@@ -1,0 +1,17 @@
+{
+    "name": "kinoglaz/no-plan",
+    "description": "You have a plan but nobody to share it with? This is your app!",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Josep",
+            "email": "jmartinbolet@gmail.com"
+        }
+    ],
+    "require": {}
+}
