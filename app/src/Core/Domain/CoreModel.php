@@ -12,6 +12,16 @@ class CoreModel {
         $this->columns = $columns;
     }
 
+    public function serialize() {
+        $map = array();
+
+        foreach($this->columns as $column) {
+            $map[$column] = $this->{$column};
+        }
+
+        return $map;
+    }
+
     public function reflect(): array {
         $map = array();
         $destructure = new ReflectionClass(self::class);
