@@ -31,6 +31,7 @@ class Router
 
         // Eliminamos la parte del directorio público del path
         $path = substr($path, strlen(Env::PUBLIC_DIR) + 1);
+        $path = rtrim($path, '/');
 
         // Si la query está definida, la convertimos en un array asociativo
         if (isset($query)) {
@@ -55,6 +56,8 @@ class Router
         };
         
         // Ejecutamos el handler correspondiente a la ruta
-        Routes::getAll()[$request->method][$request->url]($request);
+        $controller = Routes::getAll()[$request->method][$request->url]['controller'];
+        $logic = Routes::getAll()[$request->method][$request->url]['logic'];
+        $controller($request, $logic);
    }
 }

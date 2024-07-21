@@ -1,16 +1,21 @@
 <?php
 namespace App\Core\Infrastructure\Controller;
 
+use App\Core\Infrastructure\Interface\IUseCase;
+use App\Core\Infrastructure\Interface\IService;
 use App\Core\Infrastructure\Service\Request;
 use App\Core\Infrastructure\Service\Response;
 
 class BaseController
 {
-    public static function login(Request $request): void {
-        if (!$request->validateQuery(['email', 'password'])) Response::jsonError(400, 'Expected parameters [email, password]');
-        
+    public static function login(Request $request, IUseCase | IService $businessLogic): void {
+        if (!$request->validateQuery(['id'])) 
+        Response::jsonError(400, 'Expected parameters [email, password]');
 
-        Response::json('success', 200, 'Logged in');
+        $res = $businessLogic(); // Se invoca el caso de uso o servicio
+        // Analizamos el resultado del caso de uso y devolvemos el JSON correspondiente al resultado
+
+        Response::json('success', 200, 'Logged in', [$res]);
     }
 
     public static function logout(Request $request): void {

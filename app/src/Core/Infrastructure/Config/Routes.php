@@ -3,6 +3,8 @@ namespace App\Core\Infrastructure\Config;
 
 use App\Core\Infrastructure\Controller\BaseController;
 
+use App\User\Application\LoginUseCase;
+
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
  */
@@ -27,8 +29,10 @@ class Routes
     public static function getAll() {
         return [
             'GET' => [
-                'home/' => [BaseController::class, 'login'],
-                'home/jumanji/' => [BaseController::class, 'logout'],
+                'login' => [
+                    'controller' => [BaseController::class, 'login'],
+                    'logic' => new LoginUseCase()
+                ]
             ]
         ];
     }
