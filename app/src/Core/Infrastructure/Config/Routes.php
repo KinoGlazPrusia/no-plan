@@ -1,19 +1,35 @@
 <?php
-namespace App\Core\Config;
+namespace App\Core\Infrastructure\Config;
 
-use App\Core\Config\Env;
+use App\Core\Infrastructure\Controller\BaseController;
 
+/**
+ * Clase Routes que gestiona las rutas definidas en la aplicación.
+ */
 class Routes
 {
-    public static function routeExists(string $route) {
-        $routes = array_keys(self::getRoutes());
-        return in_array($route, $routes) ? true : false;
+    /**
+     * Verifica si una ruta existe para un método HTTP y path específicos.
+     *
+     * @param string $method Método HTTP (por ejemplo, GET, POST).
+     * @param string $path Path de la URL.
+     * @return bool Retorna true si la ruta existe, false en caso contrario.
+     */
+    public static function routeExists(string $method, string $path): bool {
+        return isset(self::getAll()[$method][$path]) ? true : false;
     } 
 
-    public static function getRoutes() {
+    /**
+     * Obtiene todas las rutas definidas en la aplicación.
+     *
+     * @return array Arreglo de todas las rutas.
+     */
+    public static function getAll() {
         return [
-            'GET/' . Env::ROOT . 'home' => [Env::class, 'test'],
-            'GET/' . Env::ROOT . 'about' => [Env::class, 'test'],
+            'GET' => [
+                'home/' => [BaseController::class, 'login'],
+                'home/jumanji/' => [BaseController::class, 'logout'],
+            ]
         ];
     }
 }

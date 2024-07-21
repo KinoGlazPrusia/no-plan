@@ -1,25 +1,71 @@
 <?php
-namespace App\Core\Config;
+namespace App\Core\Infrastructure\Config;
 
+/**
+ * Clase de configuración de entorno que define constantes para la aplicación.
+ */
 class Env
 {
     /* HOST */
+
+    /**
+     * Dirección base de la aplicación.
+     * 
+     * @var string
+     */
     const APP_HOST = 'http://localhost/';
 
     /* DATABASE */
+
+    /**
+     * Host de la base de datos.
+     * 
+     * @var string
+     */
     const DB_HOST = 'localhost';
+
+    /**
+     * Usuario de la base de datos.
+     * 
+     * @var string
+     */
     const DB_USER = 'root';
+
+    /**
+     * Contraseña de la base de datos.
+     * 
+     * @var string
+     */
     const DB_PASS = '';
+
+    /**
+     * Nombre de la base de datos.
+     * 
+     * @var string
+     */
     const DB_NAME = 'no_plan';
 
     /* PATHS */
-    const ROOT = 'no-plan/app/';
-    const PUBLIC = self::ROOT . 'public/';
-    const SRC = self::ROOT . 'src/';
 
-    public static function test($param) {
-        echo "Hola mundo!<br>";
-        echo json_encode($param);
-    }
+    /**
+     * Directorio base de la aplicación.
+     * 
+     * @var string
+     */
+    const BASE_DIR = 'no-plan/app/';
+
+    /**
+     * Directorio público de la aplicación.
+     * 
+     * @var string
+     */
+    const PUBLIC_DIR = self::BASE_DIR . 'public/';
+
+    /**
+     * Directorio source de la aplicación.
+     * 
+     * @var string
+     */
+    const SRC_DIR = self::BASE_DIR . 'src/';
 }
 
