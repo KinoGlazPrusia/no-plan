@@ -1,10 +1,12 @@
 <?php
 namespace App\Core\Infrastructure\Config;
 
-use App\Core\Infrastructure\Controller\BaseController;
+/* AUTH */
 use App\Auth\Infrastructure\AuthController;
+use App\Auth\Application\LoginUseCase;
 
-use App\User\Application\LoginUseCase;
+use App\User\Infrastructure\UserController;
+use App\User\Application\RegisterUserUseCase;
 
 
 /**
@@ -32,12 +34,12 @@ class Routes
         return [
             'GET' => [
                 'login' => [
-                    'controller' => [BaseController::class, 'login'],
-                    'logic' => new LoginUseCase()
-                ],
-                'auth' => [
                     'controller' => [AuthController::class, 'login'],
                     'logic' => new LoginUseCase()
+                ],
+                'register' => [
+                    'controller' => [UserController::class, 'register'],
+                    'logic' => new RegisterUserUseCase()
                 ]
             ]
         ];

@@ -18,6 +18,13 @@ class Env
     /* DATABASE */
 
     /**
+     * Tipo de base de datos.
+     * 
+     * @var string
+     */
+    const DB_TYPE = 'mysql';
+
+    /**
      * Host de la base de datos.
      * 
      * @var string
@@ -43,7 +50,7 @@ class Env
      * 
      * @var string
      */
-    const DB_NAME = 'no_plan';
+    const DB_NAME = 'no_plan_db';
 
     /* PATHS */
 

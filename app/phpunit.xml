@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit 
+    bootstrap="vendor/autoload.php" 
+    cacheResult="false" 
+    stopOnFailure="false"
+    colors="true">
+    <testsuites>
+        <testsuite name="Core">
+            <directory>./tests/Core/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

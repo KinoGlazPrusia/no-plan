@@ -38,14 +38,14 @@ interface IRepository
      * @param int $id El ID de la entidad a encontrar.
      * @return IEntity|null Retorna el modelo con el id dado o null si no se pudo encontrar.
      */
-    public function find(int $id): IEntity | null; 
+    public function find(string $table, int $id): IEntity | null;
     
     /**
      * Retorna todas las entidades en la base de datos.
      *
      * @return array Arreglo de todas las entidades en la base de datos.
      */
-    public function findAll(): array;    
+    public function findAll(string $table): array;    
     
     /**
      * Encuentra entidades en la base de datos por un campo y valor dados.
@@ -54,5 +54,5 @@ interface IRepository
      * @param string $value El valor del campo por el cual filtrar.
      * @return array Arreglo de todas las entidades que cumplen con el campo y valor dados.
      */
-    public function findBy(string $field, string $value): array;             
+    public function findBy(string $table, string $field, string $value): array;
 }

@@ -11,12 +11,12 @@ class CoreEntity implements IEntity, ISerialazible {
     /**
      * @var string Nombre de la tabla en la base de datos.
      */
-    protected string $table;
+    public string $table;
 
     /**
      * @var array Columnas de la tabla o atributos de la entidad.
      */
-    protected array $columns;
+    public array $columns;
 
     /**
      * Constructor para inicializar la entidad con el nombre de la tabla y las columnas.

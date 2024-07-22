@@ -1,4 +1,6 @@
 <?php 
 namespace App\Core\Infrastructure\Interface;
 
-interface IEntity {}
+interface IEntity {
+    public function serialize(bool $includeNulls = true): array;
+}
