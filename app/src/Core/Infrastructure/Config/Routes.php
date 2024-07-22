@@ -2,8 +2,10 @@
 namespace App\Core\Infrastructure\Config;
 
 use App\Core\Infrastructure\Controller\BaseController;
+use App\Auth\Infrastructure\AuthController;
 
 use App\User\Application\LoginUseCase;
+
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -31,6 +33,10 @@ class Routes
             'GET' => [
                 'login' => [
                     'controller' => [BaseController::class, 'login'],
+                    'logic' => new LoginUseCase()
+                ],
+                'auth' => [
+                    'controller' => [AuthController::class, 'login'],
                     'logic' => new LoginUseCase()
                 ]
             ]
