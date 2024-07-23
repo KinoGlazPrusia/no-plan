@@ -7,6 +7,8 @@ use App\Core\Infrastructure\Service\Request;
 use App\Core\Infrastructure\Service\Response;
 use App\Core\Infrastructure\Service\Sanitizer;
 use App\Core\Infrastructure\Service\Validator;
+use App\Core\Infrastructure\Database\MySqlDatabase;
+use App\Auth\Infrastructure\AuthRepository;
 
 class AuthController {
     public static function login(Request $request, IUseCase | IService $businessLogic): void {
@@ -27,7 +29,11 @@ class AuthController {
             Response::jsonError(400, 'Invalid email');
         }
 
-        $loggedUser = $businessLogic($email, $password);
+        $loggedUser = $businessLogic(
+            new AuthRepository(new MySqlDatabase()),
+            $email, 
+            $password
+        );
 
         if (!$loggedUser) Response::jsonError(400, 'Invalid email or password');
 

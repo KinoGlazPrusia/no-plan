@@ -14,67 +14,31 @@ use App\User\Domain\UserGenre;
 class UserController {
     public static function register(Request $request, IUseCase | IService $businessLogic): void {
         // Validamos la request
-       /*  if (!$request->validateQuery([
-            'name',
+        if (!$request->validateQuery([
+            'name', 
             'lastname',
             'email',
             'password',
+            'conf_password',
             'birth_date',
             'genre',
-            'profile_img_url'
+            'user_img'
         ])) {
-            Response::jsonError(400, 'Expected parameters [name, lastname, email, password, birth_date, genre, profile_img_url]');
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
         }
 
         // Obtenemos los datos de la request
         $name = $request->query['name'];
         $lastname = $request->query['lastname'];
         $email = $request->query['email'];
-        $password = $request->query['password'];
-        $birth_date = $request->query['birth_date'];
-        $genre = $request->query['genre'];
-        $profile_img_url = $request->query['profile_img_url'];
-
         // Sanitizamos los datos
-        $name = Sanitizer::sanitizeName($name);
-        $lastname = Sanitizer::sanitizeLastname($lastname);
-        $email = Sanitizer::sanitizeEmail($email);
-        $password = Sanitizer::sanitizePassword($password);
-        $birth_date = Sanitizer::sanitizeBirthDate($birth_date);
-        $genre = Sanitizer::sanitizeGenre($genre);
-        $profile_img_url = Sanitizer::sanitizeProfileImgUrl($profile_img_url);
-
         // Validamos los datos
-        if (!Validator::validateName($name)) {
-            Response::jsonError(400, 'Invalid name');
-        }
+        // Extraemos los datos de la imagen y la preparamos para guardarla en servidor una vez creado el usuario
+        // En el momento de activar la cuenta si no se activa la imagen ha de eliminarse.
 
-        if (!Validator::validateLastname($lastname)) {
-            Response::jsonError(400, 'Invalid lastname');
-        }
 
-        if (!Validator::validateEmail($email)) {
-            Response::jsonError(400, 'Invalid email');
-        }
-
-        if (!Validator::validatePassword($password)) {
-            Response::jsonError(400, 'Invalid password');
-        }
-
-        if (!Validator::validateBirthDate($birth_date)) {
-            Response::jsonError(400, 'Invalid birth_date');
-        }
-
-        if (!Validator::validateGenre($genre)) {
-            Response::jsonError(400, 'Invalid genre');
-        }
-
-        if (!Validator::validateProfileImgUrl($profile_img_url)) {
-            Response::jsonError(400, 'Invalid profile_img_url');
-        } */
-
+        // Ejecutamos la lógica de negocio (crear un usuario)
         $registeredUser = $businessLogic(
-            new UserRepository(new MySqlDatabase()),
             Sanitizer::sanitizeName('name'),
             Sanitizer::sanitizeName('lastname'),
             'email',
@@ -84,6 +48,7 @@ class UserController {
             'profile_img_url'
         );
 
+        // Si recibimos un usuario
         $registeredUser ? 
             Response::json('success', 200, 'Registered user') 
             :

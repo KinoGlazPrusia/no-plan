@@ -5,10 +5,16 @@ use App\User\Domain\User;
 use App\Auth\Domain\UUIDv4;
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IUseCase;
+use App\User\Infrastructure\UserRepository;
 
 class RegisterUserUseCase implements IUseCase {
+    private IRepository $repository;
+
+    public function __construct(IRepository $repository) {
+        $this->repository = $repository;
+    }
+
     public function __invoke(
-        IRepository $repo,
         string $name,
         string $lastname,
         string $email,
@@ -31,6 +37,6 @@ class RegisterUserUseCase implements IUseCase {
             'profile_img_url' => $profile_img_url
         ];
 
-        return $repo->save(new User($data));
+        return $this->repository->save(new User($data));
     }
 }

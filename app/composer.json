@@ -19,6 +19,7 @@
     },
     "require": {
         "ramsey/uuid": "^4.7",
-        "firebase/php-jwt": "^6.10"
+        "firebase/php-jwt": "^6.10",
+        "php-di/php-di": "^7.0"
     }
 }

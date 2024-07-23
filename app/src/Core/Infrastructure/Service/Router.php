@@ -5,6 +5,7 @@ use App\Core\Infrastructure\Config\Env;
 use App\Core\Infrastructure\Config\Routes;
 use App\Core\Infrastructure\Service\Response;
 use App\Core\Infrastructure\Service\Request;
+use App\Auth\Domain\JWToken;
 
 /**
  * Clase Router responsable de analizar y manejar las solicitudes HTTP.
@@ -54,6 +55,13 @@ class Router
             // Si la ruta no existe, devolvemos un error 404
             Response::jsonError(404, "This page does not exist");
         };
+
+        // Si la ruta es privada, verificamos la cookie con JWT de acceso (autorización)
+        $access = Routes::getAll()[$request->method][$request->url]['access'];
+
+        if ($access === 'private') {
+            if (!JWToken::verifyCookie()) Response::jsonError(403, "You don't have permissions");
+        }
         
         // Ejecutamos el handler correspondiente a la ruta
         $controller = Routes::getAll()[$request->method][$request->url]['controller'];

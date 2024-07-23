@@ -1,13 +1,17 @@
 <?php
 namespace App\Core\Infrastructure\Config;
 
+/* CORE */
+use App\Core\Infrastructure\Database\MySqlDatabase;
+
 /* AUTH */
 use App\Auth\Infrastructure\AuthController;
 use App\Auth\Application\LoginUseCase;
 
+/* USER */
 use App\User\Infrastructure\UserController;
+use App\User\Infrastructure\UserRepository;
 use App\User\Application\RegisterUserUseCase;
-
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -31,15 +35,20 @@ class Routes
      * @return array Arreglo de todas las rutas.
      */
     public static function getAll() {
+        // LA INYECCIÓN DE DEPENDENCIAS (DI) SE MANEJA DESDE AQUÍ
+        // SE INYECTA UNA NUEVA INSTANCIA DE LA DEPENDENCIA EN LAS CLASES QUE LA ESPERAN
+        // LAS CLASES QUE ESPERAN UNA DI, ESPERAN COMO PARÁMETRO UNA INTERFAZ (ABSTRACCIÓN)
         return [
             'GET' => [
                 'login' => [
                     'controller' => [AuthController::class, 'login'],
-                    'logic' => new LoginUseCase()
+                    'logic' => new LoginUseCase(),
+                    'access' => 'public'
                 ],
                 'register' => [
                     'controller' => [UserController::class, 'register'],
-                    'logic' => new RegisterUserUseCase()
+                    'logic' => new RegisterUserUseCase(new UserRepository(new MySqlDatabase)),
+                    'access' => 'public'
                 ]
             ]
         ];

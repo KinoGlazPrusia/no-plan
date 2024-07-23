@@ -12,5 +12,4 @@ class AuthRepository extends CoreRepository {
 
         return new User($res[0]);
     }
-    
 }
