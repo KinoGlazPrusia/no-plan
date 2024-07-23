@@ -9,6 +9,7 @@ use App\Core\Infrastructure\Service\Sanitizer;
 use App\Core\Infrastructure\Service\Validator;
 use App\User\Infrastructure\UserRepository;
 use App\Core\Infrastructure\Database\MySqlDatabase;
+use App\User\Domain\UserGenre;
 
 class UserController {
     public static function register(Request $request, IUseCase | IService $businessLogic): void {
@@ -74,12 +75,12 @@ class UserController {
 
         $registeredUser = $businessLogic(
             new UserRepository(new MySqlDatabase()),
-            'name',
-            'lastname',
+            Sanitizer::sanitizeName('name'),
+            Sanitizer::sanitizeName('lastname'),
             'email',
             'password',
             '2000-01-01',
-            'genre',
+            UserGenre::MALE,
             'profile_img_url'
         );
 
