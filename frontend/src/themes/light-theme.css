@@ -1,0 +1,10 @@
+.light-theme {
+    --text-color: #5F6368;
+
+    --accent-color: #8ECECA;
+
+    --bg-color: white;
+
+    --box-radius: 10pt;
+    --box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0");
+
+.p-navbar-button-wrapper {
+    height: fit-content;
+    width: fit-content;
+}
+
+.button {
+    cursor: pointer;
+
+    appearance: none;
+    padding: 0;
+
+    height: 50px;
+    width: 50px;
+
+    display: grid;
+    place-content: center;
+
+    border: none;
+    border-radius: 2.5pt;
+
+    background-color: var(--bg-color);
+
+    transition: 300ms;
+}
+
+.button span {
+    font-size: 32px;
+    color: var(--text-color);
+
+    display: grid;
+    place-content: center;
+}
+
+.selected span {
+    color: var(--accent-color);
+}
+
+/* DESKTOP STATES */
+@media (min-width: 1000px) {
+    .button:hover {
+        transform: translateY(-30%);
+
+        background-color: white;
+
+        box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* ANIMATION */
+.clicked {
+    animation: name duration timing-function delay iteration-count direction fill-mode;
+    animation-name: clicked;
+    animation-duration: 200ms;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+@keyframes clicked {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.05);}
+    100% {transform: scale(1);}
+}
