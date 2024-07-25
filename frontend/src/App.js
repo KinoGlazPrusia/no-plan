@@ -16,6 +16,10 @@ class pApp extends PlainComponent {
         super('p-app', `${SRC_PATH}App.css`)
 
         this.router = new PlainRouter('http://localhost/no-plan/frontend/public/')
+
+        // En este componente guardaremos los contextos generales de la aplicación
+        // mientras que en los componentes de las páginas guardaremos los contextos 
+        // propios de cada página
     }
 
     template() {
