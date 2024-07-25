@@ -8,5 +8,8 @@
         <testsuite name="Core">
             <directory>./tests/Core/</directory>
         </testsuite>
+        <testsuite name="User">
+            <directory>./tests/User/</directory>
+        </testsuite>
     </testsuites>
 </phpunit>

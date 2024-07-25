@@ -33,6 +33,7 @@ class UserController {
         $email = $request->query['email']; */
         // Sanitizamos los datos
         // Validamos los datos
+        
         // Extraemos los datos de la imagen y la preparamos para guardarla en servidor una vez creado el usuario
         // En el momento de activar la cuenta si no se activa la imagen ha de eliminarse.
 

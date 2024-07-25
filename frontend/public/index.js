@@ -1,0 +1,1 @@
+import pApp from '../src/App.js'

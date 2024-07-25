@@ -69,6 +69,13 @@ class Env
     const PUBLIC_DIR = self::BASE_DIR . 'public/';
 
     /**
+     * Directorio público donde se almacenan las imágenes de los avatares de usuario.
+     * 
+     * @var string
+     */
+    const AVATAR_IMAGES_DIR = self::BASE_DIR . 'public/assets/images/avatar/';
+
+    /**
      * Directorio source de la aplicación.
      * 
      * @var string
