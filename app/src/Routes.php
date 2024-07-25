@@ -1,11 +1,12 @@
 <?php
-namespace App\Core\Infrastructure\Config;
+namespace App;
 
 /* CORE */
 use App\Core\Infrastructure\Database\MySqlDatabase;
 
 /* AUTH */
 use App\Auth\Infrastructure\AuthController;
+use App\Auth\Infrastructure\AuthRepository;
 use App\Auth\Application\LoginUseCase;
 
 /* USER */
@@ -42,7 +43,7 @@ class Routes
             'GET' => [
                 'login' => [
                     'controller' => [AuthController::class, 'login'],
-                    'logic' => new LoginUseCase(),
+                    'logic' => new LoginUseCase(new AuthRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ],
                 'register' => [

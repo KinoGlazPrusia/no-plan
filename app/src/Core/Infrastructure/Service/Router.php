@@ -1,8 +1,8 @@
 <?php
 namespace App\Core\Infrastructure\Service;
 
-use App\Core\Infrastructure\Config\Env;
-use App\Core\Infrastructure\Config\Routes;
+use App\Env;
+use App\Routes;
 use App\Core\Infrastructure\Service\Response;
 use App\Core\Infrastructure\Service\Request;
 use App\Auth\Domain\JWToken;
@@ -64,6 +64,7 @@ class Router
         }
         
         // Ejecutamos el handler correspondiente a la ruta
+        session_start(); // Al iniciar sesión aquí (entry) no es necesario volver a llamar a esta función
         $controller = Routes::getAll()[$request->method][$request->url]['controller'];
         $logic = Routes::getAll()[$request->method][$request->url]['logic'];
         $controller($request, $logic);

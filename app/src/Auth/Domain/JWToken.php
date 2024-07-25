@@ -5,15 +5,18 @@ require_once dirname(__DIR__) . '/../../../secret/Secret.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Secret\Secret;
+use App\User\Domain\User;
+use App\Env;
 
 class JWToken {
-    public static function generateToken(User $user, $validityTime): string {
+    public static function encodeToken(User $user, $validityTime): string {
         $key = Secret::JWT_SECRET_KEY;
+        $issuedAt = time();
         $payload = [
             'iss' => Env::APP_HOST,                 // issuer
             'sub' => $user->id,                     // subject
             'aud' => Env::APP_HOST,                 // audience
-            'iat' => time(),                        // issued at
+            'iat' => $issuedAt,                     // issued at
             'nbf' => $issuedAt,                     // not before
             'exp' => $issuedAt + $validityTime,     // expiration (segundos)
             'jti' => bin2hex(random_bytes(16)),     // JWT ID
@@ -26,7 +29,7 @@ class JWToken {
         return $jwt;
     }
 
-    public static function verifyToken(string $jwt): Object | string {
+    public static function decodeToken(string $jwt): Object | string {
         $error = null;
 
         try {
@@ -39,32 +42,29 @@ class JWToken {
     }
 
     public static function generateCookie(User $user, $validityTime) {
-        session_start();
+        $jwt = self::encodeToken($user, $validityTime);
 
-        $jwt = self::generateToken($user, $validityTime);
-
-        setcookie('token', $jwt, time() + $validityTime, secure: true, httponly:true);
+        setcookie('session_token', $jwt, time() + $validityTime, secure: true, httponly:true);
     }
 
     public static function verifyCookie(): bool {
-        session_start();
+        if (!isset($_COOKIE['session_token'])) return false;
+
+        $verification = self::decodeToken($_COOKIE['session_token']);
+
+        // Verificamos que los datos de sesión estén seteados
+        if (
+            !isset($_SESSION['uid']) ||
+            !isset($_SESSION['userEmail'])
+        ) return false;
         
-        if (!isset($_COOKIE['token'])) return false;
-
-        $verification = self::verifyToken($_COOKIE['token']);
-
-        if (gettype($verification) !== Object) return false;
+        // Verificamos que los datos del token coincidan con los datos de sesión
+        if (
+            gettype($verification) !== Object || // Si $verification devuelve un string, es que hay un error
+            $verification['uid'] !== $_SESSION['uid'] ||
+            $verification['email'] !== $_SESSION['userEmail']
+        ) return false;
 
         return true;
     }
 }
-
-/* 
-Ejemplo de uso:
-
-$jwt = JWToken::generateToken([
-    'id' => 24,
-    'isLoggedIn' => true
-]);
-var_dump(JWToken::verifyToken($jwt));
-*/

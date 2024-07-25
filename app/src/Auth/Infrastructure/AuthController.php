@@ -10,8 +10,17 @@ use App\Core\Infrastructure\Service\Validator;
 use App\Core\Infrastructure\Database\MySqlDatabase;
 use App\Auth\Infrastructure\AuthRepository;
 
+use App\Auth\Domain\JWToken;
+
 class AuthController {
-    public static function login(Request $request, IUseCase | IService $businessLogic): void {
+    public static function login(Request $request, IUseCase | IService $login): void {
+        // Chequeamos si el usuario ya está logueado
+        if (isset($_COOKIE['session_token'])) {
+            // Esto solo está con fines de DEBUG (eliminar en producción)
+            $decodedToken = JWToken::decodeToken($_COOKIE['session_token']);
+            Response::json('success', 200, 'User already logged in', ['token' => $decodedToken]);
+        }
+
         // Validamos la request
         if (!$request->validateQuery(['email', 'password'])) {
             Response::jsonError(400, 'Expected parameters [email, password]');
@@ -29,14 +38,11 @@ class AuthController {
             Response::jsonError(400, 'Invalid email');
         }
 
-        $loggedUser = $businessLogic(
-            new AuthRepository(new MySqlDatabase()),
-            $email, 
-            $password
-        );
+        $loggedUser = $login($email, $password);
 
         if (!$loggedUser) Response::jsonError(400, 'Invalid email or password');
 
+        // Respuesta provisional
         Response::json('success', 200, 'Logged in', [$loggedUser]);
     }
 }

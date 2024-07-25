@@ -3,7 +3,7 @@ namespace App\Core\Infrastructure\Database;
 
 use PDO;
 use PDOException;
-use App\Core\Infrastructure\Config\Env;
+use App\Env;
 use App\Core\Infrastructure\Interface\ITransactionalDatabase;
 
 class MySqlDatabase implements ITransactionalDatabase {

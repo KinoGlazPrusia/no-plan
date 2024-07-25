@@ -12,9 +12,9 @@ use App\Core\Infrastructure\Database\MySqlDatabase;
 use App\User\Domain\UserGenre;
 
 class UserController {
-    public static function register(Request $request, IUseCase | IService $businessLogic): void {
+    public static function register(Request $request, IUseCase | IService $registerUser): void {
         // Validamos la request
-        if (!$request->validateQuery([
+        /* if (!$request->validateQuery([
             'name', 
             'lastname',
             'email',
@@ -25,12 +25,12 @@ class UserController {
             'user_img'
         ])) {
             Response::jsonError(400, 'Expected parameters doesn\'t match');
-        }
+        } */
 
         // Obtenemos los datos de la request
-        $name = $request->query['name'];
+        /* $name = $request->query['name'];
         $lastname = $request->query['lastname'];
-        $email = $request->query['email'];
+        $email = $request->query['email']; */
         // Sanitizamos los datos
         // Validamos los datos
         // Extraemos los datos de la imagen y la preparamos para guardarla en servidor una vez creado el usuario
@@ -38,11 +38,11 @@ class UserController {
 
 
         // Ejecutamos la lógica de negocio (crear un usuario)
-        $registeredUser = $businessLogic(
+        $registeredUser = $registerUser(
             Sanitizer::sanitizeName('name'),
             Sanitizer::sanitizeName('lastname'),
-            'email',
-            'password',
+            'email@gmail.com',
+            '1234',
             '2000-01-01',
             UserGenre::MALE,
             'profile_img_url'

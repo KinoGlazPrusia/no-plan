@@ -1,4 +1,5 @@
 # TODOs
+- [x] Integrar login
 - [ ] Revisar la clase Request para ver como captura los parámetros en el atributo query para request con un método POST.
 - [ ] Revisar el modelo. Creo que debería añadirse un campo en la tabla de rating_criteria para definir si es criterio de usuario o criterio de plan ya que no todos podrán compartirse.
 - [ ] Los planes podrían tener un timeline.

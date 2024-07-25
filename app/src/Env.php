@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Infrastructure\Config;
+namespace App;
 
 /**
  * Clase de configuración de entorno que define constantes para la aplicación.
