@@ -4,6 +4,12 @@ import { SRC_PATH } from './config/env.config.js'
 /* PAGES */
 import IndexPage from './components/pages/index/IndexPage.js'
 import LoginPage from './components/pages/login/LoginPage.js'
+import SignUpPage from './components/pages/signup/SignUpPage.js'
+import PasswordRecoveryPage from './components/pages/password-recovery/PasswordRecoveryPage.js'
+import PlannerPage from './components/pages/planner/PlannerPage.js'
+import UserProfilePage from './components/pages/user/UserProfilePage.js'
+import UserPlansPage from './components/pages/user/UserPlansPage.js'
+import CreatePlanPage from './components/pages/plan/CreatePlanPage.js'
 
 class pApp extends PlainComponent {
     constructor() {
@@ -17,12 +23,12 @@ class pApp extends PlainComponent {
             ${this.router.route({
                 '':                     '<p-index-page></p-index-page>',
                 'login':                '<p-login-page></p-login-page>',
-                'signup':               '<h2>SignUpPage</h2>',
-                'password-recovery':    '<h2>PwdRecoveryPage</h2>',
-                'planner':              '<h2>PlannerPage</h2>',
-                'user/profile':         '<h2>UserProfilePage</h2>',
-                'user/plans':           '<h2>UserPlansPage</h2>',
-                'plan/create':          '<h2>PlanCreationPage</h2>',
+                'signup':               '<p-signup-page></p-signup-page>',
+                'password-recovery':    '<p-password-recovery-page></p-password-recovery-page>',
+                'planner':              '<p-planner-page></p-planner-page>',
+                'user/profile':         '<p-user-profile-page></p-user-profile-page>',
+                'user/plans':           '<p-user-plans-page></p-user-plans-page>',
+                'plan/create':          '<p-create-plan-page></p-create-plan-page>',
                 '*':                    '<h2>Not Found</h2>'
             })}
         `
