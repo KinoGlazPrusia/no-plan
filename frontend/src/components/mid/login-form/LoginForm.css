@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0");
+
+form {
+    padding: 1em;
+    box-sizing: border-box;
+    
+    width: 350px;
+
+    display: grid;
+    place-content: center;
+
+    border-radius: 10pt;
+
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
+
+    background-color: var(--bg-color);
+}

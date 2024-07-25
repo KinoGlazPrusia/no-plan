@@ -1,0 +1,22 @@
+/* TYPES */
+.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.secondary {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+}
+
+.tertiary {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+/* DISABLED */
+.disabled {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    cursor: not-allowed;
+}

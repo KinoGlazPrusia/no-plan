@@ -10,11 +10,16 @@ class IndexPage extends PlainComponent {
   constructor () {
     super('p-index-page')
 
-    apiAuth.isAuthenticated() ? this.navigateTo('planner') : this.navigateTo('login')
+    this.checkAuthentication()
   }
 
   template () {
     return ''
+  }
+
+  async checkAuthentication () {
+    const isAuthenticated = await apiAuth.isAuthenticated()
+    isAuthenticated ? this.navigateTo('planner') : this.navigateTo('login')
   }
 
   navigateTo (path) {
