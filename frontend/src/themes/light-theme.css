@@ -1,10 +1,20 @@
 .light-theme {
+    /* STATE */
+    --success-color: rgb(48, 163, 48);
+    --error-color: rgb(211, 10, 10);
+    --accent-color: #8ECECA;
+    --link-color: #0085FF;
+
+    /* TEXT */
     --text-color: #5F6368;
 
-    --accent-color: #8ECECA;
+    /* BUTTONS */
+    --button-primary-color: var(--accent-color);
 
+    /* BACKGROUND */
     --bg-color: white;
 
+    /* OTHER */
     --box-radius: 10pt;
     --box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
 }

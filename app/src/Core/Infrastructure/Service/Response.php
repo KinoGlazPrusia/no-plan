@@ -37,7 +37,7 @@ class Response
      */
     public static function jsonError(int $code, string $details = null) {
         header('Content-Type: application/json');
-        http_response_code($code);
+        // http_response_code($code);
         echo json_encode([
             'status' => 'error',
             'message' => self::getErrorMessage($code),

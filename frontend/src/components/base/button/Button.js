@@ -1,15 +1,15 @@
 import { PlainComponent } from '../../../../node_modules/plain-reactive/src/index.js'
-import { PUBLIC_PATH } from '../../../config/env.config.js'
+import { BASE_COMPONENTS_PATH} from '../../../config/env.config.js'
 
 class Button extends PlainComponent {
   constructor () {
-    super('p-button', `${PUBLIC_PATH}components/base/button/Button.css`)
+    super('p-button', `${BASE_COMPONENTS_PATH}button/Button.css`)
   }
 
   template () {
     // Los botones pueden ser de 3 tipos: primary, secondary y tertiary
     return `
-            <button class="button ${this.getAttribute('type')}" disabled="${this.hasAttribute('disabled')}">
+            <button class="button ${this.getAttribute('type')}" ${this.hasAttribute('disabled') ? 'disabled' : ''}>
                 ${this.getAttribute('icon')
                     ? `<span class="material-symbols-outlined">${this.getAttribute('icon')}</span>`
                     : this.textContent

@@ -1,18 +1,88 @@
-import { PlainComponent } from '../../../../node_modules/plain-reactive/src/index.js'
+import { PlainComponent, PlainState } from '../../../../node_modules/plain-reactive/src/index.js'
 import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
+
+/* SERVICES */
+import * as validators from '../../../services/validator.js'
 
 class TextInput extends PlainComponent {
   constructor () {
     super('p-text-input', `${BASE_COMPONENTS_PATH}text-input/TextInput.css`)
+
+    this.validator = validators[this.getAttribute('validator')]
+    this.validity = new PlainState({
+      isValid: true,
+      messages: []
+    }, this)
+
+    this.inputValue = new PlainState('', this)
   }
 
   template () {
     return `
             <label class="label">${this.getAttribute('label')}</label>
-            <input name="${this.getAttribute('name')}" type="${this.getAttribute('type')}" placeholder="${this.getAttribute('placeholder')}">
-            <span class="error"></span>
-            <span class="error-icon material-symbols-outlined">alert</span>
+            <input 
+            class="input" 
+            name="${this.getAttribute('name')}" 
+            type="${this.getAttribute('type')}" 
+            value="${this.inputValue.getState()}"
+            placeholder="${this.hasAttribute('placeholder') ? this.getAttribute('placeholder') : ''}">
+            <div class="error-list">
+              ${this.validity.getState().messages.map(error => {
+                return `
+                  <div class="error-wrapper">
+                    <span class="error-icon material-symbols-outlined">error</span>
+                    <span class="error">${error}</span>
+                  </div>
+                `
+              }).join('')}
+            </div>
         `
+  }
+
+  listeners() {
+    this.$('.input').oninput = () => {
+      // Actualización del input value
+      this.updateValue()
+      
+
+      // Validación
+      this.validator && this.validate()
+
+      this.focusInput()
+      this.moveCursorToEnd()
+    }
+  }
+
+  updateValue() {
+    this.inputValue.setState(this.$('.input').value, false)
+  }
+
+  focusInput() {
+    this.$('.input').focus()
+  }
+
+  moveCursorToEnd() {
+    this.$('.input').value = ''
+    this.$('.input').value = this.inputValue.getState()
+  }
+
+  validate() {
+    const value = this.$('.input').value
+    
+    let isValid = null
+    const validityMessage = this.validator(value)
+
+    validityMessage.length > 0 ? isValid = false : isValid = true
+
+    !isValid ?
+      !this.wrapper.classList.contains('is-invalid') && this.wrapper.classList.add('is-invalid')
+      :
+      this.wrapper.classList.contains('is-invalid') && this.wrapper.classList.remove('is-invalid')
+
+    this.validity.setState({
+      isValid: isValid,
+      messages: validityMessage
+    })
   }
 }
 

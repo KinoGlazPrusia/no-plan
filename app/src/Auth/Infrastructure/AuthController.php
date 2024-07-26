@@ -35,14 +35,16 @@ class AuthController {
 
         // Validamos los datos
         if (!Validator::validateEmail($email)) {
-            Response::jsonError(400, 'Invalid email');
+            Response::jsonError(400, "Invalid email $email");
         }
 
         $loggedUser = $login($email, $password);
 
-        if (!$loggedUser) Response::jsonError(400, 'Invalid email or password');
+        if (!$loggedUser) Response::jsonError(403, 'Invalid email or password');
 
-        // Respuesta provisional
-        Response::json('success', 200, 'Logged in', [$loggedUser]);
+        // Respuesta provisional (devolvemos los datos del usuario ¡sin el password!)
+        $userData = $loggedUser->serialize();
+        unset($userData['password']);
+        Response::json('success', 200, 'Logged in', [$userData]);
     }
 }

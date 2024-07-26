@@ -1,17 +1,51 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0");
 
+/* FORM */
 form {
-    padding: 1em;
+    position: relative;
+
+    padding: 2em;
+    padding-block: 2.5em;
     box-sizing: border-box;
     
-    width: 350px;
+    width: 340px;
 
-    display: grid;
-    place-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
 
     border-radius: 10pt;
 
-    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 35px rgba(0, 0, 0, 0.2);
 
     background-color: var(--bg-color);
+}
+
+/* GREETINGS */
+.greetings {
+    position: absolute;
+    top: -1.58em;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* color: var(--text-color); */
+    font-size: 64px;
+    font-weight: 400;
+    font-family: "Kristi", cursive;
+}
+
+/* INPUTS */
+.input {
+    width: 100%;
+}
+
+/* SUBMIT */
+.submit {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
