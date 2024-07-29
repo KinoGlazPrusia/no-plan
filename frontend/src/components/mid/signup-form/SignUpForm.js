@@ -9,15 +9,17 @@ import { VALIDATORS } from '../../../services/validator.js'
 import Button from '../../base/button/Button.js'
 import TextInput from '../../base/text-input/TextInput.js'
 import DateInput from '../../base/date-input/DateInput.js'
+import PhoneInput from '../../base/phone-input/PhoneInput.js'
+import SelectInput from '../../base/select-input/SelectInput.js'
 /* eslint-enable */
 
 class SignUpForm extends PlainComponent {
-    constructor() {
-        super('p-signup-form', `${MID_COMPONENTS_PATH}signup-form/SignUpForm.css`)
-    }
+  constructor () {
+    super('p-signup-form', `${MID_COMPONENTS_PATH}signup-form/SignUpForm.css`)
+  }
 
-    template() {
-        return `
+  template () {
+    return `
             <form class="signup-form" name="signup-form">
                 <h1 class="greetings">Register!</h1>
 
@@ -94,23 +96,21 @@ class SignUpForm extends PlainComponent {
 
                         <div class="tab-3">
 
-                            <!-- NAME -->
-                            <p-text-input 
+                            <!-- PHONE NUMBER -->
+                            <p-phone-input
                             class="input" 
-                            id="name"
-                            name="name" 
-                            label="Name" 
-                            type="text">
-                            </p-text-input>
+                            id="phone"
+                            name="phone" 
+                            label="Phone Number">
+                            </p-phone-input>
 
-                            <!-- LASTNAME -->
-                            <p-text-input 
+                            <!-- GENRE -->
+                            <p-select-input
                             class="input" 
-                            id="lastname"
-                            name="lastname" 
-                            label="Last Name" 
-                            type="text">
-                            </p-text-input>
+                            id="genre"
+                            name="genre" 
+                            label="Genre">
+                            </p-select-input>
 
                             <!-- BIRTHDAY -->
                             <p-date-input
@@ -140,53 +140,53 @@ class SignUpForm extends PlainComponent {
                 </div>
             </form>
         `
+  }
+
+  listeners () {
+    const tabButtons = [
+      this.$('.tab-btn#tab-1'),
+      this.$('.tab-btn#tab-2'),
+      this.$('.tab-btn#tab-3')
+    ]
+
+    tabButtons.forEach(button => {
+      button.onclick = () => this.changeTab(button, tabButtons)
+    })
+  }
+
+  changeTab (currentTabButton, tabButtons) {
+    // Estilamos los botones de selección del tab
+    tabButtons.forEach(button => {
+      button.classList.remove('selected')
+    })
+
+    currentTabButton.classList.add('selected')
+
+    // Movemos el input wrapper
+    const inputWrapper = this.$('.input-wrapper')
+    inputWrapper.classList = 'input-wrapper'
+    inputWrapper.classList.add(`current-tab-${currentTabButton.textContent}`)
+
+    // Si estamos en el último tab activamos el botón de submit
+    const submitButton = this.$('.submit')
+    if (currentTabButton.textContent === '3') {
+      submitButton.enable() // Llamamos a funciones propias del componente
+    } else if (!submitButton.classList.contains('disabled')) {
+      submitButton.disable()
     }
+  }
 
-    listeners() {
-        const tabButtons = [
-            this.$('.tab-btn#tab-1'),
-            this.$('.tab-btn#tab-2'),
-            this.$('.tab-btn#tab-3')
-        ]
-        
-        tabButtons.forEach(button => {
-            button.onclick = () => this.changeTab(button, tabButtons)
-        })
-    }
+  handleSubmit () {
 
-    changeTab(currentTabButton, tabButtons) {
-        // Estilamos los botones de selección del tab
-        tabButtons.forEach(button => {
-            button.classList.remove('selected')
-        })
+  }
 
-        currentTabButton.classList.add('selected')
+  handleResponse () {
 
-        // Movemos el input wrapper
-        const inputWrapper = this.$('.input-wrapper')
-        inputWrapper.classList = 'input-wrapper'
-        inputWrapper.classList.add(`current-tab-${currentTabButton.textContent}`)
+  }
 
-        // Si estamos en el último tab activamos el botón de submit
-        const submitButton = this.$('.submit')
-        if (currentTabButton.textContent === '3') {
-            submitButton.enable() // Llamamos a funciones propias del componente
-        } else if (!submitButton.classList.contains('disabled')) {
-            submitButton.disable()
-        }
-    }
+  validateFields () {
 
-    handleSubmit() {
-
-    }
-
-    handleResponse() {
-
-    }
-
-    validateFields() {
-
-    }
+  }
 }
 
 export default window.customElements.define('p-signup-form', SignUpForm)

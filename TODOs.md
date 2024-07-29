@@ -6,7 +6,7 @@
 - [x] Revisar la clase Request para ver como captura los parámetros en el atributo query para request con un método POST.
 - [x] Crear componente DateInput.
 - [x] Crear componente SignUpForm.
-- [ ] Crear componente PhoneInput.
+- [x] Crear componente PhoneInput.
 - [ ] Crear componente SelectInput.
 - [ ] Crear componente FileInput (recuperarlo del ejercicio de los mapas).
 - [ ] Crear componente CreatePlanForm.

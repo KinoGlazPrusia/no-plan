@@ -2,16 +2,17 @@ import { PlainComponent, PlainState } from '../../../../node_modules/plain-react
 import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* COMPONENTS */
-/* eslint-disable */
 import FormFeedback from '../form-feedback/FormFeedback.js'
-/* eslint-enable */
 
 /* SERVICES */
 import * as validators from '../../../services/validator.js'
 
-class TextInput extends PlainComponent {
+/* CONSTANTS */
+import { userGenres } from '../../../constants/userGenres.js'
+
+class SelectInput extends PlainComponent {
   constructor () {
-    super('p-text-input', `${BASE_COMPONENTS_PATH}text-input/TextInput.css`)
+    super('p-select-input', `${BASE_COMPONENTS_PATH}select-input/SelectInput.css`)
 
     this.validator = validators[this.getAttribute('validator')]
     this.validity = new PlainState({
@@ -25,14 +26,18 @@ class TextInput extends PlainComponent {
   template () {
     return `
             <label class="label">${this.getAttribute('label')}</label>
-
-            <input 
+            
+            <select 
             class="input" 
             name="${this.getAttribute('name')}" 
-            type="${this.getAttribute('type')}" 
             value="${this.inputValue.getState()}"
-            placeholder="${this.hasAttribute('placeholder') ? this.getAttribute('placeholder') : ''}">
-            
+            placeholder="Select">
+                <option value="" default hidden>Select an option</option>
+                ${Object.entries(userGenres).map(([key, value]) =>
+                    `<option value="${key}">${value}</option>`
+                )}
+            </select>
+
             <p-form-feedback class="feedback"></p-form-feedback>
         `
   }
@@ -52,27 +57,8 @@ class TextInput extends PlainComponent {
   }
 
   validate () {
-    const value = this.$('.input').value
 
-    let isValid = null
-    const validityMessage = this.validator(value)
-
-    validityMessage.length > 0
-      ? isValid = false
-      : isValid = true
-
-    !isValid
-      ? !this.wrapper.classList.contains('is-invalid') && this.wrapper.classList.add('is-invalid')
-      : this.wrapper.classList.contains('is-invalid') && this.wrapper.classList.remove('is-invalid')
-
-    this.validity.setState({
-      isValid,
-      messages: validityMessage
-    }, false)
-
-    // Re-renderizamos el componente de feedback para mostrar errores o mensajes
-    if (!isValid) this.$('.feedback').errors.setState(validityMessage)
   }
 }
 
-export default window.customElements.define('p-text-input', TextInput)
+export default window.customElements.define('p-select-input', SelectInput)

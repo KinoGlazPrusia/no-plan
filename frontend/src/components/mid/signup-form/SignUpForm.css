@@ -30,7 +30,7 @@
 
     border-radius: 10pt;
 
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 /* GREETINGS */
@@ -69,6 +69,9 @@
 
 .tab-1, .tab-2, .tab-3 {
     width: 276px;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .current-tab-1 {
