@@ -19,7 +19,7 @@ class SignUpForm extends PlainComponent {
     template() {
         return `
             <form class="signup-form" name="signup-form">
-                <h1 class="greetings">Welcome!</h1>
+                <h1 class="greetings">Register!</h1>
 
                 <div class="overflow-wrapper">
                     <div class="input-wrapper current-tab-1">
@@ -84,7 +84,8 @@ class SignUpForm extends PlainComponent {
                             class="birth-date"
                             id="birth-date"
                             name="birth-date"
-                            label="Birth Date">
+                            label="Birth Date"
+                            validator="${VALIDATORS.DATE}">
                             <p-date-input>
 
                         </div>
@@ -173,6 +174,18 @@ class SignUpForm extends PlainComponent {
         } else if (!submitButton.classList.contains('disabled')) {
             submitButton.disable()
         }
+    }
+
+    handleSubmit() {
+
+    }
+
+    handleResponse() {
+
+    }
+
+    validateFields() {
+
     }
 }
 

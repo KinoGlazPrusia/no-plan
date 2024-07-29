@@ -1,5 +1,5 @@
 import { PlainComponent, PlainContext } from '../../../../node_modules/plain-reactive/src/index.js'
-import { PAGES_PATH } from '../../../config/env.config.js'
+import { PUBLIC_PATH, PAGES_PATH } from '../../../config/env.config.js'
 
 /* COMPONENTS */
 /* eslint-disable */
@@ -18,8 +18,16 @@ class SignUpPage extends PlainComponent {
     return `
             <p-signup-form></p-signup-form>
             <p-navbar></p-navbar>
-            <span class="login-link">Already have an account? <a href="#">Log In</a></span>
+            <span class="login-link">Already have an account? <a class="to-login">Log In</a></span>
         `
+  }
+
+  listeners() {
+    this.$('.to-login').onclick = () => this.navigateTo('login')
+  }
+
+  navigateTo (path) {
+    window.location.replace(PUBLIC_PATH + path)
   }
 }
 

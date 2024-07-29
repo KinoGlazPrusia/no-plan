@@ -4,9 +4,13 @@
 - [x] Implementar el método en la api del frontend para hacer login a través de POST
 - [x] Implementar método en el componente input para mantener el cursor en la última posición en la que estaba (para así poder modificar diferentes puntos del input sin que se vaya al final constantemente)
 - [x] Revisar la clase Request para ver como captura los parámetros en el atributo query para request con un método POST.
-- [ ] Crear componente DateInput.
-- [ ] Crear componente SignUpForm.
+- [x] Crear componente DateInput.
+- [x] Crear componente SignUpForm.
+- [ ] Crear componente PhoneInput.
+- [ ] Crear componente SelectInput.
+- [ ] Crear componente FileInput (recuperarlo del ejercicio de los mapas).
 - [ ] Crear componente CreatePlanForm.
+- [ ] Implementar validaciones en todos los componentes del frontend.
 - [ ] Revisar el modelo. Creo que debería añadirse un campo en la tabla de rating_criteria para definir si es criterio de usuario o criterio de plan ya que no todos podrán compartirse.
 - [ ] Los planes podrían tener un timeline.
 - [ ] La iluminación/color-tinte del mapa cambia según la hora del día.

@@ -3,7 +3,8 @@ de validación, que pasaremos en un atributo a los componentes input para
 poder cargar las funciones */
 export const VALIDATORS = {
     EMAIL: 'validateEmail',
-    STRING: 'validateString'
+    STRING: 'validateString',
+    DATE: 'validateDate'
 }
 
 export function validateEmail(email) {
@@ -21,6 +22,18 @@ export function validateEmail(email) {
     ])
 
     return validityMessage
+}
+
+export function validateDate(rawDate) {
+    const [year, month, day] = rawDate.split('-')
+    const date = {
+        year: year,
+        month: month,
+        day: day,
+        raw: rawDate
+    }
+
+    console.table(date)
 }
 
 /* Esta función genérica permite pasar un input value y una función como condición,

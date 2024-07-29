@@ -23,6 +23,11 @@
     font-weight: bold;
 }
 
+/* ICON */
+.input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
 /* INPUT */
 .input {
     padding: 0.5em;
