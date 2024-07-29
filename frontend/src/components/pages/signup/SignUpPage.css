@@ -1,0 +1,26 @@
+.p-signup-page-wrapper {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75em;
+}
+
+.login-link {
+    user-select: none;
+    
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.login-link a {
+    cursor: pointer;
+    
+    text-decoration: none;
+
+    color: var(--link-color);
+    font-weight: bold;
+}

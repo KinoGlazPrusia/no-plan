@@ -9,7 +9,7 @@ class Button extends PlainComponent {
   template () {
     // Los botones pueden ser de 3 tipos: primary, secondary y tertiary
     return `
-            <button class="button ${this.getAttribute('type')}" ${this.hasAttribute('disabled') ? 'disabled' : ''}>
+            <button class="button ${this.getAttribute('type')} ${this.hasAttribute('disabled') ? 'disabled' : ''}">
                 ${this.getAttribute('icon')
                     ? `<span class="material-symbols-outlined">${this.getAttribute('icon')}</span>`
                     : this.textContent
@@ -31,6 +31,18 @@ class Button extends PlainComponent {
   animateClick () {
     this.wrapper.classList.add('clicked')
     this.wrapper.onanimationend = () => this.wrapper.classList.remove('clicked')
+  }
+
+  enable () {
+    if (this.$('.button').classList.contains('disabled')) {
+      this.$('.button').classList.remove('disabled')
+    }
+  }
+
+  disable() {
+    if (!this.$('.button').classList.contains('disabled')) {
+      this.$('.button').classList.add('disabled')
+    }
   }
 }
 

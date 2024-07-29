@@ -18,18 +18,19 @@ class TextInput extends PlainComponent {
     }, this)
 
     this.inputValue = new PlainState('', this)
-    this.cursorPosition = new PlainState(0, this)
   }
 
   template () {
     return `
             <label class="label">${this.getAttribute('label')}</label>
+
             <input 
             class="input" 
             name="${this.getAttribute('name')}" 
             type="${this.getAttribute('type')}" 
             value="${this.inputValue.getState()}"
             placeholder="${this.hasAttribute('placeholder') ? this.getAttribute('placeholder') : ''}">
+            
             <p-form-feedback class="feedback"></p-form-feedback>
         `
   }
@@ -54,7 +55,10 @@ class TextInput extends PlainComponent {
     let isValid = null
     const validityMessage = this.validator(value)
 
-    validityMessage.length > 0 ? isValid = false : isValid = true
+    validityMessage.length > 0 ? 
+      isValid = false 
+      : 
+      isValid = true
 
     !isValid ?
       !this.wrapper.classList.contains('is-invalid') && this.wrapper.classList.add('is-invalid')
@@ -66,7 +70,8 @@ class TextInput extends PlainComponent {
       messages: validityMessage
     }, false)
 
-    this.$('.feedback').errors.setState(validityMessage)
+    // Re-renderizamos el componente de feedback para mostrar errores o mensajes
+    if (!isValid) this.$('.feedback').errors.setState(validityMessage)
   }
 }
 

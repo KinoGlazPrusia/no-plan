@@ -1,4 +1,8 @@
 .light-theme {
+    /* MAIN */
+    --tertiary-color: #D9D9D9;
+
+
     /* STATE */
     --success-color: rgb(48, 163, 48);
     --error-color: rgb(211, 10, 10);
