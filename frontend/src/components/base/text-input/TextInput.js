@@ -1,6 +1,9 @@
 import { PlainComponent, PlainState } from '../../../../node_modules/plain-reactive/src/index.js'
 import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 
+/* COMPONENTS */
+import FormFeedback from '../form-feedback/FormFeedback.js'
+
 /* SERVICES */
 import * as validators from '../../../services/validator.js'
 
@@ -15,6 +18,7 @@ class TextInput extends PlainComponent {
     }, this)
 
     this.inputValue = new PlainState('', this)
+    this.cursorPosition = new PlainState(0, this)
   }
 
   template () {
@@ -26,44 +30,22 @@ class TextInput extends PlainComponent {
             type="${this.getAttribute('type')}" 
             value="${this.inputValue.getState()}"
             placeholder="${this.hasAttribute('placeholder') ? this.getAttribute('placeholder') : ''}">
-            <div class="error-list">
-              ${this.validity.getState().messages.map(error => {
-                return `
-                  <div class="error-wrapper">
-                    <span class="error-icon material-symbols-outlined">error</span>
-                    <span class="error">${error}</span>
-                  </div>
-                `
-              }).join('')}
-            </div>
+            <p-form-feedback class="feedback"></p-form-feedback>
         `
   }
 
   listeners() {
-    this.$('.input').oninput = () => {
+    this.$('.input').oninput = (e) => {
       // Actualización del input value
       this.updateValue()
-      
 
       // Validación
       this.validator && this.validate()
-
-      this.focusInput()
-      this.moveCursorToEnd()
     }
   }
 
   updateValue() {
     this.inputValue.setState(this.$('.input').value, false)
-  }
-
-  focusInput() {
-    this.$('.input').focus()
-  }
-
-  moveCursorToEnd() {
-    this.$('.input').value = ''
-    this.$('.input').value = this.inputValue.getState()
   }
 
   validate() {
@@ -82,7 +64,9 @@ class TextInput extends PlainComponent {
     this.validity.setState({
       isValid: isValid,
       messages: validityMessage
-    })
+    }, false)
+
+    this.$('.feedback').errors.setState(validityMessage)
   }
 }
 

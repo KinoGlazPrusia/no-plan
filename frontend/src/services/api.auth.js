@@ -5,19 +5,17 @@ export async function isAuthenticated() {
 }
 
 export async function login(email, password) {  
-  const url = API_ENDPOINTS.LOGIN + '?email=' + email + '&password=' + password
-  // const url = API_ENDPOINTS.LOGIN
-  /* const body = new FormData()
+  const url = API_ENDPOINTS.LOGIN
+  const body = new FormData()
 
-  body.set('email', email)
-  body.set('password', password) */
+  body.append('email', email)
+  body.append('password', password)
 
   try {
-    /* const response = await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       body: body
-    }) */
-    const response = await fetch(url)
+    })
   
     if (!response.ok) {
       throw new Error('Something went wrong while loggin in')

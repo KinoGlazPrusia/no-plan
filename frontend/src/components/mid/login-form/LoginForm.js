@@ -26,7 +26,7 @@ class LoginForm extends PlainComponent {
               id="email-input"
               name="email" 
               label="Email" 
-              type="email"
+              type="text"
               validator="${VALIDATORS.EMAIL}">
             </p-text-input>
 
@@ -53,18 +53,19 @@ class LoginForm extends PlainComponent {
 
     if (!this.validateFields()) return
     
+    // const response = await apiLogin(email, password)
     const response = await apiLogin(email, password)
     this.handleResponse(response)
   }
 
   handleResponse(response) {
-    console.table(response)
+    console.log(response)
   }
 
   validateFields() {
     this.$('#email-input').validate()
 
-    const validity = this.$('#email-input').validity.getState().isValid
+    const validity = this.$('#email-input').validity.getState().isValid // && otroInput.validity && etc
 
     return validity
   }

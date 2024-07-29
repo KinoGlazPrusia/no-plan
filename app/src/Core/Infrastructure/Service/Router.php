@@ -34,9 +34,15 @@ class Router
         $path = substr($path, strlen(Env::PUBLIC_DIR) + 1);
         $path = rtrim($path, '/');
 
+        // Para construir la query necesitamos métodos distintos dependiendo del request method
+        // Para GET
         // Si la query está definida, la convertimos en un array asociativo
         if (isset($query)) {
             parse_str($query, $query);
+        } else {
+            // Para POST
+            // Iteramos por el $_POST y lo guardamos en una nueva variable (array assoc.)
+            $query = $_POST;
         }
 
         // Devolvemos una nueva instancia de Request con el método, path y query

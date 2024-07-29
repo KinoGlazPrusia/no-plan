@@ -41,14 +41,16 @@ class Routes
         // LAS CLASES QUE ESPERAN UNA DI, ESPERAN COMO PARÁMETRO UNA INTERFAZ (ABSTRACCIÓN)
         return [
             'GET' => [
-                'login' => [
-                    'controller' => [AuthController::class, 'login'],
-                    'logic' => new LoginUseCase(new AuthRepository(new MySqlDatabase)),
-                    'access' => 'public'
-                ],
                 'register' => [
                     'controller' => [UserController::class, 'register'],
                     'logic' => new RegisterUserUseCase(new UserRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ]
+            ],
+            'POST' => [
+                'login' => [
+                    'controller' => [AuthController::class, 'login'],
+                    'logic' => new LoginUseCase(new AuthRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ]
             ]

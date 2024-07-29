@@ -35,7 +35,7 @@ class Request
      * @param string $url La URL de la solicitud.
      * @param array|null $query Los parámetros de consulta de la solicitud.
      */
-    public function __construct(string $method, string $url, array | null $query)
+    public function __construct(string $method, string $url, array | null $query = null)
     {
         $this->method = $method;
         $this->url = $url;
@@ -58,7 +58,7 @@ class Request
         if ($expectedQuery && $this->query) {
             foreach ($expectedQuery as $key) {
 
-                // Verificamos si la clave existe en la consulta proporcionada
+                // Verificamos si la clave existe en la consulta proporcionada (solo en el caso de GET)
                 if (!array_key_exists($key, $this->query)) $validity = false;
 
                 // Validamos la consulta en función del método HTTP
@@ -69,12 +69,12 @@ class Request
                     case 'POST':
                         if (!isset($_POST[$key])) $validity = false;
                         break;
-                    case 'PUT':
+                    /* case 'PUT':
                         if (!isset($_PUT[$key])) $validity = false;
                         break;
                     case 'DELETE':
                         if (!isset($_DELETE[$key])) $validity = false;
-                        break;
+                        break; */
                 }
             }
         }

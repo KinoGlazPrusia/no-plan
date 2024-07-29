@@ -32,18 +32,18 @@ class pApp extends PlainComponent {
   template() {
     /* eslint-disable */
     return `
-            ${this.router.route({
-      '':                     '<p-index-page></p-index-page>',
-      'login':                '<p-login-page></p-login-page>',
-      'signup':               '<p-signup-page></p-signup-page>',
-      'password-recovery':    '<p-password-recovery-page></p-password-recovery-page>',
-      'planner':              '<p-planner-page></p-planner-page>',
-      'user/profile':         '<p-user-profile-page></p-user-profile-page>',
-      'user/plans':           '<p-user-plans-page></p-user-plans-page>',
-      'plan/create':          '<p-create-plan-page></p-create-plan-page>',
-      '*':                    '<h2>Not Found</h2>'
-    })}
-        `
+      ${this.router.route({
+        '':                     '<p-index-page></p-index-page>',
+        'login':                '<p-login-page></p-login-page>',
+        'signup':               '<p-signup-page></p-signup-page>',
+        'password-recovery':    '<p-password-recovery-page></p-password-recovery-page>',
+        'planner':              '<p-planner-page></p-planner-page>',
+        'user/profile':         '<p-user-profile-page></p-user-profile-page>',
+        'user/plans':           '<p-user-plans-page></p-user-plans-page>',
+        'plan/create':          '<p-create-plan-page></p-create-plan-page>',
+        '*':                    '<h2>Not Found</h2>'
+      })}
+    `
     /* eslint-enable */
   }
 }
