@@ -79,3 +79,9 @@
 .is-invalid .input {
     border-color: var(--error-color);
 }
+
+/* FEEDBACK */
+.feedback {
+    max-width: 100%;
+    overflow: hidden;
+}

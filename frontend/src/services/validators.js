@@ -9,6 +9,7 @@ export const VALIDATORS = {
     PASSWORD: 'validatePassword',
     PASSWORD_CONFIRMATION: 'validatePasswordConfirmation',
     NAME: 'validateName',
+    PHONE_NUMBER: 'validatePhoneNumber',
     AVATAR_IMAGE_FILE: 'validateAvatarImage'
 }
 
@@ -95,10 +96,31 @@ export function validateName(name) {
     return validityMessage
 }
 
+export function validatePhoneNumber(phone) {
+    const validityMessage = validate([
+        {
+            condition: () => phone.length > 8 && phone.length < 20,
+            message: 'The phone length is not valid'
+        }
+    ])
+
+    return validityMessage
+}
+
 export function validateAvatarImage(file) {
-    const { type, size } = file
+    let type = null
+    let size = null
+
+    if (file) {
+        type = file.type
+        size = file.size 
+    }
 
     const validityMessage = validate([
+        {
+            condition: () => file,
+            message: 'This field is required'
+        },
         {
             condition: () => imageValidFormats.type.includes(type),
             message: 'This image type is not accepted'

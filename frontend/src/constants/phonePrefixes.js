@@ -3,7 +3,7 @@ export const phonePrefixes = {
     "Argentina": {
         prefix: "+54",
         maxLen: 15,
-        pattern: /^\+54 \d{1,4} \d{1,4} \d{4,5}$/
+        pattern: /^(\+54)(\d{1,4})(\d{1,4})(\d{4,5})$/
     },
     "Australia": {
         prefix: "+61",
@@ -198,7 +198,7 @@ export const phonePrefixes = {
     "Spain": {
         prefix: "+34",
         maxLen: 12,
-        pattern: /^\+34 \d{9}$/
+        pattern: /^(\+34)(\d{3})(\d{3})(\d{3})$/
     },
     "Sweden": {
         prefix: "+46",

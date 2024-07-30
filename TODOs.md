@@ -9,8 +9,12 @@
 - [x] Crear componente PhoneInput.
 - [x] Crear componente SelectInput.
 - [x] Crear componente FileInput (recuperarlo del ejercicio de los mapas).
+- [ ] Implementar la función isAuthenticated() de api.auth.js.
+- [ ] Completar validaciones para el SignUpForm.
+- [ ] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
 - [ ] Implementar validaciones en todos los componentes del frontend.
 - [ ] Crear componente CreatePlanForm.
+- [ ] Implementar formateo automático del PhoneInput.
 - [ ] Revisar el modelo. Creo que debería añadirse un campo en la tabla de rating_criteria para definir si es criterio de usuario o criterio de plan ya que no todos podrán compartirse.
 - [ ] Los planes podrían tener un timeline.
 - [ ] La iluminación/color-tinte del mapa cambia según la hora del día.

@@ -21,6 +21,7 @@ class PhoneInput extends PlainComponent {
     }, this)
 
     this.inputValue = new PlainState('', this)
+    this.phonePrefix = new PlainState('', this)
   }
 
   template () {
@@ -57,12 +58,38 @@ class PhoneInput extends PlainComponent {
   }
 
   updateValue () {
-    this.inputValue.setState(this.$('.input').value.replace(/\D/g, ''), false)
+    // this.inputValue.setState(this.formatValue(), false)
+    this.inputValue.setState(this.$('.input').value.replace(/[\D]/g, ''), false)
     this.$('.input').value = `+${this.inputValue.getState()}`
   }
 
-  validate () {
+  formatValue() {
+    // Pendiente de implementar
+    const value = this.$('.input').value
+    return value.replace(phonePrefixes.Spain.pattern, '$1 $2 $3 $4')
+  }
 
+  validate () {
+    const value = this.inputValue.getState()
+
+    let isValid = null
+    const validityMessage = this.validator(value)
+
+    validityMessage.length > 0
+      ? isValid = false
+      : isValid = true
+
+    !isValid
+      ? !this.wrapper.classList.contains('is-invalid') && this.wrapper.classList.add('is-invalid')
+      : this.wrapper.classList.contains('is-invalid') && this.wrapper.classList.remove('is-invalid')
+
+    this.validity.setState({
+      isValid,
+      messages: validityMessage
+    }, false)
+
+    // Re-renderizamos el componente de feedback para mostrar errores o mensajes
+    this.$('.feedback').errors.setState(validityMessage)
   }
 }
 

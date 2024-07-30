@@ -7,6 +7,8 @@ class FormFeedback extends PlainComponent {
 
         this.messages = new PlainState([], this)
         this.errors =  new PlainState([], this)
+
+        this.maxFeedbackLen = 25
     }
 
     template() {
@@ -15,8 +17,8 @@ class FormFeedback extends PlainComponent {
                 ${this.errors.getState().map(error => {
                     return `
                         <div class="error-wrapper">
-                        <span class="error-icon material-symbols-outlined">error</span>
-                        <span class="error">${error}</span>
+                            <span class="error-icon material-symbols-outlined">error</span>
+                            <span class="error">${error}</span>
                         </div>
                     `
                 }).join('')}
@@ -25,8 +27,15 @@ class FormFeedback extends PlainComponent {
                 ${this.messages.getState().map(message => {
                     return `
                         <div class="message-wrapper">
-                        <span class="message-icon material-symbols-outlined">check</span>
-                        <span class="message">${message}</span>
+                            <span class="message-icon material-symbols-outlined">check</span>
+                            <span class="message">
+                                ${
+                                    message.length <= this.maxFeedbackLen ?
+                                        message
+                                        :
+                                        `${message.substring(0, this.maxFeedbackLen)}...`
+                                }
+                            </span>
                         </div>
                     `
                 }).join('')}

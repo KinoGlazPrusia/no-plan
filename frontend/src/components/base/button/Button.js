@@ -34,12 +34,14 @@ class Button extends PlainComponent {
   }
 
   enable () {
+    this.removeAttribute('disabled')
     if (this.$('.button').classList.contains('disabled')) {
       this.$('.button').classList.remove('disabled')
     }
   }
 
   disable() {
+    this.setAttribute('disabled', true)
     if (!this.$('.button').classList.contains('disabled')) {
       this.$('.button').classList.add('disabled')
     }

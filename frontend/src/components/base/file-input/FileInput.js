@@ -36,7 +36,6 @@ class FileInput extends PlainComponent {
             class="input" 
             type="file" 
             name="${this.getAttribute(name)}" 
-            id="file" 
             accept="${this.getAttribute('accept')}"
             hidden>
 
@@ -50,24 +49,27 @@ class FileInput extends PlainComponent {
 
   listeners () {
     this.wrapper.onclick = () => this.openFileBrowser()
-    this.$('#file').onchange = (e) => this.handleFileSelect(e)
+    this.$('.input').onchange = (e) => this.handleFileSelect(e)
   }
 
   openFileBrowser () {
-    this.$('#file').click()
+    this.$('.input').click()
   }
 
   handleFileSelect (e) {
-    const imageFile = e.target.files[0]
-    this.validator && this.validate(imageFile)
+    this.inputValue.setState(e.target.files[0], false)
+    this.validator && this.validate()
   }
 
   onFileDeselected () {
+    this.inputValue.setState(null, false)
     this.$('.input').value = ''
     this.validate()
   }
 
-  validate (value) {
+  validate () {
+    const value = this.inputValue.getState()
+
     let isValid = null
     const validityMessage = this.validator(value)
 

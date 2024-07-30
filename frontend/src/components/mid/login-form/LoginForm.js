@@ -3,7 +3,7 @@ import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
 import { VALIDATORS } from '../../../services/validators.js'
-import { login as apiLogin } from '../../../services/api.auth.js'
+import { login as apiAuthLogin } from '../../../services/api.auth.js'
 
 /* COMPONENTS */
 /* eslint-disable */
@@ -48,13 +48,12 @@ class LoginForm extends PlainComponent {
   }
 
   async handleSubmit () {
+    if (!this.validateFields()) return
+
     const email = this.$('#email-input').inputValue.getState()
     const password = this.$('#password-input').inputValue.getState()
-
-    if (!this.validateFields()) return
     
-    // const response = await apiLogin(email, password)
-    const response = await apiLogin(email, password)
+    const response = await apiAuthLogin(email, password)
     this.handleResponse(response)
   }
 

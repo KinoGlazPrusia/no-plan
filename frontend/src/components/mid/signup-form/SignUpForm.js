@@ -3,6 +3,7 @@ import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
 import { VALIDATORS } from '../../../services/validators.js'
+import { register as apiUserRegister } from '../../../services/api.user.js'
 
 /* COMPONENTS */
 /* eslint-disable */
@@ -110,7 +111,8 @@ class SignUpForm extends PlainComponent {
                             class="input" 
                             id="phone"
                             name="phone" 
-                            label="Phone Number">
+                            label="Phone Number"
+                            validator="${VALIDATORS.PHONE_NUMBER}">
                             </p-phone-input>
 
                             <!-- GENRE -->
@@ -161,11 +163,31 @@ class SignUpForm extends PlainComponent {
     ]
 
     tabButtons.forEach(button => {
-      button.onclick = () => this.changeTab(button, tabButtons)
+      button.onclick = () => this.changeTabOnClick(button, tabButtons)
     })
+
+    this.$('.submit').onclick = () => this.handleSubmit()
   }
 
-  changeTab (currentTabButton, tabButtons) {
+  changeTabOnValidation(targetTab) {
+    const tabButtons = [
+      this.$('.tab-btn#tab-1'),
+      this.$('.tab-btn#tab-2'),
+      this.$('.tab-btn#tab-3')
+    ]
+
+    tabButtons.forEach(button => {
+      button.classList.remove('selected')
+    })
+
+    this.$(`.tab-btn#tab-${targetTab}`).classList.add('selected')
+
+    const inputWrapper = this.$('.input-wrapper')
+    inputWrapper.classList = 'input-wrapper'
+    inputWrapper.classList.add(`current-tab-${targetTab}`)
+  }
+
+  changeTabOnClick (currentTabButton, tabButtons) {
     // Estilamos los botones de selección del tab
     tabButtons.forEach(button => {
       button.classList.remove('selected')
@@ -187,16 +209,75 @@ class SignUpForm extends PlainComponent {
     }
   }
 
-  handleSubmit () {
+  async handleSubmit () {
+    // Si el submit está deshabilitado salimos
+    if (this.$('.submit').hasAttribute('disabled')) return
 
+    // Validamos el formulario
+    if (!this.validateFields()) return
+
+    // Recogemos todos los datos para pasarlos a la función de la api
+    const userData = {
+      email: this.$('#email-input').inputValue.getState(),
+      password: this.$('#password-input').inputValue.getState(),
+      name: this.$('#name').inputValue.getState(),
+      lastname: this.$('#lastname').inputValue.getState(),
+      birth_date: this.$('#birth-date').inputValue.getState(),
+      phone: this.$('#phone').inputValue.getState(),
+      genre: this.$('#genre').inputValue.getState(),
+      image: this.$('#avatar-img').inputValue.getState()
+    }
+
+    const response = await apiUserRegister(userData)
+    this.handleResponse(response)
   }
 
   handleResponse () {
-
+    
   }
 
   validateFields () {
     // Se validan todos con sus funciones propias menos la confirmación de password
+    this.$('#email-input').validate()
+    this.$('#password-input').validate()
+    //this.$('#conf-password-input').validate()
+    this.$('#name').validate()
+    this.$('#lastname').validate()
+    //this.$('#birth-date').validate()
+    this.$('#phone').validate()
+    //this.$('#genre').validate()
+    this.$('#avatar-img').validate()
+
+    if (
+      !this.$('#email-input').validity.getState().isValid ||
+      !this.$('#password-input').validity.getState().isValid
+    ) {
+      this.changeTabOnValidation(1)
+    } 
+    else if (
+      !this.$('#name').validity.getState().isValid ||
+      !this.$('#lastname').validity.getState().isValid ||
+      !this.$('#birth-date').validity.getState().isValid
+    ) {
+      this.changeTabOnValidation(2)
+    }
+    else if (
+      !this.$('#phone').validity.getState().isValid ||
+      !this.$('#genre').validity.getState().isValid ||
+      !this.$('#avatar-img').validity.getState().isValid
+    ) {
+      this.changeTabOnValidation(3)
+    }
+
+    const validity = 
+      this.$('#email-input').validity.getState().isValid &&
+      this.$('#password-input').validity.getState().isValid &&
+      this.$('#name').validity.getState().isValid &&
+      this.$('#lastname').validity.getState().isValid &&
+      this.$('#phone').validity.getState().isValid &&
+      this.$('#avatar-img').validity.getState().isValid 
+
+    return validity
   }
 }
 
