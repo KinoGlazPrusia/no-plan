@@ -13,19 +13,20 @@ use App\User\Domain\UserGenre;
 
 class UserController {
     public static function register(Request $request, IUseCase | IService $registerUser): void {
+        print_r($_FILES['image']);
         // Validamos la request
-        /* if (!$request->validateQuery([
+        if (!$request->validateQuery([
             'name', 
             'lastname',
             'email',
             'password',
-            'conf_password',
             'birth_date',
-            'genre',
-            'user_img'
+            'genre'
         ])) {
             Response::jsonError(400, 'Expected parameters doesn\'t match');
-        } */
+        }
+
+        Response::json('success', 200, 'ok', [$request]);
 
         // Obtenemos los datos de la request
         /* $name = $request->query['name'];
@@ -39,7 +40,7 @@ class UserController {
 
 
         // Ejecutamos la lógica de negocio (crear un usuario)
-        $registeredUser = $registerUser(
+        /* $registeredUser = $registerUser(
             Sanitizer::sanitizeName('name'),
             Sanitizer::sanitizeName('lastname'),
             'email@gmail.com',
@@ -47,12 +48,12 @@ class UserController {
             '2000-01-01',
             UserGenre::MALE,
             'profile_img_url'
-        );
+        ); */
 
         // Si recibimos un usuario
-        $registeredUser ? 
+        /* $registeredUser ? 
             Response::json('success', 200, 'Registered user') 
             :
-            Response::jsonError(400, 'Invalid data');
+            Response::jsonError(400, 'Invalid data'); */
     }
 }

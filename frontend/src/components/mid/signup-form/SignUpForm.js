@@ -223,7 +223,6 @@ class SignUpForm extends PlainComponent {
       name: this.$('#name').inputValue.getState(),
       lastname: this.$('#lastname').inputValue.getState(),
       birth_date: this.$('#birth-date').inputValue.getState(),
-      phone: this.$('#phone').inputValue.getState(),
       genre: this.$('#genre').inputValue.getState(),
       image: this.$('#avatar-img').inputValue.getState()
     }
@@ -232,8 +231,8 @@ class SignUpForm extends PlainComponent {
     this.handleResponse(response)
   }
 
-  handleResponse () {
-    
+  handleResponse (response) {
+    console.table(response)
   }
 
   validateFields () {

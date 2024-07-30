@@ -52,6 +52,11 @@ class Routes
                     'controller' => [AuthController::class, 'login'],
                     'logic' => new LoginUseCase(new AuthRepository(new MySqlDatabase)),
                     'access' => 'public'
+                ],
+                'register' => [
+                    'controller' => [UserController::class, 'register'],
+                    'logic' => new RegisterUserUseCase(new UserRepository(new MySqlDatabase)),
+                    'access' => 'public'
                 ]
             ]
         ];

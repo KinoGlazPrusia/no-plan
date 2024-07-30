@@ -6,18 +6,18 @@ export async function register(userData) {
 
     console.table(userData)
 
-    Object.entries(userData).forEach((key, value) => {
-        body.append(key, value)
+    Object.entries(userData).forEach(item => {
+        body.append(item[0], item[1])
     })
 
-    /* try {
+    try {
       const response = await fetch(url, {
         method: 'POST',
         body: body
       })
     
       if (!response.ok) {
-        throw new Error('Something went wrong while loggin in')
+        throw new Error('Something went wrong while signin up')
       }
     
       const data = await response.json()
@@ -25,5 +25,5 @@ export async function register(userData) {
     } 
     catch (error) {
       throw error
-    } */
+    }
   }
