@@ -8,9 +8,9 @@
 - [x] Crear componente SignUpForm.
 - [x] Crear componente PhoneInput.
 - [x] Crear componente SelectInput.
-- [ ] Crear componente FileInput (recuperarlo del ejercicio de los mapas).
-- [ ] Crear componente CreatePlanForm.
+- [x] Crear componente FileInput (recuperarlo del ejercicio de los mapas).
 - [ ] Implementar validaciones en todos los componentes del frontend.
+- [ ] Crear componente CreatePlanForm.
 - [ ] Revisar el modelo. Creo que debería añadirse un campo en la tabla de rating_criteria para definir si es criterio de usuario o criterio de plan ya que no todos podrán compartirse.
 - [ ] Los planes podrían tener un timeline.
 - [ ] La iluminación/color-tinte del mapa cambia según la hora del día.

@@ -5,7 +5,7 @@ import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 import FormFeedback from '../form-feedback/FormFeedback.js'
 
 /* SERVICES */
-import * as validators from '../../../services/validator.js'
+import * as validators from '../../../services/validators.js'
 
 /* CONSTANTS */
 import { userGenres } from '../../../constants/userGenres.js'

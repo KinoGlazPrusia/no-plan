@@ -2,7 +2,7 @@ import { PlainComponent } from '../../../../node_modules/plain-reactive/src/inde
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
-import { VALIDATORS } from '../../../services/validator.js'
+import { VALIDATORS } from '../../../services/validators.js'
 import { login as apiLogin } from '../../../services/api.auth.js'
 
 /* COMPONENTS */

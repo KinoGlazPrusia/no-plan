@@ -5,8 +5,10 @@ de validación, que pasaremos en un atributo a los componentes input para
 poder cargar las funciones */
 export const VALIDATORS = {
     EMAIL: 'validateEmail',
-    STRING: 'validateString',
     DATE: 'validateDate',
+    PASSWORD: 'validatePassword',
+    PASSWORD_CONFIRMATION: 'validatePasswordConfirmation',
+    NAME: 'validateName',
     AVATAR_IMAGE_FILE: 'validateAvatarImage'
 }
 
@@ -27,7 +29,6 @@ export function validateEmail(email) {
     return validityMessage
 }
 
-// TERMINAR LA IMPLEMENTACIÓN
 export function validateDate(rawDate) {
     const [year, month, day] = rawDate.split('-')
     const date = {
@@ -37,7 +38,61 @@ export function validateDate(rawDate) {
         raw: rawDate
     }
 
-    console.table(date)
+    // Pendiente de implementar la validación
+}
+
+export function validatePassword(password) {
+    const regexHasUppercase = /[A-Z]{1,}/g
+    const regexHasLowercase = /[a-z]{1,}/g
+    const regexHasSpecialChar = /[^A-z\s\d][\\\^]?/g
+    const regexHasDigit = /[\d]{1,}/g
+
+    const validityMessage = validate([
+        {
+            condition: () => password.length >= 8,
+            message: 'Min. 8 characters'
+        },
+        {
+            condition: () => regexHasUppercase.test(password),
+            message: 'At least one uppercase'
+        },
+        {
+            condition: () => regexHasLowercase.test(password),
+            message: 'At least one lowercase'
+        },
+        {
+            condition: () => regexHasSpecialChar.test(password),
+            message: 'At least one special character'
+        },
+        {
+            condition: () => regexHasDigit.test(password),
+            message: 'At least one digit'
+        }
+    ])
+
+    return validityMessage
+}
+
+export function validatePasswordConfirmation(password, confirmation) {
+    const validityMessage = validate([
+        {
+            condition: () => password === confirmation,
+            message: 'Passwords don\'t match'
+        }
+    ])
+
+    return validityMessage
+}
+
+export function validateName(name) {
+    const validityMessage = validate([
+        {
+            condition: () => name.length > 0 && name.length < 20,
+            message: 'Between 1 and 20 characters'
+        }
+    ])
+
+    return validityMessage
 }
 
 export function validateAvatarImage(file) {

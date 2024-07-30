@@ -2,7 +2,7 @@ import { PlainComponent } from '../../../../node_modules/plain-reactive/src/inde
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
-import { VALIDATORS } from '../../../services/validator.js'
+import { VALIDATORS } from '../../../services/validators.js'
 
 /* COMPONENTS */
 /* eslint-disable */
@@ -37,6 +37,7 @@ class SignUpForm extends PlainComponent {
                             name="email" 
                             label="Email" 
                             type="email"
+                            maxlength="45"
                             validator="${VALIDATORS.EMAIL}">
                             </p-text-input>
 
@@ -46,7 +47,9 @@ class SignUpForm extends PlainComponent {
                             id="password-input"
                             name="password" 
                             label="Password" 
-                            type="password">
+                            type="password"
+                            maxlength="60"
+                            validator="${VALIDATORS.PASSWORD}">
                             </p-text-input>
 
                             <!-- CONF PASSWORD -->
@@ -55,7 +58,8 @@ class SignUpForm extends PlainComponent {
                             id="conf-password-input"
                             name="conf-password" 
                             label="Confirm Password" 
-                            type="password">
+                            type="password"
+                            maxlength="60">
                             </p-text-input>
 
                         </div>
@@ -70,7 +74,9 @@ class SignUpForm extends PlainComponent {
                             id="name"
                             name="name" 
                             label="Name" 
-                            type="text">
+                            type="text"
+                            maxlength="30"
+                            validator="${VALIDATORS.NAME}">
                             </p-text-input>
 
                             <!-- LASTNAME -->
@@ -79,7 +85,9 @@ class SignUpForm extends PlainComponent {
                             id="lastname"
                             name="lastname" 
                             label="Last Name" 
-                            type="text">
+                            type="text"
+                            maxlength="30"
+                            validator="${VALIDATORS.NAME}">
                             </p-text-input>
 
                             <!-- BIRTHDAY -->
@@ -119,6 +127,7 @@ class SignUpForm extends PlainComponent {
                             id="avatar-img"
                             name="avatar-img"
                             label="Avatar Image"
+                            accept="image/*"
                             validator="${VALIDATORS.AVATAR_IMAGE_FILE}">
                             <p-file-input>
 
@@ -187,7 +196,7 @@ class SignUpForm extends PlainComponent {
   }
 
   validateFields () {
-
+    // Se validan todos con sus funciones propias menos la confirmación de password
   }
 }
 

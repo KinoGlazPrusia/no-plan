@@ -7,7 +7,7 @@ import FormFeedback from '../form-feedback/FormFeedback.js'
 /* eslint-enable */
 
 /* SERVICES */
-import * as validators from '../../../services/validator.js'
+import * as validators from '../../../services/validators.js'
 
 class TextInput extends PlainComponent {
   constructor () {
@@ -31,6 +31,7 @@ class TextInput extends PlainComponent {
             name="${this.getAttribute('name')}" 
             type="${this.getAttribute('type')}" 
             value="${this.inputValue.getState()}"
+            maxlength="${this.hasAttribute('maxlength') ? this.getAttribute('maxlength') : 200}"
             placeholder="${this.hasAttribute('placeholder') ? this.getAttribute('placeholder') : ''}">
             
             <p-form-feedback class="feedback"></p-form-feedback>

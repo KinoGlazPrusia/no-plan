@@ -7,7 +7,7 @@ import FormFeedback from '../form-feedback/FormFeedback.js'
 /* eslint-enable */
 
 /* SERVICES */
-import * as validators from '../../../services/validator.js'
+import * as validators from '../../../services/validators.js'
 
 class FileInput extends PlainComponent {
   constructor () {
@@ -37,6 +37,7 @@ class FileInput extends PlainComponent {
             type="file" 
             name="${this.getAttribute(name)}" 
             id="file" 
+            accept="${this.getAttribute('accept')}"
             hidden>
 
             <div class="input-frame">
