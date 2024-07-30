@@ -1,10 +1,13 @@
+import { imageValidFormats } from '../constants/imageValidFormats.js'
+
 /* Este objeto sirve de ENUM para recuperar los nombres de las funciones
 de validación, que pasaremos en un atributo a los componentes input para
 poder cargar las funciones */
 export const VALIDATORS = {
     EMAIL: 'validateEmail',
     STRING: 'validateString',
-    DATE: 'validateDate'
+    DATE: 'validateDate',
+    AVATAR_IMAGE_FILE: 'validateAvatarImage'
 }
 
 export function validateEmail(email) {
@@ -24,6 +27,7 @@ export function validateEmail(email) {
     return validityMessage
 }
 
+// TERMINAR LA IMPLEMENTACIÓN
 export function validateDate(rawDate) {
     const [year, month, day] = rawDate.split('-')
     const date = {
@@ -34,6 +38,23 @@ export function validateDate(rawDate) {
     }
 
     console.table(date)
+}
+
+export function validateAvatarImage(file) {
+    const { type, size } = file
+
+    const validityMessage = validate([
+        {
+            condition: () => imageValidFormats.type.includes(type),
+            message: 'This image type is not accepted'
+        },
+        {
+            condition: () => size <= imageValidFormats.maxSize,
+            message: `The image is too big (max. size is ${imageValidFormats.maxSize / 1000000}Mb)`
+        }
+    ])
+
+    return validityMessage
 }
 
 /* Esta función genérica permite pasar un input value y una función como condición,

@@ -22,3 +22,26 @@
 .error-icon {
     font-size: 1.2em;
 }
+
+/* MESSAGE */
+.message-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-wrapper {
+    padding-left: 1em;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5em;
+
+    color: var(--accent-color);
+    font-size: 14px;
+}
+
+.message-icon {
+    font-size: 1.2em;
+}

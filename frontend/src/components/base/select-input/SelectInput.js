@@ -30,9 +30,8 @@ class SelectInput extends PlainComponent {
             <select 
             class="input" 
             name="${this.getAttribute('name')}" 
-            value="${this.inputValue.getState()}"
-            placeholder="Select">
-                <option value="" default hidden>Select an option</option>
+            value="${this.inputValue.getState()}">
+                <option default hidden>Select an option</option>
                 ${Object.entries(userGenres).map(([key, value]) =>
                     `<option value="${key}">${value}</option>`
                 )}

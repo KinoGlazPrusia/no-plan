@@ -11,6 +11,7 @@ import TextInput from '../../base/text-input/TextInput.js'
 import DateInput from '../../base/date-input/DateInput.js'
 import PhoneInput from '../../base/phone-input/PhoneInput.js'
 import SelectInput from '../../base/select-input/SelectInput.js'
+import FileInput from '../../base/file-input/FileInput.js'
 /* eslint-enable */
 
 class SignUpForm extends PlainComponent {
@@ -112,13 +113,14 @@ class SignUpForm extends PlainComponent {
                             label="Genre">
                             </p-select-input>
 
-                            <!-- BIRTHDAY -->
-                            <p-date-input
-                            class="birth-date"
-                            id="birth-date"
-                            name="birth-date"
-                            label="Birth Date">
-                            <p-date-input>
+                            <!-- AVATAR IMAGE -->
+                            <p-file-input
+                            class="avatar-img"
+                            id="avatar-img"
+                            name="avatar-img"
+                            label="Avatar Image"
+                            validator="${VALIDATORS.AVATAR_IMAGE_FILE}">
+                            <p-file-input>
 
                         </div>
 

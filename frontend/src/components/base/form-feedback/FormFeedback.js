@@ -13,12 +13,22 @@ class FormFeedback extends PlainComponent {
         return `
             <div class="error-list">
                 ${this.errors.getState().map(error => {
-                return `
-                    <div class="error-wrapper">
-                    <span class="error-icon material-symbols-outlined">error</span>
-                    <span class="error">${error}</span>
-                    </div>
-                `
+                    return `
+                        <div class="error-wrapper">
+                        <span class="error-icon material-symbols-outlined">error</span>
+                        <span class="error">${error}</span>
+                        </div>
+                    `
+                }).join('')}
+            </div>
+            <div class="message-list">
+                ${this.messages.getState().map(message => {
+                    return `
+                        <div class="message-wrapper">
+                        <span class="message-icon material-symbols-outlined">check</span>
+                        <span class="message">${message}</span>
+                        </div>
+                    `
                 }).join('')}
             </div>
         `

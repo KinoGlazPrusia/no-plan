@@ -7,7 +7,7 @@
 - [x] Crear componente DateInput.
 - [x] Crear componente SignUpForm.
 - [x] Crear componente PhoneInput.
-- [ ] Crear componente SelectInput.
+- [x] Crear componente SelectInput.
 - [ ] Crear componente FileInput (recuperarlo del ejercicio de los mapas).
 - [ ] Crear componente CreatePlanForm.
 - [ ] Implementar validaciones en todos los componentes del frontend.
@@ -15,3 +15,4 @@
 - [ ] Los planes podrían tener un timeline.
 - [ ] La iluminación/color-tinte del mapa cambia según la hora del día.
 - [ ] Incluir el manejo de mensajes de 'success' en el componente FormFeedback.
+- [ ] Mejorar los componentes PhoneInput y SelectInput

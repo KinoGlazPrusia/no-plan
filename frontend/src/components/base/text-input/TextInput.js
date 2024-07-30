@@ -71,7 +71,7 @@ class TextInput extends PlainComponent {
     }, false)
 
     // Re-renderizamos el componente de feedback para mostrar errores o mensajes
-    if (!isValid) this.$('.feedback').errors.setState(validityMessage)
+    this.$('.feedback').errors.setState(validityMessage)
   }
 }
 
