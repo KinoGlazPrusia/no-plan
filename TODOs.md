@@ -9,6 +9,7 @@
 - [x] Crear componente PhoneInput.
 - [x] Crear componente SelectInput.
 - [x] Crear componente FileInput (recuperarlo del ejercicio de los mapas).
+- [ ] Implementar manejo de archivos desde la entidad Request.
 - [ ] Implementar la función isAuthenticated() de api.auth.js.
 - [ ] Completar validaciones para el SignUpForm.
 - [ ] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.

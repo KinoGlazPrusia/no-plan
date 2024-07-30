@@ -21,4 +21,9 @@ class Sanitizer
         $sanitized = strtoupper($sanitized[0]) . substr($sanitized, 1);
         return $sanitized;
     }
+
+    public static function sanitizeDate(string $birth_date): string {
+        $sanitized = self::sanitizeString($birth_date);
+        return $sanitized;
+    }
 }

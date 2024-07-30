@@ -42,7 +42,9 @@ class Router
         } else {
             // Para POST
             // Iteramos por el $_POST y lo guardamos en una nueva variable (array assoc.)
-            $query = $_POST;
+            $query = array_map(function($key) {
+                return $key;
+            }, $_POST);
         }
 
         // Devolvemos una nueva instancia de Request con el método, path y query

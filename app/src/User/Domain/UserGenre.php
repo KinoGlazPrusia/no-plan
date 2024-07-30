@@ -9,7 +9,7 @@ class UserGenre {
     const OTHER = 'O';
     const NOT_SET = 'NS';
 
-    public function getVerbose(string $code) {
+    public static function getVerbose(string $code) {
         switch ($code) {
             case 'M':
                 return 'male';
@@ -22,5 +22,15 @@ class UserGenre {
             default:
                 return 'not set';
         }
+    }
+
+    public static function getAll() {
+        return [
+            self::MALE,
+            self::FEMALE,
+            self::NON_BINARY,
+            self::OTHER,
+            self::NOT_SET
+        ];
     }
 }

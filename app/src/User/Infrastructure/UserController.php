@@ -1,24 +1,22 @@
 <?php
 namespace App\User\Infrastructure;
 
+use App\Env;
 use App\Core\Infrastructure\Interface\IUseCase;
 use App\Core\Infrastructure\Interface\IService;
 use App\Core\Infrastructure\Service\Request;
 use App\Core\Infrastructure\Service\Response;
 use App\Core\Infrastructure\Service\Sanitizer;
 use App\Core\Infrastructure\Service\Validator;
-use App\User\Infrastructure\UserRepository;
-use App\Core\Infrastructure\Database\MySqlDatabase;
-use App\User\Domain\UserGenre;
+
 
 class UserController {
     public static function register(Request $request, IUseCase | IService $registerUser): void {
-        print_r($_FILES['image']);
         // Validamos la request
         if (!$request->validateQuery([
-            'name', 
+            'email', 
+            'name',
             'lastname',
-            'email',
             'password',
             'birth_date',
             'genre'
@@ -26,29 +24,44 @@ class UserController {
             Response::jsonError(400, 'Expected parameters doesn\'t match');
         }
 
-        Response::json('success', 200, 'ok', [$request]);
-
-        // Obtenemos los datos de la request
-        /* $name = $request->query['name'];
-        $lastname = $request->query['lastname'];
-        $email = $request->query['email']; */
-        // Sanitizamos los datos
-        // Validamos los datos
+        // Obtenemos los datos de la request y los sanitizamos
+        $email = Sanitizer::sanitizeEmail($request->query['email']);
+        $name = Sanitizer::sanitizeName($request->query['name']);
+        $lastname = Sanitizer::sanitizeName($request->query['lastname']);
+        $password = $request->query['password'];
+        $birth_date = Sanitizer::sanitizeDate($request->query['birth_date']);
+        $genre = Sanitizer::sanitizeString($request->query['genre']);
         
-        // Extraemos los datos de la imagen y la preparamos para guardarla en servidor una vez creado el usuario
-        // En el momento de activar la cuenta si no se activa la imagen ha de eliminarse.
+        // Creamos una url para guardar la imagen
+        $image = $_FILES['image'];
+        if (!is_uploaded_file($image['tmp_name'])) {
+            Response::jsonError(400, 'Invalid image');
+        }
 
-
+        // Validamos todos los datos recogidos
+        $validityMessage = array_merge(
+            Validator::validateEmail($email),
+            Validator::validateName($name),
+            Validator::validateName($lastname),
+            Validator::validateDate($birth_date),
+            Validator::validateGenre($genre),
+            Validator::validateUploadedImage($image)
+        );
+        
+        if (count($validityMessage) > 0) {
+            Response::jsonError(400, implode(', ', $validityMessage));
+        }
+        
         // Ejecutamos la lógica de negocio (crear un usuario)
-        /* $registeredUser = $registerUser(
-            Sanitizer::sanitizeName('name'),
-            Sanitizer::sanitizeName('lastname'),
-            'email@gmail.com',
-            '1234',
-            '2000-01-01',
-            UserGenre::MALE,
-            'profile_img_url'
-        ); */
+        $isUserRegistered = $registerUser(
+            $email,
+            $name,
+            $lastname,
+            $password,
+            $birth_date,
+            $genre,
+            $image
+        );
 
         // Si recibimos un usuario
         /* $registeredUser ? 
