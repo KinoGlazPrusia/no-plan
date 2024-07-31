@@ -5,7 +5,7 @@ use Ramsey\Uuid\Uuid;
 
 /* Value object */
 class UUIDv4 {
-    public static function _invoke(): string {
+    public static function get(): string {
         return Uuid::uuid4()->toString();
     }
 }

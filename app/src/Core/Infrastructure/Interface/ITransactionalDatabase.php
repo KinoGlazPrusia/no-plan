@@ -1,6 +1,8 @@
 <?php 
 namespace App\Core\Infrastructure\Interface;
 
+use Exception;
+
 /**
  * Interfaz para manejo de conexiones y transacciones en una base de datos.
  */

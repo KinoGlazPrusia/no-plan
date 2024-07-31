@@ -1,6 +1,7 @@
 <?php 
 namespace App\Core\Infrastructure\Interface;
 
+use Exception;
 use App\Core\Infrastructure\Interface\IEntity;
 
 /**

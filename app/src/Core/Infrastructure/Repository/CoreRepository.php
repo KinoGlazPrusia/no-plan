@@ -1,6 +1,7 @@
 <?php
 namespace App\Core\Infrastructure\Repository;
 
+use Exception;
 use App\Core\Infrastructure\Database\MySqlDatabase;
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IEntity;
@@ -16,9 +17,6 @@ class CoreRepository implements IRepository
     }
 
     public function save(IEntity $entity): bool {
-        $this->db->connect();
-        $error = false;
-
         $data = $entity->serialize(false);
         $keys = array_keys($data);
         $placeholders = array_map(function($key) {
@@ -26,18 +24,21 @@ class CoreRepository implements IRepository
         }, $keys);
 
         $sql = 'INSERT INTO ' . $entity->table . ' (' . implode(', ', $keys) . ') VALUES (' . implode(', ', $placeholders) . ')';
-        $stmt = $this->db->prepare($sql);
-
-        $this->db->beginTransaction();
-        $this->db->execute($stmt, $data);
-        if (!$this->db->commit()) {
+        
+        try {
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $this->db->beginTransaction();
+            $this->db->execute($stmt, $data);
+            $this->db->commit();
+            $this->db->disconnect();
+            return true;
+        } 
+        catch (Exception $e) {
             $this->db->rollBack();
-            $error = true;
+            $this->db->disconnect();
+            throw $e;
         }
-
-        $this->db->disconnect();
-
-        return !$error;
     }
 
     public function update(IEntity $entity): bool {
@@ -57,20 +58,23 @@ class CoreRepository implements IRepository
     }
 
     public function findBy(string $table, string $field, string $value): array {
-        $this->db->connect();
-        
         $res = [];
 
         $sql = 'SELECT * FROM ' . $table . ' WHERE ' . $field . ' = :value';
-        $stmt = $this->db->prepare($sql);
 
-        $this->db->beginTransaction();
-        $res = $this->db->execute($stmt, ['value' => $value]);
-        if (!$this->db->commit()) {
+        try {
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $this->db->beginTransaction();
+            $res = $this->db->execute($stmt, ['value' => $value]);
+            $this->db->commit();
+            $this->db->disconnect();
+            return $res;
+        } 
+        catch (Exception $e) {
             $this->db->rollBack();
+            $this->db->disconnect();
+            throw $e;
         }
-
-        $this->db->disconnect();
-        return $res;
     }
 }   

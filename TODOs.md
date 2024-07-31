@@ -9,7 +9,9 @@
 - [x] Crear componente PhoneInput.
 - [x] Crear componente SelectInput.
 - [x] Crear componente FileInput (recuperarlo del ejercicio de los mapas).
-. [ ] Separar la lógica de registro de usuario en un serivicio que coordina distintos casos de uso (crear usuario, guardar avatar, enviar email de activación, etc.).
+- [x] Separar la lógica de registro de usuario en un serivicio que coordina distintos casos de uso (crear usuario, guardar avatar, enviar email de activación, etc.).
+- [ ] En la creación de usuario, habría que extraer el rollback al caso de uso para poder hacerlo en caso de que no se pueda guardar la imagen o enviar el email de confirmación. Buscar y revisar un vídeo de CodelyTV que hablaba de mover la lógica de bases de datos transaccionales a la capa de aplicación (creo que se llama BBDD transaccionales).
+- [ ] Añadir el campo phone a la tabla users e implementarlo en el servidor.
 - [ ] Implementar manejo de archivos desde la entidad Request.
 - [ ] Implementar la función isAuthenticated() de api.auth.js.
 - [ ] Completar validaciones para el SignUpForm.
@@ -22,3 +24,4 @@
 - [ ] La iluminación/color-tinte del mapa cambia según la hora del día.
 - [ ] Incluir el manejo de mensajes de 'success' en el componente FormFeedback.
 - [ ] Mejorar los componentes PhoneInput y SelectInput
+- [ ] Revisar el manejo de excepciones en MySqlDatabase.php

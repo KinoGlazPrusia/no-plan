@@ -1,6 +1,7 @@
 <?php
 namespace App\Core\Infrastructure\Database;
 
+use Exception;
 use PDO;
 use PDOException;
 use App\Env;
@@ -18,8 +19,7 @@ class MySqlDatabase implements ITransactionalDatabase {
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } 
         catch (PDOException $e) {
-            fwrite(fopen('php://stdout', 'w'), $e->getMessage());
-            throw $e;
+            throw new Exception($e->getMessage());
         }
 
         return $this->conn ? true : false;
@@ -32,8 +32,7 @@ class MySqlDatabase implements ITransactionalDatabase {
             $stmt = $this->conn->prepare($query);
         } 
         catch (PDOException $e) {
-            fwrite(fopen('php://stdout', 'w'), $e->getMessage());
-            throw $e;
+            throw new Exception($e->getMessage());
         }
 
         return $stmt;
@@ -45,8 +44,7 @@ class MySqlDatabase implements ITransactionalDatabase {
             return true;
         } 
         catch (PDOException $e) {
-            fwrite(fopen('php://stdout', 'w'), $e->getMessage());
-            throw $e;
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -60,8 +58,7 @@ class MySqlDatabase implements ITransactionalDatabase {
             }
         } 
         catch (PDOException $e) {
-            fwrite(fopen('php://stdout', 'w'), $e->getMessage());
-            throw $e;
+            throw new Exception($e->getMessage());
         }
 
         return $data;
@@ -73,8 +70,7 @@ class MySqlDatabase implements ITransactionalDatabase {
             return true;
         } 
         catch (PDOException $e) {
-            fwrite(fopen('php://stdout', 'w'), $e->getMessage());
-            throw $e;
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -84,8 +80,7 @@ class MySqlDatabase implements ITransactionalDatabase {
             return true;
         } 
         catch (PDOException $e) {
-            fwrite(fopen('php://stdout', 'w'), $e->getMessage());
-            return false;
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -96,7 +91,7 @@ class MySqlDatabase implements ITransactionalDatabase {
             $lastId = $this->conn->lastInsertId();
         } 
         catch (PDOException $e) {
-            fwrite(fopen('php://stdout', 'w'), $e->getMessage());
+            throw new Exception($e->getMessage());
         }
 
         return $lastId;

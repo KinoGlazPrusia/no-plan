@@ -1,6 +1,7 @@
 <?php
 namespace App\User\Infrastructure;
 
+use Exception;
 use App\Env;
 use App\Core\Infrastructure\Interface\IUseCase;
 use App\Core\Infrastructure\Interface\IService;
@@ -53,20 +54,28 @@ class UserController {
         }
         
         // Ejecutamos la lógica de negocio (crear un usuario)
-        $isUserRegistered = $registerUser(
-            $email,
-            $name,
-            $lastname,
-            $password,
-            $birth_date,
-            $genre,
-            $image
-        );
+        $isUserRegistered = false;
+        $error = null;
+        
+        try {
+            $isUserRegistered = $registerUser(
+                $email,
+                $name,
+                $lastname,
+                $password,
+                $birth_date,
+                $genre,
+                $image
+            );
+        } 
+        catch (Exception $e) {
+            $error = $e->getMessage();
+        }
 
         // Si recibimos un usuario
         $isUserRegistered ? 
             Response::json('success', 200, 'Registered user') 
             :
-            Response::jsonError(400, 'Invalid data');
+            Response::jsonError(400, $error);
     }
 }
