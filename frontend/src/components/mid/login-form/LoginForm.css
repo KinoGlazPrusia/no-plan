@@ -8,6 +8,7 @@ form {
     padding-block: 2.5em;
     box-sizing: border-box;
     
+    min-height: 348px;
     width: 340px;
 
     display: flex;

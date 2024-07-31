@@ -19,7 +19,7 @@ class AuthController {
         if (isset($_COOKIE['session_token'])) {
             // Esto solo está con fines de DEBUG (eliminar en producción)
             $decodedToken = JWToken::decodeToken($_COOKIE['session_token']);
-            Response::json('success', 200, 'User already logged in', ['token' => $decodedToken]);
+            Response::json('error', 200, 'User already logged in', ['token' => $decodedToken]);
         }
 
         // Validamos la request
@@ -35,8 +35,10 @@ class AuthController {
         $email = Sanitizer::sanitizeEmail($email);
 
         // Validamos los datos
-        if (!Validator::validateEmail($email)) {
-            Response::jsonError(400, "Invalid email $email");
+        $validityMessage = Validator::validateEmail($email);
+
+        if (count($validityMessage) > 0) {
+            Response::jsonError(400, implode(', ', $validityMessage));
         }
 
         try {
@@ -44,7 +46,7 @@ class AuthController {
 
             // Respuesta provisional (devolvemos los datos del usuario ¡sin el password!)
             $filteredUserData = $loggedUser->serialize();
-            unset($userData['password']);
+            unset($filteredUserData['password']);
             Response::json('success', 200, 'Logged in', [$filteredUserData]);
         } 
         catch (Exception $e) {

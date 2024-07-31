@@ -1,4 +1,4 @@
-import { PlainComponent } from '../../../../node_modules/plain-reactive/src/index.js'
+import { PlainComponent, PlainState } from '../../../../node_modules/plain-reactive/src/index.js'
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
@@ -9,42 +9,69 @@ import { login as apiAuthLogin } from '../../../services/api.auth.js'
 /* eslint-disable */
 import Button from '../../base/button/Button.js'
 import TextInput from '../../base/text-input/TextInput.js'
+import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
 /* eslint-enable */
 
 class LoginForm extends PlainComponent {
   constructor () {
     super('p-login-form', `${MID_COMPONENTS_PATH}login-form/LoginForm.css`)
+
+    // [ ] Implementar isLoading
+    this.isLoading = new PlainState(false, this)
+
+    // [ ] Implementar isError
+    this.isError = new PlainState(false, this)
   }
 
   template () {
+    if (this.isLoading.getState()) {
+      return `
+        <form class="login-form" name="login-form">
+            <h1 class="greetings">Welcome!</h1>
+
+            <p-loading-spinner
+              class="spinner"
+              success-message="Welcome"
+              success-detail="You're logged in">
+            </p-loading-spinner>
+
+        </form>
+      `
+    }
+
     return `
         <form class="login-form" name="login-form">
             <h1 class="greetings">Welcome!</h1>
 
-            <p-text-input 
-              class="input" 
-              id="email-input"
-              name="email" 
-              label="Email" 
-              type="text"
-              validator="${VALIDATORS.EMAIL}">
-            </p-text-input>
+              <p-text-input 
+                class="input" 
+                id="email-input"
+                name="email" 
+                label="Email" 
+                type="text"
+                validator="${VALIDATORS.EMAIL}">
+              </p-text-input>
 
-            <p-text-input 
-              class="input" 
-              id="password-input"
-              name="password" 
-              label="Password" 
-              type="password">
-            </p-text-input>
+              <p-text-input 
+                class="input" 
+                id="password-input"
+                name="password" 
+                label="Password" 
+                type="password">
+              </p-text-input>
 
-            <p-button class="submit" type="primary">Log In</p-button>
+              <p-button class="submit" type="primary">Log In</p-button>
         </form>
         `
   }
 
   listeners () {
-    this.$('.submit').onclick = () => this.handleSubmit()
+    try {
+      this.$('.submit').onclick = () => this.handleSubmit()
+    } 
+    catch (error) {
+      // [ ] Implementar manejo de errores
+    }
   }
 
   async handleSubmit () {
@@ -53,12 +80,23 @@ class LoginForm extends PlainComponent {
     const email = this.$('#email-input').inputValue.getState()
     const password = this.$('#password-input').inputValue.getState()
     
-    const response = await apiAuthLogin(email, password)
-    this.handleResponse(response)
+    this.isLoading.setState(true)
+    try {
+      const response = await apiAuthLogin(email, password)
+      this.handleResponse(response)
+    } 
+    catch (error) {
+      // [ ] Implementar manejo de errores
+    }
   }
 
   handleResponse(response) {
+    // [ ] Eliminar los console logs
     console.log(response)
+    if (response.status === 'success') {
+      this.$('.spinner').success()
+    }
+    // [ ] Implementar manejo de errores cuando la response.status === 'error'
   }
 
   validateFields() {
