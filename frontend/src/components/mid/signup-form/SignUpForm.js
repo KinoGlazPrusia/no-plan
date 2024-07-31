@@ -258,6 +258,7 @@ class SignUpForm extends PlainComponent {
   }
 
   handleResponse (response) {
+    // [ ] Eliminar los console logs
     console.log(response)
     if (response.status === 'success') {
       this.$('.spinner').success()
@@ -277,6 +278,8 @@ class SignUpForm extends PlainComponent {
     //this.$('#genre').validate()
     this.$('#avatar-img').validate()
 
+
+    // Cambiamos el tab de manera automática según en donde esté el error
     if (
       !this.$('#email-input').validity.getState().isValid ||
       !this.$('#password-input').validity.getState().isValid
@@ -298,6 +301,7 @@ class SignUpForm extends PlainComponent {
       this.changeTabOnValidation(3)
     }
 
+    // Guardamos la validez del formulario en una variable para devolverla
     const validity = 
       this.$('#email-input').validity.getState().isValid &&
       this.$('#password-input').validity.getState().isValid &&
