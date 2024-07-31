@@ -53,4 +53,33 @@ class AuthController {
             Response::jsonError(403, $e->getMessage());
         }
     }
+
+    public static function emailExists(Request $request, IUseCase | IService $emailExists): void {
+        // Validamos la request
+        if (!$request->validateQuery(['email'])) {
+            Response::jsonError(400, 'Expected parameters [email]');
+        }
+
+        // Obtenemos los datos de la request
+        $email = $request->query['email'];
+
+        // Validamos los datos
+        $validityMessage = Validator::validateEmail($email);
+
+        if (count($validityMessage) > 0) {
+            Response::jsonError(400, implode(', ', $validityMessage));
+        }
+
+        try {
+            $exists = $emailExists($email);
+
+            $exists ? 
+                Response::json('error', 200, 'Email exists', [$exists])
+                :
+                Response::json('success', 200, 'Email does not exist', [$exists]);
+        } 
+        catch (Exception $e) {
+            Response::jsonError(403, $e->getMessage());
+        }
+    }   
 }

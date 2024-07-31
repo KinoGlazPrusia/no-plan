@@ -8,11 +8,13 @@ use App\Core\Infrastructure\Database\MySqlDatabase;
 use App\Auth\Infrastructure\AuthController;
 use App\Auth\Infrastructure\AuthRepository;
 use App\Auth\Application\LoginUseCase;
-use App\User\Application\RegisterUserService;
+use App\Auth\Application\EmailExistsUseCase;
+
 /* USER */
 use App\User\Infrastructure\UserController;
 use App\User\Infrastructure\UserRepository;
-use App\User\Application\RegisterUserUseCase;
+use App\User\Application\RegisterUserService;
+
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -42,8 +44,8 @@ class Routes
         return [
             'GET' => [
                 'email-exists' => [
-                    'controller' => [UserController::class, 'register'],
-                    'logic' => new RegisterUserService(new UserRepository(new MySqlDatabase)),
+                    'controller' => [AuthController::class, 'emailExists'],
+                    'logic' => new EmailExistsUseCase(new AuthRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ]
             ],
