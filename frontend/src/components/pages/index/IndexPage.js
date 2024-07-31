@@ -19,7 +19,7 @@ class IndexPage extends PlainComponent {
 
   async checkAuthentication () {
     const isAuthenticated = await apiAuth.isAuthenticated()
-    isAuthenticated ? this.navigateTo('planner') : this.navigateTo('login')
+    isAuthenticated.data[0] ? this.navigateTo('planner') : this.navigateTo('login')
   }
 
   navigateTo (path) {

@@ -17,19 +17,21 @@ import Navbar from './components/mid/navbar/Navbar.js'
 /* eslint-enable */
 
 class pApp extends PlainComponent {
-  constructor() {
+  constructor () {
     super('p-app', `${SRC_PATH}App.css`)
 
     this.router = new PlainRouter(PUBLIC_PATH)
     this.navigationContext = new PlainContext('navigation', this, false)
     this.navigationContext.setData({ currentPage: 'index' })
 
+    this.userContext = new PlainContext('user', this, false)
+
     // En este componente guardaremos los contextos generales de la aplicación
     // mientras que en los componentes de las páginas guardaremos los contextos
     // propios de cada página
   }
 
-  template() {
+  template () {
     /* eslint-disable */
     return `
       ${this.router.route({

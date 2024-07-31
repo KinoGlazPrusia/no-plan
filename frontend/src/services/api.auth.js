@@ -1,7 +1,15 @@
 import { API_ENDPOINTS } from '../config/env.config.js'
 
 export async function isAuthenticated () {
-  return false
+  const url = API_ENDPOINTS.IS_AUTHENTICATED
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error('Something went wrong while checking authentication')
+  }
+
+  const data = await response.json()
+  return data
 }
 
 export async function login (email, password) {

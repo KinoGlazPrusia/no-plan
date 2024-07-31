@@ -1,5 +1,6 @@
 import { PlainComponent, PlainContext } from '../../../../node_modules/plain-reactive/src/index.js'
 import { PUBLIC_PATH, PAGES_PATH } from '../../../config/env.config.js'
+import * as apiAuth from '../../../services/api.auth.js'
 
 /* COMPONENTS */
 /* eslint-disable */
@@ -12,6 +13,8 @@ class LoginPage extends PlainComponent {
 
     this.navigationContext = new PlainContext('navigation', this, false)
     this.navigationContext.setData({ currentPage: 'login' })
+
+    this.checkAuthentication()
   }
 
   template () {
@@ -22,8 +25,13 @@ class LoginPage extends PlainComponent {
         `
   }
 
-  listeners() {
+  listeners () {
     this.$('.to-signup').onclick = () => this.navigateTo('signup')
+  }
+
+  async checkAuthentication () {
+    const isAuthenticated = await apiAuth.isAuthenticated()
+    isAuthenticated.data[0] && this.navigateTo('planner')
   }
 
   navigateTo (path) {

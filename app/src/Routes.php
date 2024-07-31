@@ -9,6 +9,7 @@ use App\Auth\Infrastructure\AuthController;
 use App\Auth\Infrastructure\AuthRepository;
 use App\Auth\Application\LoginUseCase;
 use App\Auth\Application\EmailExistsUseCase;
+use App\Auth\Application\CheckAuthenticationUseCase;
 
 /* USER */
 use App\User\Infrastructure\UserController;
@@ -46,6 +47,11 @@ class Routes
                 'email-exists' => [
                     'controller' => [AuthController::class, 'emailExists'],
                     'logic' => new EmailExistsUseCase(new AuthRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'is-authenticated' => [
+                    'controller' => [AuthController::class, 'isAuthenticated'],
+                    'logic' => new CheckAuthenticationUseCase(),
                     'access' => 'public'
                 ]
             ],

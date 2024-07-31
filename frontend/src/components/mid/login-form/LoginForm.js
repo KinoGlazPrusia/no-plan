@@ -1,9 +1,9 @@
-import { PlainComponent, PlainState } from '../../../../node_modules/plain-reactive/src/index.js'
-import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
+import { PlainComponent, PlainState, PlainContext } from '../../../../node_modules/plain-reactive/src/index.js'
+import { PUBLIC_PATH, MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
 import { VALIDATORS } from '../../../services/validators.js'
-import { login as apiAuthLogin } from '../../../services/api.auth.js'
+import * as apiAuth from '../../../services/api.auth.js'
 
 /* COMPONENTS */
 /* eslint-disable */
@@ -21,6 +21,8 @@ class LoginForm extends PlainComponent {
 
     // [ ] Implementar isError
     this.isError = new PlainState(false, this)
+
+    this.userContext = new PlainContext('user', this, false)
   }
 
   template () {
@@ -68,8 +70,7 @@ class LoginForm extends PlainComponent {
   listeners () {
     try {
       this.$('.submit').onclick = () => this.handleSubmit()
-    } 
-    catch (error) {
+    } catch (error) {
       // [ ] Implementar manejo de errores
     }
   }
@@ -79,32 +80,40 @@ class LoginForm extends PlainComponent {
 
     const email = this.$('#email-input').inputValue.getState()
     const password = this.$('#password-input').inputValue.getState()
-    
+
     this.isLoading.setState(true)
     try {
-      const response = await apiAuthLogin(email, password)
+      const response = await apiAuth.login(email, password)
       this.handleResponse(response)
-    } 
-    catch (error) {
+    } catch (error) {
       // [ ] Implementar manejo de errores
+      // Aqui se activa el isError
     }
   }
 
-  handleResponse(response) {
+  handleResponse (response) {
     // [ ] Eliminar los console logs
     console.log(response)
     if (response.status === 'success') {
       this.$('.spinner').success()
+      this.userContext.setData({ user: response.data[0] })
+      this.redirectAfterLogin()
     }
     // [ ] Implementar manejo de errores cuando la response.status === 'error'
   }
 
-  validateFields() {
+  validateFields () {
     this.$('#email-input').validate()
 
     const validity = this.$('#email-input').validity.getState().isValid // && otroInput.validity && etc
 
     return validity
+  }
+
+  redirectAfterLogin () {
+    setTimeout(() => {
+      window.location.replace(PUBLIC_PATH + 'planner')
+    }, 1500)
   }
 }
 

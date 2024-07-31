@@ -81,5 +81,15 @@ class AuthController {
         catch (Exception $e) {
             Response::jsonError(403, $e->getMessage());
         }
-    }   
+    }
+    
+    public static function isAuthenticated(Request $request, IUseCase | IService $isAuthenticated): void {
+        try {
+            $isAuthenticated = $isAuthenticated();
+            Response::json('success', 200, 'User authentication', [$isAuthenticated]);
+        } 
+        catch (Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
 }
