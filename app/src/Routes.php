@@ -41,7 +41,7 @@ class Routes
         // LAS CLASES QUE ESPERAN UNA DI, ESPERAN COMO PARÁMETRO UNA INTERFAZ (ABSTRACCIÓN)
         return [
             'GET' => [
-                'register' => [
+                'email-exists' => [
                     'controller' => [UserController::class, 'register'],
                     'logic' => new RegisterUserService(new UserRepository(new MySqlDatabase)),
                     'access' => 'public'

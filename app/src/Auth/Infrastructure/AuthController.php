@@ -1,6 +1,7 @@
 <?php
 namespace App\Auth\Infrastructure;
 
+use Exception;
 use App\Core\Infrastructure\Interface\IUseCase;
 use App\Core\Infrastructure\Interface\IService;
 use App\Core\Infrastructure\Service\Request;
@@ -38,13 +39,16 @@ class AuthController {
             Response::jsonError(400, "Invalid email $email");
         }
 
-        $loggedUser = $login($email, $password);
+        try {
+            $loggedUser = $login($email, $password);
 
-        if (!$loggedUser) Response::jsonError(403, 'Invalid email or password');
-
-        // Respuesta provisional (devolvemos los datos del usuario ¡sin el password!)
-        $userData = $loggedUser->serialize();
-        unset($userData['password']);
-        Response::json('success', 200, 'Logged in', [$userData]);
+            // Respuesta provisional (devolvemos los datos del usuario ¡sin el password!)
+            $filteredUserData = $loggedUser->serialize();
+            unset($userData['password']);
+            Response::json('success', 200, 'Logged in', [$filteredUserData]);
+        } 
+        catch (Exception $e) {
+            Response::jsonError(403, $e->getMessage());
+        }
     }
 }
