@@ -11,7 +11,12 @@ class Button extends PlainComponent {
     return `
             <button class="button ${this.getAttribute('type')} ${this.hasAttribute('disabled') ? 'disabled' : ''}">
                 ${this.getAttribute('icon')
-                    ? `<span class="material-symbols-outlined">${this.getAttribute('icon')}</span>`
+                    ? `
+                    <div class="icon-wrapper">
+                        <span class="icon material-symbols-outlined">${this.getAttribute('icon')}</span>
+                        <span>${this.textContent}</span>
+                    </div>
+                    `
                     : this.textContent
                 }
             </button>

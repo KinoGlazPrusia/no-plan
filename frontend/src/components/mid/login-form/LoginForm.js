@@ -16,10 +16,9 @@ class LoginForm extends PlainComponent {
   constructor () {
     super('p-login-form', `${MID_COMPONENTS_PATH}login-form/LoginForm.css`)
 
-    // [ ] Implementar isLoading
-    this.isLoading = new PlainState(false, this)
-
+    // [x] Implementar isLoading
     // [ ] Implementar isError
+    this.isLoading = new PlainState(false, this)
     this.isError = new PlainState(false, this)
 
     this.userContext = new PlainContext('user', this, false)
