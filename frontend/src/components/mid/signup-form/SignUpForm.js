@@ -2,7 +2,7 @@ import { PlainComponent, PlainState } from '../../../../node_modules/plain-react
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
-import { VALIDATORS } from '../../../services/validators.js'
+import { VALIDATORS, validateEmailDontExists, validatePasswordConfirmation } from '../../../services/validators.js'
 import { register as apiUserRegister } from '../../../services/api.user.js'
 
 /* COMPONENTS */
@@ -14,6 +14,7 @@ import PhoneInput from '../../base/phone-input/PhoneInput.js'
 import SelectInput from '../../base/select-input/SelectInput.js'
 import FileInput from '../../base/file-input/FileInput.js'
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
+import { emailExists } from '../../../services/api.auth.js'
 /* eslint-enable */
 
 class SignUpForm extends PlainComponent {
@@ -24,21 +25,30 @@ class SignUpForm extends PlainComponent {
     this.isError = new PlainState(false, this)
   }
 
-  // [ ] Mejorar la implementación de isError y isLoading
+  // [x] Mejorar la implementación isLoading
+  // [ ] Implementar isError
   template () {
+    if (this.isLoading.getState()) {
+      return `
+        <form class="signup-form" name="signup-form">
+            <h1 class="greetings">Register!</h1>
+            <div class="overflow-wrapper">
+              <p-loading-spinner
+                class="spinner"
+                success-message="You've been registered"
+                success-detail="Validate your account in your email">
+              </p-loading-spinner>
+            </div>
+        </form>
+      `
+    }
+
     return `
             <form class="signup-form" name="signup-form">
                 <h1 class="greetings">Register!</h1>
 
                 <div class="overflow-wrapper">
-                  ${this.isLoading.getState() ?
-                    `<p-loading-spinner
-                      class="spinner"
-                      success-message="You've been registered"
-                      success-detail="Validate your account in your email">
-                    </p-loading-spinner>`
-                    :
-                    `<div class="input-wrapper current-tab-1">
+                    <div class="input-wrapper current-tab-1">
 
                         <!-- TAB 1 -->
                         <div class="tab-1">
@@ -160,8 +170,7 @@ class SignUpForm extends PlainComponent {
                         <div class="dashed-line"></div>
                     </div>
 
-                    <p-button class="submit" type="primary" disabled>Sign Up</p-button>`
-                  }
+                    <p-button class="submit" type="primary" disabled="true">Sign Up</p-button>
                 </div>
             </form>
         `
@@ -174,20 +183,19 @@ class SignUpForm extends PlainComponent {
         this.$('.tab-btn#tab-2'),
         this.$('.tab-btn#tab-3')
       ]
-  
+
       tabButtons.forEach(button => {
         button.onclick = () => this.changeTabOnClick(button, tabButtons)
       })
-  
+
       this.$('.submit').onclick = () => this.handleSubmit()
-    } 
-    catch (error) {
+    } catch (error) {
       // console.log(error)
       // [ ] Revisar el manejo de esta excepción cuando se invocan los listeners pero no se han cargado los elementos
     }
   }
 
-  changeTabOnValidation(targetTab) {
+  changeTabOnValidation (targetTab) {
     const tabButtons = [
       this.$('.tab-btn#tab-1'),
       this.$('.tab-btn#tab-2'),
@@ -219,8 +227,14 @@ class SignUpForm extends PlainComponent {
     inputWrapper.classList.add(`current-tab-${currentTabButton.textContent}`)
 
     // Si estamos en el último tab activamos el botón de submit
+    this.toogleSubmitButton(currentTabButton.textContent)
+  }
+
+  toogleSubmitButton (currentTab) {
+    console.log(currentTab)
+    // Si estamos en el último tab activamos el botón de submit
     const submitButton = this.$('.submit')
-    if (currentTabButton.textContent === '3') {
+    if (currentTab === '3' && submitButton.getAttribute('disabled')) {
       submitButton.enable() // Llamamos a funciones propias del componente
     } else if (!submitButton.classList.contains('disabled')) {
       submitButton.disable()
@@ -229,10 +243,11 @@ class SignUpForm extends PlainComponent {
 
   async handleSubmit () {
     // Si el submit está deshabilitado salimos
-    if (this.$('.submit').hasAttribute('disabled')) return
+    if (this.$('.submit').getAttribute('disabled') === true) return
 
     // Validamos el formulario
-    if (!this.validateFields()) return
+    const isValid = await this.validateFields()
+    if (!isValid) return
 
     // Recogemos todos los datos para pasarlos a la función de la api
     const userData = {
@@ -249,8 +264,7 @@ class SignUpForm extends PlainComponent {
     try {
       const response = await apiUserRegister(userData)
       this.handleResponse(response)
-    } 
-    catch (error) {
+    } catch (error) {
       // [ ] Implementar manejo de errores cuando no hay conexión a internet
       /* this.isLoading.setState(true)
       this.$('.spinner').error() */
@@ -266,34 +280,64 @@ class SignUpForm extends PlainComponent {
     // [ ] Implementar manejo de errores cuando la response.status === 'error'
   }
 
-  validateFields () {
+  async validateFields () {
     // Se validan todos con sus funciones propias menos la confirmación de password
     this.$('#email-input').validate()
     this.$('#password-input').validate()
-    //this.$('#conf-password-input').validate()
+    // this.$('#conf-password-input').validate()
     this.$('#name').validate()
     this.$('#lastname').validate()
-    //this.$('#birth-date').validate()
+    // this.$('#birth-date').validate()
     this.$('#phone').validate()
-    //this.$('#genre').validate()
+    // this.$('#genre').validate()
     this.$('#avatar-img').validate()
 
+    // Validamos si el email existe
+    // [x] Implementar el checkeo de si el email existe al validar el input de email
+    const emailExistsValidityMessage = await validateEmailDontExists(this.$('#email-input').inputValue.getState())
+    if (emailExistsValidityMessage.length > 0) {
+      this.$('#email-input').validity.setState({
+        isValid: false,
+        messages: this.$('#email-input').validity.getPrevState().messages.concat(emailExistsValidityMessage)
+      }, false)
+      this.$('#email-input').updateFeedback()
+    }
+
+    // Validamos la confirmación de password
+    // [x] Integrar validación de confirmación de password
+    const passwordConfirmation = this.$('#conf-password-input').inputValue.getState()
+    const password = this.$('#password-input').inputValue.getState()
+    const passwordConfirmationValidityMessage = validatePasswordConfirmation(password, passwordConfirmation)
+    if (passwordConfirmationValidityMessage.length > 0) {
+      this.$('#conf-password-input').validity.setState({
+        isValid: false,
+        messages: this.$('#conf-password-input').validity.getPrevState().messages.concat(passwordConfirmationValidityMessage)
+      }, false)
+      this.$('#conf-password-input').updateFeedback()
+    } else {
+      this.$('#conf-password-input').validity.setState({
+        isValid: true,
+        messages: []
+      }, false)
+      this.$('#conf-password-input').updateFeedback()
+    }
 
     // Cambiamos el tab de manera automática según en donde esté el error
     if (
       !this.$('#email-input').validity.getState().isValid ||
-      !this.$('#password-input').validity.getState().isValid
+      !this.$('#password-input').validity.getState().isValid ||
+      !this.$('#conf-password-input').validity.getState().isValid
     ) {
       this.changeTabOnValidation(1)
-    } 
-    else if (
+      this.toogleSubmitButton(1)
+    } else if (
       !this.$('#name').validity.getState().isValid ||
       !this.$('#lastname').validity.getState().isValid ||
       !this.$('#birth-date').validity.getState().isValid
     ) {
       this.changeTabOnValidation(2)
-    }
-    else if (
+      this.toogleSubmitButton(2)
+    } else if (
       !this.$('#phone').validity.getState().isValid ||
       !this.$('#genre').validity.getState().isValid ||
       !this.$('#avatar-img').validity.getState().isValid
@@ -302,13 +346,13 @@ class SignUpForm extends PlainComponent {
     }
 
     // Guardamos la validez del formulario en una variable para devolverla
-    const validity = 
+    const validity =
       this.$('#email-input').validity.getState().isValid &&
       this.$('#password-input').validity.getState().isValid &&
       this.$('#name').validity.getState().isValid &&
       this.$('#lastname').validity.getState().isValid &&
       this.$('#phone').validity.getState().isValid &&
-      this.$('#avatar-img').validity.getState().isValid 
+      this.$('#avatar-img').validity.getState().isValid
 
     return validity
   }

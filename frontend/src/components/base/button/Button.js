@@ -1,5 +1,5 @@
 import { PlainComponent } from '../../../../node_modules/plain-reactive/src/index.js'
-import { BASE_COMPONENTS_PATH} from '../../../config/env.config.js'
+import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 class Button extends PlainComponent {
   constructor () {
@@ -34,13 +34,13 @@ class Button extends PlainComponent {
   }
 
   enable () {
-    this.removeAttribute('disabled')
+    this.setAttribute('disabled', false)
     if (this.$('.button').classList.contains('disabled')) {
       this.$('.button').classList.remove('disabled')
     }
   }
 
-  disable() {
+  disable () {
     this.setAttribute('disabled', true)
     if (!this.$('.button').classList.contains('disabled')) {
       this.$('.button').classList.add('disabled')

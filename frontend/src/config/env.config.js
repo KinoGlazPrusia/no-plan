@@ -14,6 +14,7 @@ export const MID_COMPONENTS_PATH = SRC_PATH + 'components/mid/'
 export const COMPLEX_COMPONENTS_PATH = SRC_PATH + 'components/complex/'
 
 export const API_ENDPOINTS = {
-    LOGIN: APP_URL + 'login',
-    REGISTER: APP_URL + 'register'
+  LOGIN: APP_URL + 'login',
+  REGISTER: APP_URL + 'register',
+  EMAIL_EXISTS: APP_URL + 'email-exists'
 }

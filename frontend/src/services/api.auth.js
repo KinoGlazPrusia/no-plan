@@ -1,30 +1,38 @@
-import { API_ENDPOINTS } from "../config/env.config.js";
+import { API_ENDPOINTS } from '../config/env.config.js'
 
-export async function isAuthenticated() {
-  return false;
+export async function isAuthenticated () {
+  return false
 }
 
-export async function login(email, password) {  
+export async function login (email, password) {
   const url = API_ENDPOINTS.LOGIN
   const body = new FormData()
 
   body.append('email', email)
   body.append('password', password)
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      body: body
-    })
-  
-    if (!response.ok) {
-      throw new Error('Something went wrong while loggin in')
-    }
-  
-    const data = await response.json()
-    return data
-  } 
-  catch (error) {
-    throw error
+  const response = await fetch(url, {
+    method: 'POST',
+    body
+  })
+
+  if (!response.ok) {
+    throw new Error('Something went wrong while loggin in')
   }
+
+  const data = await response.json()
+  return data
+}
+
+export async function emailExists (email) {
+  const url = `${API_ENDPOINTS.EMAIL_EXISTS}?email=${email}`
+
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error('Something went wrong while checking email existence')
+  }
+
+  const data = await response.json()
+  return data
 }
