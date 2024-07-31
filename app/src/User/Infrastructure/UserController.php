@@ -64,9 +64,9 @@ class UserController {
         );
 
         // Si recibimos un usuario
-        /* $registeredUser ? 
+        $isUserRegistered ? 
             Response::json('success', 200, 'Registered user') 
             :
-            Response::jsonError(400, 'Invalid data'); */
+            Response::jsonError(400, 'Invalid data');
     }
 }

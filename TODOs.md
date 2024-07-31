@@ -9,6 +9,7 @@
 - [x] Crear componente PhoneInput.
 - [x] Crear componente SelectInput.
 - [x] Crear componente FileInput (recuperarlo del ejercicio de los mapas).
+. [ ] Separar la lógica de registro de usuario en un serivicio que coordina distintos casos de uso (crear usuario, guardar avatar, enviar email de activación, etc.).
 - [ ] Implementar manejo de archivos desde la entidad Request.
 - [ ] Implementar la función isAuthenticated() de api.auth.js.
 - [ ] Completar validaciones para el SignUpForm.

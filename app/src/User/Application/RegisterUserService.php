@@ -9,7 +9,7 @@ use App\Core\Infrastructure\Interface\IService;
 use App\Core\Infrastructure\Interface\IUseCase;
 use App\User\Infrastructure\UserRepository;
 
-class RegisterUserUseCase implements IUseCase {
+class RegisterUserService implements IService {
     private IRepository $repository;
 
     public function __construct(IRepository $repository) {
@@ -40,6 +40,9 @@ class RegisterUserUseCase implements IUseCase {
             'profile_img_url' => $profile_img_url
         ];
 
+        print_r($data);
+
+        // El problema está aquí, ya que aunque el email esté duplicado devuelve true, pero el usuario no se ha guardado
         if (!$this->repository->save(new User($data))) return false;
         
         // Si se ha guardado el usuario, guardamos la imagen
@@ -53,7 +56,7 @@ class RegisterUserUseCase implements IUseCase {
     public function generateImagePath(array $image): string {
         // Extraemos los datos de la imagen y la preparamos para guardarla en servidor una vez creado el usuario
         $extension = explode('/', $image['type'])[1];
-        return Env::AVATAR_IMAGES_DIR . time() . random_int(0, 1000) . '.' . $extension;
+        return 'assets/images/avatar/' . time() . random_int(0, 1000) . '.' . $extension;
     }
 
     public function storeAvatarImage(string $src, $dst): bool {

@@ -19,6 +19,7 @@ class MySqlDatabase implements ITransactionalDatabase {
         } 
         catch (PDOException $e) {
             fwrite(fopen('php://stdout', 'w'), $e->getMessage());
+            throw $e;
         }
 
         return $this->conn ? true : false;
@@ -32,6 +33,7 @@ class MySqlDatabase implements ITransactionalDatabase {
         } 
         catch (PDOException $e) {
             fwrite(fopen('php://stdout', 'w'), $e->getMessage());
+            throw $e;
         }
 
         return $stmt;
@@ -44,7 +46,7 @@ class MySqlDatabase implements ITransactionalDatabase {
         } 
         catch (PDOException $e) {
             fwrite(fopen('php://stdout', 'w'), $e->getMessage());
-            return false;
+            throw $e;
         }
     }
 
@@ -59,6 +61,7 @@ class MySqlDatabase implements ITransactionalDatabase {
         } 
         catch (PDOException $e) {
             fwrite(fopen('php://stdout', 'w'), $e->getMessage());
+            throw $e;
         }
 
         return $data;
@@ -71,7 +74,7 @@ class MySqlDatabase implements ITransactionalDatabase {
         } 
         catch (PDOException $e) {
             fwrite(fopen('php://stdout', 'w'), $e->getMessage());
-            return false;
+            throw $e;
         }
     }
 

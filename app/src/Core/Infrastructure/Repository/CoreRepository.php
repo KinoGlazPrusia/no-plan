@@ -5,6 +5,7 @@ use App\Core\Infrastructure\Database\MySqlDatabase;
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IEntity;
 use App\Core\Infrastructure\Interface\ITransactionalDatabase;
+use App\Core\Infrastructure\Service\Response;
 
 class CoreRepository implements IRepository
 {

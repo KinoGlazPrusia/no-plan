@@ -8,7 +8,7 @@ use App\Core\Infrastructure\Database\MySqlDatabase;
 use App\Auth\Infrastructure\AuthController;
 use App\Auth\Infrastructure\AuthRepository;
 use App\Auth\Application\LoginUseCase;
-
+use App\User\Application\RegisterUserService;
 /* USER */
 use App\User\Infrastructure\UserController;
 use App\User\Infrastructure\UserRepository;
@@ -43,7 +43,7 @@ class Routes
             'GET' => [
                 'register' => [
                     'controller' => [UserController::class, 'register'],
-                    'logic' => new RegisterUserUseCase(new UserRepository(new MySqlDatabase)),
+                    'logic' => new RegisterUserService(new UserRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ]
             ],
@@ -55,7 +55,7 @@ class Routes
                 ],
                 'register' => [
                     'controller' => [UserController::class, 'register'],
-                    'logic' => new RegisterUserUseCase(new UserRepository(new MySqlDatabase)),
+                    'logic' => new RegisterUserService(new UserRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ]
             ]
