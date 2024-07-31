@@ -13,6 +13,7 @@ import DateInput from '../../base/date-input/DateInput.js'
 import PhoneInput from '../../base/phone-input/PhoneInput.js'
 import SelectInput from '../../base/select-input/SelectInput.js'
 import FileInput from '../../base/file-input/FileInput.js'
+import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
 /* eslint-enable */
 
 class SignUpForm extends PlainComponent {
@@ -23,13 +24,21 @@ class SignUpForm extends PlainComponent {
     this.isError = new PlainState(false, this)
   }
 
+  // [ ] Mejorar la implementación de isError y isLoading
   template () {
     return `
             <form class="signup-form" name="signup-form">
                 <h1 class="greetings">Register!</h1>
 
                 <div class="overflow-wrapper">
-                    <div class="input-wrapper current-tab-1">
+                  ${this.isLoading.getState() ?
+                    `<p-loading-spinner
+                      class="spinner"
+                      success-message="You've been registered"
+                      success-detail="Validate your account in your email">
+                    </p-loading-spinner>`
+                    :
+                    `<div class="input-wrapper current-tab-1">
 
                         <!-- TAB 1 -->
                         <div class="tab-1">
@@ -151,25 +160,31 @@ class SignUpForm extends PlainComponent {
                         <div class="dashed-line"></div>
                     </div>
 
-                    <p-button class="submit" type="primary" disabled>Sign Up</p-button>
-                    
+                    <p-button class="submit" type="primary" disabled>Sign Up</p-button>`
+                  }
                 </div>
             </form>
         `
   }
 
   listeners () {
-    const tabButtons = [
-      this.$('.tab-btn#tab-1'),
-      this.$('.tab-btn#tab-2'),
-      this.$('.tab-btn#tab-3')
-    ]
-
-    tabButtons.forEach(button => {
-      button.onclick = () => this.changeTabOnClick(button, tabButtons)
-    })
-
-    this.$('.submit').onclick = () => this.handleSubmit()
+    try {
+      const tabButtons = [
+        this.$('.tab-btn#tab-1'),
+        this.$('.tab-btn#tab-2'),
+        this.$('.tab-btn#tab-3')
+      ]
+  
+      tabButtons.forEach(button => {
+        button.onclick = () => this.changeTabOnClick(button, tabButtons)
+      })
+  
+      this.$('.submit').onclick = () => this.handleSubmit()
+    } 
+    catch (error) {
+      // console.log(error)
+      // [ ] Revisar el manejo de esta excepción cuando se invocan los listeners pero no se han cargado los elementos
+    }
   }
 
   changeTabOnValidation(targetTab) {
@@ -230,12 +245,24 @@ class SignUpForm extends PlainComponent {
       image: this.$('#avatar-img').inputValue.getState()
     }
 
-    const response = await apiUserRegister(userData)
-    this.handleResponse(response)
+    this.isLoading.setState(true)
+    try {
+      const response = await apiUserRegister(userData)
+      this.handleResponse(response)
+    } 
+    catch (error) {
+      // [ ] Implementar manejo de errores cuando no hay conexión a internet
+      /* this.isLoading.setState(true)
+      this.$('.spinner').error() */
+    }
   }
 
   handleResponse (response) {
-    console.table(response)
+    console.log(response)
+    if (response.status === 'success') {
+      this.$('.spinner').success()
+    }
+    // [ ] Implementar manejo de errores cuando la response.status === 'error'
   }
 
   validateFields () {
