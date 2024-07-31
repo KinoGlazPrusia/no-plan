@@ -1,6 +1,9 @@
 import { PlainComponent, PlainContext } from '../../../../node_modules/plain-reactive/src/index.js'
 import { PAGES_PATH } from '../../../config/env.config.js'
 
+/* COMPONENTS */
+import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
+
 class PlannerPage extends PlainComponent {
   constructor () {
     super('p-planner-page', `${PAGES_PATH}planner/PlannerPage.css`)
@@ -11,7 +14,7 @@ class PlannerPage extends PlainComponent {
 
   template () {
     return `
-            <h1>Planner Page</h1>
+            <p-loading-spinner class="spinner"></p-loading-spinner>
             <p-navbar></p-navbar>
         `
   }

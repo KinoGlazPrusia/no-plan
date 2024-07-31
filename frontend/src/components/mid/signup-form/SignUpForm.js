@@ -1,4 +1,4 @@
-import { PlainComponent } from '../../../../node_modules/plain-reactive/src/index.js'
+import { PlainComponent, PlainState } from '../../../../node_modules/plain-reactive/src/index.js'
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
@@ -18,6 +18,9 @@ import FileInput from '../../base/file-input/FileInput.js'
 class SignUpForm extends PlainComponent {
   constructor () {
     super('p-signup-form', `${MID_COMPONENTS_PATH}signup-form/SignUpForm.css`)
+
+    this.isLoading = new PlainState(false, this)
+    this.isError = new PlainState(false, this)
   }
 
   template () {
