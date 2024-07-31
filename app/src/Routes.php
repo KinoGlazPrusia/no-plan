@@ -8,6 +8,7 @@ use App\Core\Infrastructure\Database\MySqlDatabase;
 use App\Auth\Infrastructure\AuthController;
 use App\Auth\Infrastructure\AuthRepository;
 use App\Auth\Application\LoginUseCase;
+use App\Auth\Application\LogoutUseCase;
 use App\Auth\Application\EmailExistsUseCase;
 use App\Auth\Application\CheckAuthenticationUseCase;
 
@@ -15,7 +16,6 @@ use App\Auth\Application\CheckAuthenticationUseCase;
 use App\User\Infrastructure\UserController;
 use App\User\Infrastructure\UserRepository;
 use App\User\Application\RegisterUserService;
-
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -52,6 +52,11 @@ class Routes
                 'is-authenticated' => [
                     'controller' => [AuthController::class, 'isAuthenticated'],
                     'logic' => new CheckAuthenticationUseCase(),
+                    'access' => 'public'
+                ],
+                'logout' => [
+                    'controller' => [AuthController::class, 'logout'],
+                    'logic' => new LogoutUseCase(),
                     'access' => 'public'
                 ]
             ],

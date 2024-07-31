@@ -2,7 +2,10 @@ import { PlainComponent, PlainContext } from '../../../../node_modules/plain-rea
 import { PAGES_PATH } from '../../../config/env.config.js'
 
 /* COMPONENTS */
+/* eslint-disable */
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
+import LogoutButton from '../../base/logout-button/LogoutButton.js'
+/* eslint-enable */
 
 class PlannerPage extends PlainComponent {
   constructor () {
@@ -14,6 +17,7 @@ class PlannerPage extends PlainComponent {
 
   template () {
     return `
+            <p-logout-button></p-logout-button>
             <p-loading-spinner class="spinner"></p-loading-spinner>
             <p-navbar></p-navbar>
         `

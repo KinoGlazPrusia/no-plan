@@ -44,3 +44,16 @@ export async function emailExists (email) {
   const data = await response.json()
   return data
 }
+
+export async function logout () {
+  const url = API_ENDPOINTS.LOGOUT
+
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error('Something went wrong while logging out')
+  }
+
+  const data = await response.json()
+  return data
+}

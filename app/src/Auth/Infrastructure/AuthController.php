@@ -92,4 +92,14 @@ class AuthController {
             Response::jsonError(500, $e->getMessage());
         }
     }
+
+    public static function logout(Request $request, IUseCase | IService $logout): void {
+        try {
+            $logout();
+            Response::json('success', 200, 'User logged out');
+        } 
+        catch (Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
 }
