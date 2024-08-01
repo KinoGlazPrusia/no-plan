@@ -23,6 +23,7 @@ class SelectInput extends PlainComponent {
     this.inputValue = new PlainState('', this)
   }
 
+  // [ ] Crear dropdown personalizado
   template () {
     return `
             <label class="label">${this.getAttribute('label')}</label>

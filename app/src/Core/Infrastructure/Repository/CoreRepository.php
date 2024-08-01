@@ -10,7 +10,7 @@ use App\Core\Infrastructure\Service\Response;
 
 class CoreRepository implements IRepository
 {
-    private ITransactionalDatabase $db;
+    protected ITransactionalDatabase $db;
 
     public function __construct(ITransactionalDatabase $database) {
         $this->db = $database;

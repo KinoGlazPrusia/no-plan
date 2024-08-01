@@ -119,6 +119,7 @@ class SignUpForm extends PlainComponent {
                             id="birth-date"
                             name="birth-date"
                             label="Birth Date"
+                            no-calendar
                             validator="${VALIDATORS.DATE}">
                             <p-date-input>
 

@@ -10,7 +10,7 @@ use App\Env;
 use stdClass;
 
 class JWToken {
-    public static function encodeToken(User $user, $validityTime): string {
+    public static function encodeToken(User $user, array $roles, $validityTime): string {
         $key = Secret::JWT_SECRET_KEY;
         $issuedAt = time();
         $payload = [
@@ -22,7 +22,9 @@ class JWToken {
             'exp' => $issuedAt + $validityTime,     // expiration (segundos)
             'jti' => bin2hex(random_bytes(16)),     // JWT ID
             'uid' => $user->id,                     // User ID
-            'roles' => ['admin', 'user'],           // Roles
+            'roles' => array_map(function($role) {  // Roles
+                return $role->role;
+            }, $roles),  
             'email' => $user->email                 // Email
         ];
         $jwt = JWT::encode($payload, $key, 'HS256');
@@ -42,8 +44,8 @@ class JWToken {
         return $error ? $error : $decoded;
     }
 
-    public static function generateCookie(User $user, $validityTime) {
-        $jwt = self::encodeToken($user, $validityTime);
+    public static function generateCookie(User $user, array $roles, $validityTime) {
+        $jwt = self::encodeToken($user, $roles, $validityTime);
 
         setcookie('session_token', $jwt, time() + $validityTime, secure: true, httponly:true);
     }

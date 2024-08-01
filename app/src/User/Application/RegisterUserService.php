@@ -4,6 +4,7 @@ namespace App\User\Application;
 use Exception;
 use App\Env;
 use App\User\Domain\User;
+use App\User\Domain\UserRole;
 use App\Auth\Domain\UUIDv4;
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IService;
@@ -12,6 +13,7 @@ use App\User\Infrastructure\UserRepository;
 
 use App\User\Application\SaveNewUserUseCase;
 use App\User\Application\StoreUserAvatarUseCase;
+use App\User\Application\AssignRolesToNewUserUseCase;
 
 class RegisterUserService implements IService {
     private IRepository $repository;
@@ -27,7 +29,8 @@ class RegisterUserService implements IService {
         string $password,
         string $birth_date,
         string $genre,
-        array $image
+        array $image,
+        array $roles
     ): bool {
         
         try {
@@ -46,8 +49,14 @@ class RegisterUserService implements IService {
             // Caso de uso para guardar la imagen del usuario en servidor
             StoreUserAvatarUseCase::storeAvatarImage($image['tmp_name'], $newUser->profile_img_url);
 
-            // Caso de uso para enviar email de verificación de cuenta
-            // Pendiente de implementar
+            // [ ] Implementar caso de uso para enviar email de verificación de cuenta
+
+            // [ ] Implementar caso de uso para asignar roles al usuario
+            $roleList = array_map(function($role) {
+                return new UserRole($role);
+            }, $roles);
+
+            AssignRolesToNewUserUseCase::assign($this->repository, $newUser, $roleList);
         } 
         catch (Exception $e) {
             throw $e;

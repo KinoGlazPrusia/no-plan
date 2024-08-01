@@ -17,9 +17,12 @@ class LoginUseCase implements IUseCase {
     public function __invoke($email, $password): User | null {
         // Recuperamos el usuario
         $user = null;
+        $roles = [];
 
         try {
             $user = $this->repository->getUserByEmail($email);
+            // [x] Recuperar los roles del usuario
+            $roles = $this->repository->getUserRoles($user);
         } 
         catch (Exception $e) {
             throw $e;
@@ -31,13 +34,14 @@ class LoginUseCase implements IUseCase {
         try {
             password_verify($password, $user->password);
             // Si las credenciales son válidas
-            // Guardamos el id y el email del usuario en la sesión
-            // Aquí se podrían añadir roles
+            // Guardamos el id, el email y los roles del usuario en la sesión
             $_SESSION['uid'] = $user->id;
             $_SESSION['userEmail'] = $user->email;
-
+            $_SESSION['roles'] = $roles;
+            
+            // [x] Integrar los roles en el JWT
             // Generamos el token de sesión y su cookie
-            JWToken::generateCookie($user, (3600*24));
+            JWToken::generateCookie($user, $roles, (3600*24));
         }
         catch (Exception $e) {
             throw $e;

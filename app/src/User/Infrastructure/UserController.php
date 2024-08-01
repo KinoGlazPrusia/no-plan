@@ -65,7 +65,8 @@ class UserController {
                 $password,
                 $birth_date,
                 $genre,
-                $image
+                $image,
+                ['admin', 'user']
             );
         } 
         catch (Exception $e) {

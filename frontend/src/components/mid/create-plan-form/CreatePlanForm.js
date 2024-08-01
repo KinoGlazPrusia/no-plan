@@ -8,6 +8,7 @@ import { VALIDATORS } from '../../../services/validators.js'
 /* eslint-disable */
 import Button from '../../base/button/Button.js'
 import TextInput from '../../base/text-input/TextInput.js'
+import TextAreaInput from '../../base/text-area-input/TextAreaInput.js'
 import DateInput from '../../base/date-input/DateInput.js'
 import SelectInput from '../../base/select-input/SelectInput.js'
 import FileInput from '../../base/file-input/FileInput.js'
@@ -30,63 +31,47 @@ class CreatePlanForm extends PlainComponent {
                 <div class="overflow-wrapper">
                     <!-- PLAN TITLE -->
                     <p-text-input 
-                    class="input" 
-                    id="title"
-                    name="title" 
-                    label="Plan Title" 
-                    type="text"
-                    maxlength="30"
-                    validator="${VALIDATORS.NAME}">
+                      class="input" 
+                      id="title"
+                      name="title" 
+                      label="Plan Title" 
+                      type="text"
+                      maxlength="30"
+                      validator="${VALIDATORS.NAME}">
                     </p-text-input>
 
-                    <!-- PLAN TITLE -->
-                    <p-text-input 
-                    class="input" 
-                    id="title"
-                    name="title" 
-                    label="Plan Title" 
-                    type="text"
-                    maxlength="30"
-                    validator="${VALIDATORS.NAME}">
-                    </p-text-input>
+                    <!-- PLAN DESCRIPTION -->
+                    <p-text-area-input
+                      class="input"
+                      id="description"
+                      name="description"
+                      label="Description"
+                      maxlength="100">
+                    </p-text-area-input>
 
-                    <!-- PLAN TITLE -->
-                    <p-text-input 
-                    class="input" 
-                    id="title"
-                    name="title" 
-                    label="Plan Title" 
-                    type="text"
-                    maxlength="30"
-                    validator="${VALIDATORS.NAME}">
-                    </p-text-input>
-
-                    <!-- PLAN TITLE -->
-                    <p-text-input 
-                    class="input" 
-                    id="title"
-                    name="title" 
-                    label="Plan Title" 
-                    type="text"
-                    maxlength="30"
-                    validator="${VALIDATORS.NAME}">
-                    </p-text-input>
+                    <!-- PLAN DATE -->
+                    <p-date-input
+                      class="input"
+                      id="plan-date"
+                      name="plan-date"
+                      label="Plan Date">
+                    </p-date-input>
 
                     <!-- CATEGORIES -->
                     <p-select-input
-                    class="input" 
-                    id="categories"
-                    name="categories" 
-                    label="Categories">
+                      class="input" 
+                      id="categories"
+                      name="categories" 
+                      label="Categories">
                     </p-select-input>
 
                     <!-- PLAN IMAGE -->
                     <p-file-input
-                    class="plan-img"
-                    id="plan-img"
-                    name="plan-img"
-                    label="Plan Image"
-                    accept="image/*">
+                      class="plan-img"
+                      id="plan-img"
+                      name="plan-img"
+                      label="Plan Image"
+                      accept="image/*">
                     <p-file-input>
 
                 </div>

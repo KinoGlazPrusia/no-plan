@@ -12,21 +12,29 @@
 - [x] Separar la lógica de registro de usuario en un serivicio que coordina distintos casos de uso (crear usuario, guardar avatar, enviar email de activación, etc.).
 - [x] Implementar un TTL y si no se recibe respuesta del servidor devolver una pantalla de error.
 - [x] Implementar una plantilla de error de servidor 
+- [x] Implementar un spinner para cargas y un mensaje de éxito o error al registrar el usuario.
+- [x] Implementar la función isAuthenticated() de api.auth.js.
+- [x] Crear componente CreatePlanForm.
+- [x] Los planes podrían tener un timeline.
+- [x] Incluir el manejo de mensajes de 'success' en el componente FormFeedback.
+- [x] Revisar el manejo de excepciones en MySqlDatabase.php
+- [x] Crear un UseCase CreateUserRoleUseCase (para admin)
+- [x] Añadir un campo rol para la tabla user.
+- [x] Recuperar e insertar los roles en una variable de sesión y en el token
+- [ ] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
+- [ ] Añadir una función en servidor para chequear si el usuario está logueado y el rol del usuario.
+- [ ] Crear componente de select con checkbox (único y múltiple) 
 - [ ] Implementar un método para devolver respuesta en caso de que el servidor no responda.
-- [ ] Implementar un spinner para cargas y un mensaje de éxito o error al registrar el usuario.
 - [ ] En la creación de usuario, habría que extraer el rollback al caso de uso para poder hacerlo en caso de que no se pueda guardar la imagen o enviar el email de confirmación. Buscar y revisar un vídeo de CodelyTV que hablaba de mover la lógica de bases de datos transaccionales a la capa de aplicación (creo que se llama BBDD transaccionales).
 - [ ] Añadir el campo phone a la tabla users e implementarlo en el servidor.
-- [ ] Implementar manejo de archivos desde la entidad Request.
-- [ ] Implementar la función isAuthenticated() de api.auth.js.
 - [ ] Completar validaciones para el SignUpForm.
-- [ ] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
 - [ ] Implementar validaciones en todos los componentes del frontend.
-- [ ] Crear componente CreatePlanForm.
 - [ ] Implementar formateo automático del PhoneInput.
 - [ ] Revisar el modelo. Creo que debería añadirse un campo en la tabla de rating_criteria para definir si es criterio de usuario o criterio de plan ya que no todos podrán compartirse.
-- [ ] Los planes podrían tener un timeline.
 - [ ] La iluminación/color-tinte del mapa cambia según la hora del día.
-- [ ] Incluir el manejo de mensajes de 'success' en el componente FormFeedback.
 - [ ] Mejorar los componentes PhoneInput y SelectInput
-- [ ] Revisar el manejo de excepciones en MySqlDatabase.php
 - [ ] Rehacer el test de registro de usuarios.
+- [ ] Incluir campo teléfono en la tabla 'user' (añadirlo la gestión en servidor al registrar usuario).
+- [ ] En el CreatePlanForm, añadir feedback (con scrollbar o flechas animadas) para dar a entender al usuario que puede hacer scroll.
+- [ ] Crear modal para añadir 'steps' a un plan.
+- [ ] Crear componente PlanTimeline
