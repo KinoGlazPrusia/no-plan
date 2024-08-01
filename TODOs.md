@@ -21,8 +21,9 @@
 - [x] Crear un UseCase CreateUserRoleUseCase (para admin)
 - [x] Añadir un campo rol para la tabla user.
 - [x] Recuperar e insertar los roles en una variable de sesión y en el token
+- [ ] Terminar de implementar el 'permissionGate'.
 - [ ] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
-- [ ] Añadir una función en servidor para chequear si el usuario está logueado y el rol del usuario.
+- [ ] Añadir una función en servidor para chequear si el usuario está logueado y el rol del usuario para permitir que acceda a un endpoint o no.
 - [ ] Crear componente de select con checkbox (único y múltiple) 
 - [ ] Implementar un método para devolver respuesta en caso de que el servidor no responda.
 - [ ] En la creación de usuario, habría que extraer el rollback al caso de uso para poder hacerlo en caso de que no se pueda guardar la imagen o enviar el email de confirmación. Buscar y revisar un vídeo de CodelyTV que hablaba de mover la lógica de bases de datos transaccionales a la capa de aplicación (creo que se llama BBDD transaccionales).
