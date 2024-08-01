@@ -1,4 +1,7 @@
-import { PlainComponent, PlainState } from '../../../../node_modules/plain-reactive/src/index.js'
+import {
+  PlainComponent,
+  PlainState
+} from '../../../../node_modules/plain-reactive/src/index.js'
 import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* COMPONENTS */
@@ -8,20 +11,23 @@ import FormFeedback from '../form-feedback/FormFeedback.js'
 import * as validators from '../../../utils/validators.js'
 
 class DateInput extends PlainComponent {
-  constructor () {
+  constructor() {
     super('p-date-input', `${BASE_COMPONENTS_PATH}date-input/DateInput.css`)
 
     this.validator = validators[this.getAttribute('validator')]
-    this.validity = new PlainState({
-      isValid: true,
-      messages: []
-    }, this)
+    this.validity = new PlainState(
+      {
+        isValid: true,
+        messages: []
+      },
+      this
+    )
 
     this.inputValue = new PlainState('', this)
   }
 
   // [x] Añadir una clase para que se pueda definir si tiene icono de calendario desplegable o no
-  template () {
+  template() {
     return `
             <label class="label">${this.getAttribute('label')}</label>
             
@@ -36,7 +42,7 @@ class DateInput extends PlainComponent {
         `
   }
 
-  listeners () {
+  listeners() {
     this.$('.input').oninput = (e) => {
       // Actualización del input value
       this.updateValue()
@@ -46,13 +52,11 @@ class DateInput extends PlainComponent {
     }
   }
 
-  updateValue () {
+  updateValue() {
     this.inputValue.setState(this.$('.input').value, false)
   }
 
-  validate () {
-
-  }
+  validate() {}
 }
 
 export default window.customElements.define('p-date-input', DateInput)

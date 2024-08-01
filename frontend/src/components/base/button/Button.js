@@ -2,15 +2,16 @@ import { PlainComponent } from '../../../../node_modules/plain-reactive/src/inde
 import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 class Button extends PlainComponent {
-  constructor () {
+  constructor() {
     super('p-button', `${BASE_COMPONENTS_PATH}button/Button.css`)
   }
 
-  template () {
+  template() {
     // Los botones pueden ser de 3 tipos: primary, secondary y tertiary
     return `
             <button class="button ${this.getAttribute('type')} ${this.hasAttribute('disabled') ? 'disabled' : ''}">
-                ${this.getAttribute('icon')
+                ${
+                  this.getAttribute('icon')
                     ? `
                     <div class="icon-wrapper">
                         <span class="icon material-symbols-outlined">${this.getAttribute('icon')}</span>
@@ -23,29 +24,30 @@ class Button extends PlainComponent {
         `
   }
 
-  listeners () {
+  listeners() {
     this.$('.button').onclick = () => {
       this.handleClick()
+      console.log(3 + 2)
     }
   }
 
-  handleClick () {
+  handleClick() {
     this.animateClick()
   }
 
-  animateClick () {
+  animateClick() {
     this.wrapper.classList.add('clicked')
     this.wrapper.onanimationend = () => this.wrapper.classList.remove('clicked')
   }
 
-  enable () {
+  enable() {
     this.setAttribute('disabled', false)
     if (this.$('.button').classList.contains('disabled')) {
       this.$('.button').classList.remove('disabled')
     }
   }
 
-  disable () {
+  disable() {
     this.setAttribute('disabled', true)
     if (!this.$('.button').classList.contains('disabled')) {
       this.$('.button').classList.add('disabled')
