@@ -5,7 +5,9 @@ export async function permissionGate(validRoles) {
 
     if (!authentication.data[0]) return false
 
-    authentication.data[1].forEach(role => {
+    console.log(authentication)
+
+    authentication.data[1].roles.forEach(role => {
         if(!validRoles.includes(role)) return false
     })
 

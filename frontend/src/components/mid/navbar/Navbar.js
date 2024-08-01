@@ -12,6 +12,7 @@ class Navbar extends PlainComponent {
     this.navigationContext = new PlainContext('navigation', this)
   }
 
+  // [ ] Implementar deshabilitación de botones dependiendo del estado de autenticación del usuario
   template () {
     return `
             <p-navbar-button icon="person" path="user/profile" ${this.navigationContext.getData('currentPage') === 'user/profile' ? 'selected="true' : ''}"></p-navbar-button>
@@ -19,7 +20,6 @@ class Navbar extends PlainComponent {
             <p-navbar-button icon="add" path="plan/create" ${this.navigationContext.getData('currentPage') === 'plan/create' ? 'selected="true' : ''}"></p-navbar-button>
             <p-navbar-button icon="roofing" path="planner" ${this.navigationContext.getData('currentPage') === 'planner' ? 'selected="true' : ''}"></p-navbar-button>
             <p-navbar-button icon="search" path="finder" ${this.navigationContext.getData('currentPage') === 'finder' ? 'selected="true' : ''}"></p-navbar-button>
-            <!-- <p-navbar-button icon="power_settings_new" path="logout"}"></p-navbar-button> -->
         `
   }
 }

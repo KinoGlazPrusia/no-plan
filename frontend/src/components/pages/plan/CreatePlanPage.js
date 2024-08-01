@@ -5,6 +5,7 @@ import { PUBLIC_PATH, PAGES_PATH } from '../../../config/env.config.js'
 /* eslint-disable */
 import CreatePlanForm from '../../mid/create-plan-form/CreatePlanForm.js'
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
+import LogoutButton from '../../base/logout-button/LogoutButton.js'
 /* eslint-enable */
 
 /* UTILS */
@@ -23,15 +24,16 @@ class CreatePlanPage extends PlainComponent {
   }
 
   template () {
-    this.checkAuthentication()
-
     if (!this.userIsAuthenticated.getState()) {
+      this.checkAuthentication()
+
       return `
         <p-loading-spinner></p-loading-spinner>
       `
     } 
 
     return `
+            <p-logout-button></p-logout-button>
             <p-create-plan-form class="create-plan-form"></p-create-plan-form>
             <p-navbar></p-navbar>
         `
