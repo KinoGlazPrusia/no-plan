@@ -1,4 +1,8 @@
-import { PlainComponent, PlainRouter, PlainContext } from '../node_modules/plain-reactive/src/index.js'
+import {
+  PlainComponent,
+  PlainRouter,
+  PlainContext
+} from '../node_modules/plain-reactive/src/index.js'
 import { SRC_PATH, PUBLIC_PATH } from './config/env.config.js'
 
 /* eslint-disable */
@@ -17,7 +21,7 @@ import Navbar from './components/mid/navbar/Navbar.js'
 /* eslint-enable */
 
 class pApp extends PlainComponent {
-  constructor () {
+  constructor() {
     super('p-app', `${SRC_PATH}App.css`)
 
     this.router = new PlainRouter(PUBLIC_PATH)
@@ -31,19 +35,20 @@ class pApp extends PlainComponent {
     // propios de cada página
   }
 
-  template () {
+  template() {
     /* eslint-disable */
     return `
       ${this.router.route({
-        '':                     '<p-index-page></p-index-page>',
-        'login':                '<p-login-page></p-login-page>',
-        'signup':               '<p-signup-page></p-signup-page>',
-        'password-recovery':    '<p-password-recovery-page></p-password-recovery-page>',
-        'planner':              '<p-planner-page></p-planner-page>',
-        'user/profile':         '<p-user-profile-page></p-user-profile-page>',
-        'user/plans':           '<p-user-plans-page></p-user-plans-page>',
-        'plan/create':          '<p-create-plan-page></p-create-plan-page>',
-        '*':                    '<h2>Not Found</h2>'
+        '': '<p-index-page></p-index-page>',
+        login: '<p-login-page></p-login-page>',
+        signup: '<p-signup-page></p-signup-page>',
+        'password-recovery':
+          '<p-password-recovery-page></p-password-recovery-page>',
+        planner: '<p-planner-page></p-planner-page>',
+        'user/profile': '<p-user-profile-page></p-user-profile-page>',
+        'user/plans': '<p-user-plans-page></p-user-plans-page>',
+        'plan/create': '<p-create-plan-page></p-create-plan-page>',
+        '*': '<h2>Not Found</h2>'
       })}
     `
     /* eslint-enable */
