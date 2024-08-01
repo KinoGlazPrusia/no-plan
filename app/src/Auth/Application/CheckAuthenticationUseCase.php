@@ -6,14 +6,17 @@ use App\Auth\Domain\JWToken;
 use App\Core\Infrastructure\Interface\IUseCase;
 
 class CheckAuthenticationUseCase implements IUseCase {
-    public function __invoke(): bool {
+    public function __invoke(): Object | null {
+        $session_token = null;
+
         try {
-            if(!JWToken::verifyCookie()) return false;
+            $session_token = JWToken::verifyCookie();
+            if(!$session_token) return null;
         } 
         catch (Exception $e) {
             throw $e;
         }
 
-        return true;
+        return $session_token;
     }
 }
