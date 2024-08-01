@@ -5,6 +5,9 @@ import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 import { VALIDATORS, validateEmailDontExists, validatePasswordConfirmation } from '../../../utils/validators.js'
 import { register as apiUserRegister } from '../../../services/api.user.js'
 
+/* CONSTANTS */
+import { userGenres } from '../../../constants/userGenres.js'
+
 /* COMPONENTS */
 /* eslint-disable */
 import Button from '../../base/button/Button.js'
@@ -42,7 +45,6 @@ class SignUpForm extends PlainComponent {
         </form>
       `
     }
-
     return `
             <form class="signup-form" name="signup-form">
                 <h1 class="greetings">Register!</h1>
@@ -143,7 +145,8 @@ class SignUpForm extends PlainComponent {
                             class="input" 
                             id="genre"
                             name="genre" 
-                            label="Genre">
+                            label="Genre"
+                            options='${JSON.stringify(userGenres)}'>
                             </p-select-input>
 
                             <!-- AVATAR IMAGE -->

@@ -7,9 +7,6 @@ import FormFeedback from '../form-feedback/FormFeedback.js'
 /* SERVICES */
 import * as validators from '../../../utils/validators.js'
 
-/* CONSTANTS */
-import { userGenres } from '../../../constants/userGenres.js'
-
 class SelectInput extends PlainComponent {
   constructor () {
     super('p-select-input', `${BASE_COMPONENTS_PATH}select-input/SelectInput.css`)
@@ -20,10 +17,17 @@ class SelectInput extends PlainComponent {
       messages: []
     }, this)
 
+    // El argumento se le ha de pasar con un JSON.stringify(object)
+    console.log(JSON.parse(this.getAttribute('options')))
+    this.options = new PlainState(
+      JSON.parse(this.getAttribute('options')), 
+      this
+  )
+
     this.inputValue = new PlainState('', this)
   }
 
-  // [ ] Crear dropdown personalizado
+  // [x] Crear dropdown personalizado
   template () {
     return `
             <label class="label">${this.getAttribute('label')}</label>
@@ -33,7 +37,7 @@ class SelectInput extends PlainComponent {
             name="${this.getAttribute('name')}" 
             value="${this.inputValue.getState()}">
                 <option default hidden>Select an option</option>
-                ${Object.entries(userGenres).map(([key, value]) =>
+                ${Object.entries(this.options.getState()).map(([key, value]) =>
                     `<option value="${key}">${value}</option>`
                 )}
             </select>

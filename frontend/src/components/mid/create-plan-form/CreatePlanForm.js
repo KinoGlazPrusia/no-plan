@@ -13,6 +13,7 @@ import DateInput from '../../base/date-input/DateInput.js'
 import SelectInput from '../../base/select-input/SelectInput.js'
 import FileInput from '../../base/file-input/FileInput.js'
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
+import SelectCheckboxInput from '../../base/select-checkbox-input/SelectCheckboxInput.js'
 /* eslint-enable */
 
 class CreatePlanForm extends PlainComponent {
@@ -26,6 +27,14 @@ class CreatePlanForm extends PlainComponent {
   }
 
   template () {
+    // Sustituir esto por una llamada a la API para hacer un fetch de todas las categorías
+    const testCategories = [
+      'Hiking',
+      'BBQ',
+      'Cultural',
+      'Cinema',
+      'Videogames'
+    ]
     return `
             <form class="create-plan-form" name="create-plan-form">
                 <div class="overflow-wrapper">
@@ -64,6 +73,10 @@ class CreatePlanForm extends PlainComponent {
                       name="categories" 
                       label="Categories">
                     </p-select-input>
+
+                    <p-select-checkbox-input
+                    options=${JSON.stringify(testCategories)}>
+                    </p-select-checkbox-input>
 
                     <!-- PLAN IMAGE -->
                     <p-file-input
