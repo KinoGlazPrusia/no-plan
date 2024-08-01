@@ -39,20 +39,21 @@ class SelectInput extends PlainComponent {
   // [x] Crear dropdown personalizado
   template() {
     return `
-            <label class="label">${this.getAttribute('label')}</label>
-            
-            <select 
-            class="input ${this.hasAttribute('multiple') && 'multiple'}"
-            name="${this.getAttribute('name')}" 
-            value="${this.inputValue.getState()}"
-            ${this.hasAttribute('multiple') && 'multiple'}>
-                <option default hidden>Select an option</option>
-                ${Object.entries(this.options.getState()).map(
-                  ([key, value]) => `<option value="${key}">${value}</option>`
-                )}
-            </select>
+          <label class="label">${this.getAttribute('label')}</label>
+          <div class="overflow-wrapper">
+              <select 
+              class="input ${this.hasAttribute('multiple') && 'multiple'}"
+              name="${this.getAttribute('name')}" 
+              value="${this.inputValue.getState()}"
+              ${this.hasAttribute('multiple') && 'multiple'}>
+                  <option default hidden>Select an option</option>
+                  ${Object.entries(this.options.getState()).map(
+                    ([key, value]) => `<option value="${key}">${value}</option>`
+                  )}
+              </select>
 
-            <p-form-feedback class="feedback"></p-form-feedback>
+              <p-form-feedback class="feedback"></p-form-feedback>
+          </div>
         `
   }
 

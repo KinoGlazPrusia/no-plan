@@ -13,6 +13,15 @@
   gap: 0.5em;
 }
 
+.overflow-wrapper {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 10pt;
+
+  overflow: hidden;
+}
+
 /* LABEL */
 .label {
   padding-left: 1em;
@@ -79,6 +88,20 @@
 /* .input:focus.multiple option:checked {
   background-color: var(--accent-color) !important;
 } */
+
+/* SCROOLBARS */
+.input.multiple::-webkit-scrollbar {
+  height: 50px;
+  width: 0.5em;
+}
+
+.input.multiple::-webkit-scrollbar-track {
+  border-radius: 10pt; /* Match the input's border-radius */
+}
+
+.input.multiple::-webkit-scrollbar-thumb {
+  background: var(--tertiary-color);
+}
 
 /* ERROR */
 .is-invalid .input {
