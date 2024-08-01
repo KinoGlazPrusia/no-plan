@@ -2,7 +2,7 @@ import { PlainComponent, PlainState, PlainContext } from '../../../../node_modul
 import { PUBLIC_PATH, MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
-import { VALIDATORS } from '../../../services/validators.js'
+import { VALIDATORS } from '../../../utils/validators.js'
 import * as apiAuth from '../../../services/api.auth.js'
 
 /* COMPONENTS */

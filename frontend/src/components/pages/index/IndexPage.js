@@ -1,25 +1,33 @@
 import { PlainComponent } from '../../../../node_modules/plain-reactive/src/index.js'
-import { PUBLIC_PATH } from '../../../config/env.config.js'
+import { PUBLIC_PATH, PAGES_PATH } from '../../../config/env.config.js'
+
+/* COMPONENTS */
+/* eslint-disable */
+import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
+/* eslint-enable */
+
+/* SERVICES */
 import * as apiAuth from '../../../services/api.auth.js'
 
-// Este componente chequea si el usuario está logueado y redirige:
-// - LoginPage (si NO lo está)
-// - HomePage (si lo está)
-// El chequeo lo hará llamando a un método de la api
+/* UTILS */
+import * as authenticator from '../../../utils/authenticator.js'
+
 class IndexPage extends PlainComponent {
   constructor () {
-    super('p-index-page')
+    super('p-index-page', `${PAGES_PATH}index/IndexPage.css`)
 
     this.checkAuthentication()
   }
 
   template () {
-    return ''
+    return `
+      <p-loading-spinner></p-loading-spinner>
+    `
   }
 
   async checkAuthentication () {
-    const isAuthenticated = await apiAuth.isAuthenticated()
-    isAuthenticated.data[0] ? this.navigateTo('planner') : this.navigateTo('login')
+    const isAuthenticated = await authenticator.permissionGate(['user', 'admin'])
+    isAuthenticated ? this.navigateTo('planner') : this.navigateTo('login')
   }
 
   navigateTo (path) {

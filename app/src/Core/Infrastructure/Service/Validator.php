@@ -16,6 +16,7 @@ class Validator
     }
 
     public static function validateName(string $name): array {
+        // [ ] Revisar la validación del nombre en frontend ya que al insertar números esta regex falla
         $validityMessage = array();
     
         // Check if the name only contains letters and spaces, including UTF-8 characters

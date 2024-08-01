@@ -2,7 +2,7 @@ import { PlainComponent, PlainState } from '../../../../node_modules/plain-react
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
-import { VALIDATORS, validateEmailDontExists, validatePasswordConfirmation } from '../../../services/validators.js'
+import { VALIDATORS, validateEmailDontExists, validatePasswordConfirmation } from '../../../utils/validators.js'
 import { register as apiUserRegister } from '../../../services/api.user.js'
 
 /* COMPONENTS */

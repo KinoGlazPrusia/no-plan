@@ -2,7 +2,7 @@ import { PlainComponent, PlainState, PlainContext } from '../../../../node_modul
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
-import { VALIDATORS } from '../../../services/validators.js'
+import { VALIDATORS } from '../../../utils/validators.js'
 
 /* COMPONENTS */
 /* eslint-disable */

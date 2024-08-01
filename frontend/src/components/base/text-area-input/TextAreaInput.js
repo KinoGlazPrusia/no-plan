@@ -8,7 +8,7 @@ import FormFeedback from '../form-feedback/FormFeedback.js'
 /* eslint-enable */
 
 /* SERVICES */
-import * as validators from '../../../services/validators.js'
+import * as validators from '../../../utils/validators.js'
 
 class TextAreaInput extends PlainComponent {
   constructor () {
