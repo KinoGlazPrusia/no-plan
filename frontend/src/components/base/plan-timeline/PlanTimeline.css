@@ -1,0 +1,107 @@
+.p-plan-timeline-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2em;
+}
+
+.step-wrapper {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* TIME */
+.step-time {
+  height: 45px;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-content: center;
+
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 100pt;
+
+  color: var(--text-color);
+  font-size: 0.75em;
+  font-weight: bold;
+
+  background-color: var(--tertiary-color);
+
+  z-index: 10;
+
+  transition: 300ms;
+}
+
+/* INFO */
+.step-info {
+  user-select: none;
+
+  width: 220px;
+
+  margin-left: -0.75em;
+  padding: 0.5em;
+  padding-left: calc(0.75em + 0.5em);
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  height: fit-content;
+
+  border: 1px solid var(--tertiary-color);
+  border-radius: 10pt;
+
+  box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.1);
+
+  transition: 300ms;
+}
+
+.title {
+  max-width: 100%;
+
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.description {
+  max-width: 100%;
+
+  font-size: 0.75em;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* CONNECTION */
+.connection-line {
+  position: absolute;
+  top: 45px;
+  left: calc(45px / 2);
+
+  height: 100%;
+  width: 45px;
+
+  border-left: 2px dashed rgba(0, 0, 0, 0);
+}
+
+/* Esto conecta solo los steps que están seguidos por otro */
+.step-wrapper:has(+ .step-wrapper) .connection-line {
+  border-left: 2px dashed var(--text-color);
+}
+
+/* HOVER */
+.step-wrapper:hover .step-time {
+  border: 1px solid var(--text-color);
+  transform: scale(1.075);
+}
+
+.step-wrapper:hover .step-info {
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.05);
+}
