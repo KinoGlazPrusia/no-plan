@@ -127,7 +127,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Auth/Infrastructure/AuthController.php"><a href="files/src-auth-infrastructure-authcontroller.html"><abbr title="src/Auth/Infrastructure/AuthController.php">AuthController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -162,7 +162,25 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Auth-Infrastructure-AuthController.html#method_emailExists">emailExists()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Auth-Infrastructure-AuthController.html#method_isAuthenticated">isAuthenticated()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Auth-Infrastructure-AuthController.html#method_login">login()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Auth-Infrastructure-AuthController.html#method_logout">logout()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -187,22 +205,22 @@
             -public
                                     -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_login">
-        login()
-        <a href="classes/App-Auth-Infrastructure-AuthController.html#method_login" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_emailExists">
+        emailExists()
+        <a href="classes/App-Auth-Infrastructure-AuthController.html#method_emailExists" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Auth/Infrastructure/AuthController.php"><a href="files/src-auth-infrastructure-authcontroller.html"><abbr title="src/Auth/Infrastructure/AuthController.php">AuthController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">login</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Service-Request.html"><abbr title="\App\Core\Infrastructure\Service\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Interface-IUseCase.html"><abbr title="\App\Core\Infrastructure\Interface\IUseCase">IUseCase</abbr></a>|<a href="classes/App-Core-Infrastructure-Interface-IService.html"><abbr title="\App\Core\Infrastructure\Interface\IService">IService</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$businessLogic</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">emailExists</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Service-Request.html"><abbr title="\App\Core\Infrastructure\Service\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Interface-IUseCase.html"><abbr title="\App\Core\Infrastructure\Interface\IUseCase">IUseCase</abbr></a>|<a href="classes/App-Core-Infrastructure-Interface-IService.html"><abbr title="\App\Core\Infrastructure\Interface\IService">IService</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$emailExists</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -218,7 +236,160 @@
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$businessLogic</span>
+                <span class="phpdocumentor-signature__argument__name">$emailExists</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Interface-IUseCase.html"><abbr title="\App\Core\Infrastructure\Interface\IUseCase">IUseCase</abbr></a>|<a href="classes/App-Core-Infrastructure-Interface-IService.html"><abbr title="\App\Core\Infrastructure\Interface\IService">IService</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isAuthenticated">
+        isAuthenticated()
+        <a href="classes/App-Auth-Infrastructure-AuthController.html#method_isAuthenticated" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Auth/Infrastructure/AuthController.php"><a href="files/src-auth-infrastructure-authcontroller.html"><abbr title="src/Auth/Infrastructure/AuthController.php">AuthController.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">86</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">isAuthenticated</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Service-Request.html"><abbr title="\App\Core\Infrastructure\Service\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Interface-IUseCase.html"><abbr title="\App\Core\Infrastructure\Interface\IUseCase">IUseCase</abbr></a>|<a href="classes/App-Core-Infrastructure-Interface-IService.html"><abbr title="\App\Core\Infrastructure\Interface\IService">IService</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$isAuthenticated</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Service-Request.html"><abbr title="\App\Core\Infrastructure\Service\Request">Request</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$isAuthenticated</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Interface-IUseCase.html"><abbr title="\App\Core\Infrastructure\Interface\IUseCase">IUseCase</abbr></a>|<a href="classes/App-Core-Infrastructure-Interface-IService.html"><abbr title="\App\Core\Infrastructure\Interface\IService">IService</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_login">
+        login()
+        <a href="classes/App-Auth-Infrastructure-AuthController.html#method_login" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Auth/Infrastructure/AuthController.php"><a href="files/src-auth-infrastructure-authcontroller.html"><abbr title="src/Auth/Infrastructure/AuthController.php">AuthController.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">login</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Service-Request.html"><abbr title="\App\Core\Infrastructure\Service\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Interface-IUseCase.html"><abbr title="\App\Core\Infrastructure\Interface\IUseCase">IUseCase</abbr></a>|<a href="classes/App-Core-Infrastructure-Interface-IService.html"><abbr title="\App\Core\Infrastructure\Interface\IService">IService</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$login</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Service-Request.html"><abbr title="\App\Core\Infrastructure\Service\Request">Request</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$login</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Interface-IUseCase.html"><abbr title="\App\Core\Infrastructure\Interface\IUseCase">IUseCase</abbr></a>|<a href="classes/App-Core-Infrastructure-Interface-IService.html"><abbr title="\App\Core\Infrastructure\Interface\IService">IService</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_logout">
+        logout()
+        <a href="classes/App-Auth-Infrastructure-AuthController.html#method_logout" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Auth/Infrastructure/AuthController.php"><a href="files/src-auth-infrastructure-authcontroller.html"><abbr title="src/Auth/Infrastructure/AuthController.php">AuthController.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">97</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">logout</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Service-Request.html"><abbr title="\App\Core\Infrastructure\Service\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Interface-IUseCase.html"><abbr title="\App\Core\Infrastructure\Interface\IUseCase">IUseCase</abbr></a>|<a href="classes/App-Core-Infrastructure-Interface-IService.html"><abbr title="\App\Core\Infrastructure\Interface\IService">IService</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logout</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Service-Request.html"><abbr title="\App\Core\Infrastructure\Service\Request">Request</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$logout</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Core-Infrastructure-Interface-IUseCase.html"><abbr title="\App\Core\Infrastructure\Interface\IUseCase">IUseCase</abbr></a>|<a href="classes/App-Core-Infrastructure-Interface-IService.html"><abbr title="\App\Core\Infrastructure\Interface\IService">IService</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
@@ -345,7 +516,10 @@
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/App-Auth-Infrastructure-AuthController.html#method_emailExists">emailExists()</a></li>
+                                            <li class=""><a href="classes/App-Auth-Infrastructure-AuthController.html#method_isAuthenticated">isAuthenticated()</a></li>
                                             <li class=""><a href="classes/App-Auth-Infrastructure-AuthController.html#method_login">login()</a></li>
+                                            <li class=""><a href="classes/App-Auth-Infrastructure-AuthController.html#method_logout">logout()</a></li>
                                     </ul>
             </li>
                     </ul>

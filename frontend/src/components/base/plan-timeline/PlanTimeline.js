@@ -19,17 +19,18 @@ class PlanTimeline extends PlainComponent {
           time: '14:52',
           title: 'Encuentro',
           description:
-            'Nos reunimos delante de la puerta de atrás del edificio del ayuntamiento.'
+            'nos reunimos delante de la puerta de atrás del edificio del ayuntamiento.'
         },
         {
           time: '15:00',
           title: 'Primer bar',
-          description: 'Vamos a tomar un vermut a la bodega X'
+          description: 'vamos a tomar un vermut a la bodega X.'
         },
         {
-          time: '15:00',
-          title: 'Primer bar',
-          description: 'Vamos a tomar un vermut a la bodega X'
+          time: '16:25',
+          title: 'Segundo bar',
+          description:
+            'vamos a tomar un vermut al otro bar un poco más adelante.'
         }
       ],
       this
@@ -45,8 +46,12 @@ class PlanTimeline extends PlainComponent {
                 <div class="step-wrapper">
                     <div class="step-time">${step.time}</div>
                     <div class="step-info">
-                        <span class="title">${step.title}</span>
-                        <span class="description">${step.description}</span>
+                        <span class="title">
+                            ${step.title[0].toUpperCase() + step.title.substring(1)}
+                        </span>
+                        <span class="description">
+                            ${step.description[0].toUpperCase() + step.description.substring(1)}
+                        </span>
                     </div>
                     <div class="connection-line"></div>
                 </div>

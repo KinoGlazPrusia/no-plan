@@ -1,25 +1,100 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\App\\Auth\\Application\\CheckAuthenticationUseCase",
+            "name": "CheckAuthenticationUseCase",
+            "summary": "",
+            "url": "classes/App-Auth-Application-CheckAuthenticationUseCase.html"
+        },                {
+            "fqsen": "\\App\\Auth\\Application\\CheckAuthenticationUseCase\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/App-Auth-Application-CheckAuthenticationUseCase.html#method___invoke"
+        },                {
+            "fqsen": "\\App\\Auth\\Application\\EmailExistsUseCase",
+            "name": "EmailExistsUseCase",
+            "summary": "",
+            "url": "classes/App-Auth-Application-EmailExistsUseCase.html"
+        },                {
+            "fqsen": "\\App\\Auth\\Application\\EmailExistsUseCase\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Auth-Application-EmailExistsUseCase.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Auth\\Application\\EmailExistsUseCase\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/App-Auth-Application-EmailExistsUseCase.html#method___invoke"
+        },                {
+            "fqsen": "\\App\\Auth\\Application\\EmailExistsUseCase\u003A\u003A\u0024repository",
+            "name": "repository",
+            "summary": "",
+            "url": "classes/App-Auth-Application-EmailExistsUseCase.html#property_repository"
+        },                {
             "fqsen": "\\App\\Auth\\Application\\LoginUseCase",
             "name": "LoginUseCase",
             "summary": "",
             "url": "classes/App-Auth-Application-LoginUseCase.html"
+        },                {
+            "fqsen": "\\App\\Auth\\Application\\LoginUseCase\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Auth-Application-LoginUseCase.html#method___construct"
         },                {
             "fqsen": "\\App\\Auth\\Application\\LoginUseCase\u003A\u003A__invoke\u0028\u0029",
             "name": "__invoke",
             "summary": "",
             "url": "classes/App-Auth-Application-LoginUseCase.html#method___invoke"
         },                {
+            "fqsen": "\\App\\Auth\\Application\\LoginUseCase\u003A\u003A\u0024repository",
+            "name": "repository",
+            "summary": "",
+            "url": "classes/App-Auth-Application-LoginUseCase.html#property_repository"
+        },                {
+            "fqsen": "\\App\\Auth\\Application\\LogoutUseCase",
+            "name": "LogoutUseCase",
+            "summary": "",
+            "url": "classes/App-Auth-Application-LogoutUseCase.html"
+        },                {
+            "fqsen": "\\App\\Auth\\Application\\LogoutUseCase\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/App-Auth-Application-LogoutUseCase.html#method___invoke"
+        },                {
+            "fqsen": "\\App\\Auth\\Domain\\JWToken",
+            "name": "JWToken",
+            "summary": "",
+            "url": "classes/App-Auth-Domain-JWToken.html"
+        },                {
+            "fqsen": "\\App\\Auth\\Domain\\JWToken\u003A\u003AencodeToken\u0028\u0029",
+            "name": "encodeToken",
+            "summary": "",
+            "url": "classes/App-Auth-Domain-JWToken.html#method_encodeToken"
+        },                {
+            "fqsen": "\\App\\Auth\\Domain\\JWToken\u003A\u003AdecodeToken\u0028\u0029",
+            "name": "decodeToken",
+            "summary": "",
+            "url": "classes/App-Auth-Domain-JWToken.html#method_decodeToken"
+        },                {
+            "fqsen": "\\App\\Auth\\Domain\\JWToken\u003A\u003AgenerateCookie\u0028\u0029",
+            "name": "generateCookie",
+            "summary": "",
+            "url": "classes/App-Auth-Domain-JWToken.html#method_generateCookie"
+        },                {
+            "fqsen": "\\App\\Auth\\Domain\\JWToken\u003A\u003AverifyCookie\u0028\u0029",
+            "name": "verifyCookie",
+            "summary": "",
+            "url": "classes/App-Auth-Domain-JWToken.html#method_verifyCookie"
+        },                {
             "fqsen": "\\App\\Auth\\Domain\\UUIDv4",
             "name": "UUIDv4",
             "summary": "",
             "url": "classes/App-Auth-Domain-UUIDv4.html"
         },                {
-            "fqsen": "\\App\\Auth\\Domain\\UUIDv4\u003A\u003A_invoke\u0028\u0029",
-            "name": "_invoke",
+            "fqsen": "\\App\\Auth\\Domain\\UUIDv4\u003A\u003Aget\u0028\u0029",
+            "name": "get",
             "summary": "",
-            "url": "classes/App-Auth-Domain-UUIDv4.html#method__invoke"
+            "url": "classes/App-Auth-Domain-UUIDv4.html#method_get"
         },                {
             "fqsen": "\\App\\Auth\\Infrastructure\\AuthController",
             "name": "AuthController",
@@ -31,6 +106,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Auth-Infrastructure-AuthController.html#method_login"
         },                {
+            "fqsen": "\\App\\Auth\\Infrastructure\\AuthController\u003A\u003AemailExists\u0028\u0029",
+            "name": "emailExists",
+            "summary": "",
+            "url": "classes/App-Auth-Infrastructure-AuthController.html#method_emailExists"
+        },                {
+            "fqsen": "\\App\\Auth\\Infrastructure\\AuthController\u003A\u003AisAuthenticated\u0028\u0029",
+            "name": "isAuthenticated",
+            "summary": "",
+            "url": "classes/App-Auth-Infrastructure-AuthController.html#method_isAuthenticated"
+        },                {
+            "fqsen": "\\App\\Auth\\Infrastructure\\AuthController\u003A\u003Alogout\u0028\u0029",
+            "name": "logout",
+            "summary": "",
+            "url": "classes/App-Auth-Infrastructure-AuthController.html#method_logout"
+        },                {
             "fqsen": "\\App\\Auth\\Infrastructure\\AuthRepository",
             "name": "AuthRepository",
             "summary": "",
@@ -40,6 +130,11 @@ Search.appendIndex(
             "name": "getUserByEmail",
             "summary": "",
             "url": "classes/App-Auth-Infrastructure-AuthRepository.html#method_getUserByEmail"
+        },                {
+            "fqsen": "\\App\\Auth\\Infrastructure\\AuthRepository\u003A\u003AgetUserRoles\u0028\u0029",
+            "name": "getUserRoles",
+            "summary": "",
+            "url": "classes/App-Auth-Infrastructure-AuthRepository.html#method_getUserRoles"
         },                {
             "fqsen": "\\App\\Core\\Domain\\CoreEntity",
             "name": "CoreEntity",
@@ -65,86 +160,6 @@ Search.appendIndex(
             "name": "columns",
             "summary": "",
             "url": "classes/App-Core-Domain-CoreEntity.html#property_columns"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env",
-            "name": "Env",
-            "summary": "Clase\u0020de\u0020configuraci\u00F3n\u0020de\u0020entorno\u0020que\u0020define\u0020constantes\u0020para\u0020la\u0020aplicaci\u00F3n.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env\u003A\u003AAPP_HOST",
-            "name": "APP_HOST",
-            "summary": "Direcci\u00F3n\u0020base\u0020de\u0020la\u0020aplicaci\u00F3n.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html#constant_APP_HOST"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env\u003A\u003ADB_TYPE",
-            "name": "DB_TYPE",
-            "summary": "Tipo\u0020de\u0020base\u0020de\u0020datos.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html#constant_DB_TYPE"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env\u003A\u003ADB_HOST",
-            "name": "DB_HOST",
-            "summary": "Host\u0020de\u0020la\u0020base\u0020de\u0020datos.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html#constant_DB_HOST"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env\u003A\u003ADB_USER",
-            "name": "DB_USER",
-            "summary": "Usuario\u0020de\u0020la\u0020base\u0020de\u0020datos.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html#constant_DB_USER"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env\u003A\u003ADB_PASS",
-            "name": "DB_PASS",
-            "summary": "Contrase\u00F1a\u0020de\u0020la\u0020base\u0020de\u0020datos.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html#constant_DB_PASS"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env\u003A\u003ADB_NAME",
-            "name": "DB_NAME",
-            "summary": "Nombre\u0020de\u0020la\u0020base\u0020de\u0020datos.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html#constant_DB_NAME"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env\u003A\u003ABASE_DIR",
-            "name": "BASE_DIR",
-            "summary": "Directorio\u0020base\u0020de\u0020la\u0020aplicaci\u00F3n.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html#constant_BASE_DIR"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env\u003A\u003APUBLIC_DIR",
-            "name": "PUBLIC_DIR",
-            "summary": "Directorio\u0020p\u00FAblico\u0020de\u0020la\u0020aplicaci\u00F3n.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html#constant_PUBLIC_DIR"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Env\u003A\u003ASRC_DIR",
-            "name": "SRC_DIR",
-            "summary": "Directorio\u0020source\u0020de\u0020la\u0020aplicaci\u00F3n.",
-            "url": "classes/App-Core-Infrastructure-Config-Env.html#constant_SRC_DIR"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Routes",
-            "name": "Routes",
-            "summary": "Clase\u0020Routes\u0020que\u0020gestiona\u0020las\u0020rutas\u0020definidas\u0020en\u0020la\u0020aplicaci\u00F3n.",
-            "url": "classes/App-Core-Infrastructure-Config-Routes.html"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Routes\u003A\u003ArouteExists\u0028\u0029",
-            "name": "routeExists",
-            "summary": "Verifica\u0020si\u0020una\u0020ruta\u0020existe\u0020para\u0020un\u0020m\u00E9todo\u0020HTTP\u0020y\u0020path\u0020espec\u00EDficos.",
-            "url": "classes/App-Core-Infrastructure-Config-Routes.html#method_routeExists"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config\\Routes\u003A\u003AgetAll\u0028\u0029",
-            "name": "getAll",
-            "summary": "Obtiene\u0020todas\u0020las\u0020rutas\u0020definidas\u0020en\u0020la\u0020aplicaci\u00F3n.",
-            "url": "classes/App-Core-Infrastructure-Config-Routes.html#method_getAll"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Controller\\BaseController",
-            "name": "BaseController",
-            "summary": "",
-            "url": "classes/App-Core-Infrastructure-Controller-BaseController.html"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Controller\\BaseController\u003A\u003Alogin\u0028\u0029",
-            "name": "login",
-            "summary": "",
-            "url": "classes/App-Core-Infrastructure-Controller-BaseController.html#method_login"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Controller\\BaseController\u003A\u003Alogout\u0028\u0029",
-            "name": "logout",
-            "summary": "",
-            "url": "classes/App-Core-Infrastructure-Controller-BaseController.html#method_logout"
         },                {
             "fqsen": "\\App\\Core\\Infrastructure\\Database\\MySqlDatabase",
             "name": "MySqlDatabase",
@@ -351,6 +366,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Core-Infrastructure-Repository-CoreRepository.html#property_db"
         },                {
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Mock",
+            "name": "Mock",
+            "summary": "",
+            "url": "classes/App-Core-Infrastructure-Service-Mock.html"
+        },                {
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Mock\u003A\u003AmockUploadedImage\u0028\u0029",
+            "name": "mockUploadedImage",
+            "summary": "",
+            "url": "classes/App-Core-Infrastructure-Service-Mock.html#method_mockUploadedImage"
+        },                {
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Mock\u003A\u003AnewUserPostData\u0028\u0029",
+            "name": "newUserPostData",
+            "summary": "",
+            "url": "classes/App-Core-Infrastructure-Service-Mock.html#method_newUserPostData"
+        },                {
             "fqsen": "\\App\\Core\\Infrastructure\\Service\\Request",
             "name": "Request",
             "summary": "Clase\u0020que\u0020representa\u0020una\u0020solicitud\u0020HTTP.",
@@ -426,6 +456,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Core-Infrastructure-Service-Sanitizer.html#method_sanitizeEmail"
         },                {
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Sanitizer\u003A\u003AsanitizeString\u0028\u0029",
+            "name": "sanitizeString",
+            "summary": "",
+            "url": "classes/App-Core-Infrastructure-Service-Sanitizer.html#method_sanitizeString"
+        },                {
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Sanitizer\u003A\u003AsanitizeName\u0028\u0029",
+            "name": "sanitizeName",
+            "summary": "",
+            "url": "classes/App-Core-Infrastructure-Service-Sanitizer.html#method_sanitizeName"
+        },                {
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Sanitizer\u003A\u003AsanitizeDate\u0028\u0029",
+            "name": "sanitizeDate",
+            "summary": "",
+            "url": "classes/App-Core-Infrastructure-Service-Sanitizer.html#method_sanitizeDate"
+        },                {
             "fqsen": "\\App\\Core\\Infrastructure\\Service\\Validator",
             "name": "Validator",
             "summary": "",
@@ -436,15 +481,150 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Core-Infrastructure-Service-Validator.html#method_validateEmail"
         },                {
-            "fqsen": "\\App\\User\\Application\\RegisterUserUseCase",
-            "name": "RegisterUserUseCase",
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Validator\u003A\u003AvalidateName\u0028\u0029",
+            "name": "validateName",
             "summary": "",
-            "url": "classes/App-User-Application-RegisterUserUseCase.html"
+            "url": "classes/App-Core-Infrastructure-Service-Validator.html#method_validateName"
         },                {
-            "fqsen": "\\App\\User\\Application\\RegisterUserUseCase\u003A\u003A__invoke\u0028\u0029",
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Validator\u003A\u003AvalidateGenre\u0028\u0029",
+            "name": "validateGenre",
+            "summary": "",
+            "url": "classes/App-Core-Infrastructure-Service-Validator.html#method_validateGenre"
+        },                {
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Validator\u003A\u003AvalidateDate\u0028\u0029",
+            "name": "validateDate",
+            "summary": "",
+            "url": "classes/App-Core-Infrastructure-Service-Validator.html#method_validateDate"
+        },                {
+            "fqsen": "\\App\\Core\\Infrastructure\\Service\\Validator\u003A\u003AvalidateUploadedImage\u0028\u0029",
+            "name": "validateUploadedImage",
+            "summary": "",
+            "url": "classes/App-Core-Infrastructure-Service-Validator.html#method_validateUploadedImage"
+        },                {
+            "fqsen": "\\App\\Env",
+            "name": "Env",
+            "summary": "Clase\u0020de\u0020configuraci\u00F3n\u0020de\u0020entorno\u0020que\u0020define\u0020constantes\u0020para\u0020la\u0020aplicaci\u00F3n.",
+            "url": "classes/App-Env.html"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003AAPP_HOST",
+            "name": "APP_HOST",
+            "summary": "Direcci\u00F3n\u0020base\u0020de\u0020la\u0020aplicaci\u00F3n.",
+            "url": "classes/App-Env.html#constant_APP_HOST"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003ADB_TYPE",
+            "name": "DB_TYPE",
+            "summary": "Tipo\u0020de\u0020base\u0020de\u0020datos.",
+            "url": "classes/App-Env.html#constant_DB_TYPE"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003ADB_HOST",
+            "name": "DB_HOST",
+            "summary": "Host\u0020de\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/App-Env.html#constant_DB_HOST"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003ADB_USER",
+            "name": "DB_USER",
+            "summary": "Usuario\u0020de\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/App-Env.html#constant_DB_USER"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003ADB_PASS",
+            "name": "DB_PASS",
+            "summary": "Contrase\u00F1a\u0020de\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/App-Env.html#constant_DB_PASS"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003ADB_NAME",
+            "name": "DB_NAME",
+            "summary": "Nombre\u0020de\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/App-Env.html#constant_DB_NAME"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003ABASE_DIR",
+            "name": "BASE_DIR",
+            "summary": "Directorio\u0020base\u0020de\u0020la\u0020aplicaci\u00F3n.",
+            "url": "classes/App-Env.html#constant_BASE_DIR"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003APUBLIC_DIR",
+            "name": "PUBLIC_DIR",
+            "summary": "Directorio\u0020p\u00FAblico\u0020de\u0020la\u0020aplicaci\u00F3n.",
+            "url": "classes/App-Env.html#constant_PUBLIC_DIR"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003AAVATAR_IMAGES_DIR",
+            "name": "AVATAR_IMAGES_DIR",
+            "summary": "Directorio\u0020p\u00FAblico\u0020donde\u0020se\u0020almacenan\u0020las\u0020im\u00E1genes\u0020de\u0020los\u0020avatares\u0020de\u0020usuario.",
+            "url": "classes/App-Env.html#constant_AVATAR_IMAGES_DIR"
+        },                {
+            "fqsen": "\\App\\Env\u003A\u003ASRC_DIR",
+            "name": "SRC_DIR",
+            "summary": "Directorio\u0020source\u0020de\u0020la\u0020aplicaci\u00F3n.",
+            "url": "classes/App-Env.html#constant_SRC_DIR"
+        },                {
+            "fqsen": "\\App\\Routes",
+            "name": "Routes",
+            "summary": "Clase\u0020Routes\u0020que\u0020gestiona\u0020las\u0020rutas\u0020definidas\u0020en\u0020la\u0020aplicaci\u00F3n.",
+            "url": "classes/App-Routes.html"
+        },                {
+            "fqsen": "\\App\\Routes\u003A\u003ArouteExists\u0028\u0029",
+            "name": "routeExists",
+            "summary": "Verifica\u0020si\u0020una\u0020ruta\u0020existe\u0020para\u0020un\u0020m\u00E9todo\u0020HTTP\u0020y\u0020path\u0020espec\u00EDficos.",
+            "url": "classes/App-Routes.html#method_routeExists"
+        },                {
+            "fqsen": "\\App\\Routes\u003A\u003AgetAll\u0028\u0029",
+            "name": "getAll",
+            "summary": "Obtiene\u0020todas\u0020las\u0020rutas\u0020definidas\u0020en\u0020la\u0020aplicaci\u00F3n.",
+            "url": "classes/App-Routes.html#method_getAll"
+        },                {
+            "fqsen": "\\App\\User\\Application\\AssignRolesToNewUserUseCase",
+            "name": "AssignRolesToNewUserUseCase",
+            "summary": "",
+            "url": "classes/App-User-Application-AssignRolesToNewUserUseCase.html"
+        },                {
+            "fqsen": "\\App\\User\\Application\\AssignRolesToNewUserUseCase\u003A\u003Aassign\u0028\u0029",
+            "name": "assign",
+            "summary": "",
+            "url": "classes/App-User-Application-AssignRolesToNewUserUseCase.html#method_assign"
+        },                {
+            "fqsen": "\\App\\User\\Application\\RegisterUserService",
+            "name": "RegisterUserService",
+            "summary": "",
+            "url": "classes/App-User-Application-RegisterUserService.html"
+        },                {
+            "fqsen": "\\App\\User\\Application\\RegisterUserService\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-User-Application-RegisterUserService.html#method___construct"
+        },                {
+            "fqsen": "\\App\\User\\Application\\RegisterUserService\u003A\u003A__invoke\u0028\u0029",
             "name": "__invoke",
             "summary": "",
-            "url": "classes/App-User-Application-RegisterUserUseCase.html#method___invoke"
+            "url": "classes/App-User-Application-RegisterUserService.html#method___invoke"
+        },                {
+            "fqsen": "\\App\\User\\Application\\RegisterUserService\u003A\u003A\u0024repository",
+            "name": "repository",
+            "summary": "",
+            "url": "classes/App-User-Application-RegisterUserService.html#property_repository"
+        },                {
+            "fqsen": "\\App\\User\\Application\\SaveNewUserUseCase",
+            "name": "SaveNewUserUseCase",
+            "summary": "",
+            "url": "classes/App-User-Application-SaveNewUserUseCase.html"
+        },                {
+            "fqsen": "\\App\\User\\Application\\SaveNewUserUseCase\u003A\u003Asave\u0028\u0029",
+            "name": "save",
+            "summary": "",
+            "url": "classes/App-User-Application-SaveNewUserUseCase.html#method_save"
+        },                {
+            "fqsen": "\\App\\User\\Application\\SaveNewUserUseCase\u003A\u003AgenerateImagePath\u0028\u0029",
+            "name": "generateImagePath",
+            "summary": "",
+            "url": "classes/App-User-Application-SaveNewUserUseCase.html#method_generateImagePath"
+        },                {
+            "fqsen": "\\App\\User\\Application\\StoreUserAvatarUseCase",
+            "name": "StoreUserAvatarUseCase",
+            "summary": "",
+            "url": "classes/App-User-Application-StoreUserAvatarUseCase.html"
+        },                {
+            "fqsen": "\\App\\User\\Application\\StoreUserAvatarUseCase\u003A\u003AstoreAvatarImage\u0028\u0029",
+            "name": "storeAvatarImage",
+            "summary": "",
+            "url": "classes/App-User-Application-StoreUserAvatarUseCase.html#method_storeAvatarImage"
         },                {
             "fqsen": "\\App\\User\\Domain\\User",
             "name": "User",
@@ -541,6 +721,71 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-User-Domain-User.html#property_last_connection"
         },                {
+            "fqsen": "\\App\\User\\Domain\\UserGenre",
+            "name": "UserGenre",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserGenre.html"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserGenre\u003A\u003AgetVerbose\u0028\u0029",
+            "name": "getVerbose",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserGenre.html#method_getVerbose"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserGenre\u003A\u003AgetAll\u0028\u0029",
+            "name": "getAll",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserGenre.html#method_getAll"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserGenre\u003A\u003AMALE",
+            "name": "MALE",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserGenre.html#constant_MALE"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserGenre\u003A\u003AFEMALE",
+            "name": "FEMALE",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserGenre.html#constant_FEMALE"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserGenre\u003A\u003ANON_BINARY",
+            "name": "NON_BINARY",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserGenre.html#constant_NON_BINARY"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserGenre\u003A\u003AOTHER",
+            "name": "OTHER",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserGenre.html#constant_OTHER"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserGenre\u003A\u003ANOT_SET",
+            "name": "NOT_SET",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserGenre.html#constant_NOT_SET"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserRole",
+            "name": "UserRole",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserRole.html"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserRole\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserRole.html#method___construct"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserRole\u003A\u003AADMIN",
+            "name": "ADMIN",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserRole.html#constant_ADMIN"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserRole\u003A\u003AUSER",
+            "name": "USER",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserRole.html#constant_USER"
+        },                {
+            "fqsen": "\\App\\User\\Domain\\UserRole\u003A\u003A\u0024role",
+            "name": "role",
+            "summary": "",
+            "url": "classes/App-User-Domain-UserRole.html#property_role"
+        },                {
             "fqsen": "\\App\\User\\Infrastructure\\UserController",
             "name": "UserController",
             "summary": "",
@@ -556,6 +801,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-User-Infrastructure-UserRepository.html"
         },                {
+            "fqsen": "\\App\\User\\Infrastructure\\UserRepository\u003A\u003AassignRoleToUser\u0028\u0029",
+            "name": "assignRoleToUser",
+            "summary": "",
+            "url": "classes/App-User-Infrastructure-UserRepository.html#method_assignRoleToUser"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -570,11 +820,6 @@ Search.appendIndex(
             "name": "Auth",
             "summary": "",
             "url": "namespaces/app-auth.html"
-        },                {
-            "fqsen": "\\App",
-            "name": "App",
-            "summary": "",
-            "url": "namespaces/app.html"
         },                {
             "fqsen": "\\App\\Auth\\Domain",
             "name": "Domain",
@@ -596,25 +841,15 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app-core.html"
         },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Config",
-            "name": "Config",
+            "fqsen": "\\App\\Core\\Infrastructure\\Database",
+            "name": "Database",
             "summary": "",
-            "url": "namespaces/app-core-infrastructure-config.html"
+            "url": "namespaces/app-core-infrastructure-database.html"
         },                {
             "fqsen": "\\App\\Core\\Infrastructure",
             "name": "Infrastructure",
             "summary": "",
             "url": "namespaces/app-core-infrastructure.html"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Controller",
-            "name": "Controller",
-            "summary": "",
-            "url": "namespaces/app-core-infrastructure-controller.html"
-        },                {
-            "fqsen": "\\App\\Core\\Infrastructure\\Database",
-            "name": "Database",
-            "summary": "",
-            "url": "namespaces/app-core-infrastructure-database.html"
         },                {
             "fqsen": "\\App\\Core\\Infrastructure\\Interface",
             "name": "Interface",
@@ -630,6 +865,11 @@ Search.appendIndex(
             "name": "Service",
             "summary": "",
             "url": "namespaces/app-core-infrastructure-service.html"
+        },                {
+            "fqsen": "\\App",
+            "name": "App",
+            "summary": "",
+            "url": "namespaces/app.html"
         },                {
             "fqsen": "\\App\\User\\Application",
             "name": "Application",

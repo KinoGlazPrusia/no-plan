@@ -30,7 +30,7 @@ class AuthRepository extends CoreRepository {
             $res = $this->db->execute($stmt, ['user_id' => $user->id]);
             $this->db->disconnect();
         } 
-        catch (Exception $e) {
+        catch (\Exception $e) {
             $this->db->disconnect();
             throw $e;
         }
