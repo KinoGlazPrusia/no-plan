@@ -9,7 +9,6 @@ import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 import { VALIDATORS } from '../../../utils/validators.js'
 
 /* COMPONENTS */
-/* eslint-disable */
 import Button from '../../base/button/Button.js'
 import TextInput from '../../base/text-input/TextInput.js'
 import TextAreaInput from '../../base/text-area-input/TextAreaInput.js'
@@ -17,7 +16,7 @@ import DateInput from '../../base/date-input/DateInput.js'
 import SelectInput from '../../base/select-input/SelectInput.js'
 import FileInput from '../../base/file-input/FileInput.js'
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
-/* eslint-enable */
+import PlanTimeline from '../../base/plan-timeline/PlanTimeline.js'
 
 class CreatePlanForm extends PlainComponent {
   constructor() {
@@ -34,7 +33,15 @@ class CreatePlanForm extends PlainComponent {
 
   template() {
     // Sustituir esto por una llamada a la API para hacer un fetch de todas las categorías
-    const testCategories = ['Hiking', 'BBQ', 'Cultural', 'Cinema', 'Videogames']
+    const testCategories = [
+      'Hiking',
+      'BBQ',
+      'Cultural',
+      'Cinema',
+      'Videogames',
+      'Gastro'
+    ]
+    // [ ] Sustituir el validador de la imagen por uno nuevo
     return `
             <form class="create-plan-form" name="create-plan-form">
                 <div class="overflow-wrapper">
@@ -82,8 +89,12 @@ class CreatePlanForm extends PlainComponent {
                       id="plan-img"
                       name="plan-img"
                       label="Plan Image"
-                      accept="image/*">
-                    <p-file-input>
+                      accept="image/*"
+                      validator="${VALIDATORS.AVATAR_IMAGE_FILE}">
+                    </p-file-input>
+
+                    <!-- PLAN TIMELINE -->
+                    <p-plan-timeline></p-plan-timeline>
 
                 </div>
 
