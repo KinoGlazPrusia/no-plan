@@ -22,6 +22,7 @@
 - [x] Añadir un campo rol para la tabla user.
 - [x] Recuperar e insertar los roles en una variable de sesión y en el token
 - [x] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
+- [ ] Crear componente PlanTimeline
 - [ ] Terminar de implementar el 'permissionGate'.
 - [ ] Añadir una función en servidor para chequear si el usuario está logueado y el rol del usuario para permitir que acceda a un endpoint o no.
 - [ ] Implementar un método para devolver respuesta en caso de que el servidor no responda.
@@ -37,4 +38,3 @@
 - [ ] Incluir campo teléfono en la tabla 'user' (añadirlo la gestión en servidor al registrar usuario).
 - [ ] En el CreatePlanForm, añadir feedback (con scrollbar o flechas animadas) para dar a entender al usuario que puede hacer scroll.
 - [ ] Crear modal para añadir 'steps' a un plan.
-- [ ] Crear componente PlanTimeline
