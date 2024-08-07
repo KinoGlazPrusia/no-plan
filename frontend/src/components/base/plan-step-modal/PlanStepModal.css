@@ -1,0 +1,74 @@
+.modal-header {
+  align-self: flex-start;
+  font-size: 1.5em;
+}
+
+.modal {
+  padding: 2em;
+
+  width: fit-content;
+  height: fit-content;
+
+  background-color: var(--bg-color);
+
+  border: none;
+  border-radius: 10pt;
+
+  box-shadow: 0px 5px 35px rgba(0, 0, 0, 0.2);
+
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+
+  z-index: 1000;
+}
+
+.modal[open] {
+  display: flex;
+}
+
+::backdrop {
+  backdrop-filter: blur(5px);
+}
+
+/* BUTTONS */
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  gap: 12px;
+}
+
+.cancel-step {
+  flex: 1;
+}
+
+.submit {
+  flex: 1;
+}
+
+/* ANIMATION */
+.modal.entry {
+  animation-name: entry;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+@keyframes entry {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

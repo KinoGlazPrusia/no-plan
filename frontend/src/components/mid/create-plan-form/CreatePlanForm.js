@@ -17,6 +17,7 @@ import SelectInput from '../../base/select-input/SelectInput.js'
 import FileInput from '../../base/file-input/FileInput.js'
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
 import PlanTimeline from '../../base/plan-timeline/PlanTimeline.js'
+import PlanStepModal from '../../base/plan-step-modal/PlanStepModal.js'
 
 class CreatePlanForm extends PlainComponent {
   constructor() {
@@ -29,18 +30,36 @@ class CreatePlanForm extends PlainComponent {
     this.isError = new PlainState(false, this)
 
     this.userContext = new PlainContext('user', this, false)
+
+    // [ ] Quizás se podría sustituir el select multiple por un div lleno de check chips como en un filtro
   }
 
   template() {
     // Sustituir esto por una llamada a la API para hacer un fetch de todas las categorías
     const testCategories = [
-      'Hiking',
-      'BBQ',
-      'Cultural',
-      'Cinema',
-      'Videogames',
-      'Gastro'
+      'Social Gatherings',
+      'Outdoor Activities',
+      'Sports & Fitness',
+      'Cultural Events',
+      'Food & Dining',
+      'Music & Concerts',
+      'Art & Exhibitions',
+      'Educational & Workshops',
+      'Nightlife & Parties',
+      'Travel & Excursions',
+      'Wellness & Relaxation',
+      'Professional Networking',
+      'Volunteering & Charity',
+      'Technology & Gaming',
+      'Family-Friendly Activities',
+      'Shopping & Markets',
+      'Movies & Theater',
+      'Book Clubs & Literary Events',
+      'Pets & Animal Lovers',
+      'Hobby & Craft Sessions'
     ]
+
+    console.log(JSON.stringify(testCategories))
     // [ ] Sustituir el validador de la imagen por uno nuevo
     return `
             <form class="create-plan-form" name="create-plan-form">
@@ -79,7 +98,7 @@ class CreatePlanForm extends PlainComponent {
                       id="categories"
                       name="categories" 
                       label="Categories"
-                      options=${JSON.stringify(testCategories)}
+                      options='${JSON.stringify(testCategories)}'
                       multiple>
                     </p-select-input>
 
@@ -106,7 +125,20 @@ class CreatePlanForm extends PlainComponent {
                 </div>
 
             </form>
+            <p-plan-step-modal></p-plan-step-modal>
         `
+  }
+
+  listeners() {
+    this.$('.add-step').onclick = () => this.openStepModal()
+  }
+
+  openStepModal() {
+    this.$('p-plan-step-modal').open()
+  }
+
+  addStep(step) {
+    this.$('p-plan-timeline').addStep(step) // Esto se llama desde el modal
   }
 }
 

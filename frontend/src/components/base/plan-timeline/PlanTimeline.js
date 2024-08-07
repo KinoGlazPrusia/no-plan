@@ -13,7 +13,7 @@ class PlanTimeline extends PlainComponent {
 
     this.isLoading = new PlainState(false, this)
     this.isError = new PlainState(false, this)
-    this.timeline = new PlainState(
+    /*  this.timeline = new PlainState(
       [
         {
           time: '14:52',
@@ -34,7 +34,8 @@ class PlanTimeline extends PlainComponent {
         }
       ],
       this
-    )
+    ) */
+    this.timeline = new PlainState([], this)
   }
 
   template() {
@@ -61,7 +62,15 @@ class PlanTimeline extends PlainComponent {
     `
   }
 
-  addStep() {}
+  addStep(step) {
+    /* El step debe ser un objeto con las siguientes claves: 
+      time: string (hora)
+      title: string (titulo)
+      description: string (descripción)
+    */
+    this.timeline.setState([...this.timeline.getState(), step])
+    // [ ] Se debería hacer un sortStep() para ordenar las tareas por hora
+  }
 
   removeStep() {}
 
