@@ -1,7 +1,6 @@
 <?php
 namespace App\User\Domain;
 
-use DateTime;
 use App\Core\Domain\CoreEntity;
 
 class User extends CoreEntity {
