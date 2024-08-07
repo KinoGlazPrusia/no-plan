@@ -22,7 +22,7 @@
 - [x] Añadir un campo rol para la tabla user.
 - [x] Recuperar e insertar los roles en una variable de sesión y en el token
 - [x] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
-- [ ] Crear componente PlanTimeline
+- [x] Crear componente PlanTimeline
 - [ ] Terminar de implementar el 'permissionGate'.
 - [ ] Añadir una función en servidor para chequear si el usuario está logueado y el rol del usuario para permitir que acceda a un endpoint o no.
 - [ ] Implementar un método para devolver respuesta en caso de que el servidor no responda.
