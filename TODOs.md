@@ -38,3 +38,4 @@
 - [ ] Incluir campo teléfono en la tabla 'user' (añadirlo la gestión en servidor al registrar usuario).
 - [ ] En el CreatePlanForm, añadir feedback (con scrollbar o flechas animadas) para dar a entender al usuario que puede hacer scroll.
 - [ ] Crear modal para añadir 'steps' a un plan.
+- [ ] En el componente FormFeedback, añadir un modal cuando el mensaje supere las 2 líneas.
