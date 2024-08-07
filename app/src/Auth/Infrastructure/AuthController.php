@@ -51,6 +51,7 @@ class AuthController {
         } 
         catch (Exception $e) {
             Response::jsonError(403, $e->getMessage());
+            // [ ] Implementar manejo de errores en el frontend añadiendo un toast o algo similar para errores de validación
         }
     }
 

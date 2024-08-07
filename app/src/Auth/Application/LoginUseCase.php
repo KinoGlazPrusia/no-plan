@@ -21,14 +21,17 @@ class LoginUseCase implements IUseCase {
 
         try {
             $user = $this->repository->getUserByEmail($email);
+            
+            // Se puede retornar directamente $user pero es por legibilidad
+            // Esta excepción podría retornarse directamente desde el repository
+            if (!$user) throw new Exception('User don\'t exist'); 
+
             // [x] Recuperar los roles del usuario
             $roles = $this->repository->getUserRoles($user);
         } 
         catch (Exception $e) {
             throw $e;
         }
-
-        if (!$user) throw new Exception('User don\'t exist'); // Se puede retornar directamente $user pero es por legibilidad
 
         // Chequeamos las credenciales
         try {
