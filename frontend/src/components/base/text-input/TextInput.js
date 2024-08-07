@@ -46,7 +46,9 @@ class TextInput extends PlainComponent {
     this.$('.input').oninput = (e) => {
       // Actualización del input value
       this.updateValue()
+    }
 
+    this.$('.input').onblur = () => {
       // Validación
       this.validator && this.validate()
     }

@@ -27,7 +27,6 @@ class SelectInput extends PlainComponent {
     )
 
     // El argumento se le ha de pasar con un JSON.stringify(object)
-    console.log(JSON.parse(this.getAttribute('options')))
     this.options = new PlainState(
       JSON.parse(this.getAttribute('options')),
       this

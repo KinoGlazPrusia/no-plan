@@ -59,7 +59,6 @@ class CreatePlanForm extends PlainComponent {
       'Hobby & Craft Sessions'
     ]
 
-    console.log(JSON.stringify(testCategories))
     // [ ] Sustituir el validador de la imagen por uno nuevo
     return `
             <form class="create-plan-form" name="create-plan-form">
