@@ -76,6 +76,13 @@ class Env
     const AVATAR_IMAGES_DIR = self::BASE_DIR . 'public/assets/images/avatar/';
 
     /**
+     * Directorio público donde se almacenan las imágenes de los planes.
+     * 
+     * @var string
+     */
+    const PLAN_IMAGES_DIR = self::BASE_DIR . 'public/assets/images/plan/';
+
+    /**
      * Directorio source de la aplicación.
      * 
      * @var string
