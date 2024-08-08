@@ -17,6 +17,11 @@ use App\User\Infrastructure\UserController;
 use App\User\Infrastructure\UserRepository;
 use App\User\Application\RegisterUserService;
 
+/* PLAN */
+use App\Plan\Infrastructure\PlanController;
+use App\Plan\Infrastructure\PlanRepository;
+use App\Plan\Application\CreatePlanService;
+
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
  */
@@ -57,7 +62,7 @@ class Routes
                 'logout' => [
                     'controller' => [AuthController::class, 'logout'],
                     'logic' => new LogoutUseCase(),
-                    'access' => 'public'
+                    'access' => 'private'
                 ]
             ],
             'POST' => [
@@ -69,6 +74,11 @@ class Routes
                 'register' => [
                     'controller' => [UserController::class, 'register'],
                     'logic' => new RegisterUserService(new UserRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'create-plan' => [
+                    'controller' => [PlanController::class, 'create'],
+                    'logic' => new CreatePlanService(new PlanRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ]
             ]
