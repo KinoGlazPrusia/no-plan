@@ -15,6 +15,11 @@ class Sanitizer
         return $sanitized;
     }
 
+    public static function sanitizeInt(int $int): int {
+        $sanitized = self::sanitizeString($int);
+        return $sanitized;
+    }
+
     public static function sanitizeName(string $name): string {
         $sanitized = self::sanitizeString($name);
         $sanitized = strtolower($sanitized);

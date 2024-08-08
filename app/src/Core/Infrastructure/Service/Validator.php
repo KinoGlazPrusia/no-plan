@@ -80,4 +80,88 @@ class Validator
 
         return $validityMessage;
     }
+
+    public static function validatePlanTitle(string $title): array {
+        $validityMessage = array();
+
+        if (strlen($title) < 3) {
+            $validityMessage[] = 'Invalid title: The title must be at least 3 characters long.';
+        }
+
+        return $validityMessage;
+    }
+
+    public static function validatePlanDescription(string $description): array {
+        $validityMessage = array();
+
+        if (strlen($description) < 10) {
+            $validityMessage[] = 'Invalid description: The description must be at least 10 characters long.';
+        }
+
+        return $validityMessage;
+    }
+
+    public static function validatePlanDate(string $date): array {
+        $validityMessage = array();
+
+        $year = explode('-', $date)[0];
+        $month = explode('-', $date)[1];
+        $day = explode('-', $date)[2];
+
+        if (!checkdate($month, $day, $year)) {
+            $validityMessage[] = 'Invalid date';
+        }
+
+        if (strtotime($date) < strtotime('now')) {
+            $validityMessage[] = 'Invalid date: The date must be in the future.';
+        }
+
+        return $validityMessage;
+    }
+
+    public static function validatePlanParticipation(int $participation): array {
+        $validityMessage = array();
+
+        if ($participation <= 0) {
+            $validityMessage[] = 'Invalid participation: The participation must be greater than 0.';
+        }
+
+        if ($participation >= 10) {
+            $validityMessage[] = 'Invalid participation: The participation must be equal orless than 10.';
+        }
+
+        return $validityMessage;
+    }
+
+    public static function validatePlanTimeline(array $timeline): array {
+        $validityMessage = array();
+
+        if (count($timeline) < 1) {
+            $validityMessage[] = 'Invalid timeline: The timeline must contain at least 1 step.';
+        }
+
+        foreach ($timeline as $step) {
+            $validityMessage = array_merge($validityMessage, Validator::validatePlanStep($step));
+        }
+
+        return $validityMessage;
+    }
+
+    public static function validatePlanStep(array $step): array {
+        $validityMessage = array();
+
+        if (!isset($step['title'])) {
+            $validityMessage[] = 'Invalid step: The step must contain a title.';
+        }
+
+        if (!isset($step['description'])) {
+            $validityMessage[] = 'Invalid step: The step must contain a description.';
+        }
+
+        if (!isset($step['time'])) {
+            $validityMessage[] = 'Invalid step: The step must contain a time.';
+        }
+
+        return $validityMessage;
+    }
 }
