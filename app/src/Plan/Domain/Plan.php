@@ -15,7 +15,8 @@ class Plan extends CoreEntity {
     public readonly string | null $location;
     public readonly int $max_participation;
     public readonly PlanStatus | null $status;
-    public readonly User | null $created_by;
+    public readonly int | null $created_by;
+    public readonly string | null $plan_img_url;
     public readonly array | null $timeline;
 
     public function __construct(Object | null $data = null) {
@@ -29,6 +30,7 @@ class Plan extends CoreEntity {
                 'location',
                 'max_participation',
                 'status',
+                'plan_img_url',
                 'created_by'
             ]
         );
@@ -73,8 +75,8 @@ class Plan extends CoreEntity {
         $this->status = $status;
     }
 
-    public function setCreatedBy(User $user): void {
-        $this->created_by = $user;
+    public function setCreatedBy(int $userId): void {
+        $this->created_by = $userId;
     }
 
     public function setTimeline(array $timeline): void {
