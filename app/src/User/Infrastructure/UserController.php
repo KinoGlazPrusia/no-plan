@@ -2,7 +2,6 @@
 namespace App\User\Infrastructure;
 
 use Exception;
-use App\Env;
 use App\Core\Infrastructure\Interface\IUseCase;
 use App\Core\Infrastructure\Interface\IService;
 use App\Core\Infrastructure\Service\Request;

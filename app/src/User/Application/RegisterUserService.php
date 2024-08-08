@@ -2,14 +2,9 @@
 namespace App\User\Application;
 
 use Exception;
-use App\Env;
-use App\User\Domain\User;
 use App\User\Domain\UserRole;
-use App\Auth\Domain\UUIDv4;
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IService;
-use App\Core\Infrastructure\Interface\IUseCase;
-use App\User\Infrastructure\UserRepository;
 
 use App\User\Application\SaveNewUserUseCase;
 use App\User\Application\StoreUserAvatarUseCase;
