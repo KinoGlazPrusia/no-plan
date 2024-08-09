@@ -8,7 +8,7 @@ use App\User\Domain\User;
 
 /* INFRAESTRUCTURA */
 use App\Core\Infrastructure\Interface\IRepository;
-
+use App\Core\Infrastructure\Service\Response;
 
 class SaveNewPlanUseCase {
     public static function save(
@@ -37,7 +37,8 @@ class SaveNewPlanUseCase {
 
         try {
             $plan = new Plan((object)$plan_data);
-            $repository->save($plan);
+            $planId = $repository->save($plan);
+            $plan->setId($planId);
             return $plan;
         } 
         catch (\Exception $e) {
@@ -73,9 +74,9 @@ class SaveNewPlanUseCase {
             'location' => null, // [ ] Implementar geolocalización más adelante
             'max_participation' => $max_participation,
             'status_id' => $status->id,
-            'status' => $status,
+            'status' => $status->serialize(),
             'created_by_id' => $_SESSION['uid'],
-            'created_by' => $filteredCreator,
+            'created_by' => $filteredCreator->serialize(false),
             'plan_img_url' => $plan_img_url
         ];
     }

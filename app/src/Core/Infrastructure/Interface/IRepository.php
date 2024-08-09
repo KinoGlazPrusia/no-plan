@@ -15,7 +15,7 @@ interface IRepository
      * @param IEntity $entity La entidad a guardar.
      * @return bool Retorna true si se pudo guardar el modelo en la base de datos.
      */
-    public function save(IEntity $entity): bool;   
+    public function save(IEntity $entity): string;   
     
     /**
      * Actualiza una entidad existente en la base de datos.

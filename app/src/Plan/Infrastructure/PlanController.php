@@ -1,6 +1,14 @@
 <?php
 namespace App\Plan\Infrastructure;
 
+/* DOMINIO */
+use App\Plan\Domain\PlanStep;
+use App\Plan\Domain\PlanCategory;
+
+/* APLICACION */
+
+/* INFRAESTRUCTURA */
+
 use Exception;
 use App\Env;
 use App\Core\Infrastructure\Interface\IUseCase;
@@ -9,9 +17,7 @@ use App\Core\Infrastructure\Service\Request;
 use App\Core\Infrastructure\Service\Response;
 use App\Core\Infrastructure\Service\Sanitizer;
 use App\Core\Infrastructure\Service\Validator;
-use App\Plan\Domain\Plan;
-use App\Plan\Domain\PlanStep;
-use App\Plan\Domain\PlanStatus;
+
 
 class PlanController {
     public static function create(Request $request, IUseCase | IService $createPlan): void {
@@ -32,6 +38,8 @@ class PlanController {
         $description = Sanitizer::sanitizeString($request->query['description']);
         $datetime = Sanitizer::sanitizeDate($request->query['datetime']);
         $max_participation = Sanitizer::sanitizeInt($request->query['max_participation']);
+
+        // [ ] Crear instancias de PlanCategory igual que en el timeline
         $categories = array_map(function($category) {
             return Sanitizer::sanitizeString($category);
         }, $request->query['categories']);

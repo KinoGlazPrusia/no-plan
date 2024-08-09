@@ -84,17 +84,15 @@ class MySqlDatabase implements ITransactionalDatabase {
         }
     }
 
-    public function getLastInsertId(): int | null {
-        $lastId = null;
-
+    public function getLastInsertId(): int | string | null {
         try {
             $lastId = $this->conn->lastInsertId();
+            return $lastId;
+
         } 
         catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
-
-        return $lastId;
     }
 
     public function disconnect(): void {

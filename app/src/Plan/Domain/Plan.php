@@ -8,18 +8,18 @@ use App\Plan\Domain\PlanTimeline;
 
 class Plan extends CoreEntity {
 
-    public readonly int | null $id;
-    public readonly string | null $title;
-    public readonly string | null $description;
-    public readonly string | null $datetime;
-    public readonly string | null $location;
-    public readonly int $max_participation;
-    public readonly int | null $status_id;
-    public readonly PlanStatus | null $status;
-    public readonly string | null $created_by_id;
-    public readonly User | null $created_by;
-    public readonly string | null $plan_img_url;
-    public readonly array | null $timeline;
+    public int | null $id;
+    public string | null $title;
+    public string | null $description;
+    public string | null $datetime;
+    public string | null $location;
+    public int $max_participation;
+    public int | null $status_id;
+    public array | null $status;
+    public string | null $created_by_id;
+    public array | null $created_by;
+    public string | null $plan_img_url;
+    public array | null $timeline;
 
     public function __construct(Object | null $data = null) {
         parent::__construct(
@@ -87,5 +87,54 @@ class Plan extends CoreEntity {
     public function setTimeline(array $timeline): void {
         // Esta función espera un array de PlanStep
         $this->timeline = $timeline;
+    }
+
+    /* GETTERS */
+    public function getId(): int | null {
+        return $this->id;
+    }
+
+    public function getTitle(): string | null  {
+        return $this->title;
+    }
+
+    public function getDescription(): string | null  {
+        return $this->description;
+    }
+
+    public function getDatetime(): string | null  {
+        return $this->datetime;
+    }
+
+    public function getLocation(): string | null  {
+        return $this->location;
+    }
+
+    public function getMaxParticipation(): int | null  {
+        return $this->max_participation;
+    }
+
+    public function getStatusId(): int | null  {
+        return $this->status_id;
+    }
+
+    public function getStatus(): array | null  {
+        return $this->status;
+    }
+
+    public function getCreatedById(): string | null  {
+        return $this->created_by_id;
+    }
+
+    public function getCreatedBy(): array | null  {
+        return $this->created_by;
+    }
+
+    public function getPlanImgUrl(): string | null {
+        return $this->plan_img_url;
+    }
+
+    public function getTimeline(): array | null  {
+        return $this->timeline;
     }
 }

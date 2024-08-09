@@ -58,7 +58,7 @@ interface ITransactionalDatabase
      *
      * @return int Retorna el ID de la última fila insertada.
      */
-    public function getLastInsertId(): int | null;
+    public function getLastInsertId(): int | string | null;
 
     /**
      * Desconecta la base de datos.

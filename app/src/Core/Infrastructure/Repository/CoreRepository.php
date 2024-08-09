@@ -16,7 +16,7 @@ class CoreRepository implements IRepository
         $this->db = $database;
     }
 
-    public function save(IEntity $entity): bool {
+    public function save(IEntity $entity): string {
         $data = $entity->serialize(false);
         $keys = array_keys($data);
         $placeholders = array_map(function($key) {
@@ -30,9 +30,10 @@ class CoreRepository implements IRepository
             $stmt = $this->db->prepare($sql);
             $this->db->beginTransaction();
             $this->db->execute($stmt, $data);
+            $lastId = $this->db->getLastInsertId(); // Es importante devolver el ID antes del commit porque sino devuelve 0
             $this->db->commit();
             $this->db->disconnect();
-            return true;
+            return $lastId;
         } 
         catch (Exception $e) {
             $this->db->rollBack();

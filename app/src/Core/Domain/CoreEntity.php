@@ -50,4 +50,5 @@ class CoreEntity implements IEntity, ISerialazible {
         // Devolver el array serializado
         return $map;
     }
+
 }

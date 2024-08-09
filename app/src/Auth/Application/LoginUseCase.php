@@ -26,7 +26,6 @@ class LoginUseCase implements IUseCase {
             // Esta excepción podría retornarse directamente desde el repository
             if (!$user) throw new Exception('User don\'t exist'); 
 
-            // [x] Recuperar los roles del usuario
             $roles = $this->repository->getUserRoles($user);
         } 
         catch (Exception $e) {
@@ -42,7 +41,6 @@ class LoginUseCase implements IUseCase {
             $_SESSION['userEmail'] = $user->email;
             $_SESSION['roles'] = $roles;
             
-            // [x] Integrar los roles en el JWT
             // Generamos el token de sesión y su cookie
             JWToken::generateCookie($user, $roles, (3600*24));
         }
