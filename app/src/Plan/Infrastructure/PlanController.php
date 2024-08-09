@@ -76,4 +76,20 @@ class PlanController {
             Response::jsonError(500, $e->getMessage());
         }
     }
+
+    public static function fetchAllCategories(Request $request, IUseCase | IService $fetchAllCategories): void {
+        // Validamos la request
+        if (!$request->validateQuery([])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        try {
+            $categories = $fetchAllCategories();
+            Response::json('success', 200, 'Plan categories fetched', $categories);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+
+    }
 }
