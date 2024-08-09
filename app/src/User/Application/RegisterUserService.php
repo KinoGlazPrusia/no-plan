@@ -46,7 +46,7 @@ class RegisterUserService implements IService {
 
             // [ ] Implementar caso de uso para enviar email de verificación de cuenta
 
-            // [ ] Implementar caso de uso para asignar roles al usuario
+            // [x] Implementar caso de uso para asignar roles al usuario
             $roleList = array_map(function($role) {
                 return new UserRole($role);
             }, $roles);
