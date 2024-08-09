@@ -21,6 +21,7 @@ use App\User\Application\RegisterUserService;
 use App\Plan\Infrastructure\PlanController;
 use App\Plan\Infrastructure\PlanRepository;
 use App\Plan\Application\CreatePlanService;
+use App\Plan\Application\GetPlanCategoriesUseCase;
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -63,6 +64,11 @@ class Routes
                     'controller' => [AuthController::class, 'logout'],
                     'logic' => new LogoutUseCase(),
                     'access' => 'private'
+                ],
+                'categories' => [
+                    'controller' => [PlanController::class, 'fetchAllCategories'],
+                    'logic' => new GetPlanCategoriesUseCase(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'public'
                 ]
             ],
             'POST' => [
