@@ -23,6 +23,7 @@
 - [x] Recuperar e insertar los roles en una variable de sesión y en el token
 - [x] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
 - [x] Crear componente PlanTimeline
+- [ ] Sustituir todos los atributos readonly por setters y getters de atrubutos protected !!! IMPORTANTE !!!
 - [ ] Terminar de implementar el 'permissionGate'.
 - [ ] Añadir una función en servidor para chequear si el usuario está logueado y el rol del usuario para permitir que acceda a un endpoint o no.
 - [ ] Implementar un método para devolver respuesta en caso de que el servidor no responda.
