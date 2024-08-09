@@ -41,7 +41,8 @@ class PlanController {
 
         // [ ] Crear instancias de PlanCategory igual que en el timeline
         $categories = array_map(function($category) {
-            return Sanitizer::sanitizeString($category);
+            $sanitizedCategory = Sanitizer::sanitizeString($category);
+            return new PlanCategory((object)['id' => $sanitizedCategory]);
         }, $request->query['categories']);
 
         $rawTimeline = $request->query['timeline'];

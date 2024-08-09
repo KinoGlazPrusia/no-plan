@@ -20,6 +20,7 @@ class Plan extends CoreEntity {
     public array | null $created_by;
     public string | null $plan_img_url;
     public array | null $timeline;
+    public array | null $categories;
 
     public function __construct(Object | null $data = null) {
         parent::__construct(
@@ -49,6 +50,7 @@ class Plan extends CoreEntity {
         $this->created_by = isset($data->created_by) ? $data->created_by : null;
         $this->plan_img_url = isset($data->plan_img_url) ? $data->plan_img_url : null;
         $this->timeline = isset($data->timeline) ? $data->timeline : null;
+        $this->categories = isset($data->categories) ? $data->categories : null;
     }
 
     /* SETTERS */
@@ -87,6 +89,11 @@ class Plan extends CoreEntity {
     public function setTimeline(array $timeline): void {
         // Esta función espera un array de PlanStep
         $this->timeline = $timeline;
+    }
+
+    public function setCategories(array $categories): void {
+        // Esta función espera un array de PlanCategory
+        $this->categories = $categories;
     }
 
     /* GETTERS */
@@ -136,5 +143,9 @@ class Plan extends CoreEntity {
 
     public function getTimeline(): array | null  {
         return $this->timeline;
+    }
+
+    public function getCategories(): array | null  {
+        return $this->categories;
     }
 }

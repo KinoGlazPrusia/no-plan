@@ -33,12 +33,10 @@ class UserRepository extends CoreRepository  {
             $this->db->disconnect();
             return true;
         } 
-        catch (Exception $e) {
+        catch (\Exception $e) {
             $this->db->rollBack();
             $this->db->disconnect();
             throw $e;
         }
-
-        return true;
     }
 }

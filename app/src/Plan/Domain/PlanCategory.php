@@ -4,9 +4,9 @@ namespace App\Plan\Domain;
 use App\Core\Domain\CoreEntity;
 
 class PlanCategory extends CoreEntity {
-    public readonly int | null $id;
-    public readonly string | null $name;
-    public readonly string | null $description;
+    public int | null $id;
+    public string | null $name;
+    public string | null $description;
 
     public function __construct(Object | null $data = null) {
         parent::__construct(

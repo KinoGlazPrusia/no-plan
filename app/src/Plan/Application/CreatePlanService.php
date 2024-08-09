@@ -42,10 +42,11 @@ class CreatePlanService implements IService {
 
             // Caso de uso para guardar el timeline (devuelve el mismo plan pero con el nuevo timeline y lo guarda en el repositorio)
             $plan = SaveTimelineStepsUseCase::save($this->repository, $plan, $timeline);
-
-            Response::json('success', 200, 'Plan created', [$plan]);
             
             // [ ] Implementar caso de uso para asignar categorias al plan
+            $plan = AssignCategoriesToPlanUseCase::assign($this->repository, $plan, $categories);
+
+            Response::json('success', 200, 'Plan created', [$plan]);
             // [ ] Implementar caso de uso para guardar la imagen del plan en servidor
 
         } 
