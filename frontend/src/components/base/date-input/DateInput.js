@@ -26,7 +26,6 @@ class DateInput extends PlainComponent {
     this.inputValue = new PlainState('', this)
   }
 
-  // [x] Añadir una clase para que se pueda definir si tiene icono de calendario desplegable o no
   template() {
     return `
             <label class="label">${this.getAttribute('label')}</label>

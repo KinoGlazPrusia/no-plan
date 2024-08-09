@@ -1,4 +1,8 @@
-import { PlainComponent, PlainState, PlainContext } from '../../../../node_modules/plain-reactive/src/index.js'
+import {
+  PlainComponent,
+  PlainState,
+  PlainContext
+} from '../../../../node_modules/plain-reactive/src/index.js'
 import { PUBLIC_PATH, MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
@@ -13,10 +17,9 @@ import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
 /* eslint-enable */
 
 class LoginForm extends PlainComponent {
-  constructor () {
+  constructor() {
     super('p-login-form', `${MID_COMPONENTS_PATH}login-form/LoginForm.css`)
 
-    // [x] Implementar isLoading
     // [ ] Implementar isError
     this.isLoading = new PlainState(false, this)
     this.isError = new PlainState(false, this)
@@ -24,7 +27,7 @@ class LoginForm extends PlainComponent {
     this.userContext = new PlainContext('user', this, false)
   }
 
-  template () {
+  template() {
     if (this.isLoading.getState()) {
       return `
         <form class="login-form" name="login-form">
@@ -66,7 +69,7 @@ class LoginForm extends PlainComponent {
         `
   }
 
-  listeners () {
+  listeners() {
     try {
       this.$('.submit').onclick = () => this.handleSubmit()
     } catch (error) {
@@ -74,7 +77,7 @@ class LoginForm extends PlainComponent {
     }
   }
 
-  async handleSubmit () {
+  async handleSubmit() {
     if (!this.validateFields()) return
 
     const email = this.$('#email-input').inputValue.getState()
@@ -90,7 +93,7 @@ class LoginForm extends PlainComponent {
     }
   }
 
-  handleResponse (response) {
+  handleResponse(response) {
     // [ ] Eliminar los console logs
     console.log(response)
     if (response.status === 'success') {
@@ -101,7 +104,7 @@ class LoginForm extends PlainComponent {
     // [ ] Implementar manejo de errores cuando la response.status === 'error'
   }
 
-  validateFields () {
+  validateFields() {
     this.$('#email-input').validate()
 
     const validity = this.$('#email-input').validity.getState().isValid // && otroInput.validity && etc
@@ -109,7 +112,7 @@ class LoginForm extends PlainComponent {
     return validity
   }
 
-  redirectAfterLogin () {
+  redirectAfterLogin() {
     setTimeout(() => {
       window.location.replace(PUBLIC_PATH + 'planner')
     }, 1500)

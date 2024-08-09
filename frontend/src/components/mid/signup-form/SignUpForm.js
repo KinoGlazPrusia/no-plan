@@ -1,8 +1,15 @@
-import { PlainComponent, PlainState } from '../../../../node_modules/plain-reactive/src/index.js'
+import {
+  PlainComponent,
+  PlainState
+} from '../../../../node_modules/plain-reactive/src/index.js'
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
-import { VALIDATORS, validateEmailDontExists, validatePasswordConfirmation } from '../../../utils/validators.js'
+import {
+  VALIDATORS,
+  validateEmailDontExists,
+  validatePasswordConfirmation
+} from '../../../utils/validators.js'
 import { register as apiUserRegister } from '../../../services/api.user.js'
 
 /* CONSTANTS */
@@ -21,16 +28,15 @@ import { emailExists } from '../../../services/api.auth.js'
 /* eslint-enable */
 
 class SignUpForm extends PlainComponent {
-  constructor () {
+  constructor() {
     super('p-signup-form', `${MID_COMPONENTS_PATH}signup-form/SignUpForm.css`)
 
     this.isLoading = new PlainState(false, this)
     this.isError = new PlainState(false, this)
   }
 
-  // [x] Mejorar la implementación isLoading
   // [ ] Implementar isError
-  template () {
+  template() {
     if (this.isLoading.getState()) {
       return `
         <form class="signup-form" name="signup-form">
@@ -180,7 +186,7 @@ class SignUpForm extends PlainComponent {
         `
   }
 
-  listeners () {
+  listeners() {
     try {
       const tabButtons = [
         this.$('.tab-btn#tab-1'),
@@ -188,7 +194,7 @@ class SignUpForm extends PlainComponent {
         this.$('.tab-btn#tab-3')
       ]
 
-      tabButtons.forEach(button => {
+      tabButtons.forEach((button) => {
         button.onclick = () => this.changeTabOnClick(button, tabButtons)
       })
 
@@ -199,14 +205,14 @@ class SignUpForm extends PlainComponent {
     }
   }
 
-  changeTabOnValidation (targetTab) {
+  changeTabOnValidation(targetTab) {
     const tabButtons = [
       this.$('.tab-btn#tab-1'),
       this.$('.tab-btn#tab-2'),
       this.$('.tab-btn#tab-3')
     ]
 
-    tabButtons.forEach(button => {
+    tabButtons.forEach((button) => {
       button.classList.remove('selected')
     })
 
@@ -217,9 +223,9 @@ class SignUpForm extends PlainComponent {
     inputWrapper.classList.add(`current-tab-${targetTab}`)
   }
 
-  changeTabOnClick (currentTabButton, tabButtons) {
+  changeTabOnClick(currentTabButton, tabButtons) {
     // Estilamos los botones de selección del tab
-    tabButtons.forEach(button => {
+    tabButtons.forEach((button) => {
       button.classList.remove('selected')
     })
 
@@ -234,7 +240,7 @@ class SignUpForm extends PlainComponent {
     this.toogleSubmitButton(currentTabButton.textContent)
   }
 
-  toogleSubmitButton (currentTab) {
+  toogleSubmitButton(currentTab) {
     console.log(currentTab)
     // Si estamos en el último tab activamos el botón de submit
     const submitButton = this.$('.submit')
@@ -245,7 +251,7 @@ class SignUpForm extends PlainComponent {
     }
   }
 
-  async handleSubmit () {
+  async handleSubmit() {
     // Si el submit está deshabilitado salimos
     if (this.$('.submit').getAttribute('disabled') === true) return
 
@@ -275,7 +281,7 @@ class SignUpForm extends PlainComponent {
     }
   }
 
-  handleResponse (response) {
+  handleResponse(response) {
     // [ ] Eliminar los console logs
     console.log(response)
     if (response.status === 'success') {
@@ -284,7 +290,7 @@ class SignUpForm extends PlainComponent {
     // [ ] Implementar manejo de errores cuando la response.status === 'error'
   }
 
-  async validateFields () {
+  async validateFields() {
     // Se validan todos con sus funciones propias menos la confirmación de password
     this.$('#email-input').validate()
     this.$('#password-input').validate()
@@ -297,32 +303,50 @@ class SignUpForm extends PlainComponent {
     this.$('#avatar-img').validate()
 
     // Validamos si el email existe
-    // [x] Implementar el checkeo de si el email existe al validar el input de email
-    const emailExistsValidityMessage = await validateEmailDontExists(this.$('#email-input').inputValue.getState())
+    const emailExistsValidityMessage = await validateEmailDontExists(
+      this.$('#email-input').inputValue.getState()
+    )
     if (emailExistsValidityMessage.length > 0) {
-      this.$('#email-input').validity.setState({
-        isValid: false,
-        messages: this.$('#email-input').validity.getPrevState().messages.concat(emailExistsValidityMessage)
-      }, false)
+      this.$('#email-input').validity.setState(
+        {
+          isValid: false,
+          messages: this.$('#email-input')
+            .validity.getPrevState()
+            .messages.concat(emailExistsValidityMessage)
+        },
+        false
+      )
       this.$('#email-input').updateFeedback()
     }
 
     // Validamos la confirmación de password
-    // [x] Integrar validación de confirmación de password
-    const passwordConfirmation = this.$('#conf-password-input').inputValue.getState()
+    const passwordConfirmation = this.$(
+      '#conf-password-input'
+    ).inputValue.getState()
     const password = this.$('#password-input').inputValue.getState()
-    const passwordConfirmationValidityMessage = validatePasswordConfirmation(password, passwordConfirmation)
+    const passwordConfirmationValidityMessage = validatePasswordConfirmation(
+      password,
+      passwordConfirmation
+    )
     if (passwordConfirmationValidityMessage.length > 0) {
-      this.$('#conf-password-input').validity.setState({
-        isValid: false,
-        messages: this.$('#conf-password-input').validity.getPrevState().messages.concat(passwordConfirmationValidityMessage)
-      }, false)
+      this.$('#conf-password-input').validity.setState(
+        {
+          isValid: false,
+          messages: this.$('#conf-password-input')
+            .validity.getPrevState()
+            .messages.concat(passwordConfirmationValidityMessage)
+        },
+        false
+      )
       this.$('#conf-password-input').updateFeedback()
     } else {
-      this.$('#conf-password-input').validity.setState({
-        isValid: true,
-        messages: []
-      }, false)
+      this.$('#conf-password-input').validity.setState(
+        {
+          isValid: true,
+          messages: []
+        },
+        false
+      )
       this.$('#conf-password-input').updateFeedback()
     }
 
