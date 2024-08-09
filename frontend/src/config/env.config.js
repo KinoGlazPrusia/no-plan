@@ -18,5 +18,6 @@ export const API_ENDPOINTS = {
   LOGOUT: APP_URL + 'logout',
   REGISTER: APP_URL + 'register',
   EMAIL_EXISTS: APP_URL + 'email-exists',
-  IS_AUTHENTICATED: APP_URL + 'is-authenticated'
+  IS_AUTHENTICATED: APP_URL + 'is-authenticated',
+  FETCH_ALL_CATEGORIES: APP_URL + 'categories'
 }

@@ -28,6 +28,7 @@ class CreatePlanForm extends PlainComponent {
 
     this.isLoading = new PlainState(false, this)
     this.isError = new PlainState(false, this)
+    this.categories = new PlainState([], this)
 
     this.userContext = new PlainContext('user', this, false)
 
@@ -35,13 +36,14 @@ class CreatePlanForm extends PlainComponent {
   }
 
   template() {
-    // Sustituir esto por una llamada a la API para hacer un fetch de todas las categorías
+    // [ ] Sustituir esto por una llamada a la API para hacer un fetch de todas las categorías
+    // [ ] En el select input, pasarle el objeto de categría completo y añadir el id al valor del select para poderlo recoger
     const testCategories = [
       'Social Gatherings',
       'Outdoor Activities',
       'Sports & Fitness',
       'Cultural Events',
-      'Food & Dining',
+      'Food & Drinks',
       'Music & Concerts',
       'Art & Exhibitions',
       'Educational & Workshops',
