@@ -54,6 +54,22 @@ class CoreRepository implements IRepository
     }
 
     public function findAll(string $table): array {
+        $res = [];
+
+        $sql = 'SELECT * FROM ' . $table;
+
+        try {
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $res = $this->db->execute($stmt);
+            $this->db->disconnect();
+            return $res;
+        } 
+        catch (Exception $e) {
+            $this->db->disconnect();
+            throw $e;
+        }
+        
         return [];
     }
 
