@@ -1,10 +1,14 @@
 <?php
 namespace App\Plan\Application;
 
-use App\Core\Infrastructure\Interface\IRepository;
-use App\Auth\Domain\UUIDv4;
+/* DOMINIO */
 use App\Plan\Domain\Plan;
 use App\Plan\Domain\PlanStatus;
+use App\User\Domain\User;
+
+/* INFRAESTRUCTURA */
+use App\Core\Infrastructure\Interface\IRepository;
+
 
 class SaveNewPlanUseCase {
     public static function save(
@@ -15,28 +19,65 @@ class SaveNewPlanUseCase {
         int $max_participation,
         array $image
     ): Plan {
+        $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
 
-        $uuid = UUIDv4::get();
-        $status = $repository->getPlanStatusIdByName(PlanStatus::DRAFT);
+        $status = $repository->getPlanStatusByName(PlanStatus::PUBLISHED);
+        $creator = self::getFilteredCreator($repository);
+
         $plan_img_url = self::generateImagePath($image);
-
-        $plan = new Plan(
-            (object)[
-                'id' => $uuid,
-                'title' => $title,
-                'description' => $description,
-                'datetime' => $datetime,
-                'location' => null, // [ ] Implementar más adelante el tema de la geolocalización
-                'max_participation' => $max_participation,
-                'status' => $status,
-                'created_by' => $_SESSION['uid'],
-                'plan_img_url' => $plan_img_url
-            ]
+        $plan_data = self::createPlanData(
+            $title,
+            $description,
+            $datetime,
+            $max_participation,
+            $status,
+            $creator,
+            $plan_img_url
         );
 
-        $repository->save($plan);
+        try {
+            $plan = new Plan((object)$plan_data);
+            $repository->save($plan);
+            return $plan;
+        } 
+        catch (\Exception $e) {
+            throw $e;
+        }
+    }
 
-        return $plan;
+    private static function getFilteredCreator(IRepository $repository): User {
+        $creator = $repository->getPlanCreatorById($_SESSION['uid']);
+        $serializedCreator = $creator->serialize();
+
+        $filteredData = array_diff_key(
+            $serializedCreator,
+            array_flip(['email', 'birth_date', 'genre', 'password', 'last_connection'])
+        );
+
+        return new User((object)$filteredData);
+    }
+
+     private static function createPlanData(
+        string $title,
+        string $description,
+        string $datetime,
+        int $max_participation,
+        $status,
+        $filteredCreator,
+        string $plan_img_url
+    ): array {
+        return [
+            'title' => $title,
+            'description' => $description,
+            'datetime' => $datetime,
+            'location' => null, // [ ] Implementar geolocalización más adelante
+            'max_participation' => $max_participation,
+            'status_id' => $status->id,
+            'status' => $status,
+            'created_by_id' => $_SESSION['uid'],
+            'created_by' => $filteredCreator,
+            'plan_img_url' => $plan_img_url
+        ];
     }
 
     private static function generateImagePath(array $image): string {
