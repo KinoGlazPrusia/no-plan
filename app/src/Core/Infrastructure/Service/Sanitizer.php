@@ -27,7 +27,7 @@ class Sanitizer
     }
 
     public static function sanitizeDate(string $birth_date): string {
-        $sanitized = self::sanitizeString($birth_date);
+        $sanitized = preg_replace('/[^0-9\-]/', '', $birth_date);
         return $sanitized;
     }
 }
