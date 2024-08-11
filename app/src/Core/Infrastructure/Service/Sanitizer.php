@@ -16,8 +16,7 @@ class Sanitizer
     }
 
     public static function sanitizeInt(int $int): int {
-        $sanitized = self::sanitizeString($int);
-        return $sanitized;
+        return filter_var($int, FILTER_SANITIZE_NUMBER_INT);
     }
 
     public static function sanitizeName(string $name): string {
