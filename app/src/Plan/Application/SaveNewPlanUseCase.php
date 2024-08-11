@@ -8,7 +8,6 @@ use App\User\Domain\User;
 
 /* INFRAESTRUCTURA */
 use App\Core\Infrastructure\Interface\IRepository;
-use App\Core\Infrastructure\Service\Response;
 
 class SaveNewPlanUseCase {
     public static function save(
@@ -22,7 +21,7 @@ class SaveNewPlanUseCase {
         $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
 
         $status = $repository->getPlanStatusByName(PlanStatus::PUBLISHED);
-        $creator = self::getFilteredCreator($repository);
+        $creator = self::getFilteredCreatorData($repository);
 
         $plan_img_url = self::generateImagePath($image);
         $plan_data = self::createPlanData(
@@ -46,7 +45,7 @@ class SaveNewPlanUseCase {
         }
     }
 
-    private static function getFilteredCreator(IRepository $repository): User {
+    private static function getFilteredCreatorData(IRepository $repository): User {
         $creator = $repository->getPlanCreatorById($_SESSION['uid']);
         $serializedCreator = $creator->serialize();
 
@@ -58,7 +57,7 @@ class SaveNewPlanUseCase {
         return new User((object)$filteredData);
     }
 
-     private static function createPlanData(
+    private static function createPlanData(
         string $title,
         string $description,
         string $datetime,

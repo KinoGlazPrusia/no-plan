@@ -13,7 +13,7 @@ class Plan extends CoreEntity {
     public string | null $description;
     public string | null $datetime;
     public string | null $location;
-    public int $max_participation;
+    public int | null $max_participation;
     public int | null $status_id;
     public array | null $status;
     public string | null $created_by_id;
@@ -22,6 +22,8 @@ class Plan extends CoreEntity {
     public array | null $timeline;
     public array | null $categories;
 
+    // Se le pasa un objeto con los datos para no tener que pasar todos los parámetros al constructor, ya que no se poueden pasar de manera desordenada
+    // De este modo solo se pasan los datos que se necesitan
     public function __construct(Object | null $data = null) {
         parent::__construct(
             'plan',

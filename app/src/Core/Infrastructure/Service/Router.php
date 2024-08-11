@@ -67,12 +67,13 @@ class Router
         // Si la ruta es privada, verificamos la cookie con JWT de acceso (autorización)
         $access = Routes::getAll()[$request->method][$request->url]['access'];
 
+        session_start(); // Al iniciar sesión aquí (entry) no es necesario volver a llamar a esta función
+
         if ($access === 'private') {
             if (!JWToken::verifyCookie()) Response::jsonError(403, "You don't have permissions");
         }
         
         // Ejecutamos el handler correspondiente a la ruta
-        session_start(); // Al iniciar sesión aquí (entry) no es necesario volver a llamar a esta función
         $controller = Routes::getAll()[$request->method][$request->url]['controller'];
         $logic = Routes::getAll()[$request->method][$request->url]['logic'];
         $controller($request, $logic);

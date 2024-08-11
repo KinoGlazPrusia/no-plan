@@ -20,8 +20,9 @@ use App\User\Application\RegisterUserService;
 /* PLAN */
 use App\Plan\Infrastructure\PlanController;
 use App\Plan\Infrastructure\PlanRepository;
-use App\Plan\Application\CreatePlanService;
 use App\Plan\Application\GetPlanCategoriesUseCase;
+use App\Plan\Application\CreatePlanService;
+use App\Plan\Application\UpdatePlanService;
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -86,6 +87,11 @@ class Routes
                     'controller' => [PlanController::class, 'create'],
                     'logic' => new CreatePlanService(new PlanRepository(new MySqlDatabase)),
                     'access' => 'public'
+                ],
+                'update-plan' => [
+                    'controller' => [PlanController::class, 'update'],
+                    'logic' => new UpdatePlanService(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'public' // [ ] Cambiar acceso a 'private' cuando se implemente el caso de uso
                 ]
             ]
         ];

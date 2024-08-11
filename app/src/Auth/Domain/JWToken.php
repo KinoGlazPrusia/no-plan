@@ -7,7 +7,6 @@ use Firebase\JWT\Key;
 use Secret\Secret;
 use App\User\Domain\User;
 use App\Env;
-use stdClass;
 
 class JWToken {
     public static function encodeToken(User $user, array $roles, $validityTime): string {
@@ -61,7 +60,7 @@ class JWToken {
             !isset($_SESSION['uid']) ||
             !isset($_SESSION['userEmail'])
         ) return null;
-        
+
         // Verificamos que los datos del token coincidan con los datos de sesión
         if (
             gettype($verification) !== 'object' || // Si $verification devuelve un string, es que hay un error

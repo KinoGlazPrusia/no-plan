@@ -32,6 +32,15 @@ interface IRepository
      * @return bool Retorna true si se pudo eliminar el modelo de la base de datos con el id dado.
      */
     public function delete(int $id): bool;  
+
+    /**
+     * Elimina todas las entidades de la base de datos que cumplen con un campo y valor dados.
+     *
+     * @param string $field El campo por el cual filtrar.
+     * @param string $value El valor del campo por el cual filtrar.
+     * @return bool Retorna true si se pudo eliminar el modelo de la base de datos con el id dado.
+     */
+    public function deleteWhere(string $table, string $field, string $value): bool;
     
     /**
      * Encuentra una entidad en la base de datos por su ID.
