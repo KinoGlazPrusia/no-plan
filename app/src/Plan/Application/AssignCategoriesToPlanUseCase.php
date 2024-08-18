@@ -30,7 +30,7 @@ class AssignCategoriesToPlanUseCase implements IUseCase {
     }
 
     private static function addCategoryToPlan(Plan $plan, PlanCategory $category, IRepository $repository): Plan {
-        // Obtiene la línea de tiempo actual del plan
+        // Obtiene las categorías de la entidad
         $categories = $plan->getCategories();
 
         // Obtiene los datos del category

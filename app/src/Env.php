@@ -36,14 +36,14 @@ class Env
      * 
      * @var string
      */
-    const DB_USER = 'root';
+    const DB_USER = 'kinoglaz';
 
     /**
      * Contraseña de la base de datos.
      * 
      * @var string
      */
-    const DB_PASS = '';
+    const DB_PASS = 'kinoglaz';
 
     /**
      * Nombre de la base de datos.

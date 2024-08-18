@@ -56,6 +56,28 @@ class PlanRepository extends CoreRepository {
         return $res;
     }
 
+    public function fetchAllPlans(string $userId): array {
+        // [ ] Implementar la paginación
+        try {
+            $data = ['user_id' => $userId];
+            $sql = "SELECT * FROM plan WHERE created_by_id != :user_id";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $res = $this->db->execute($stmt, $data);
+
+            $plans = array_map(function($planData) {
+                return new Plan($planData);
+            }, $res);
+
+            return $plans;
+            // [ ] Terminar de implementar el fetchAllPlans
+        }
+        catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     public function getPlanStatusByName(string $status): PlanStatus {
         try {
             $res = $this->findBy('plan_status', 'status', $status);

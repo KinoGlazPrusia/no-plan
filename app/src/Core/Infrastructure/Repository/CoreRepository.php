@@ -49,9 +49,9 @@ class CoreRepository implements IRepository
             return ':' . $key;
         }, $keys);
 
-        print_r($data);
+        /* print_r($data);
         print_r($keys);
-        print_r($placeholders);
+        print_r($placeholders); */
 
         $sql = 'UPDATE ' . $entity->table . ' SET ';
         foreach ($keys as $index => $value) {

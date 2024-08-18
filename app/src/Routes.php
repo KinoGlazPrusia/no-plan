@@ -20,8 +20,9 @@ use App\User\Application\RegisterUserService;
 /* PLAN */
 use App\Plan\Infrastructure\PlanController;
 use App\Plan\Infrastructure\PlanRepository;
-use App\Plan\Application\GetPlanCategoriesUseCase;
+use App\Plan\Application\GetAllPlanCategoriesUseCase;
 use App\Plan\Application\CreatePlanService;
+use App\Plan\Application\GetAllPlansService;
 use App\Plan\Application\UpdatePlanService;
 
 /**
@@ -68,8 +69,13 @@ class Routes
                 ],
                 'categories' => [
                     'controller' => [PlanController::class, 'fetchAllCategories'],
-                    'logic' => new GetPlanCategoriesUseCase(new PlanRepository(new MySqlDatabase)),
+                    'logic' => new GetAllPlanCategoriesUseCase(new PlanRepository(new MySqlDatabase)),
                     'access' => 'public'
+                ],
+                'plans' => [
+                    'controller' => [PlanController::class, 'fetchAllPlans'],
+                    'logic' => new GetAllPlansService(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'public' // [ ] Cambiar acceso a privado
                 ]
             ],
             'POST' => [

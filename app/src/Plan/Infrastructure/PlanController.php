@@ -85,7 +85,6 @@ class PlanController {
         }
     }
 
-    // [ ] Implementar endpoint para actualizar un plan
     public static function update(Request $request, IUseCase | IService $updatePlan): void {
         // Validamos la request
         if (!$request->validateQuery(['id'])) {
@@ -118,6 +117,14 @@ class PlanController {
                 Response::jsonError(400, 'Invalid image');
             }
 
+            // Validamos todos los datos recogidos
+            // [ ] Finalizar la implementación de validaciones
+            $validityMessage = Validator::validatePlanDate($datetime);
+
+            if (count($validityMessage) > 0) {
+                Response::jsonError(400, implode(', ', $validityMessage));
+            }
+
             // Llamamos al caso de uso para actualizar el plan
             if ($updatePlan(
                 $id,
@@ -128,7 +135,7 @@ class PlanController {
                 $categories,
                 $timeline,
                 $image
-            )) null;
+            )) Response::json('success', 200, "Plan $id updated");
         } 
         catch (\Exception $e) {
             Response::jsonError(500, $e->getMessage());
@@ -138,8 +145,20 @@ class PlanController {
     // [ ] Implementar endpoint para obtener todos los planes
     public static function fetchAllPlans(Request $request, IUseCase | IService $fetchAllPlans): void {
         // Validamos la request
-        if (!$request->validateQuery([])) {
+        if (!$request->validateQuery(['page', 'items_per_page'])) {
             Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        // Obtenemos y validamos los datos de la request
+        $page = Sanitizer::sanitizeInt($request->query['page']);
+        $itemsPerPage = Sanitizer::sanitizeInt($request->query['items_per_page']);
+
+        try {
+            $plans = $fetchAllPlans($page, $itemsPerPage);
+            Response::json('success', 200, 'All plans', $plans);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
         }
     }
 
