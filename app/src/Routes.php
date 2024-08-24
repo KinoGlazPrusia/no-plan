@@ -25,6 +25,11 @@ use App\Plan\Application\CreatePlanService;
 use App\Plan\Application\GetAllPlansService;
 use App\Plan\Application\UpdatePlanService;
 
+/* PARTICIPACION */
+use App\Participation\Infrastructure\ParticipationController;
+use App\Participation\Infrastructure\ParticipationRepository;
+use App\Participation\Application\SuscribeToPlanService;
+
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
  */
@@ -76,7 +81,13 @@ class Routes
                     'controller' => [PlanController::class, 'fetchAllPlans'],
                     'logic' => new GetAllPlansService(new PlanRepository(new MySqlDatabase)),
                     'access' => 'public' // [ ] Cambiar acceso a privado
+                ],
+                'participate' => [
+                    'controller' =>[ParticipationController::class, 'suscribeToPlan'],
+                    'logic' => new SuscribeToPlanService(new ParticipationRepository(new MySqlDatabase)),
+                    'access' => 'public'
                 ]
+
             ],
             'POST' => [
                 'login' => [
