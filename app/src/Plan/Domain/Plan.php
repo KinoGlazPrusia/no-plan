@@ -80,8 +80,12 @@ class Plan extends CoreEntity {
         $this->max_participation = $max_participation;
     }
 
-    public function setStatus(int $statusId): void {
+    public function setStatusId(int $statusId): void {
         $this->status_id = $statusId;
+    }
+
+    public function setStatus(array $status): void {        
+        $this->status = $status;
     }
 
     public function setCreatedBy(string $userId): void {

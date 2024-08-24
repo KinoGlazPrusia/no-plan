@@ -1,8 +1,15 @@
 # TODOs
 
 ## WORKING ON ...
-- [ ] Crear endpoint para hacer un fetch de todos los planes.
-- [ ] Crear endpoint para hacer un fetch de todos los planes de un usuario.
+- [ ] Crear endpoint para suscribirse a un plan.
+- [ ] Crear sistema de notificación para el creador del plan al recibir una solicitud.
+- [ ] Crear endpoint para aceptar una participación.
+- [ ] Crear sistema de notificación al participante de un plan cuando se acepte una solicitud (notificación en la app y por email)
+- [ ] Crear endpoint para revocar una participación.
+- [ ] Crear sistema de notificación al participante de un plan cuando se revoca una solicitud (notificación en la app y por email).
+
+*El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay
+tiempo para implementarlo*
 
 ## FRONTEND
 - [x] Implementar el método en la api del frontend para hacer login a través de POST
@@ -21,6 +28,7 @@
 - [x] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
 - [x] Crear componente PlanTimeline
 - [x] Crear modal para añadir 'steps' a un plan.
+- [ ] Crear endpoint para hacer un fetch de todos los planes de un usuario.
 - [ ] En el componente FormFeedback, añadir un modal cuando el mensaje supere las 2 líneas.
 - [ ] Completar validaciones para el SignUpForm.
 - [ ] Implementar validaciones en todos los componentes del frontend.
@@ -35,6 +43,8 @@
 - [x] Separar la lógica de registro de usuario en un serivicio que coordina distintos casos de uso (crear usuario, guardar avatar, enviar email de activación, etc.).
 - [x] Crear un UseCase CreateUserRoleUseCase (para admin)
 - [x] Recuperar e insertar los roles en una variable de sesión y en el token
+- [x] Crear endpoint para hacer un fetch de todos los planes.
+
 - [ ] Encapsular y automatizar la sanitización y la validación de datos en funciones únicas encerradas en un try catch !!! IMPORTANTE !!!
 - [ ] Implementar edición de planes.
 - [ ] Crear endpoint para actualizar el status de un plan.

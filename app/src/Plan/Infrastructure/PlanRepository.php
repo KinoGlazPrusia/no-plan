@@ -56,11 +56,18 @@ class PlanRepository extends CoreRepository {
         return $res;
     }
 
-    public function fetchAllPlans(string $userId): array {
-        // [ ] Implementar la paginación
+    public function fetchAllPlans(string $userId, int $page, int $itemsPerPage): array {
+        $offset = ($page - 1) * $itemsPerPage;
         try {
             $data = ['user_id' => $userId];
-            $sql = "SELECT * FROM plan WHERE created_by_id != :user_id";
+
+            $sql = "
+                SELECT * 
+                FROM plan 
+                WHERE created_by_id != :user_id 
+                ORDER BY created_at DESC 
+                LIMIT $itemsPerPage 
+                OFFSET $offset";
 
             $this->db->connect();
             $stmt = $this->db->prepare($sql);
@@ -71,7 +78,6 @@ class PlanRepository extends CoreRepository {
             }, $res);
 
             return $plans;
-            // [ ] Terminar de implementar el fetchAllPlans
         }
         catch (\Exception $e) {
             throw $e;

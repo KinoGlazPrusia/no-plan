@@ -142,7 +142,6 @@ class PlanController {
         }
     }
 
-    // [ ] Implementar endpoint para obtener todos los planes
     public static function fetchAllPlans(Request $request, IUseCase | IService $fetchAllPlans): void {
         // Validamos la request
         if (!$request->validateQuery(['page', 'items_per_page'])) {

@@ -33,7 +33,7 @@ class AssignCategoriesToPlanUseCase implements IUseCase {
         // Obtiene las categorías de la entidad
         $categories = $plan->getCategories();
 
-        // Obtiene los datos del category
+        // Obtiene los datos del category (solo contamos con el id en este punto)
         $categoryData = $repository->findBy('category', 'id', $category->id)[0];
         $category->setName($categoryData->name);
         $category->setDescription($categoryData->description);
