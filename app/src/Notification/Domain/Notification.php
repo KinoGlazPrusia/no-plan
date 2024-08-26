@@ -4,15 +4,15 @@ namespace App\Notification\Domain;
 use App\Core\Domain\CoreEntity;
 
 class Notification extends CoreEntity {
-    private int | null $id;
-    private int | null $user_id;
-    private int | null $notification_type_id;
-    private string | null $content;
-    private string | null $created_at;
+    public int | null $id;
+    public string | null $user_id;
+    public int | null $notification_type_id;
+    public string | null $content;
+    public string | null $created_at;
 
     public function __construct(Object | null $data = null) {
         parent::__construct(
-            'notifications',
+            'notification',
             [
                 'id',
                 'user_id',
@@ -22,11 +22,11 @@ class Notification extends CoreEntity {
             ]
         );
 
-        $this->id = isset($data['id']) ? $data['id'] : null;
-        $this->user_id = isset($data['user_id']) ? $data['user_id'] : null;
-        $this->notification_type_id = isset($data['notification_type_id']) ? $data['notification_type_id'] : null;
-        $this->content = isset($data['content']) ? $data['content'] : null;
-        $this->created_at = isset($data['created_at']) ? $data['created_at'] : null;
+        $this->id = isset($data->id) ? $data->id : null;
+        $this->user_id = isset($data->user_id) ? $data->user_id : null;
+        $this->notification_type_id = isset($data->notification_type_id) ? $data->notification_type_id : null;
+        $this->content = isset($data->content) ? $data->content : null;
+        $this->created_at = isset($data->created_at) ? $data->created_at : null;
     }
 
     /* SETTERS */

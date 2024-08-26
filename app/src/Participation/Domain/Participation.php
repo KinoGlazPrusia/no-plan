@@ -6,7 +6,7 @@ use App\Core\Domain\CoreEntity;
 class Participation extends CoreEntity {
     public int | null $id;
     public int | null $plan_id;
-    public int | null $user_id;
+    public string | null $user_id;
     public int | null $status_id;
 
     public function __construct(Object | null $data = null) {

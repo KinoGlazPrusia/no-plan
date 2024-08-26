@@ -7,6 +7,7 @@ use App\Core\Infrastructure\Interface\IService;
 use App\Notification\Application\CreateNotificationUseCase;
 use App\Notification\Domain\NotificationType;
 use App\User\Domain\User;
+use App\Participation\Domain\Participation;
 
 class SuscribeToPlanService implements IService {
     private IRepository $repository;
@@ -32,7 +33,7 @@ class SuscribeToPlanService implements IService {
             $participationData['status_id'] = 1;
 
             // 2. Caso de uso para guardar la participación en el repositorio
-            // $this->repository->save(new Participation((object)$participationData));
+            $this->repository->save(new Participation((object)$participationData));
 
             // 3. Caso de uso para recuperar los datos del autor de un plan
             $creator = GetPlanCreatorContactDataUseCase::fetch($this->repository, $planId);

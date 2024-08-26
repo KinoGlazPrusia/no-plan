@@ -29,6 +29,7 @@ use App\Plan\Application\UpdatePlanService;
 use App\Participation\Infrastructure\ParticipationController;
 use App\Participation\Infrastructure\ParticipationRepository;
 use App\Participation\Application\SuscribeToPlanService;
+use App\Participation\Application\AcceptParticipationService;
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -86,8 +87,12 @@ class Routes
                     'controller' =>[ParticipationController::class, 'suscribeToPlan'],
                     'logic' => new SuscribeToPlanService(new ParticipationRepository(new MySqlDatabase)),
                     'access' => 'public'
+                ],
+                'accept-participation' => [
+                    'controller' => [ParticipationController::class, 'acceptParticipation'],
+                    'logic' => new AcceptParticipationService(new ParticipationRepository(new MySqlDatabase)),
+                    'access' => 'public'
                 ]
-
             ],
             'POST' => [
                 'login' => [

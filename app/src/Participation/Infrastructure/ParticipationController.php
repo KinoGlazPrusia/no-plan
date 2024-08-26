@@ -23,8 +23,22 @@ class ParticipationController {
         try {
             $planId = Sanitizer::sanitizeInt($request->query['plan_id']);
             $suscribeToPlan($planId);
-            Response::json('success', 200, 'Participación a plan creada');
+            Response::json('success', 200, 'Participación solicitada');
         } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
+    public static function acceptParticipation(Request $request, IUseCase | IService $acceptParticipation): void {
+        $request->validateQuery(['user_id, plan_id']);
+
+        try {
+            $userId = Sanitizer::sanitizeString($request->query['user_id']);
+            $planId = Sanitizer::sanitizeInt($request->query['plan_id']);
+            $acceptParticipation($userId, $planId); 
+            Response::json('success', 200, 'Participación aceptada');
+        }
         catch (\Exception $e) {
             Response::jsonError(500, $e->getMessage());
         }
