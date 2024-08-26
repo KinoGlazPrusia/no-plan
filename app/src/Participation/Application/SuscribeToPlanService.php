@@ -41,6 +41,7 @@ class SuscribeToPlanService implements IService {
             
             // 3. Caso de uso para notificar al creador del plan de que se ha suscrito a él a través
             // de la app
+            
 
             // 4. Caso de uso para notificar al participante de que se ha suscrito al plan a través 
             // de la app
