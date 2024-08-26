@@ -29,43 +29,16 @@ class SuscribeToPlanService implements IService {
             // le pasaremos el id que ya conocemos '1'.
             $participationData['status_id'] = 1;
 
-            echo '<pre>';
-            print_r((object)$participationData);
-            echo '</pre><br><br>';
-
             // 2. Caso de uso para guardar la participación en el repositorio
             // $this->repository->save(new Participation((object)$participationData));
 
             // 3. Caso de uso para recuperar los datos del autor de un plan
-            $planData = $this->repository->findBy('plan', 'id', $planId)[0];
+            $creator = GetPlanCreatorContactDataUseCase::fetch($this->repository, $planId);
+
             echo '<pre>';
-            print_r($planData);
-            echo '</pre><br><br>';
-
-            $planCreatedBy = $planData->created_by_id;
-            echo $planCreatedBy;
-
-            $planCreatorData = $this->repository->findBy('user', 'id', $planCreatedBy)[0];
-            echo '<pre>';
-            print_r($planCreatorData);
-            echo '</pre><br><br>';
-
-            $filteredPlanCreatorData = self::filterSensitiveData([
-                'password',
-                'created_at',
-                'updated_at',
-                'last_connection',
-                'birth_date',
-                'genre',
-                'profile_img_url',
-                'last_connection'
-            ], (array)$planCreatorData);
-
-            $planCreator = new User((object)$filteredPlanCreatorData);
-            echo '<pre>';
-            print_r($planCreator->serialize(false));
-            echo '</pre><br><br>';
-
+            print_r($creator->serialize(false));
+            echo '</pre>';
+            
             // 3. Caso de uso para notificar al creador del plan de que se ha suscrito a él a través
             // de la app
 
@@ -81,12 +54,5 @@ class SuscribeToPlanService implements IService {
         catch (\Exception $e) {
             throw $e;
         }
-    }
-
-    // [ ] Traspasar esta función a una clase Helper o Utils
-    private static function filterSensitiveData(array $keys, array $data): array {
-        $keys = array_flip($keys);
-
-        return array_diff_key($data, $keys);
     }
 }
