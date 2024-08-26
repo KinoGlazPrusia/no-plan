@@ -39,6 +39,7 @@ class LoginUseCase implements IUseCase {
             // Guardamos el id, el email y los roles del usuario en la sesión
             $_SESSION['uid'] = $user->id;
             $_SESSION['userEmail'] = $user->email;
+            $_SESSION['userName'] = $user->name . ' ' . $user->lastname;
             $_SESSION['roles'] = $roles;
             
             // Generamos el token de sesión y su cookie

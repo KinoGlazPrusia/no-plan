@@ -61,6 +61,8 @@ class PlanRepository extends CoreRepository {
         try {
             $data = ['user_id' => $userId];
 
+            // [ ] Modificar la query para que solo acepte planes en los que queden
+            // plazas de participación.
             $sql = "
                 SELECT * 
                 FROM plan 

@@ -6,6 +6,8 @@ namespace App;
  */
 class Env
 {
+    /* STATUS */
+    const STATUS = 'dev'; // Puede ser 'dev' o 'prod'
     /* HOST */
 
     /**

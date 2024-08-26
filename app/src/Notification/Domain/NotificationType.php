@@ -1,9 +1,9 @@
 <?php
-namespace App\Notification\Application;
+namespace App\Notification\Domain;
 
-use App\Core\Infrastructure\Interface\IEntity;
+use App\Core\Domain\CoreEntity;
 
-class NotificationType extends IEntity {
+class NotificationType extends CoreEntity {
     const MESSAGE = 'message';
     const PARTICIPATION_REQUEST = 'participation_request';
     const PARTICIPATION_ACCEPTED = 'participation_accepted';
