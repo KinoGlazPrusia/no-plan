@@ -1,12 +1,10 @@
 # TODOs
 
 ## WORKING ON ...
-- [ ] Crear endpoint para suscribirse a un plan.
-- [ ] Crear sistema de notificación para el creador del plan al recibir una solicitud.
-- [ ] Crear endpoint para aceptar una participación.
-- [ ] Crear sistema de notificación al participante de un plan cuando se acepte una solicitud (notificación en la app y por email)
-- [ ] Crear endpoint para revocar una participación.
-- [ ] Crear sistema de notificación al participante de un plan cuando se revoca una solicitud (notificación en la app y por email).
+- [ ] Implementar el caso de uso: GetAllAcceptedParticipations
+- [ ] Implementar el caso de uso: GetAllPendingParticipations
+- [ ] Implementar el caso de uso: CheckForUnreadNotifications
+- [ ] Implementar el caso de uso: SetNotificationAsRead
 
 *El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay
 tiempo para implementarlo*
@@ -44,7 +42,12 @@ tiempo para implementarlo*
 - [x] Crear un UseCase CreateUserRoleUseCase (para admin)
 - [x] Recuperar e insertar los roles en una variable de sesión y en el token
 - [x] Crear endpoint para hacer un fetch de todos los planes.
-
+- [x] Crear endpoint para suscribirse a un plan.
+- [x] Crear sistema de notificación para el creador del plan al recibir una solicitud.
+- [x] Crear endpoint para aceptar una participación.
+- [x] Crear sistema de notificación al participante de un plan cuando se acepte una solicitud (notificación en la app y por email)
+- [x] Crear endpoint para revocar una participación.
+- [x] Crear sistema de notificación al participante de un plan cuando se revoca una solicitud (notificación en la app y por email).
 - [ ] Encapsular y automatizar la sanitización y la validación de datos en funciones únicas encerradas en un try catch !!! IMPORTANTE !!!
 - [ ] Implementar edición de planes.
 - [ ] Crear endpoint para actualizar el status de un plan.

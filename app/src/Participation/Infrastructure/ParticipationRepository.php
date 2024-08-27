@@ -31,4 +31,30 @@ class ParticipationRepository extends CoreRepository {
             throw $e;
         }
     }
+
+    public function fetchParticipationsByPlan(int $planId, string $status): array {
+        $data = [
+            'plan_id' => $planId,
+            'status' => $status
+        ];
+
+        $sql = "
+        SELECT * FROM participation 
+        WHERE plan_id = :plan_id
+        AND status_id = (
+            SELECT id FROM participation_status WHERE status = :status
+        )";
+
+        try {
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $result = $this->db->execute($stmt, $data);
+            $this->db->disconnect();
+            return $result;
+        } 
+        catch (\Exception $e) {
+            $this->db->disconnect();
+            throw $e;
+        }
+    }
 }

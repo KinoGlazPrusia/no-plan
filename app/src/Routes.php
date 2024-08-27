@@ -30,6 +30,9 @@ use App\Participation\Infrastructure\ParticipationController;
 use App\Participation\Infrastructure\ParticipationRepository;
 use App\Participation\Application\SuscribeToPlanService;
 use App\Participation\Application\AcceptParticipationService;
+use App\Participation\Application\RejectParticipationService;
+use App\Participation\Application\CancelSubscriptionToPlanService;
+use App\Participation\Application\GetAllAcceptedParticipationsByPlanUseCase;
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -46,7 +49,7 @@ class Routes
     public static function routeExists(string $method, string $path): bool {
         return isset(self::getAll()[$method][$path]) ? true : false;
     } 
-
+    // [ ] Revisar acceso a los endpoints (privado / publico)
     /**
      * Obtiene todas las rutas definidas en la aplicación.
      *
@@ -91,6 +94,21 @@ class Routes
                 'accept-participation' => [
                     'controller' => [ParticipationController::class, 'acceptParticipation'],
                     'logic' => new AcceptParticipationService(new ParticipationRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'reject-participation' => [
+                    'controller' => [ParticipationController::class, 'rejectParticipation'],
+                    'logic' => new RejectParticipationService(new ParticipationRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'cancel-participation' => [
+                    'controller' => [ParticipationController::class, 'cancelParticipation'],
+                    'logic' => new CancelSubscriptionToPlanService(new ParticipationRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'accepted-participations' => [
+                    'controller' => [ParticipationController::class, 'getAllAcceptedParticipations'],
+                    'logic' => new GetAllAcceptedParticipationsByPlanUseCase(new ParticipationRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ]
             ],
