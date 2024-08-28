@@ -1,10 +1,7 @@
 # TODOs
 
 ## WORKING ON ...
-- [ ] Implementar el caso de uso: GetAllAcceptedParticipations
-- [ ] Implementar el caso de uso: GetAllPendingParticipations
-- [ ] Implementar el caso de uso: CheckForUnreadNotifications
-- [ ] Implementar el caso de uso: SetNotificationAsRead
+
 
 *El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay
 tiempo para implementarlo*
@@ -48,6 +45,10 @@ tiempo para implementarlo*
 - [x] Crear sistema de notificación al participante de un plan cuando se acepte una solicitud (notificación en la app y por email)
 - [x] Crear endpoint para revocar una participación.
 - [x] Crear sistema de notificación al participante de un plan cuando se revoca una solicitud (notificación en la app y por email).
+- [x] Implementar el caso de uso: GetAllAcceptedParticipations
+- [x] Implementar el caso de uso: GetAllPendingParticipations
+- [x] Implementar el caso de uso: CheckForUnreadNotifications
+- [x] Implementar el caso de uso: SetNotificationAsRead
 - [ ] Encapsular y automatizar la sanitización y la validación de datos en funciones únicas encerradas en un try catch !!! IMPORTANTE !!!
 - [ ] Implementar edición de planes.
 - [ ] Crear endpoint para actualizar el status de un plan.

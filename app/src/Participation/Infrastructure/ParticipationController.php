@@ -81,4 +81,17 @@ class ParticipationController {
             Response::jsonError(500, $e->getMessage());
         }
     }
+
+    public static function getAllPendingParticipations(Request $request, IUseCase | IService $getAllPendingParticipations): void {
+        $request->validateQuery(['plan_id']);
+
+        try {
+            $planId = Sanitizer::sanitizeInt($request->query['plan_id']);
+            $participations = $getAllPendingParticipations($planId); 
+            Response::json('success', 200, 'Participaciones pendientes', $participations);
+        }
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
 }

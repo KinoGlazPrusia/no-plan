@@ -3,6 +3,7 @@ namespace App\Participation\Application;
 
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IUseCase;
+use App\Core\Infrastructure\Service\Helper;
 use App\User\Domain\User;
 
 class GetPlanCreatorContactDataUseCase implements IUseCase {
@@ -13,7 +14,7 @@ class GetPlanCreatorContactDataUseCase implements IUseCase {
 
         $planCreatorData = $repository->findBy('user', 'id', $planCreatedBy)[0];
 
-        $filteredPlanCreatorData = self::filterSensitiveData([
+        $filteredPlanCreatorData = Helper::filterSensitiveData([
             'password',
             'created_at',
             'updated_at',
@@ -26,12 +27,5 @@ class GetPlanCreatorContactDataUseCase implements IUseCase {
 
         $planCreator = new User((object)$filteredPlanCreatorData);
         return $planCreator;
-    }
-
-    // [ ] Implementar este método dentro de una clase de servicio 'Helper' o 'Utils'
-    private static function filterSensitiveData(array $keys, array $data): array {
-        $keys = array_flip($keys);
-
-        return array_diff_key($data, $keys);
     }
 }

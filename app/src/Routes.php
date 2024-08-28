@@ -33,6 +33,13 @@ use App\Participation\Application\AcceptParticipationService;
 use App\Participation\Application\RejectParticipationService;
 use App\Participation\Application\CancelSubscriptionToPlanService;
 use App\Participation\Application\GetAllAcceptedParticipationsByPlanUseCase;
+use App\Participation\Application\GetAllPendingParticipationsByPlanUseCase;
+
+/* NOTIFICATION */
+use App\Notification\Infrastructure\NotificationController;
+use App\Notification\Infrastructure\NotificationRepository;
+use App\Notification\Application\CheckForUnreadNotificationsUseCase;
+use App\Notification\Application\SetNotificationAsReadUseCase;
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -109,6 +116,21 @@ class Routes
                 'accepted-participations' => [
                     'controller' => [ParticipationController::class, 'getAllAcceptedParticipations'],
                     'logic' => new GetAllAcceptedParticipationsByPlanUseCase(new ParticipationRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'pending-participations' => [
+                    'controller' => [ParticipationController::class, 'getAllPendingParticipations'],
+                    'logic' => new GetAllPendingParticipationsByPlanUseCase(new ParticipationRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'notifications/unread' => [
+                    'controller' => [NotificationController::class, 'getUnreadNotifications'],
+                    'logic' => new CheckForUnreadNotificationsUseCase(new NotificationRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'notifications/set-read' => [
+                    'controller' => [NotificationController::class, 'setNotificationAsRead'],
+                    'logic' => new SetNotificationAsReadUseCase(new NotificationRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ]
             ],
