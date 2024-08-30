@@ -88,8 +88,12 @@ class Plan extends CoreEntity {
         $this->status = $status;
     }
 
-    public function setCreatedBy(string $userId): void {
+    public function setCreatedById(string $userId): void {
         $this->created_by_id = $userId;
+    }
+
+    public function setCreatedBy(array $userData): void {
+        $this->created_by = $userData;
     }
 
     public function setTimeline(array $timeline): void {

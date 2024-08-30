@@ -24,6 +24,7 @@ use App\Plan\Application\GetAllPlanCategoriesUseCase;
 use App\Plan\Application\CreatePlanService;
 use App\Plan\Application\GetAllPlansService;
 use App\Plan\Application\UpdatePlanService;
+use App\Plan\Application\GetPlanByIdService;
 
 /* PARTICIPACION */
 use App\Participation\Infrastructure\ParticipationController;
@@ -131,6 +132,11 @@ class Routes
                 'notifications/set-read' => [
                     'controller' => [NotificationController::class, 'setNotificationAsRead'],
                     'logic' => new SetNotificationAsReadUseCase(new NotificationRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'plan' => [
+                    'controller' => [PlanController::class, 'fetchPlanData'],
+                    'logic' => new GetPlanByIdService(new PlanRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ]
             ],

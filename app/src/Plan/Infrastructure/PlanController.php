@@ -161,7 +161,24 @@ class PlanController {
         }
     }
 
-    // [ ] Implementar endpoint para obtener todos los planes de un usuario
+    public static function fetchPlanData(Request $request, IUseCase | IService $fetchPlanData): void {
+        // Validamos la request
+        if (!$request->validateQuery(['id'])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        // Obtenemos y validamos los datos de la request
+        $id = Sanitizer::sanitizeInt($request->query['id']);
+
+        try {
+            $plan = $fetchPlanData($id);
+            Response::json('success', 200, 'Plan data fetched', [$plan]);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
     public static function fetchUserPlans(Request $request, IUseCase | IService $fetchUserPlans): void {
         // Validamos la request
         if (!$request->validateQuery(['user_id'])) {
