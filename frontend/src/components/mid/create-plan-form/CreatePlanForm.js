@@ -30,10 +30,11 @@ class CreatePlanForm extends PlainComponent {
     this.isLoading = new PlainState(false, this)
     this.error = new PlainState(null, this)
     this.categories = new PlainState(this.fetchCategories(), this)
-
     this.editMode = new PlainState(false, this)
 
     this.userContext = new PlainContext('user', this, false)
+
+    this.fillData(11) // [ ] Implementar correctamente esta función
 
     // [ ] Quizás se podría sustituir el select multiple por un div lleno de check chips como en un filtro
   }
@@ -143,19 +144,23 @@ class CreatePlanForm extends PlainComponent {
   }
 
   async fillData(planId) {
-    const data = await apiPlan.fetchPlanData(planId)
+    const plan = await apiPlan.fetchPlanData(planId)
+    const data = plan.data[0]
 
-    this.$('#title').inputValue.setState(data.title, false)
-    this.$('#description').inputValue.setState(data.description, false)
-    this.$('#plan-date').inputValue.setState(data.datetime, false)
-    this.$('#max-participants').inputValue.setState(
-      data.max_participation,
-      false
+    this.$('#title').inputValue.setState(data.title)
+    this.$('#description').inputValue.setState(data.description)
+    const date = new Date(data.datetime)
+    this.$('#plan-date').inputValue.setState(
+      `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
     )
-    this.$('#categories').inputValue.setState(data.categories, false)
-    this.$('p-plan-timeline').timeline.setState(data.timeline, false)
+    this.$('#max-participants').inputValue.setState(data.max_participation)
+    this.$('#categories').inputValue.setState(data.categories) // [ ] Implementar la carga de categorias
 
-    this.editMode.setState(true)
+    data.timeline.forEach((step) => {
+      const time = new Date(`01/01/2022 ${step.time}`)
+      step.time = `${time.getHours()}:${time.getMinutes()}`
+      this.addStep(step)
+    })
   }
 
   async fetchCategories() {

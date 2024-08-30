@@ -31,6 +31,7 @@ export async function fetchAllPlans() {
 
 export async function fetchPlanData(id) {
   const url = API_ENDPOINTS.FETCH_PLAN_DATA.replace('{id}', id)
+  console.log(url)
   try {
     const response = await fetch(url)
     if (!response.ok) {
