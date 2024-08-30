@@ -1,6 +1,11 @@
 # TODOs
 
 ## WORKING ON ...
+- [ ] Crear el formulario de registro de planes + Página de registro funcional
+- [ ] Crear la página de visualización de planes (con acción de suscripción y cancelación)
+--------
+- [ ] Crear la página de usuario con visualización de notificaciones
+- [ ] Crear la acción de aceptar o rechazar solicitudes dentro de la página de notificaciones.
 
 
 *El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay

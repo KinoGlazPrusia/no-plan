@@ -2,6 +2,7 @@ import {
   PlainComponent,
   PlainState
 } from '../../../../node_modules/plain-reactive/src/index.js'
+
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
@@ -10,7 +11,9 @@ import {
   validateEmailDontExists,
   validatePasswordConfirmation
 } from '../../../utils/validators.js'
+
 import { register as apiUserRegister } from '../../../services/api.user.js'
+import { emailExists } from '../../../services/api.auth.js'
 
 /* CONSTANTS */
 import { userGenres } from '../../../constants/userGenres.js'
@@ -24,7 +27,6 @@ import PhoneInput from '../../base/phone-input/PhoneInput.js'
 import SelectInput from '../../base/select-input/SelectInput.js'
 import FileInput from '../../base/file-input/FileInput.js'
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
-import { emailExists } from '../../../services/api.auth.js'
 /* eslint-enable */
 
 class SignUpForm extends PlainComponent {
@@ -52,137 +54,137 @@ class SignUpForm extends PlainComponent {
       `
     }
     return `
-            <form class="signup-form" name="signup-form">
-                <h1 class="greetings">Register!</h1>
+        <form class="signup-form" name="signup-form">
+            <h1 class="greetings">Register!</h1>
 
-                <div class="overflow-wrapper">
-                    <div class="input-wrapper current-tab-1">
+            <div class="overflow-wrapper">
+                <div class="input-wrapper current-tab-1">
 
-                        <!-- TAB 1 -->
-                        <div class="tab-1">
+                    <!-- TAB 1 -->
+                    <div class="tab-1">
 
-                            <!-- EMAIL -->
-                            <p-text-input 
-                            class="input" 
-                            id="email-input"
-                            name="email" 
-                            label="Email" 
-                            type="email"
-                            maxlength="45"
-                            validator="${VALIDATORS.EMAIL}">
-                            </p-text-input>
+                        <!-- EMAIL -->
+                        <p-text-input 
+                        class="input" 
+                        id="email-input"
+                        name="email" 
+                        label="Email" 
+                        type="email"
+                        maxlength="45"
+                        validator="${VALIDATORS.EMAIL}">
+                        </p-text-input>
 
-                            <!-- PASSWORD -->
-                            <p-text-input 
-                            class="input" 
-                            id="password-input"
-                            name="password" 
-                            label="Password" 
-                            type="password"
-                            maxlength="60"
-                            validator="${VALIDATORS.PASSWORD}">
-                            </p-text-input>
+                        <!-- PASSWORD -->
+                        <p-text-input 
+                        class="input" 
+                        id="password-input"
+                        name="password" 
+                        label="Password" 
+                        type="password"
+                        maxlength="60"
+                        validator="${VALIDATORS.PASSWORD}">
+                        </p-text-input>
 
-                            <!-- CONF PASSWORD -->
-                            <p-text-input 
-                            class="input" 
-                            id="conf-password-input"
-                            name="conf-password" 
-                            label="Confirm Password" 
-                            type="password"
-                            maxlength="60">
-                            </p-text-input>
-
-                        </div>
-
-                        <!-- TAB 2 -->
-
-                        <div class="tab-2">
-
-                            <!-- NAME -->
-                            <p-text-input 
-                            class="input" 
-                            id="name"
-                            name="name" 
-                            label="Name" 
-                            type="text"
-                            maxlength="30"
-                            validator="${VALIDATORS.NAME}">
-                            </p-text-input>
-
-                            <!-- LASTNAME -->
-                            <p-text-input 
-                            class="input" 
-                            id="lastname"
-                            name="lastname" 
-                            label="Last Name" 
-                            type="text"
-                            maxlength="30"
-                            validator="${VALIDATORS.NAME}">
-                            </p-text-input>
-
-                            <!-- BIRTHDAY -->
-                            <p-date-input
-                            class="birth-date"
-                            id="birth-date"
-                            name="birth-date"
-                            label="Birth Date"
-                            no-calendar
-                            validator="${VALIDATORS.DATE}">
-                            <p-date-input>
-
-                        </div>
-
-                        <!-- TAB 3 -->
-
-                        <div class="tab-3">
-
-                            <!-- PHONE NUMBER -->
-                            <p-phone-input
-                            class="input" 
-                            id="phone"
-                            name="phone" 
-                            label="Phone Number"
-                            validator="${VALIDATORS.PHONE_NUMBER}">
-                            </p-phone-input>
-
-                            <!-- GENRE -->
-                            <p-select-input
-                            class="input" 
-                            id="genre"
-                            name="genre" 
-                            label="Genre"
-                            options='${JSON.stringify(userGenres)}'>
-                            </p-select-input>
-
-                            <!-- AVATAR IMAGE -->
-                            <p-file-input
-                            class="avatar-img"
-                            id="avatar-img"
-                            name="avatar-img"
-                            label="Avatar Image"
-                            accept="image/*"
-                            validator="${VALIDATORS.AVATAR_IMAGE_FILE}">
-                            <p-file-input>
-
-                        </div>
+                        <!-- CONF PASSWORD -->
+                        <p-text-input 
+                        class="input" 
+                        id="conf-password-input"
+                        name="conf-password" 
+                        label="Confirm Password" 
+                        type="password"
+                        maxlength="60">
+                        </p-text-input>
 
                     </div>
 
-                    <div class="fade-left"></div>
-                    <div class="fade-right"></div>
+                    <!-- TAB 2 -->
 
-                    <!-- TAB SELECTOR BUTTONS -->
-                    <div class="tab-selector-wrapper">
-                        <div class="tab-btn selected" id="tab-1">1</div>
-                        <div class="tab-btn" id="tab-2">2</div>
-                        <div class="tab-btn" id="tab-3">3</div>
-                        <div class="dashed-line"></div>
+                    <div class="tab-2">
+
+                        <!-- NAME -->
+                        <p-text-input 
+                        class="input" 
+                        id="name"
+                        name="name" 
+                        label="Name" 
+                        type="text"
+                        maxlength="30"
+                        validator="${VALIDATORS.NAME}">
+                        </p-text-input>
+
+                        <!-- LASTNAME -->
+                        <p-text-input 
+                        class="input" 
+                        id="lastname"
+                        name="lastname" 
+                        label="Last Name" 
+                        type="text"
+                        maxlength="30"
+                        validator="${VALIDATORS.NAME}">
+                        </p-text-input>
+
+                        <!-- BIRTHDAY -->
+                        <p-date-input
+                        class="birth-date"
+                        id="birth-date"
+                        name="birth-date"
+                        label="Birth Date"
+                        no-calendar
+                        validator="${VALIDATORS.DATE}">
+                        <p-date-input>
+
                     </div>
 
-                    <p-button class="submit" type="primary" disabled="true">Sign Up</p-button>
+                    <!-- TAB 3 -->
+
+                    <div class="tab-3">
+
+                        <!-- PHONE NUMBER -->
+                        <p-phone-input
+                        class="input" 
+                        id="phone"
+                        name="phone" 
+                        label="Phone Number"
+                        validator="${VALIDATORS.PHONE_NUMBER}">
+                        </p-phone-input>
+
+                        <!-- GENRE -->
+                        <p-select-input
+                        class="input" 
+                        id="genre"
+                        name="genre" 
+                        label="Genre"
+                        options='${JSON.stringify(userGenres)}'>
+                        </p-select-input>
+
+                        <!-- AVATAR IMAGE -->
+                        <p-file-input
+                        class="avatar-img"
+                        id="avatar-img"
+                        name="avatar-img"
+                        label="Avatar Image"
+                        accept="image/*"
+                        validator="${VALIDATORS.AVATAR_IMAGE_FILE}">
+                        <p-file-input>
+
+                    </div>
+
                 </div>
-            </form>
+
+                <div class="fade-left"></div>
+                <div class="fade-right"></div>
+
+                <!-- TAB SELECTOR BUTTONS -->
+                <div class="tab-selector-wrapper">
+                    <div class="tab-btn selected" id="tab-1">1</div>
+                    <div class="tab-btn" id="tab-2">2</div>
+                    <div class="tab-btn" id="tab-3">3</div>
+                    <div class="dashed-line"></div>
+                </div>
+
+                <p-button class="submit" type="primary" disabled="true">Sign Up</p-button>
+            </div>
+        </form>
         `
   }
 
@@ -241,7 +243,6 @@ class SignUpForm extends PlainComponent {
   }
 
   toogleSubmitButton(currentTab) {
-    console.log(currentTab)
     // Si estamos en el último tab activamos el botón de submit
     const submitButton = this.$('.submit')
     if (currentTab === '3' && submitButton.getAttribute('disabled')) {
@@ -285,6 +286,7 @@ class SignUpForm extends PlainComponent {
     // [ ] Eliminar los console logs
     console.log(response)
     if (response.status === 'success') {
+      console.log(response.status)
       this.$('.spinner').success()
     }
     // [ ] Implementar manejo de errores cuando la response.status === 'error'

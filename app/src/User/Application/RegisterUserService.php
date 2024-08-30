@@ -52,11 +52,12 @@ class RegisterUserService implements IService {
             }, $roles);
 
             AssignRolesToNewUserUseCase::assign($this->repository, $newUser, $roleList);
+
+            return true;
         } 
         catch (Exception $e) {
             throw $e;
         }
         
-        return true;
     }
 }

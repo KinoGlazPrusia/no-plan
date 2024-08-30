@@ -11,7 +11,7 @@ class LoadingSpinner extends PlainComponent {
       `${BASE_COMPONENTS_PATH}loading-spinner/LoadingSpinner.css`
     )
 
-    this.ttl = 1000 * 15 // 10s
+    this.ttl = 1000 * 30 // 30s
     this.isError = new PlainState(false, this)
     this.isSuccess = new PlainState(false, this)
   }

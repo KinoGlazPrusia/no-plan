@@ -2,9 +2,7 @@ import { PlainComponent } from '../../../../node_modules/plain-reactive/src/inde
 import { PUBLIC_PATH, PAGES_PATH } from '../../../config/env.config.js'
 
 /* COMPONENTS */
-/* eslint-disable */
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
-/* eslint-enable */
 
 /* SERVICES */
 import * as apiAuth from '../../../services/api.auth.js'
@@ -13,24 +11,27 @@ import * as apiAuth from '../../../services/api.auth.js'
 import * as authenticator from '../../../utils/authenticator.js'
 
 class IndexPage extends PlainComponent {
-  constructor () {
+  constructor() {
     super('p-index-page', `${PAGES_PATH}index/IndexPage.css`)
 
     this.checkAuthentication()
   }
 
-  template () {
+  template() {
     return `
       <p-loading-spinner></p-loading-spinner>
     `
   }
 
-  async checkAuthentication () {
-    const isAuthenticated = await authenticator.permissionGate(['user', 'admin'])
+  async checkAuthentication() {
+    const isAuthenticated = await authenticator.permissionGate([
+      'user',
+      'admin'
+    ])
     isAuthenticated ? this.navigateTo('planner') : this.navigateTo('login')
   }
 
-  navigateTo (path) {
+  navigateTo(path) {
     window.location.replace(PUBLIC_PATH + path)
   }
 }

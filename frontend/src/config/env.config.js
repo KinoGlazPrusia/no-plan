@@ -19,5 +19,18 @@ export const API_ENDPOINTS = {
   REGISTER: APP_URL + 'register',
   EMAIL_EXISTS: APP_URL + 'email-exists',
   IS_AUTHENTICATED: APP_URL + 'is-authenticated',
-  FETCH_ALL_CATEGORIES: APP_URL + 'categories'
+  FETCH_ALL_CATEGORIES: APP_URL + 'categories',
+  FETCH_ALL_PLANS: APP_URL + 'plans',
+  CREATE_PLAN: APP_URL + 'create-plan'
+}
+
+export const PAGE_ROUTES = {
+  INDEX: '',
+  LOGIN: 'login',
+  SIGNUP: 'signup',
+  PASSWORD_RECOVERY: 'password-recovery',
+  PLANNER: 'planner',
+  USER_PROFILE: 'user/profile',
+  USER_PLANS: 'user/plans',
+  CREATE_PLAN: 'plan/create'
 }

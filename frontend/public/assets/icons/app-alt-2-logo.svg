@@ -1,0 +1,14 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Línea en forma de abrazo -->
+  <path d="M 50, 100 
+           Q 75, 50, 100, 75 
+           T 150, 100 
+           Q 125, 150, 100, 125 
+           T 50, 100 
+           Z"
+        fill="none"
+        stroke="#3B82F6"
+        stroke-width="8"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+</svg>

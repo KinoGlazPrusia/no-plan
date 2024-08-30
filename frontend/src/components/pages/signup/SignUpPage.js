@@ -1,20 +1,21 @@
-import { PlainComponent, PlainContext } from '../../../../node_modules/plain-reactive/src/index.js'
+import {
+  PlainComponent,
+  PlainContext
+} from '../../../../node_modules/plain-reactive/src/index.js'
 import { PUBLIC_PATH, PAGES_PATH } from '../../../config/env.config.js'
 
 /* COMPONENTS */
-/* eslint-disable */
 import SignUpForm from '../../mid/signup-form/SignUpForm.js'
-/* eslint-enable */
 
 class SignUpPage extends PlainComponent {
-  constructor () {
+  constructor() {
     super('p-signup-page', `${PAGES_PATH}signup/SignUpPage.css`)
 
     this.navigationContext = new PlainContext('navigation', this, false)
     this.navigationContext.setData({ currentPage: 'signup' })
   }
 
-  template () {
+  template() {
     return `
             <p-signup-form></p-signup-form>
             <p-navbar></p-navbar>
@@ -26,7 +27,7 @@ class SignUpPage extends PlainComponent {
     this.$('.to-login').onclick = () => this.navigateTo('login')
   }
 
-  navigateTo (path) {
+  navigateTo(path) {
     window.location.replace(PUBLIC_PATH + path)
   }
 }

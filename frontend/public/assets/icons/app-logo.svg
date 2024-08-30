@@ -1,0 +1,9 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  
+  <!-- Primera figura abstracta -->
+  <circle cx="70" cy="100" r="40" fill="#8ECECA" opacity="0.8"/>
+  
+  <!-- Segunda figura abstracta -->
+  <circle cx="130" cy="100" r="40" fill="#0085ff" opacity="0.8"/>
+  
+</svg>

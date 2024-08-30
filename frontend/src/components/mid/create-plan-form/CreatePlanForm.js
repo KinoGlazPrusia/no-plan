@@ -7,6 +7,7 @@ import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
 import { VALIDATORS } from '../../../utils/validators.js'
+import * as apiPlan from '../../../services/api.plan.js'
 
 /* COMPONENTS */
 import Button from '../../base/button/Button.js'
@@ -27,8 +28,8 @@ class CreatePlanForm extends PlainComponent {
     )
 
     this.isLoading = new PlainState(false, this)
-    this.isError = new PlainState(false, this)
-    this.categories = new PlainState([], this)
+    this.error = new PlainState(null, this)
+    this.categories = new PlainState(this.fetchCategories(), this)
 
     this.userContext = new PlainContext('user', this, false)
 
@@ -36,31 +37,6 @@ class CreatePlanForm extends PlainComponent {
   }
 
   template() {
-    // [ ] Sustituir esto por una llamada a la API para hacer un fetch de todas las categorías
-    // [ ] En el select input, pasarle el objeto de categría completo y añadir el id al valor del select para poderlo recoger
-    const testCategories = [
-      'Social Gatherings',
-      'Outdoor Activities',
-      'Sports & Fitness',
-      'Cultural Events',
-      'Food & Drinks',
-      'Music & Concerts',
-      'Art & Exhibitions',
-      'Educational & Workshops',
-      'Nightlife & Parties',
-      'Travel & Excursions',
-      'Wellness & Relaxation',
-      'Professional Networking',
-      'Volunteering & Charity',
-      'Technology & Gaming',
-      'Family-Friendly Activities',
-      'Shopping & Markets',
-      'Movies & Theater',
-      'Book Clubs & Literary Events',
-      'Pets & Animal Lovers',
-      'Hobby & Craft Sessions'
-    ]
-
     // [ ] Sustituir el validador de la imagen por uno nuevo
     return `
             <form class="create-plan-form" name="create-plan-form">
@@ -99,7 +75,7 @@ class CreatePlanForm extends PlainComponent {
                       id="categories"
                       name="categories" 
                       label="Categories"
-                      options='${JSON.stringify(testCategories)}'
+                      options='${JSON.stringify(this.categories.getState())}'
                       multiple>
                     </p-select-input>
 
@@ -132,6 +108,13 @@ class CreatePlanForm extends PlainComponent {
 
   listeners() {
     this.$('.add-step').onclick = () => this.openStepModal()
+    this.$('.submit').onclick = () => this.handleSubmit()
+  }
+
+  async fetchCategories() {
+    const categories = await apiPlan.fetchAllCategories()
+    const categoriesData = categories.data.map((category) => category.name)
+    this.categories.setState(categoriesData)
   }
 
   openStepModal() {
@@ -141,6 +124,15 @@ class CreatePlanForm extends PlainComponent {
   addStep(step) {
     this.$('p-plan-timeline').addStep(step) // Esto se llama desde el modal
   }
+
+  /* HANDLERS */
+  validateFields() {}
+
+  handleSubmit() {
+    console.log('submit')
+  }
+
+  handleResponse(response) {}
 }
 
 export default window.customElements.define(

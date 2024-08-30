@@ -5,7 +5,6 @@ import {
 } from '../node_modules/plain-reactive/src/index.js'
 import { SRC_PATH, PUBLIC_PATH } from './config/env.config.js'
 
-/* eslint-disable */
 /* PAGES */
 import IndexPage from './components/pages/index/IndexPage.js'
 import LoginPage from './components/pages/login/LoginPage.js'
@@ -18,7 +17,6 @@ import CreatePlanPage from './components/pages/plan/CreatePlanPage.js'
 
 /* COMPONENTS */
 import Navbar from './components/mid/navbar/Navbar.js'
-/* eslint-enable */
 
 class pApp extends PlainComponent {
   constructor() {

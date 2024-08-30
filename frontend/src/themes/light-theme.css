@@ -1,24 +1,23 @@
 .light-theme {
-    /* MAIN */
-    --tertiary-color: #D9D9D9;
+  /* MAIN */
+  --tertiary-color: #d9d9d9;
 
+  /* STATE */
+  --success-color: #30a330;
+  --error-color: rgb(211, 10, 10);
+  --accent-color: #8ececa;
+  --link-color: #0085ff;
 
-    /* STATE */
-    --success-color: rgb(48, 163, 48);
-    --error-color: rgb(211, 10, 10);
-    --accent-color: #8ECECA;
-    --link-color: #0085FF;
+  /* TEXT */
+  --text-color: #5f6368;
 
-    /* TEXT */
-    --text-color: #5F6368;
+  /* BUTTONS */
+  --button-primary-color: var(--accent-color);
 
-    /* BUTTONS */
-    --button-primary-color: var(--accent-color);
+  /* BACKGROUND */
+  --bg-color: white;
 
-    /* BACKGROUND */
-    --bg-color: white;
-
-    /* OTHER */
-    --box-radius: 10pt;
-    --box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
+  /* OTHER */
+  --box-radius: 10pt;
+  --box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
 }
