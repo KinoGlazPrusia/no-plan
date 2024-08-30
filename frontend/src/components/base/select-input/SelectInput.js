@@ -66,7 +66,15 @@ class SelectInput extends PlainComponent {
   }
 
   updateValue() {
-    this.inputValue.setState(this.$('.input').value, false)
+    if (this.hasAttribute('multiple')) {
+      const selectedOptions = Array.from(this.$('.input').selectedOptions).map(
+        (option) => option.value
+      )
+      this.inputValue.setState(selectedOptions, false)
+    } else {
+      this.inputValue.setState(this.$('.input').value, false)
+    }
+    console.log(this.inputValue.getState())
   }
 
   validate() {}

@@ -1,23 +1,37 @@
-import { PlainComponent, PlainContext } from '../../../../node_modules/plain-reactive/src/index.js'
-import { PUBLIC_PATH, PAGES_PATH } from '../../../config/env.config.js'
+import {
+  PlainComponent,
+  PlainContext
+} from '../../../../node_modules/plain-reactive/src/index.js'
+import {
+  PUBLIC_PATH,
+  PAGES_PATH,
+  PAGE_ROUTES
+} from '../../../config/env.config.js'
+
+/* SERVICES */
 import * as apiAuth from '../../../services/api.auth.js'
 
+/* UTILS */
+import * as auth from '../../../utils/authenticator.js'
+
 /* COMPONENTS */
-/* eslint-disable */
 import LoginForm from '../../mid/login-form/LoginForm.js'
-/* eslint-enable */
 
 class LoginPage extends PlainComponent {
-  constructor () {
+  constructor() {
     super('p-login-page', `${PAGES_PATH}login/LoginPage.css`)
 
     this.navigationContext = new PlainContext('navigation', this, false)
     this.navigationContext.setData({ currentPage: 'login' })
 
-    this.checkAuthentication()
+    auth.checkAuthentication(
+      ['user', 'admin'],
+      () => helper.navigateTo(PAGE_ROUTES.PLANNER),
+      null
+    )
   }
 
-  template () {
+  template() {
     return `
             <p-login-form></p-login-form>
             <p-navbar></p-navbar>
@@ -25,17 +39,8 @@ class LoginPage extends PlainComponent {
         `
   }
 
-  listeners () {
+  listeners() {
     this.$('.to-signup').onclick = () => this.navigateTo('signup')
-  }
-
-  async checkAuthentication () {
-    const isAuthenticated = await apiAuth.isAuthenticated()
-    isAuthenticated.data[0] && this.navigateTo('planner')
-  }
-
-  navigateTo (path) {
-    window.location.replace(PUBLIC_PATH + path)
   }
 }
 

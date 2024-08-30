@@ -29,15 +29,29 @@ export async function fetchAllPlans() {
   }
 }
 
+export async function fetchPlanData(id) {
+  const url = API_ENDPOINTS.FETCH_PLAN_DATA.replace('{id}', id)
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while fetching the plan data.')
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
 export async function createPlan(planData) {
   const url = API_ENDPOINTS.CREATE_PLAN
   const body = new FormData()
 
-  Object.entries(planData).forEach((key, value) => {
+  Object.entries(planData).forEach(([key, value]) => {
     switch (key) {
       case 'timeline':
         value.forEach((step) => {
-          body.append('timeline[]', step)
+          body.append('timeline[]', JSON.stringify(step))
         })
         break
       case 'categories':
@@ -51,9 +65,6 @@ export async function createPlan(planData) {
     }
   })
 
-  console.log(body)
-  return // [ ] Testear como se conforma el body antes de enviarlo
-
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -62,6 +73,48 @@ export async function createPlan(planData) {
 
     if (!response.ok) {
       throw new Error('Something went wrong while creating the plan')
+    }
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
+// [ ] Testear la implementación de updatePlan
+export async function updatePlan(planId, planData) {
+  const url = API_ENDPOINTS.UPDATE_PLAN
+  const body = new FormData()
+
+  body.append('id', planId)
+
+  Object.entries(planData).forEach(([key, value]) => {
+    switch (key) {
+      case 'timeline':
+        value.forEach((step) => {
+          body.append('timeline[]', JSON.stringify(step))
+        })
+        break
+      case 'categories':
+        value.forEach((category) => {
+          body.append('categories[]', category)
+        })
+        break
+      default:
+        body.append(key, value)
+        break
+    }
+  })
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      body: body
+    })
+
+    if (!response.ok) {
+      throw new Error('Something went wrong while updating the plan')
     }
 
     const data = await response.json()
