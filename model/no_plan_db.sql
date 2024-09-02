@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `no_plan_db` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
 USE `no_plan_db`;
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: no_plan_db
 -- ------------------------------------------------------
@@ -142,7 +142,7 @@ CREATE TABLE `notification_type` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `read` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,6 +151,7 @@ CREATE TABLE `notification_type` (
 
 LOCK TABLES `notification_type` WRITE;
 /*!40000 ALTER TABLE `notification_type` DISABLE KEYS */;
+INSERT INTO `notification_type` VALUES (1,'message','2024-09-02 07:59:37',0),(2,'participation_request','2024-09-02 07:59:37',0),(3,'participation_accepted','2024-09-02 07:59:37',0),(4,'participation_rejected','2024-09-02 07:59:37',0),(5,'participation_cancelled','2024-09-02 07:59:37',0),(6,'plan_rated','2024-09-02 07:59:37',0),(7,'rated','2024-09-02 07:59:37',0),(8,'followed','2024-09-02 07:59:37',0);
 /*!40000 ALTER TABLE `notification_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +199,7 @@ CREATE TABLE `participation_status` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,6 +208,7 @@ CREATE TABLE `participation_status` (
 
 LOCK TABLES `participation_status` WRITE;
 /*!40000 ALTER TABLE `participation_status` DISABLE KEYS */;
+INSERT INTO `participation_status` VALUES (1,'pending','2024-09-02 08:06:41','2024-09-02 08:06:41'),(2,'accepted','2024-09-02 08:06:41','2024-09-02 08:06:41'),(3,'rejected','2024-09-02 08:06:41','2024-09-02 08:06:41'),(4,'cancelled','2024-09-02 08:06:41','2024-09-02 08:06:41');
 /*!40000 ALTER TABLE `participation_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +237,7 @@ CREATE TABLE `plan` (
   KEY `fk_plan_users1_idx` (`created_by_id`),
   CONSTRAINT `fk_plan_plan_status` FOREIGN KEY (`status_id`) REFERENCES `plan_status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_plan_users1` FOREIGN KEY (`created_by_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,6 +246,7 @@ CREATE TABLE `plan` (
 
 LOCK TABLES `plan` WRITE;
 /*!40000 ALTER TABLE `plan` DISABLE KEYS */;
+INSERT INTO `plan` VALUES (1,'Plan editado','Descripción del plan de prueba','2026-05-06 22:00:00',NULL,7,2,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5','assets/images/plan/1725265542998.jpeg','2024-09-02 08:25:42','2024-09-02 11:07:29'),(2,'Picnic en la playa','Quedaremos para hacer un picnic al atardecer en la playa','2025-09-15 22:00:00',NULL,8,2,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5','assets/images/plan/1725265773517.jpeg','2024-09-02 08:29:33','2024-09-02 08:29:33'),(3,'Videojuegos','Quedamos para jugar al Fifa','2026-07-17 22:00:00',NULL,4,2,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5','assets/images/plan/1725265936133.jpeg','2024-09-02 08:32:16','2024-09-02 08:32:16'),(4,'Tarde de skate','Vamos a patinar al skatepark de la Marbella','2025-12-11 23:00:00',NULL,6,2,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5','assets/images/plan/1725272128855.jpeg','2024-09-02 10:15:28','2024-09-02 10:15:28');
 /*!40000 ALTER TABLE `plan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,6 +274,7 @@ CREATE TABLE `plan_has_category` (
 
 LOCK TABLES `plan_has_category` WRITE;
 /*!40000 ALTER TABLE `plan_has_category` DISABLE KEYS */;
+INSERT INTO `plan_has_category` VALUES (1,21),(1,22),(2,21),(2,25),(3,21),(3,34),(4,21),(4,23);
 /*!40000 ALTER TABLE `plan_has_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -344,7 +348,7 @@ CREATE TABLE `plan_status` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,6 +357,7 @@ CREATE TABLE `plan_status` (
 
 LOCK TABLES `plan_status` WRITE;
 /*!40000 ALTER TABLE `plan_status` DISABLE KEYS */;
+INSERT INTO `plan_status` VALUES (1,'draft','2024-09-02 08:09:39','2024-09-02 08:09:39'),(2,'published','2024-09-02 08:09:39','2024-09-02 08:09:39'),(3,'open','2024-09-02 08:09:39','2024-09-02 08:09:39'),(4,'closed','2024-09-02 08:09:39','2024-09-02 08:09:39'),(5,'in_progress','2024-09-02 08:09:39','2024-09-02 08:09:39'),(6,'completed','2024-09-02 08:09:39','2024-09-02 08:09:39'),(7,'cancelled','2024-09-02 08:09:39','2024-09-02 08:09:39'),(8,'postponed','2024-09-02 08:09:39','2024-09-02 08:09:39'),(9,'full','2024-09-02 08:09:39','2024-09-02 08:09:39'),(10,'pending_approval','2024-09-02 08:09:39','2024-09-02 08:09:39'),(11,'private','2024-09-02 08:09:39','2024-09-02 08:09:39'),(12,'public','2024-09-02 08:09:39','2024-09-02 08:09:39'),(13,'ended','2024-09-02 08:09:39','2024-09-02 08:09:39'),(14,'under_review','2024-09-02 08:09:39','2024-09-02 08:09:39'),(15,'archived','2024-09-02 08:09:39','2024-09-02 08:09:39');
 /*!40000 ALTER TABLE `plan_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,11 +373,11 @@ CREATE TABLE `plan_step` (
   `plan_id` int(11) NOT NULL,
   `title` varchar(45) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `time` time NOT NULL DEFAULT '00:00:00',
   PRIMARY KEY (`id`,`plan_id`),
   KEY `fk_plan_step_plan1_idx` (`plan_id`),
   CONSTRAINT `fk_plan_step_plan1` FOREIGN KEY (`plan_id`) REFERENCES `plan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -381,6 +386,7 @@ CREATE TABLE `plan_step` (
 
 LOCK TABLES `plan_step` WRITE;
 /*!40000 ALTER TABLE `plan_step` DISABLE KEYS */;
+INSERT INTO `plan_step` VALUES (1,1,'Quedada','Quedamos delante de mi puerta','11:15:00'),(2,1,'Bar','Nos vamos a un bar juntos','11:15:00'),(3,2,'Reunión','Nos reunimos al final de la rambla de Vilanova','11:15:00'),(4,3,'Encuentro','Nos encontramos en la puerta de mi casa','11:15:00'),(5,3,'Compras','Vamos a comprar snacks y bebidas','11:15:00'),(6,3,'Jugamos!','Jugaremos por 2 horas','11:15:00'),(7,4,'Encuentro','Nos encontramos en el skatepark','12:00:00');
 /*!40000 ALTER TABLE `plan_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -565,4 +571,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-09 13:26:46
+-- Dump completed on 2024-09-02 13:57:51
