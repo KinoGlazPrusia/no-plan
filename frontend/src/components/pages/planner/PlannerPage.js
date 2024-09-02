@@ -12,6 +12,8 @@ import * as auth from '../../../utils/authenticator.js'
 /* COMPONENTS */
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
 import LogoutButton from '../../base/logout-button/LogoutButton.js'
+// import PlanCarousel
+import PlanCard from '../../base/plan-card/PlanCard.js'
 
 class PlannerPage extends PlainComponent {
   constructor() {
@@ -32,7 +34,7 @@ class PlannerPage extends PlainComponent {
   template() {
     return `
             <p-logout-button></p-logout-button>
-            <p-loading-spinner class="spinner"></p-loading-spinner>
+            <p-plan-card></p-plan-card>
             <p-navbar></p-navbar>
         `
   }

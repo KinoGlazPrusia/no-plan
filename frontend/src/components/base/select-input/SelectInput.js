@@ -32,7 +32,10 @@ class SelectInput extends PlainComponent {
       this
     )
 
-    this.inputValue = new PlainState('', this)
+    this.inputValue = new PlainState(
+      this.hasAttribute('multiple') ? [] : '',
+      this
+    )
   }
 
   template() {
@@ -75,6 +78,20 @@ class SelectInput extends PlainComponent {
       this.inputValue.setState(this.$('.input').value, false)
     }
     console.log(this.inputValue.getState())
+  }
+
+  selectOption(key) {
+    this.$(`.input option[value="${key}"]`).selected = true
+
+    if (!this.hasAttribute('multiple')) {
+      this.inputValue.setState(key, false)
+      return
+    }
+
+    const prevInput = this.inputValue.getState()
+    prevInput.push(key)
+
+    this.inputValue.setState(prevInput, false)
   }
 
   validate() {}

@@ -50,10 +50,16 @@ class JWToken {
     }
 
     public static function verifyCookie(): Object | null {
-        // [ ] Mejorear el manejo de errores
+        // [ ] Mejorear el manejo de errores (icluir excepciones personalizadas como 
+        // InvalidCredentialsException o algo similar)
         if (!isset($_COOKIE['session_token'])) return null;
 
         $verification = self::decodeToken($_COOKIE['session_token']);
+
+        // [ ] Atención! Aquí tenemos que restaurar los datos de la sesión si no están 
+        // seteados, ya que si la sesión de php expira, debemos reestablecerlos desde el
+        // token. Ahora mismo aunque el token siga siendo válido, al caducar la sesión
+        // de php o cerrarse, la validación está resultando inválida.
 
         // Verificamos que los datos de sesión estén seteados
         if (

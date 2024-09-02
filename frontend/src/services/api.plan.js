@@ -90,6 +90,8 @@ export async function updatePlan(planId, planData) {
 
   body.append('id', planId)
 
+  console.log(planData)
+
   Object.entries(planData).forEach(([key, value]) => {
     switch (key) {
       case 'timeline':

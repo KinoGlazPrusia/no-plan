@@ -30,11 +30,11 @@ class CreatePlanForm extends PlainComponent {
     this.isLoading = new PlainState(false, this)
     this.error = new PlainState(null, this)
     this.categories = new PlainState(this.fetchCategories(), this)
-    this.editMode = new PlainState(false, this)
+    this.editMode = new PlainState(null, this) // Si estamos en modo edición, guardamos el id del plan que vamos a editar
 
     this.userContext = new PlainContext('user', this, false)
 
-    //this.fillData(11) // [ ] Implementar correctamente esta función
+    this.fillData(1) // [ ] Implementar correctamente esta función
 
     // [ ] Quizás se podría sustituir el select multiple por un div lleno de check chips como en un filtro
   }
@@ -48,8 +48,8 @@ class CreatePlanForm extends PlainComponent {
             <div class="overflow-wrapper is-loading">
               <p-loading-spinner
                 class="spinner"
-                success-message="Plan created"
-                success-detail="Your new plan is published">
+                success-message="${this.editMode.getState() ? 'Plan updated' : 'Plan created'}"
+                success-detail="${this.editMode.getState() ? 'Your updated plan is published' : 'Your new plan is published'}">
               </p-loading-spinner>
             </div>
         </form>
@@ -135,11 +135,9 @@ class CreatePlanForm extends PlainComponent {
   }
 
   listeners() {
-    try {
+    if (!this.isLoading.getState()) {
       this.$('.add-step').onclick = () => this.openStepModal()
       this.$('.submit').onclick = () => this.handleSubmit()
-    } catch (error) {
-      console.log(error)
     }
   }
 
@@ -149,18 +147,39 @@ class CreatePlanForm extends PlainComponent {
 
     this.$('#title').inputValue.setState(data.title)
     this.$('#description').inputValue.setState(data.description)
+
     const date = new Date(data.datetime)
-    this.$('#plan-date').inputValue.setState(
-      `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-    )
+    const year = date.getFullYear()
+    const month =
+      date.getMonth().toString().length > 1
+        ? date.getMonth()
+        : '0' + date.getMonth()
+    const day =
+      date.getDay().toString().length > 1 ? date.getDay() : '0' + date.getDay()
+
+    this.$('#plan-date').inputValue.setState(`${year}-${month}-${day}`)
     this.$('#max-participants').inputValue.setState(data.max_participation)
-    this.$('#categories').inputValue.setState(data.categories) // [ ] Implementar la carga de categorias
+
+    //this.$('#categories').inputValue.setState(data.categories) // [ ] Implementar la carga de categorias
+    data.categories.forEach((category) => {
+      this.$('#categories').selectOption(category.id)
+    })
 
     data.timeline.forEach((step) => {
-      const time = new Date(`01/01/2022 ${step.time}`)
-      step.time = `${time.getHours()}:${time.getMinutes()}`
+      const time = new Date(`01/01/2000 ${step.time}`)
+      const hours =
+        time.getHours().toString().length > 1
+          ? time.getHours()
+          : '0' + time.getHours()
+      const minutes =
+        time.getMinutes().toString().length > 1
+          ? time.getMinutes()
+          : '0' + time.getMinutes()
+      step.time = `${hours}:${minutes}`
       this.addStep(step)
     })
+
+    this.editMode.setState(planId, false)
   }
 
   async fetchCategories() {
@@ -182,6 +201,7 @@ class CreatePlanForm extends PlainComponent {
 
   /* HANDLERS */
   validateFields() {
+    // [ ] Implementar las validaciones pertinentes para el formulario completo
     return true
   }
 
@@ -209,7 +229,7 @@ class CreatePlanForm extends PlainComponent {
       if (!this.editMode.getState()) {
         response = await apiPlan.createPlan(planData)
       } else {
-        response = await apiPlan.updatePlan(planData)
+        response = await apiPlan.updatePlan(this.editMode.getState(), planData)
       }
 
       this.handleResponse(response)
