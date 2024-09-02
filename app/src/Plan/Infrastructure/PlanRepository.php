@@ -67,7 +67,7 @@ class PlanRepository extends CoreRepository {
                 SELECT * 
                 FROM plan 
                 WHERE created_by_id != :user_id 
-                ORDER BY created_at DESC 
+                ORDER BY created_at ASC 
                 LIMIT $itemsPerPage 
                 OFFSET $offset";
 

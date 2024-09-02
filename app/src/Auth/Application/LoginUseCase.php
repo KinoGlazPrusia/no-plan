@@ -1,7 +1,7 @@
 <?php
 namespace App\Auth\Application;
 
-use Exception;
+use App\Env;
 use App\Auth\Domain\JWToken;
 use App\User\Domain\User;
 use App\Core\Infrastructure\Interface\IUseCase;
@@ -24,11 +24,11 @@ class LoginUseCase implements IUseCase {
             
             // Se puede retornar directamente $user pero es por legibilidad
             // Esta excepción podría retornarse directamente desde el repository
-            if (!$user) throw new Exception('User don\'t exist'); 
+            if (!$user) throw new \Exception('User don\'t exist'); 
 
             $roles = $this->repository->getUserRoles($user);
         } 
-        catch (Exception $e) {
+        catch (\Exception $e) {
             throw $e;
         }
 
@@ -43,9 +43,9 @@ class LoginUseCase implements IUseCase {
             $_SESSION['roles'] = $roles;
             
             // Generamos el token de sesión y su cookie
-            JWToken::generateCookie($user, $roles, (3600*24));
+            JWToken::generateCookie($user, $roles, Env::SESSION_TOKEN_EXPIRATION_TIME);
         }
-        catch (Exception $e) {
+        catch (\Exception $e) {
             throw $e;
         }
 

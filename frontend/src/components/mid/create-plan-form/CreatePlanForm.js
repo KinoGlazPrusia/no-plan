@@ -34,7 +34,7 @@ class CreatePlanForm extends PlainComponent {
 
     this.userContext = new PlainContext('user', this, false)
 
-    this.fillData(11) // [ ] Implementar correctamente esta función
+    //this.fillData(11) // [ ] Implementar correctamente esta función
 
     // [ ] Quizás se podría sustituir el select multiple por un div lleno de check chips como en un filtro
   }
@@ -204,7 +204,7 @@ class CreatePlanForm extends PlainComponent {
     this.isLoading.setState(true)
 
     try {
-      const response = null
+      let response = null
 
       if (!this.editMode.getState()) {
         response = await apiPlan.createPlan(planData)
