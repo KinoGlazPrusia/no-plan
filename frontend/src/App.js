@@ -34,7 +34,6 @@ class pApp extends PlainComponent {
   }
 
   template() {
-    /* eslint-disable */
     return `
       ${this.router.route({
         '': '<p-index-page></p-index-page>',
@@ -49,7 +48,6 @@ class pApp extends PlainComponent {
         '*': '<h2>Not Found</h2>'
       })}
     `
-    /* eslint-enable */
   }
 }
 

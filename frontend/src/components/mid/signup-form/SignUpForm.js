@@ -19,7 +19,6 @@ import { emailExists } from '../../../services/api.auth.js'
 import { userGenres } from '../../../constants/userGenres.js'
 
 /* COMPONENTS */
-/* eslint-disable */
 import Button from '../../base/button/Button.js'
 import TextInput from '../../base/text-input/TextInput.js'
 import DateInput from '../../base/date-input/DateInput.js'
@@ -27,7 +26,6 @@ import PhoneInput from '../../base/phone-input/PhoneInput.js'
 import SelectInput from '../../base/select-input/SelectInput.js'
 import FileInput from '../../base/file-input/FileInput.js'
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
-/* eslint-enable */
 
 class SignUpForm extends PlainComponent {
   constructor() {
