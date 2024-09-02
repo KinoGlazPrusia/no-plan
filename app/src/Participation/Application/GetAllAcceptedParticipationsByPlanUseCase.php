@@ -36,7 +36,6 @@ class GetAllAcceptedParticipationsByPlanUseCase implements IUseCase {
                     'last_connection',
                     'birth_date',
                     'genre',
-                    'profile_img_url',
                     'last_connection'
                 ], (array)$userData);
                 $user = new User((object)$filteredUserData);

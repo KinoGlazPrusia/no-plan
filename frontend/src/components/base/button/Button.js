@@ -2,26 +2,40 @@ import { PlainComponent } from '../../../../node_modules/plain-reactive/src/inde
 import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 class Button extends PlainComponent {
+  static get observedAttributes() {
+    return ['type', 'icon', 'disabled']
+  }
+
   constructor() {
     super('p-button', `${BASE_COMPONENTS_PATH}button/Button.css`)
   }
 
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue !== newValue) {
+      this.render()
+    }
+  }
+
   template() {
     // Los botones pueden ser de 3 tipos: primary, secondary y tertiary
+    const type = this.getAttribute('type') || 'primary'
+    const disabled = this.hasAttribute('disabled') ? 'disabled' : ''
+    const icon = this.getAttribute('icon')
+
     return `
-            <button class="button ${this.getAttribute('type')} ${this.hasAttribute('disabled') ? 'disabled' : ''}">
-                ${
-                  this.getAttribute('icon')
-                    ? `
-                    <div class="icon-wrapper">
-                        <span class="icon material-symbols-outlined">${this.getAttribute('icon')}</span>
-                        <span>${this.textContent}</span>
-                    </div>
-                    `
-                    : this.textContent
-                }
-            </button>
-        `
+      <button class="button ${type} ${disabled}" ${disabled ? 'disabled' : ''}>
+        ${icon ? this.renderIcon(icon) : ''}
+        <span>${this.textContent}</span>
+      </button>
+    `
+  }
+
+  renderIcon(icon) {
+    return `
+      <div class="icon-wrapper">
+        <span class="icon material-symbols-outlined">${icon}</span>
+      </div>
+    `
   }
 
   listeners() {
@@ -40,17 +54,18 @@ class Button extends PlainComponent {
   }
 
   enable() {
-    this.setAttribute('disabled', false)
-    if (this.$('.button').classList.contains('disabled')) {
-      this.$('.button').classList.remove('disabled')
-    }
+    this.toggleAttribute('disabled', false)
+    this.updateDisabledClass()
   }
 
   disable() {
-    this.setAttribute('disabled', true)
-    if (!this.$('.button').classList.contains('disabled')) {
-      this.$('.button').classList.add('disabled')
-    }
+    this.toggleAttribute('disabled', true)
+    this.updateDisabledClass()
+  }
+
+  updateDisabledClass() {
+    const button = this.$('.button')
+    button.classList.toggle('disabled', this.hasAttribute('disabled'))
   }
 }
 

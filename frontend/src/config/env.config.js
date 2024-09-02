@@ -23,7 +23,8 @@ export const API_ENDPOINTS = {
   FETCH_ALL_PLANS: APP_URL + 'plans',
   CREATE_PLAN: APP_URL + 'create-plan',
   UPDATE_PLAN: APP_URL + 'update-plan',
-  FETCH_PLAN_DATA: APP_URL + 'plan/?id={id}'
+  FETCH_PLAN_DATA: APP_URL + 'plan/?id={id}',
+  PARTICIPATE_IN_PLAN: APP_URL + 'participate/?plan_id={planId}'
 }
 
 export const PAGE_ROUTES = {

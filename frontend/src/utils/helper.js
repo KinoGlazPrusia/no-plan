@@ -13,3 +13,21 @@ export function getAge(birthdate) {
 
   // [ ] Revisar el cálculo de la edad porque no es perfecto
 }
+
+export function getMonthName(month) {
+  const months = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre'
+  ]
+  return months[month]
+}
