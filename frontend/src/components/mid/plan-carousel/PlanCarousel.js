@@ -28,7 +28,7 @@ class PlanCarousel extends PlainComponent {
 
   template() {
     return `
-      ${}
+      ${this.cards.getState().join('')}
     `
   }
 
@@ -39,7 +39,7 @@ class PlanCarousel extends PlainComponent {
 
   async loadCards() {
     const cards = this.data.getState().map((planData) => {
-      return `<p-plan-card plan-data=${JSON.stringify(planData)}></p-plan-data>`
+      return `<p-plan-card plan-data="${JSON.stringify(planData)}"></p-plan-data>`
     })
 
     this.cards.setState(cards)
