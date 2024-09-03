@@ -4,6 +4,9 @@ import {
 } from '../../../../node_modules/plain-reactive/src/index.js'
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
+/* SERVICES */
+import * as apiPlan from '../../../services/api.plan.js'
+
 class PlanCarousel extends PlainComponent {
   constructor() {
     super(
@@ -14,30 +17,32 @@ class PlanCarousel extends PlainComponent {
     this.isLoading = new PlainState(true, this)
     this.error = new PlainState(null, this)
     this.data = new PlainState(null, this)
+    this.cards = new PlainState(null, this)
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    await this.fetchPlans()
+    await this.loadCards()
     super.connectedCallback()
-
-    this.fetchPlans()
-    this.loadCards()
   }
 
-  template() {}
+  template() {
+    return `
+      ${}
+    `
+  }
 
   async fetchPlans() {
-    // Llamamos a la api
+    const plans = await apiPlan.fetchAllPlans()
+    this.data.setState(plans.data, false)
   }
 
-  loadCards() {
+  async loadCards() {
     const cards = this.data.getState().map((planData) => {
-      const card = document.createElement('p-plan-card')
-      card.planData.loadPlanData(planData)
-
-      return card
+      return `<p-plan-card plan-data=${JSON.stringify(planData)}></p-plan-data>`
     })
 
-    cards.forEach((card) => this.$('.card-wrapper').appendChild(card))
+    this.cards.setState(cards)
   }
 }
 

@@ -13,6 +13,7 @@ import * as apiAuth from '../../../services/api.auth.js'
 
 /* UTILS */
 import * as auth from '../../../utils/authenticator.js'
+import * as helper from '../../../utils/helper.js'
 
 /* COMPONENTS */
 import LoginForm from '../../mid/login-form/LoginForm.js'
@@ -40,7 +41,7 @@ class LoginPage extends PlainComponent {
   }
 
   listeners() {
-    this.$('.to-signup').onclick = () => this.navigateTo('signup')
+    this.$('.to-signup').onclick = () => helper.navigateTo(PAGE_ROUTES.SIGNUP)
   }
 }
 

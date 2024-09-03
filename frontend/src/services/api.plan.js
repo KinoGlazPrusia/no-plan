@@ -15,8 +15,8 @@ export async function fetchAllCategories() {
   }
 }
 
-export async function fetchAllPlans() {
-  const url = API_ENDPOINTS.FETCH_ALL_PLANS
+export async function fetchAllPlans(page = 1, itemsPerPage = 10) {
+  const url = API_ENDPOINTS.FETCH_ALL_PLANS.replace('{page}', page).replace('{items}', itemsPerPage)
   try {
     const response = await fetch(url)
     if (!response.ok) {

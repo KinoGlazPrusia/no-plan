@@ -13,12 +13,11 @@ import PlanTimeline from '../plan-timeline/PlanTimeline.js'
 import * as apiParticipation from '../../../services/api.participation.js'
 
 /* UTILS */
-import * as validators from '../../../utils/validators.js'
 import * as helper from '../../../utils/helper.js'
 
 class PlanCard extends PlainComponent {
   static get observedAttributes() {
-    return ['applied', 'accepted', 'rejected']
+    return ['applied']
   }
 
   constructor() {
@@ -28,8 +27,7 @@ class PlanCard extends PlainComponent {
 
     this.isLoading = new PlainState(true, this)
     this.error = new PlainState(null, this)
-
-    this.planData = new PlainState(
+    /* this.planData = new PlainState(
       {
         id: 4,
         title: 'Tarde de hiking',
@@ -97,40 +95,13 @@ class PlanCard extends PlainComponent {
         ]
       },
       this
-    ) // Cambiar esto a null y hacer fetch desde el componente padre (en este caso el carousel)
-    this.planAcceptedParticipations = new PlainState(
-      [
-        {
-          plan_id: 1,
-          user_id: '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',
-          userData: {
-            email: 'test@example.us',
-            name: 'Jon',
-            lastname: 'Doe',
-            profile_img_url: 'assets/images/avatar/1723051155493.jpg'
-          },
-          status_id: 2,
-          status: 'accepted'
-        },
-        {
-          plan_id: 1,
-          user_id: '481fbb71-94e3-44b0-b668-37467499b869ss',
-          userData: {
-            email: 'test@example.us',
-            name: 'Jon',
-            lastname: 'Doe',
-            profile_img_url: 'assets/images/avatar/1723051155492.jpg'
-          },
-          status_id: 2,
-          status: 'accepted'
-        }
-      ],
-      this
-    )
-    this.planPendingParticipations = new PlainState({}, this)
-    this.planRejectedParticipations = new PlainState({}, this)
+    ) */ // Cambiar esto a null y hacer fetch desde el componente padre (en este caso el carousel)
+    console.log(JSON.parse(this.getAttribute('plan-data')))
+    this.planData = new PlainState(JSON.parse(this.getAttribute('plan-data')), this)
 
-    this.planParticipations = new PlainState(null, this)
+    this.acceptedParticipations = new PlainState(null, this)
+    this.rejectedParticipations = new PlainState(null, this)
+    this.pendingParticipations = new PlainState(null, this)
 
     this.isApplied = new PlainState(false, this) // El usuario ha aplicado al plan
     this.isAccepted = new PlainState(false, this) // El usuario ha sido aceptado en el plan
@@ -141,14 +112,14 @@ class PlanCard extends PlainComponent {
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue !== newValue) {
       this.render()
-      this.loadPlanParticipations()
       this.loadPlanTimeline()
     }
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    await this.loadPlanParticipations()
+    this.checkUserParticipation()
     super.connectedCallback()
-    this.loadPlanParticipations()
     this.loadPlanTimeline()
   }
 
@@ -157,12 +128,35 @@ class PlanCard extends PlainComponent {
   }
 
   async loadPlanParticipations() {
-    const participations = await apiParticipation.getPlanParticipations(
+    await this.loadAcceptedParticipations()
+    await this.loadRejectedParticipations()
+    await this.loadPendingParticipations()
+  }
+
+  async loadAcceptedParticipations() {
+    const accepted = await apiParticipation.getAcceptedPlanParticipations(
       this.planData.getState().id
     )
 
-    this.planParticipations.setState(participations, false)
-    this.checkUserParticipation()
+    console.log(accepted)
+
+    this.acceptedParticipations.setState(accepted)
+  }
+
+  async loadRejectedParticipations() {
+    const rejected = await apiParticipation.getRejectedPlanParticipations(
+      this.planData.getState().id
+    )
+
+    this.rejectedParticipations.setState(rejected)
+  }
+
+  async loadPendingParticipations() {
+    const pending = await apiParticipation.getPendingPlanParticipations(
+      this.planData.getState().id
+    )
+
+    this.pendingParticipations.setState(pending)
   }
 
   checkUserParticipation() {
@@ -172,28 +166,33 @@ class PlanCard extends PlainComponent {
     const userRejected = this.checkIfUserIsRejectedInPlan(loggedUserId)
 
     if (userRejected) {
-      this.isRejected.setState(true)
+      this.isRejected.setState(true, false)
       return
     }
 
     if (userAccepted) {
-      this.isAccepted.setState(true)
+      this.isAccepted.setState(true, false)
       return
     }
 
     if (userApplied) {
-      this.isApplied.setState(true)
+      this.toggleApplication()
       return
     }
   }
 
   checkIfUserIsRejectedInPlan(loggedUserId) {
-    const isRejected = true
+    const isRejected = this.rejectedParticipations
+      .getState()
+      .find((user) => {
+        return user.user_id === loggedUserId
+      })
+
     return isRejected
   }
 
   checkIfUserIsAcceptedInPlan(loggedUserId) {
-    const isAccepted = this.planAcceptedParticipations
+    const isAccepted = this.acceptedParticipations
       .getState()
       .find((user) => {
         return user.user_id === loggedUserId
@@ -203,7 +202,12 @@ class PlanCard extends PlainComponent {
   }
 
   checkIfUserAppliedToPlan(loggedUserId) {
-    const isApplied = null
+    const isApplied = this.pendingParticipations
+      .getState()
+      .find((user) => {
+        return user.user_id === loggedUserId
+      })
+
     return isApplied
   }
 
@@ -224,11 +228,9 @@ class PlanCard extends PlainComponent {
   }
 
   template() {
-    const userAge = helper.getAge(
-      new Date(this.userContext.getData('user').birth_date)
-    )
+    const userAge = helper.getAge(new Date(this.userContext.getData('user').birth_date))
     const planDate = new Date(this.planData.getState().datetime)
-    const participations = this.planAcceptedParticipations
+    const participations = this.acceptedParticipations
       .getState()
       .map((participation, index) => {
         return `
@@ -309,16 +311,6 @@ class PlanCard extends PlainComponent {
   toggleApplication() {
     this.isApplied.setState(!this.isApplied.getState(), false)
     this.toggleAttribute('applied', this.isApplied.getState())
-  }
-
-  toogleAccepted() {
-    this.isAccepted.setState(!this.isAccepted.getState(), false)
-    this.toggleAttribute('accepted', this.isAccepted.getState())
-  }
-
-  toogleRejected() {
-    this.isRejected.setState(!this.isRejected.getState(), false)
-    this.toggleAttribute('rejected', this.isRejected.getState())
   }
 
   addStep(step) {

@@ -281,6 +281,7 @@
 }
 
 .accepted {
+  cursor: auto;
   color: var(--bg-color);
   background-color: var(--success-color);
 }
@@ -291,6 +292,7 @@
 }
 
 .rejected {
+  cursor: auto;
   color: var(--bg-color);
   background-color: var(--tertiary-color);
 }

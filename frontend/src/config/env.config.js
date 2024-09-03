@@ -20,7 +20,7 @@ export const API_ENDPOINTS = {
   EMAIL_EXISTS: APP_URL + 'email-exists',
   IS_AUTHENTICATED: APP_URL + 'is-authenticated',
   FETCH_ALL_CATEGORIES: APP_URL + 'categories',
-  FETCH_ALL_PLANS: APP_URL + 'plans',
+  FETCH_ALL_PLANS: APP_URL + 'plans/?page={page}&items_per_page={items}',
   CREATE_PLAN: APP_URL + 'create-plan',
   UPDATE_PLAN: APP_URL + 'update-plan',
   FETCH_PLAN_DATA: APP_URL + 'plan/?id={id}',

@@ -117,7 +117,7 @@ CREATE TABLE `notification` (
   KEY `fk_notification_notification_type1_idx` (`notification_type_id`),
   CONSTRAINT `fk_notification_notification_type1` FOREIGN KEY (`notification_type_id`) REFERENCES `notification_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_notification_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +126,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+INSERT INTO `notification` VALUES (1,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',2,'Juan Perez ha solicitado participar en tu plan: Tarde de skate','2024-09-03 08:42:18'),(2,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',2,'Has solicitado participar en el plan: Tarde de skate','2024-09-03 08:42:18'),(3,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',3,'Has aceptado la solicitud de Josep en el plan: Tarde de skate','2024-09-03 11:22:24'),(4,'481fbb71-94e3-44b0-b668-37467499b869',3,'Jon Doe ha aceptado tu solicitud para participar en el plan: Tarde de skate','2024-09-03 11:22:24');
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,6 +184,7 @@ CREATE TABLE `participation` (
 
 LOCK TABLES `participation` WRITE;
 /*!40000 ALTER TABLE `participation` DISABLE KEYS */;
+INSERT INTO `participation` VALUES ('481fbb71-94e3-44b0-b668-37467499b869',4,2,'2024-09-03 11:17:09','2024-09-03 11:28:11'),('77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',4,2,'2024-09-03 08:42:18','2024-09-03 11:26:25');
 /*!40000 ALTER TABLE `participation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,7 +476,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('481fbb71-94e3-44b0-b668-37467499b869','Josep','Martin','jmartinbolet@gmail.com',NULL,'$2y$10$QqZqyUPPXNew0jmrlb.2v.RfRUHciVP9AUlsSNrTIr8xJDnebhp9u','1990-09-25 22:00:00','M','assets/images/avatar/1723051155491.png','2024-08-07 17:19:15','2024-08-07 17:19:15',NULL),('77ce78e7-69ae-4b3d-9b6f-fc88a11defd5','Jon','Doe','test@example.us',NULL,'$2y$10$jBQhrjU9tnGT/fCnmH3bxu9rbiISMTw779dk1X4tDiOOok9ujACsS','1990-09-25 22:00:00','M','assets/images/avatar/1722523741385.png','2024-08-01 14:49:01','2024-08-01 14:49:01',NULL);
+INSERT INTO `user` VALUES ('481fbb71-94e3-44b0-b668-37467499b869','Josep','Martin','jmartinbolet@gmail.com',NULL,'$2y$10$QqZqyUPPXNew0jmrlb.2v.RfRUHciVP9AUlsSNrTIr8xJDnebhp9u','1990-09-25 22:00:00','M','assets/images/avatar/1723051155491.png','2024-08-07 17:19:15','2024-08-07 17:19:15',NULL),('77ce78e7-69ae-4b3d-9b6f-fc88a11defd5','Jon','Doe','test@example.us',NULL,'$2y$10$jBQhrjU9tnGT/fCnmH3bxu9rbiISMTw779dk1X4tDiOOok9ujACsS','1990-09-25 22:00:00','M','assets/images/avatar/1722523741385.png','2024-08-01 14:49:01','2024-08-01 14:49:01',NULL),('ae4a8d86-c317-4f38-b6df-3e95ff455813','Pep','Bolet','jmb@gmail.com',NULL,'$2y$10$1LLxbPulp7dAvuaRlwTCh.GT/IRFQhXyQiJYa3PbboUULkVV.nK3u','1985-09-25 22:00:00','M','assets/images/avatar/1725363637695.jpeg','2024-09-03 11:40:37','2024-09-03 11:40:37',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -502,7 +504,7 @@ CREATE TABLE `user_has_role` (
 
 LOCK TABLES `user_has_role` WRITE;
 /*!40000 ALTER TABLE `user_has_role` DISABLE KEYS */;
-INSERT INTO `user_has_role` VALUES ('481fbb71-94e3-44b0-b668-37467499b869',1),('481fbb71-94e3-44b0-b668-37467499b869',2),('77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',1),('77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',2);
+INSERT INTO `user_has_role` VALUES ('481fbb71-94e3-44b0-b668-37467499b869',1),('481fbb71-94e3-44b0-b668-37467499b869',2),('77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',1),('77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',2),('ae4a8d86-c317-4f38-b6df-3e95ff455813',1),('ae4a8d86-c317-4f38-b6df-3e95ff455813',2);
 /*!40000 ALTER TABLE `user_has_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -571,4 +573,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-02 13:57:51
+-- Dump completed on 2024-09-03 13:59:32
