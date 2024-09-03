@@ -24,17 +24,17 @@ class Button extends PlainComponent {
 
     return `
       <button class="button ${type} ${disabled}" ${disabled ? 'disabled' : ''}>
-        ${icon ? this.renderIcon(icon) : ''}
-        <span>${this.textContent}</span>
+        <div class="icon-wrapper">
+          ${icon ? this.renderIcon(icon) : ''}
+          <span>${this.textContent}</span>
+        </div>
       </button>
     `
   }
 
   renderIcon(icon) {
     return `
-      <div class="icon-wrapper">
         <span class="icon material-symbols-outlined">${icon}</span>
-      </div>
     `
   }
 

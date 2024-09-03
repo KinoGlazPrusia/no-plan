@@ -10,12 +10,15 @@ import FormFeedback from '../form-feedback/FormFeedback.js'
 import PlanTimeline from '../plan-timeline/PlanTimeline.js'
 
 /* SERVICES */
+import * as apiParticipation from '../../../services/api.participation.js'
+
+/* UTILS */
 import * as validators from '../../../utils/validators.js'
 import * as helper from '../../../utils/helper.js'
 
 class PlanCard extends PlainComponent {
   static get observedAttributes() {
-    return ['applied']
+    return ['applied', 'accepted', 'rejected']
   }
 
   constructor() {
@@ -25,9 +28,10 @@ class PlanCard extends PlainComponent {
 
     this.isLoading = new PlainState(true, this)
     this.error = new PlainState(null, this)
+
     this.planData = new PlainState(
       {
-        id: 1,
+        id: 4,
         title: 'Tarde de hiking',
         description:
           'Haremos hiking por los senderos de la montaña de Montserrat.',
@@ -46,36 +50,36 @@ class PlanCard extends PlainComponent {
           {
             id: 1,
             plan_id: 1,
-            title: 'Quedada',
+            title: 'Encuentro',
             description: 'Quedamos delante de mi puerta',
             time: '11:15:00'
           },
           {
             id: 2,
             plan_id: 1,
-            title: 'Bar',
-            description: 'Nos vamos a un bar juntos',
+            title: 'Nos vamos',
+            description: 'Cojemos el autobús juntos',
             time: '11:15:00'
           },
           {
             id: 1,
             plan_id: 1,
-            title: 'Quedada',
-            description: 'Quedamos delante de mi puerta',
+            title: 'Empezamos',
+            description: 'Subiremos por la primera ruta',
             time: '11:15:00'
           },
           {
             id: 1,
             plan_id: 1,
-            title: 'Quedada',
-            description: 'Quedamos delante de mi puerta',
+            title: 'Desayuno',
+            description: 'Pararemos a desayunar (traed comida)',
             time: '11:15:00'
           },
           {
             id: 1,
             plan_id: 1,
-            title: 'Quedada',
-            description: 'Quedamos delante de mi puerta',
+            title: 'Despedida',
+            description: 'Nos vamos a casa',
             time: '11:15:00'
           }
         ],
@@ -94,7 +98,7 @@ class PlanCard extends PlainComponent {
       },
       this
     ) // Cambiar esto a null y hacer fetch desde el componente padre (en este caso el carousel)
-    this.planParticipations = new PlainState(
+    this.planAcceptedParticipations = new PlainState(
       [
         {
           plan_id: 1,
@@ -110,7 +114,7 @@ class PlanCard extends PlainComponent {
         },
         {
           plan_id: 1,
-          user_id: '481fbb71-94e3-44b0-b668-37467499b869s',
+          user_id: '481fbb71-94e3-44b0-b668-37467499b869ss',
           userData: {
             email: 'test@example.us',
             name: 'Jon',
@@ -123,8 +127,15 @@ class PlanCard extends PlainComponent {
       ],
       this
     )
+    this.planPendingParticipations = new PlainState({}, this)
+    this.planRejectedParticipations = new PlainState({}, this)
 
-    this.isApplied = new PlainState(false, this)
+    this.planParticipations = new PlainState(null, this)
+
+    this.isApplied = new PlainState(false, this) // El usuario ha aplicado al plan
+    this.isAccepted = new PlainState(false, this) // El usuario ha sido aceptado en el plan
+    this.isRejected = new PlainState(false, this) // El usuario ha sido rechazado en el plan
+    this.isFocused = new PlainState(true, this)
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -137,16 +148,64 @@ class PlanCard extends PlainComponent {
 
   connectedCallback() {
     super.connectedCallback()
-
-    this.loadPlanData()
     this.loadPlanParticipations()
-    this.checkIfUserAlreadyAppliedToPlan()
     this.loadPlanTimeline()
   }
 
-  async loadPlanData() {}
+  loadPlanData(planData) {
+    this.planData.setState(planData)
+  }
 
-  async loadPlanParticipations() {}
+  async loadPlanParticipations() {
+    const participations = await apiParticipation.getPlanParticipations(
+      this.planData.getState().id
+    )
+
+    this.planParticipations.setState(participations, false)
+    this.checkUserParticipation()
+  }
+
+  checkUserParticipation() {
+    const loggedUserId = this.userContext.getData('user').id
+    const userApplied = this.checkIfUserAppliedToPlan(loggedUserId)
+    const userAccepted = this.checkIfUserIsAcceptedInPlan(loggedUserId)
+    const userRejected = this.checkIfUserIsRejectedInPlan(loggedUserId)
+
+    if (userRejected) {
+      this.isRejected.setState(true)
+      return
+    }
+
+    if (userAccepted) {
+      this.isAccepted.setState(true)
+      return
+    }
+
+    if (userApplied) {
+      this.isApplied.setState(true)
+      return
+    }
+  }
+
+  checkIfUserIsRejectedInPlan(loggedUserId) {
+    const isRejected = true
+    return isRejected
+  }
+
+  checkIfUserIsAcceptedInPlan(loggedUserId) {
+    const isAccepted = this.planAcceptedParticipations
+      .getState()
+      .find((user) => {
+        return user.user_id === loggedUserId
+      })
+
+    return isAccepted
+  }
+
+  checkIfUserAppliedToPlan(loggedUserId) {
+    const isApplied = null
+    return isApplied
+  }
 
   async loadPlanTimeline() {
     this.planData.getState().timeline.forEach((step) => {
@@ -164,20 +223,12 @@ class PlanCard extends PlainComponent {
     })
   }
 
-  checkIfUserAlreadyAppliedToPlan() {
-    const isApplied = this.planParticipations.getState().find((user) => {
-      return user.user_id === this.userContext.getData('user').id
-    })
-
-    isApplied && this.isApplied.setState(true)
-  }
-
   template() {
     const userAge = helper.getAge(
       new Date(this.userContext.getData('user').birth_date)
     )
     const planDate = new Date(this.planData.getState().datetime)
-    const participations = this.planParticipations
+    const participations = this.planAcceptedParticipations
       .getState()
       .map((participation, index) => {
         return `
@@ -187,17 +238,37 @@ class PlanCard extends PlainComponent {
       `
       })
 
-    const applyButton = this.isApplied.getState()
-      ? `
+    const getButton = () => {
+      if (this.isRejected.getState()) {
+        return `
+          <button class="apply-button rejected pop-in" disabled>
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        `
+      }
+
+      if (this.isAccepted.getState()) {
+        return `
+          <button class="apply-button accepted pop-in" disabled>
+            <span class="material-symbols-outlined">check_circle</span>
+          </button>
+        `
+      }
+
+      if (this.isApplied.getState()) {
+        return `
+          <button class="apply-button applied pop-in">
+            <span class="material-symbols-outlined">mail</span>
+          </button>
+        `
+      }
+
+      return `
         <button class="apply-button unapplied pop-in">
           <span class="material-symbols-outlined">input_circle</span>
         </button>
       `
-      : `
-        <button class="apply-button applied pop-in">
-          <span class="material-symbols-outlined">check_circle</span>
-        </button>
-      `
+    }
 
     return `
         <div class="user-avatar">
@@ -226,7 +297,7 @@ class PlanCard extends PlainComponent {
           ${participations.join('')}
         </div>
         <div class="apply-button-wrapper">
-          ${applyButton}
+          ${getButton()}
         </div>
     `
   }
@@ -238,6 +309,16 @@ class PlanCard extends PlainComponent {
   toggleApplication() {
     this.isApplied.setState(!this.isApplied.getState(), false)
     this.toggleAttribute('applied', this.isApplied.getState())
+  }
+
+  toogleAccepted() {
+    this.isAccepted.setState(!this.isAccepted.getState(), false)
+    this.toggleAttribute('accepted', this.isAccepted.getState())
+  }
+
+  toogleRejected() {
+    this.isRejected.setState(!this.isRejected.getState(), false)
+    this.toggleAttribute('rejected', this.isRejected.getState())
   }
 
   addStep(step) {
@@ -263,6 +344,14 @@ class PlanCard extends PlainComponent {
 
   handleError(response) {
     console.log(response)
+  }
+
+  toggleFocus() {
+    this.isFocused.setState(!this.isFocused.getState(), false)
+    this.$('.apply-button').classList.toggle(
+      'out-of-focus',
+      !this.isFocused.getState()
+    )
   }
 }
 

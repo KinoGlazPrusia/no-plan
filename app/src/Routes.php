@@ -35,12 +35,14 @@ use App\Participation\Application\RejectParticipationService;
 use App\Participation\Application\CancelSubscriptionToPlanService;
 use App\Participation\Application\GetAllAcceptedParticipationsByPlanUseCase;
 use App\Participation\Application\GetAllPendingParticipationsByPlanUseCase;
+use App\Participation\Application\GetAllRejectedParticipationsByPlanUseCase;
 
 /* NOTIFICATION */
 use App\Notification\Infrastructure\NotificationController;
 use App\Notification\Infrastructure\NotificationRepository;
 use App\Notification\Application\CheckForUnreadNotificationsUseCase;
 use App\Notification\Application\SetNotificationAsReadUseCase;
+use App\Participation\Domain\Participation;
 
 /**
  * Clase Routes que gestiona las rutas definidas en la aplicación.
@@ -122,6 +124,11 @@ class Routes
                 'pending-participations' => [
                     'controller' => [ParticipationController::class, 'getAllPendingParticipations'],
                     'logic' => new GetAllPendingParticipationsByPlanUseCase(new ParticipationRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'rejected-participations' => [
+                    'controller' => [ParticipationController::class, 'getAllRejectedParticipations'],
+                    'logic' => new GetAllRejectedParticipationsByPlanUseCase(new ParticipationRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ],
                 'notifications/unread' => [

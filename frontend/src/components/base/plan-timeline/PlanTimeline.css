@@ -45,6 +45,7 @@
 
   margin-left: -0.75em;
   padding: 0.5em;
+  padding-block: 1em;
   padding-left: calc(0.75em + 0.5em);
   box-sizing: border-box;
 

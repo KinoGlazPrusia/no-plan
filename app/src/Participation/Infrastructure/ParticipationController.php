@@ -94,4 +94,17 @@ class ParticipationController {
             Response::jsonError(500, $e->getMessage());
         }
     }
+
+    public static function getAllRejectedParticipations(Request $request, IUseCase | IService $getAllRejectedParticipations): void {
+        $request->validateQuery(['plan_id']);
+
+        try {
+            $planId = Sanitizer::sanitizeInt($request->query['plan_id']);
+            $participations = $getAllRejectedParticipations($planId); 
+            Response::json('success', 200, 'Participaciones rechazadas', $participations);
+        }
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
 }

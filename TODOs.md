@@ -54,6 +54,7 @@ tiempo para implementarlo*
 - [x] Implementar el caso de uso: GetAllPendingParticipations
 - [x] Implementar el caso de uso: CheckForUnreadNotifications
 - [x] Implementar el caso de uso: SetNotificationAsRead
+- [ ] Limpiar las respuestas Json del servidor eliminando los campos redundantes y "columns" y "table".
 - [ ] Revisar todo el sistema de autenticación (parece que a veces la sesión caduca pero el token no repone los datos de sesión, revisar sobretodo el caso de uso de checkAuthentication).
 - [ ] Encapsular y automatizar la sanitización y la validación de datos en funciones únicas encerradas en un try catch !!! IMPORTANTE !!!
 - [ ] Implementar edición de planes.
