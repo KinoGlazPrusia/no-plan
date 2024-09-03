@@ -27,77 +27,10 @@ class PlanCard extends PlainComponent {
 
     this.isLoading = new PlainState(true, this)
     this.error = new PlainState(null, this)
-    /* this.planData = new PlainState(
-      {
-        id: 4,
-        title: 'Tarde de hiking',
-        description:
-          'Haremos hiking por los senderos de la montaña de Montserrat.',
-        datetime: '2026-05-07 00:00:00',
-        location: null,
-        max_participation: 7,
-        status_id: 2,
-        status: {
-          id: 2,
-          status: 'published'
-        },
-        created_by_id: '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',
-        created_by: null,
-        plan_img_url: 'assets/images/plan/1725265542998.jpeg',
-        timeline: [
-          {
-            id: 1,
-            plan_id: 1,
-            title: 'Encuentro',
-            description: 'Quedamos delante de mi puerta',
-            time: '11:15:00'
-          },
-          {
-            id: 2,
-            plan_id: 1,
-            title: 'Nos vamos',
-            description: 'Cojemos el autobús juntos',
-            time: '11:15:00'
-          },
-          {
-            id: 1,
-            plan_id: 1,
-            title: 'Empezamos',
-            description: 'Subiremos por la primera ruta',
-            time: '11:15:00'
-          },
-          {
-            id: 1,
-            plan_id: 1,
-            title: 'Desayuno',
-            description: 'Pararemos a desayunar (traed comida)',
-            time: '11:15:00'
-          },
-          {
-            id: 1,
-            plan_id: 1,
-            title: 'Despedida',
-            description: 'Nos vamos a casa',
-            time: '11:15:00'
-          }
-        ],
-        categories: [
-          {
-            id: 21,
-            name: 'Social Gatherings',
-            description: 'General meetups, hangouts, and social events'
-          },
-          {
-            id: 22,
-            name: 'Outdoor Activities',
-            description: 'Hiking, picnics, beach days, etc.'
-          }
-        ]
-      },
+    this.planData = new PlainState(
+      JSON.parse(this.getAttribute('plan-data')),
       this
-    ) */ // Cambiar esto a null y hacer fetch desde el componente padre (en este caso el carousel)
-    console.log(JSON.parse(this.getAttribute('plan-data')))
-    this.planData = new PlainState(JSON.parse(this.getAttribute('plan-data')), this)
+    )
 
     this.acceptedParticipations = new PlainState(null, this)
     this.rejectedParticipations = new PlainState(null, this)
@@ -137,8 +70,6 @@ class PlanCard extends PlainComponent {
     const accepted = await apiParticipation.getAcceptedPlanParticipations(
       this.planData.getState().id
     )
-
-    console.log(accepted)
 
     this.acceptedParticipations.setState(accepted)
   }
@@ -182,31 +113,25 @@ class PlanCard extends PlainComponent {
   }
 
   checkIfUserIsRejectedInPlan(loggedUserId) {
-    const isRejected = this.rejectedParticipations
-      .getState()
-      .find((user) => {
-        return user.user_id === loggedUserId
-      })
+    const isRejected = this.rejectedParticipations.getState().find((user) => {
+      return user.user_id === loggedUserId
+    })
 
     return isRejected
   }
 
   checkIfUserIsAcceptedInPlan(loggedUserId) {
-    const isAccepted = this.acceptedParticipations
-      .getState()
-      .find((user) => {
-        return user.user_id === loggedUserId
-      })
+    const isAccepted = this.acceptedParticipations.getState().find((user) => {
+      return user.user_id === loggedUserId
+    })
 
     return isAccepted
   }
 
   checkIfUserAppliedToPlan(loggedUserId) {
-    const isApplied = this.pendingParticipations
-      .getState()
-      .find((user) => {
-        return user.user_id === loggedUserId
-      })
+    const isApplied = this.pendingParticipations.getState().find((user) => {
+      return user.user_id === loggedUserId
+    })
 
     return isApplied
   }
@@ -228,7 +153,10 @@ class PlanCard extends PlainComponent {
   }
 
   template() {
-    const userAge = helper.getAge(new Date(this.userContext.getData('user').birth_date))
+    console.log(this.planData.getState())
+    const creatorData = this.planData.getState().created_by
+    creatorData.birth_date = helper.getAge(new Date(creatorData.birth_date))
+
     const planDate = new Date(this.planData.getState().datetime)
     const participations = this.acceptedParticipations
       .getState()
@@ -274,11 +202,11 @@ class PlanCard extends PlainComponent {
 
     return `
         <div class="user-avatar">
-          <div class="user-img" style="background-image: url(${APP_URL}${this.userContext.getData('user').profile_img_url})">
+          <div class="user-img" style="background-image: url(${APP_URL}${creatorData.profile_img_url})">
           </div>
           <div class="user-info">
-            <span class="user-name">${this.userContext.getData('user').name}</span>
-            <span class="user-age">${userAge} y/o</span>
+            <span class="user-name">${creatorData.name}</span>
+            <span class="user-age">${creatorData.birth_date} y/o</span>
           </div>
         </div>
         <div class="plan">

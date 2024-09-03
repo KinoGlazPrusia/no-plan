@@ -22,7 +22,7 @@ class PlannerPage extends PlainComponent {
     // [ ] Reactivar esto
     /* auth.checkAuthentication(['user', 'admin'], null, () =>
       helper.navigateTo(PAGE_ROUTES.LOGIN)
-    )*/ 
+    )*/
 
     this.navigationContext = new PlainContext('navigation', this, false)
     this.navigationContext.setData({ currentPage: 'planner' }, true)
@@ -35,8 +35,9 @@ class PlannerPage extends PlainComponent {
   template() {
     return `
             <p-logout-button></p-logout-button>
-            <p-plan-card></p-plan-card>
             <p-plan-carousel></p-plan-carousel>
+            <span class="fade-left"></span>
+            <span class="fade-right"></span>
             <p-navbar></p-navbar>
         `
   }

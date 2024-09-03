@@ -18,9 +18,7 @@ class GetPlanCreatorFilteredDataUseCase implements IUseCase {
             'created_at',
             'updated_at',
             'last_connection',
-            'birth_date',
             'genre',
-            'profile_img_url',
             'last_connection'
         ], (array)$planCreatorData);
 

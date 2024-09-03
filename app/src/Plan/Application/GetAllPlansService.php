@@ -47,6 +47,11 @@ class GetAllPlansService implements IService {
                 $plan->setStatus($status->serialize());
             }
 
+            // 5. Caso de uso para recuperar los datos del creador del plan
+            foreach($plans as $plan) {
+                GetPlanCreatorFilteredDataUseCase::fetch($this->repository, $plan);
+            }
+
             return $plans;
         }
         catch (\Exception $e) {
