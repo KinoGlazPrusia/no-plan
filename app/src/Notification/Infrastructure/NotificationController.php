@@ -13,7 +13,7 @@ class NotificationController {
     public static function getUnreadNotifications(Request $request, IUseCase | IService $getUnreadNotifications): void {
         $request->validateQuery([]);
 
-        $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
+        //$_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
 
         try {
             $unreadNotifications = $getUnreadNotifications($_SESSION['uid']);

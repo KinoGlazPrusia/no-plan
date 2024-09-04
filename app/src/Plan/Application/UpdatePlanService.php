@@ -32,7 +32,7 @@ class UpdatePlanService implements IService {
         array | null $timeline,
         array | null $image
     ): Plan {
-        $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
+        // $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
         
         try {
             // Comprobamos que el usuario que está actualmente autenticado sea el creador del plan

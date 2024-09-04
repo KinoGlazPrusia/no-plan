@@ -21,7 +21,7 @@ class GetAllPlansService implements IService {
     }
 
     public function __invoke(int $page, int $itemsPerPage): array {
-        $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
+        // $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
         $userId = $_SESSION['uid'];
 
         $plans = array();

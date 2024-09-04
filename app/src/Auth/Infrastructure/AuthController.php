@@ -1,15 +1,12 @@
 <?php
 namespace App\Auth\Infrastructure;
 
-use Exception;
 use App\Core\Infrastructure\Interface\IUseCase;
 use App\Core\Infrastructure\Interface\IService;
 use App\Core\Infrastructure\Service\Request;
 use App\Core\Infrastructure\Service\Response;
 use App\Core\Infrastructure\Service\Sanitizer;
 use App\Core\Infrastructure\Service\Validator;
-use App\Core\Infrastructure\Database\MySqlDatabase;
-use App\Auth\Infrastructure\AuthRepository;
 
 use App\Auth\Domain\JWToken;
 
@@ -49,9 +46,8 @@ class AuthController {
             unset($filteredUserData['password']);
             Response::json('success', 200, 'Logged in', [$filteredUserData]);
         } 
-        catch (Exception $e) {
+        catch (\Exception $e) {
             Response::jsonError(403, $e->getMessage());
-            // [ ] Implementar manejo de errores en el frontend añadiendo un toast o algo similar para errores de validación
         }
     }
 
@@ -79,7 +75,7 @@ class AuthController {
                 :
                 Response::json('success', 200, 'Email does not exist', [$exists]);
         } 
-        catch (Exception $e) {
+        catch (\Exception $e) {
             Response::jsonError(403, $e->getMessage());
         }
     }
@@ -87,10 +83,9 @@ class AuthController {
     public static function isAuthenticated(Request $request, IUseCase | IService $isAuthenticated): void {
         try {
             $sessionToken = $isAuthenticated();
-            $isAuthenticated = $sessionToken ? true : false;
             Response::json('success', 200, 'User authentication', [$isAuthenticated, $sessionToken]);
         } 
-        catch (Exception $e) {
+        catch (\Exception $e) {
             Response::jsonError(500, $e->getMessage());
         }
     }
@@ -100,7 +95,7 @@ class AuthController {
             $logout();
             Response::json('success', 200, 'User logged out');
         } 
-        catch (Exception $e) {
+        catch (\Exception $e) {
             Response::jsonError(500, $e->getMessage());
         }
     }
