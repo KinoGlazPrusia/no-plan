@@ -21,3 +21,69 @@
 
     background-color: var(--bg-color);
 }
+
+/* NOTIFICATION CHIP */
+.notification-chip {
+    cursor: pointer;
+
+    position: fixed;
+    bottom: 2em;
+    left: 50%;
+
+    transform: translate(calc(-160px - 50%), -50%);
+
+    width: 30px;
+    height: 30px;
+
+    display: grid;
+    place-content: center;
+
+    border-radius: 100pt;
+    background-color: var(--link-color);
+
+
+    color: var(--bg-color);
+    font-weight: bold;
+
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
+    transition: 300ms;
+}
+
+.pop {
+    animation-name: pop;
+    animation-duration: 300ms;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+.notification-chip:hover {
+    transform: 
+        translate(calc(-160px - 50%), -50%)
+        scale(1.05);
+        
+    background-color: var(--accent-color);
+}
+
+/* ANIMATION */
+@keyframes pop {
+    0% {
+        opacity: 0;
+        transform: 
+        translate(calc(-160px - 50%), -50%)
+        scale(0);
+    }
+
+    90% {
+        transform: 
+        translate(calc(-160px - 50%), -50%)
+        scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: 
+        translate(calc(-160px - 50%), -50%)
+        scale(1);
+    }
+}
