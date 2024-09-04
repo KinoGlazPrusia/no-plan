@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
+/* MODAL */
+.modal {
+  padding: 2em;
+
+  width: fit-content;
+  height: fit-content;
+
+  max-height: 80%;
+  max-width: 80%;
+
+  background-color: var(--bg-color);
+
+  border: none;
+  border-radius: 10pt;
+
+  box-shadow: 0px 5px 35px rgba(0, 0, 0, 0.2);
+
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+
+  z-index: 1000;
+}
+
+.modal[open] {
+  display: flex;
+}
+
+::backdrop {
+  backdrop-filter: blur(5px);
+}
+
+/* NOTIFICATION LIST */
+.notification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+}
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+
+  width: 100%;
+}
+
+.notification-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+
+  padding: 1.5em;
+  box-sizing: border-box;
+
+  min-height: 50px;
+  width: 100%;
+
+  border-radius: 10pt;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
+  font-size: 0.8em;
+
+  transition: 300ms;
+}
+
+.notification-message {
+  justify-self: flex-start;
+}
+
+.notification-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.notification-time {
+  padding-right: 2em;
+  align-self: flex-end;
+
+  color: var(--text-color);
+  font-size: 0.7em;
+}
+
+/* BUTTONS */
+.accept,
+.reject {
+  width: 100%;
+}
+
+.read-button {
+  cursor: pointer;
+
+  height: 50px;
+
+  display: grid;
+  place-content: center;
+
+  border: none;
+
+  color: var(--text-color);
+
+  background-color: transparent;
+
+  transition: 300ms;
+}
+
+/* NOTIFICATION CATEGORIES */
+.message {
+  background-color: rgb(255, 255, 255);
+}
+
+.participation_request {
+  background-color: rgb(252, 255, 223);
+}
+
+.participation_accepted {
+  background-color: rgb(227, 255, 227);
+}
+
+.participation_rejected {
+  background-color: rgb(255, 246, 225);
+}
+
+.participation_cancelled {
+  background-color: rgb(218, 218, 255);
+}
+
+.plan_rated {
+  background-color: purple;
+}
+
+.rated {
+  background-color: pink;
+}
+
+.followed {
+  background-color: gray;
+}
+
+.info {
+  background-color: rgb(230, 247, 255);
+}
+
+/* BUTTONS */
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  gap: 12px;
+}
+
+.cancel-step {
+  flex: 1;
+}
+
+.submit {
+  flex: 1;
+}
+
+/* ANIMATION */
+.modal.entry {
+  animation-name: entry;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+@keyframes entry {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

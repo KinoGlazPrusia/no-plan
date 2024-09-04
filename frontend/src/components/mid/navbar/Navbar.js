@@ -1,37 +1,43 @@
-import { PlainComponent, PlainContext, PlainState } from '../../../../node_modules/plain-reactive/src/index.js'
+import {
+  PlainComponent,
+  PlainContext,
+  PlainState
+} from '../../../../node_modules/plain-reactive/src/index.js'
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* COMPONENTS */
 import NavbarButton from '../../base/navbar-button/NavbarButton.js'
+import NotificationModal from '../../base/notification-modal/NotificationModal.js'
 
 /* SERVICES */
 import * as apiNotification from '../../../services/api.notification.js'
 
 class Navbar extends PlainComponent {
-  constructor () {
+  constructor() {
     super('p-navbar', `${MID_COMPONENTS_PATH}navbar/Navbar.css`)
 
     this.navigationContext = new PlainContext('navigation', this)
 
-    this.notifications = new PlainState(0, this)
+    this.notifications = new PlainState(null, this)
   }
 
-   async connectedCallback () {
-    super.connectedCallback()
+  async connectedCallback() {
     await this.loadNotifications()
+    super.connectedCallback()
   }
-   
-  async loadNotifications () {
+
+  async loadNotifications() {
     const unreadNotifications = await apiNotification.getUnreadNotifications()
-    this.notifications.setState(unreadNotifications.data.length)
+    this.notifications.setState(unreadNotifications)
+    console.log(this.notifications.getState())
   }
 
   // [ ] Implementar deshabilitación de botones dependiendo del estado de autenticación del usuario
-  template () {
+  template() {
     const notificationChip = () => {
-      const notificationNum = this.notifications.getState()
-      return notificationNum > 0 
-        ? `<span class="notification-chip pop">${notificationNum}</span>`
+      const notificationNum = this.notifications.getState().data
+      return notificationNum.length > 0
+        ? `<span class="notification-chip pop">${notificationNum.length}</span>`
         : ''
     }
 
@@ -42,11 +48,11 @@ class Navbar extends PlainComponent {
             <p-navbar-button icon="roofing" path="planner" ${this.navigationContext.getData('currentPage') === 'planner' ? 'selected="true' : ''}"></p-navbar-button>
             <p-navbar-button icon="search" path="finder" ${this.navigationContext.getData('currentPage') === 'finder' ? 'selected="true' : ''}"></p-navbar-button>
             ${notificationChip()}
-            <dialog 
+            <p-notification-modal data='${JSON.stringify(this.notifications.getState().data)}'></p-notification-modal>
         `
   }
 
-  listeners () {
+  listeners() {
     if (this.$('.notification-chip')) {
       this.$('.notification-chip').onanimationend = () => {
         this.$('.notification-chip').classList.remove('pop')
@@ -59,7 +65,7 @@ class Navbar extends PlainComponent {
   }
 
   openNotificationModal() {
-    console.log("Notifications")
+    this.$('p-notification-modal').open()
   }
 }
 

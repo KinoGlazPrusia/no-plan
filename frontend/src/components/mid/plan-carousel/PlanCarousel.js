@@ -18,7 +18,8 @@ class PlanCarousel extends PlainComponent {
     this.error = new PlainState(null, this)
     this.data = new PlainState(null, this)
     this.cards = new PlainState(null, this)
-    this.offsets = new PlainState(null, this)
+    this.currentPage = new PlainState(1, this)
+    this.itemsPerPage = new PlainState(3, this)
   }
 
   async connectedCallback() {
@@ -57,9 +58,11 @@ class PlanCarousel extends PlainComponent {
   }
 
   async fetchPlans() {
-    const plans = await apiPlan.fetchAllPlans()
+    const plans = await apiPlan.fetchAllPlans(
+      this.currentPage.getState(),
+      this.itemsPerPage.getState()
+    )
     this.data.setState(plans.data, false)
-    console.log(plans.data)
   }
 
   async loadCards() {

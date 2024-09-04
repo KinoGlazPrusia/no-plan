@@ -153,7 +153,6 @@ class PlanCard extends PlainComponent {
   }
 
   template() {
-    console.log(this.planData.getState())
     const creatorData = this.planData.getState().created_by
     creatorData.birth_date = helper.getAge(new Date(creatorData.birth_date))
 
