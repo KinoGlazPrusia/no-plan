@@ -18,7 +18,7 @@ class SaveNewPlanUseCase {
         int $max_participation,
         array $image
     ): Plan {
-        $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
+        // $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
 
         $status = $repository->getPlanStatusByName(PlanStatus::PUBLISHED);
         $creator = self::getFilteredCreatorData($repository);
