@@ -1,66 +1,75 @@
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0");
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 
 .p-logout-button-wrapper {
-    position: fixed;
-    top: 1em;
-    right: 1em;
+  position: fixed;
+  top: 1em;
+  right: 1em;
 
-    height: 50px;
-    width: 50px;
+  height: 50px;
+  width: 50px;
+
+  z-index: 99999;
 }
 
 .disabled {
-    display: none;
+  display: none;
 }
 
 .button {
-    user-select: none;
-    
-    cursor: pointer;
-    
-    height: 100%;
-    width: 100%;
+  user-select: none;
 
-    display: grid;
-    place-content: center;
+  cursor: pointer;
 
-    border: none;
-    border-radius: 100pt;
+  height: 100%;
+  width: 100%;
 
-    color: var(--text-color);
-    font-size: 32px;
-    font-weight: bold;
+  display: grid;
+  place-content: center;
 
-    background-color: var(--bg-color);
+  border: none;
+  border-radius: 100pt;
 
-    transition: 300ms;
+  color: var(--text-color);
+  font-size: 32px;
+  font-weight: bold;
+
+  background-color: var(--bg-color);
+
+  transition: 300ms;
 }
 
 /* DESKTOP STATES */
 @media (min-width: 1000px) {
-    .button:hover {
-        transform: scale(1.1);
+  .button:hover {
+    transform: scale(1.1);
 
-        color: var(--accent-color);
+    color: var(--accent-color);
 
-        box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.15);
-    }
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.15);
+  }
 }
 
 /* ANIMATION */
 .clicked {
-    animation: name duration timing-function delay iteration-count direction fill-mode;
-    animation-name: clicked;
-    animation-duration: 200ms;
-    animation-timing-function: ease-in-out;
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
+  animation: name duration timing-function delay iteration-count direction
+    fill-mode;
+  animation-name: clicked;
+  animation-duration: 200ms;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
 }
 
 @keyframes clicked {
-    0% {transform: scale(1);}
-    50% {transform: scale(1.05);}
-    100% {transform: scale(1);}
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

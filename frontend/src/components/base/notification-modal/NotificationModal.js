@@ -4,6 +4,9 @@ import {
 } from '../../../../node_modules/plain-reactive/src/index.js'
 import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 
+/* SERVICES */
+import * as apiNotification from '../../../services/api.notification.js'
+
 /* UTILS */
 import * as helper from '../../../utils/helper.js'
 
@@ -39,12 +42,12 @@ class NotificationModal extends PlainComponent {
 
         if (notification.notification_type_id === 2) {
           return `
-                <li class="notification">
+                <li class="notification ${notification.read ? 'read' : ''}">
                     <div class="notification-wrapper ${notificationCategory[notification.notification_type_id]}">
                         <span class="notification-message">${notification.content}</span>
                         <div class="notification-actions">
-                            <button class="accept">Accept</button>
-                            <button class="reject">Reject</button>
+                            <button class="accept" id="${notification.id}">Accept</button>
+                            <button class="reject" id="${notification.id}">Reject</button>
                         </div>
                     </div>
                     <span class="notification-time">${createdAt}</span>
@@ -56,7 +59,7 @@ class NotificationModal extends PlainComponent {
             <li class="notification">
                 <div class="notification-wrapper ${notificationCategory[notification.notification_type_id]}">
                     <span class="notification-message">${notification.content}</span>
-                    <button class="read-button">
+                    <button class="read-button" id="${notification.id}">
                         <span class="material-symbols-outlined notification-actions">close</span>
                     </button>
                 </div>
@@ -82,6 +85,22 @@ class NotificationModal extends PlainComponent {
 
   listeners() {
     this.$('.close').onclick = () => this.close()
+
+    if (this.$('.accept')) {
+      this.$('.accept').onclick = (e) => {
+        this.acceptParticipation(e.target.id)
+      }
+    }
+
+    if (this.$('.reject')) {
+      this.$('.reject').onclick = (e) => {
+        this.rejectParticipation(e.target.id)
+      }
+    }
+
+    this.wrapper.querySelectorAll('.read-button').forEach((button) => {
+      button.onclick = async () => await this.readNotification(button.id)
+    })
   }
 
   open() {
@@ -91,11 +110,63 @@ class NotificationModal extends PlainComponent {
 
   close() {
     this.$('.modal').close()
-    this.reset()
   }
 
   animateEntry() {
     this.$('.modal').classList.add('entry')
+  }
+
+  async acceptParticipation(notificationId) {
+    const notification = this.notifications
+      .getState()
+      .find((notification) => notification.id === notificationId)
+
+    try {
+      const response = await apiParticipation.acceptParticipation(
+        notification.user_id,
+        notificationId
+      )
+
+      if (response.status === 'success') {
+        await this.readNotification(notificationId)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async rejectParticipation(notificationId) {
+    const notification = this.notifications
+      .getState()
+      .find((notification) => notification.id === notificationId)
+
+    try {
+      const response = await apiParticipation.rejectParticipation(
+        notification.user_id,
+        notificationId
+      )
+
+      if (response.status === 'success') {
+        await this.readNotification(notificationId)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async readNotification(notificationId) {
+    try {
+      const response =
+        await apiNotification.setNotificationAsRead(notificationId)
+      if (response.status === 'success') {
+        this.parentComponent.notificationRead(notificationId)
+        this.$(
+          `.notification:has(button[id="${notificationId}"])`
+        ).classList.add('read')
+      }
+    } catch (error) {
+      throw error
+    }
   }
 }
 

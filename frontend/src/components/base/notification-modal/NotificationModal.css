@@ -24,6 +24,9 @@
   gap: 1.5em;
 
   z-index: 1000;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .modal[open] {
@@ -175,15 +178,33 @@
   flex: 1;
 }
 
+/* STATES */
+.read {
+  /* display: none; */
+  animation-name: outro;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
 /* ANIMATION */
 .modal.entry {
   animation-name: entry;
-  animation-duration: 0.5s;
+  animation-duration: 0.3s;
   animation-timing-function: ease-in-out;
-  animation-delay: 0s;
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: forwards;
+}
+
+/* SCROLLBAR */
+*::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 100pt;
+  background: var(--tertiary-color);
 }
 
 @keyframes entry {
@@ -195,5 +216,21 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes outro {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  80% {
+    opacity: 0;
+    transform: translateY(-1000px);
+  }
+
+  100% {
+    display: none;
   }
 }

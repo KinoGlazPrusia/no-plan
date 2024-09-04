@@ -15,11 +15,16 @@ export async function applyToPlan(planId) {
 }
 
 export async function getPendingPlanParticipations(planId) {
-  const url = API_ENDPOINTS.GET_PENDING_PARTICIPATIONS.replace('{planId}', planId)
+  const url = API_ENDPOINTS.GET_PENDING_PARTICIPATIONS.replace(
+    '{planId}',
+    planId
+  )
   try {
     const response = await fetch(url)
     if (!response.ok) {
-      throw new Error('Something went wrong while getting pending plan participations')
+      throw new Error(
+        'Something went wrong while getting pending plan participations'
+      )
     }
     const data = await response.json()
     return data.data
@@ -29,11 +34,16 @@ export async function getPendingPlanParticipations(planId) {
 }
 
 export async function getAcceptedPlanParticipations(planId) {
-  const url = API_ENDPOINTS.GET_ACCEPTED_PARTICIPATIONS.replace('{planId}', planId)
+  const url = API_ENDPOINTS.GET_ACCEPTED_PARTICIPATIONS.replace(
+    '{planId}',
+    planId
+  )
   try {
     const response = await fetch(url)
     if (!response.ok) {
-      throw new Error('Something went wrong while getting accepted plan participations')
+      throw new Error(
+        'Something went wrong while getting accepted plan participations'
+      )
     }
     const data = await response.json()
     return data.data
@@ -41,15 +51,55 @@ export async function getAcceptedPlanParticipations(planId) {
     throw error
   }
 }
+
 export async function getRejectedPlanParticipations(planId) {
-  const url = API_ENDPOINTS.GET_REJECTED_PARTICIPATIONS.replace('{planId}', planId)
+  const url = API_ENDPOINTS.GET_REJECTED_PARTICIPATIONS.replace(
+    '{planId}',
+    planId
+  )
   try {
     const response = await fetch(url)
     if (!response.ok) {
-      throw new Error('Something went wrong while getting rejected plan participations')
+      throw new Error(
+        'Something went wrong while getting rejected plan participations'
+      )
     }
     const data = await response.json()
     return data.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function acceptParticipation(userId, notificationId) {
+  const url = API_ENDPOINTS.ACCEPT_PARTICIPATION.replace(
+    '{userId}',
+    userId
+  ).replace('{planId}', notificationId)
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while accepting participation')
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function rejectParticipation(userId, notificationId) {
+  const url = API_ENDPOINTS.REJECT_PARTICIPATION.replace(
+    '{userId}',
+    userId
+  ).replace('{planId}', notificationId)
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while rejecting participation')
+    }
+    const data = await response.json()
+    return data
   } catch (error) {
     throw error
   }

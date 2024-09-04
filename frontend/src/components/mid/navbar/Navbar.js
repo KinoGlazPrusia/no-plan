@@ -26,18 +26,22 @@ class Navbar extends PlainComponent {
     super.connectedCallback()
   }
 
-  async loadNotifications() {
+  async loadNotifications(reRender = true) {
     const unreadNotifications = await apiNotification.getUnreadNotifications()
-    this.notifications.setState(unreadNotifications)
+    this.notifications.setState(unreadNotifications.data, reRender)
     console.log(this.notifications.getState())
+
+    // Mantenemos la actualización de las notificaciones en un bucle infinito
+    /* setTimeout(async () => {
+      await this.loadNotifications(false)
+    }, 1000) */
   }
 
   // [ ] Implementar deshabilitación de botones dependiendo del estado de autenticación del usuario
   template() {
     const notificationChip = () => {
-      const notificationNum = this.notifications.getState().data
-      return notificationNum.length > 0
-        ? `<span class="notification-chip pop">${notificationNum.length}</span>`
+      return this.notifications.getState().length > 0
+        ? `<span class="notification-chip pop">${this.notifications.getState().length}</span>`
         : ''
     }
 
@@ -48,7 +52,7 @@ class Navbar extends PlainComponent {
             <p-navbar-button icon="roofing" path="planner" ${this.navigationContext.getData('currentPage') === 'planner' ? 'selected="true' : ''}"></p-navbar-button>
             <p-navbar-button icon="search" path="finder" ${this.navigationContext.getData('currentPage') === 'finder' ? 'selected="true' : ''}"></p-navbar-button>
             ${notificationChip()}
-            <p-notification-modal data='${JSON.stringify(this.notifications.getState().data)}'></p-notification-modal>
+            <p-notification-modal class="notification-modal" data='${JSON.stringify(this.notifications.getState())}'></p-notification-modal>
         `
   }
 
@@ -66,6 +70,24 @@ class Navbar extends PlainComponent {
 
   openNotificationModal() {
     this.$('p-notification-modal').open()
+  }
+
+  // [ ] Habría que revisar las responsabilidades de este componente y del notificationModal y rehacer la estructura (de momento no hay tiempo)
+  notificationRead(notificationId) {
+    console.log(this.notifications.getState())
+
+    let newNotifications = this.notifications
+      .getState()
+      .filter((notification) => {
+        return notification.id != notificationId
+      })
+
+    this.notifications.setState(newNotifications, false)
+
+    console.log(this.notifications.getState())
+
+    this.$('.notification-chip').textContent =
+      this.notifications.getState().length
   }
 }
 

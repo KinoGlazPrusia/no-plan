@@ -25,11 +25,18 @@ export const API_ENDPOINTS = {
   UPDATE_PLAN: APP_URL + 'update-plan',
   FETCH_PLAN_DATA: APP_URL + 'plan/?id={id}',
   PARTICIPATE_IN_PLAN: APP_URL + 'participate/?plan_id={planId}',
-  GET_PENDING_PARTICIPATIONS: APP_URL + 'pending-participations/?plan_id={planId}',
-  GET_ACCEPTED_PARTICIPATIONS: APP_URL + 'accepted-participations/?plan_id={planId}',
-  GET_REJECTED_PARTICIPATIONS: APP_URL + 'rejected-participations/?plan_id={planId}',
+  GET_PENDING_PARTICIPATIONS:
+    APP_URL + 'pending-participations/?plan_id={planId}',
+  GET_ACCEPTED_PARTICIPATIONS:
+    APP_URL + 'accepted-participations/?plan_id={planId}',
+  GET_REJECTED_PARTICIPATIONS:
+    APP_URL + 'rejected-participations/?plan_id={planId}',
   GET_UNREAD_NOTIFICATIONS: APP_URL + 'notifications/unread',
-  SET_NOTIFICATION_AS_READ: APP_URL + 'notifications/set-read/?id={id}'
+  SET_NOTIFICATION_AS_READ: APP_URL + 'notifications/set-read/?id={id}',
+  ACCEPT_PARTICIPATION:
+    APP_URL + 'participation/accept/?user_id={userId}&plan_id={planId}',
+  REJECT_PARTICIPATION:
+    APP_URL + 'participation/reject/?user_id={userId}&plan_id={planId}'
 }
 
 export const PAGE_ROUTES = {
