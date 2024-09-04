@@ -24,6 +24,7 @@
 
 /* NOTIFICATION CHIP */
 .notification-chip {
+    user-select: none;
     cursor: pointer;
 
     position: fixed;
@@ -61,8 +62,8 @@
     transform: 
         translate(calc(-160px - 50%), -50%)
         scale(1.05);
-        
-    background-color: var(--accent-color);
+
+    background-color: #349dff;
 }
 
 /* ANIMATION */

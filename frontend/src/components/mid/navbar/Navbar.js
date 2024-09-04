@@ -34,6 +34,7 @@ class Navbar extends PlainComponent {
         ? `<span class="notification-chip pop">${notificationNum}</span>`
         : ''
     }
+
     return `
             <p-navbar-button icon="person" path="user/profile" ${this.navigationContext.getData('currentPage') === 'user/profile' ? 'selected="true' : ''}"></p-navbar-button>
             <p-navbar-button icon="event" path="user/plans" ${this.navigationContext.getData('currentPage') === 'user/plans' ? 'selected="true"' : ''}"></p-navbar-button>
@@ -41,6 +42,7 @@ class Navbar extends PlainComponent {
             <p-navbar-button icon="roofing" path="planner" ${this.navigationContext.getData('currentPage') === 'planner' ? 'selected="true' : ''}"></p-navbar-button>
             <p-navbar-button icon="search" path="finder" ${this.navigationContext.getData('currentPage') === 'finder' ? 'selected="true' : ''}"></p-navbar-button>
             ${notificationChip()}
+            <dialog 
         `
   }
 
@@ -49,7 +51,15 @@ class Navbar extends PlainComponent {
       this.$('.notification-chip').onanimationend = () => {
         this.$('.notification-chip').classList.remove('pop')
       }
+
+      this.$('.notification-chip').onclick = () => {
+        this.openNotificationModal()
+      }
     }
+  }
+
+  openNotificationModal() {
+    console.log("Notifications")
   }
 }
 
