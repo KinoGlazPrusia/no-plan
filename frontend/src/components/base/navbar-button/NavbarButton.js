@@ -1,5 +1,8 @@
-import { PlainComponent } from '../../../../node_modules/plain-reactive/src/index.js'
-import { PUBLIC_PATH, BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
+import { PlainComponent} from '../../../../node_modules/plain-reactive/src/index.js'
+import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
+
+/* UTILS */
+import * as helper from '../../../utils/helper.js'
 
 class NavbarButton extends PlainComponent {
   constructor () {
@@ -17,7 +20,7 @@ class NavbarButton extends PlainComponent {
   listeners () {
     this.$('.button').onclick = () => {
       this.handleClick()
-      this.navigateTo(this.getAttribute('path'))
+      helper.navigateTo(this.getAttribute('path'))
     }
   }
 
@@ -28,10 +31,6 @@ class NavbarButton extends PlainComponent {
   animateClick () {
     this.wrapper.classList.add('clicked')
     this.wrapper.onanimationend = () => this.wrapper.classList.remove('clicked')
-  }
-
-  navigateTo (path) {
-    window.location.replace(PUBLIC_PATH + path)
   }
 }
 

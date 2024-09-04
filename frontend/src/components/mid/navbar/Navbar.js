@@ -1,15 +1,27 @@
 import { PlainComponent, PlainContext } from '../../../../node_modules/plain-reactive/src/index.js'
 import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 
-/* eslint-disable */
+/* COMPONENTS */
 import NavbarButton from '../../base/navbar-button/NavbarButton.js'
-/* eslint-enable */
+
+/* SERVICES */
+import * as apiNotification from '../../../services/api.notification.js'
 
 class Navbar extends PlainComponent {
   constructor () {
     super('p-navbar', `${MID_COMPONENTS_PATH}navbar/Navbar.css`)
 
     this.navigationContext = new PlainContext('navigation', this)
+  }
+
+   async connectedCallback () {
+    super.connectedCallback()
+    await this.loadNotifications()
+  }
+   
+  async loadNotifications () {
+    const unreadNotifications = await apiNotification.getUnreadNotifications()
+    console.log(unreadNotifications)
   }
 
   // [ ] Implementar deshabilitación de botones dependiendo del estado de autenticación del usuario
