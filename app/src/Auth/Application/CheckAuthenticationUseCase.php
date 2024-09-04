@@ -1,7 +1,6 @@
 <?php
 namespace App\Auth\Application;
 
-use Exception;
 use App\Auth\Domain\JWToken;
 use App\Core\Infrastructure\Interface\IUseCase;
 
@@ -10,7 +9,7 @@ class CheckAuthenticationUseCase implements IUseCase {
         try {
             return JWToken::verifyCookie();
         } 
-        catch (Exception $e) {
+        catch (\Exception $e) {
             throw $e;
         }
     }

@@ -2,11 +2,14 @@
 namespace App\Auth\Domain;
 require_once dirname(__DIR__) . '/../../../secret/Secret.php';
 
+use App\Env;
+use App\User\Domain\User;
+use App\Auth\Application\Exception\InvalidAccessTokenException;
+
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Secret\Secret;
-use App\User\Domain\User;
-use App\Env;
+
 
 class JWToken {
     public static function encodeToken(User $user, array $roles, $validityTime): string {
@@ -52,11 +55,8 @@ class JWToken {
     }
 
     public static function verifyCookie(): Object {
-        // [ ] Mejorar el manejo de errores (icluir excepciones personalizadas como 
-        // InvalidCredentialsException o algo similar)
-
         try {
-            if (!isset($_COOKIE['session_token'])) throw new \Exception('No session token set');
+            if (!isset($_COOKIE['session_token'])) throw new InvalidAccessTokenException();
             $verification = self::decodeToken($_COOKIE['session_token']);
 
             // Si los datos de sesión no están seteados los recuperamos
@@ -73,10 +73,9 @@ class JWToken {
                 gettype($verification) !== 'object' || // Si $verification devuelve un string, es que hay un error
                 $verification->uid !== $_SESSION['uid'] ||
                 $verification->email !== $_SESSION['userEmail']
-            ) throw new \Exception('Token and session data do not match');
+            ) throw new InvalidAccessTokenException();
 
             return $verification;
-
         } 
         catch (\Exception $e) {
             throw $e;
