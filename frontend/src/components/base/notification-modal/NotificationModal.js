@@ -5,6 +5,7 @@ import {
 import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* SERVICES */
+import * as apiParticipation from '../../../services/api.participation.js'
 import * as apiNotification from '../../../services/api.notification.js'
 
 /* UTILS */
@@ -88,19 +89,29 @@ class NotificationModal extends PlainComponent {
 
     if (this.$('.accept')) {
       this.$('.accept').onclick = (e) => {
+        this.animateClick(e.target)
         this.acceptParticipation(e.target.id)
       }
     }
 
     if (this.$('.reject')) {
       this.$('.reject').onclick = (e) => {
+        this.animateClick(e.target)
         this.rejectParticipation(e.target.id)
       }
     }
 
     this.wrapper.querySelectorAll('.read-button').forEach((button) => {
-      button.onclick = async () => await this.readNotification(button.id)
+      button.onclick = async () => {
+        this.animateClick(button)
+        await this.readNotification(button.id)
+      }
     })
+  }
+
+  animateClick(button) {
+    button.classList.add('clicked')
+    button.onanimationend = () => button.classList.remove('clicked')
   }
 
   open() {
@@ -116,6 +127,7 @@ class NotificationModal extends PlainComponent {
     this.$('.modal').classList.add('entry')
   }
 
+  // [ ] Terminar de implementar la función de aceptar o rechazar un participante
   async acceptParticipation(notificationId) {
     const notification = this.notifications
       .getState()

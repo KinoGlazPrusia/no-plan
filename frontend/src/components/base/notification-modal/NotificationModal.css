@@ -101,12 +101,6 @@
   font-size: 0.7em;
 }
 
-/* BUTTONS */
-.accept,
-.reject {
-  width: 100%;
-}
-
 .read-button {
   cursor: pointer;
 
@@ -162,6 +156,42 @@
 }
 
 /* BUTTONS */
+.accept,
+.reject {
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+
+  padding: 0.5em;
+  padding-inline: 1.25em;
+  box-sizing: border-box;
+
+  width: 100%;
+
+  display: grid;
+  place-content: center;
+
+  border: 2px solid var(--text-color);
+  border-radius: 10pt;
+
+  color: var(--text-color);
+
+  background-color: transparent;
+
+  transition: 300ms;
+}
+
+.accept:focus,
+.reject:focus {
+  outline: none;
+}
+
+.accept:hover,
+.reject:hover {
+  transform: scale(1.05);
+  background-color: rgb(from var(--bg-color) r g b / 0.5);
+}
+
 .button-wrapper {
   width: 100%;
   display: flex;
@@ -187,6 +217,16 @@
   animation-fill-mode: forwards;
 }
 
+/* SCROLLBAR */
+*::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 100pt;
+  background: var(--tertiary-color);
+}
+
 /* ANIMATION */
 .modal.entry {
   animation-name: entry;
@@ -197,14 +237,14 @@
   animation-fill-mode: forwards;
 }
 
-/* SCROLLBAR */
-*::-webkit-scrollbar {
-  width: 0.5em;
-}
-
-*::-webkit-scrollbar-thumb {
-  border-radius: 100pt;
-  background: var(--tertiary-color);
+.clicked {
+  animation-name: clicked;
+  animation-duration: 200ms;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
 }
 
 @keyframes entry {
@@ -232,5 +272,17 @@
 
   100% {
     display: none;
+  }
+}
+
+@keyframes clicked {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
   }
 }
