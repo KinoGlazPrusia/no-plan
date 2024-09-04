@@ -15,7 +15,7 @@ class CheckForUnreadNotificationsUseCase implements IUseCase {
         $unreadNotifications = $this->repository->getUnreadNotificationsByUser($userId);
         
         $unreadNotifications = array_map(function($notification) {
-            return $notification->serialize(false);
+            return $notification->serialize();
         }, $unreadNotifications);
 
         return $unreadNotifications;

@@ -62,7 +62,7 @@ class SuscribeToPlanService implements IService {
             CreateNotificationUseCase::create(
                 $this->repository,
                 $participant,
-                NotificationType::PARTICIPATION_REQUEST,
+                NotificationType::INFO,
                 $notificationMessage
             );
         } 

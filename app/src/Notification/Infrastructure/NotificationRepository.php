@@ -30,7 +30,6 @@ class NotificationRepository extends CoreRepository {
         }
     }
 
-
     public function getUnreadNotificationsByUser(string $userId): array {
         $data = ['user_id' => $userId];
 

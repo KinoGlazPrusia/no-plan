@@ -12,12 +12,13 @@ class NotificationType extends CoreEntity {
     const PLAN_RATED = 'plan_rated';
     const RATED = 'rated';
     const FOLLOWED = 'followed';
+    const INFO = 'info';
 
     public readonly int | null $id;
     public readonly string | null $name;
 
     public function __construct(Object | null $data = null) {
-        parent::construct([
+        parent::__construct([
             'notification_type',
             [
                 'id',

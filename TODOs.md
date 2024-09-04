@@ -3,6 +3,7 @@
 ## WORKING ON ...
 - [x] Crear el formulario de registro de planes + Página de registro funcional
 - [x] Crear la página de visualización de planes (con acción de suscripción y cancelación)
+- [ ] Terminar de implementar la función de aceptar o rechazar un participante
 - [ ] Implementar la llamada al endpoint para suscribirse a un plan (componente de PlanCard)
 --------
 - [ ] Crear la página de usuario con visualización de notificaciones
