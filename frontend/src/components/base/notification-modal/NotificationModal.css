@@ -171,7 +171,7 @@
   display: grid;
   place-content: center;
 
-  border: 2px solid var(--text-color);
+  border: none;
   border-radius: 10pt;
 
   color: var(--text-color);
@@ -189,7 +189,14 @@
 .accept:hover,
 .reject:hover {
   transform: scale(1.05);
-  background-color: rgb(from var(--bg-color) r g b / 0.5);
+}
+
+.accept {
+  color: var(--success-color);
+}
+
+.reject {
+  color: var(--error-color);
 }
 
 .button-wrapper {

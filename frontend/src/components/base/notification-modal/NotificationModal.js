@@ -47,8 +47,12 @@ class NotificationModal extends PlainComponent {
                     <div class="notification-wrapper ${notificationCategory[notification.notification_type_id]}">
                         <span class="notification-message">${notification.content}</span>
                         <div class="notification-actions">
-                            <button class="accept" id="${notification.id}">Accept</button>
-                            <button class="reject" id="${notification.id}">Reject</button>
+                            <button class="accept" id="${notification.id}">
+                                <span class="material-symbols-outlined">thumb_up</span>
+                            </button>
+                            <button class="reject" id="${notification.id}">
+                                <span class="material-symbols-outlined">thumb_down</span>
+                            </button>
                         </div>
                     </div>
                     <span class="notification-time">${createdAt}</span>
