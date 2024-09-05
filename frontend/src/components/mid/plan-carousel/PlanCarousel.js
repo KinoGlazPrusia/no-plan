@@ -119,12 +119,11 @@ class PlanCarousel extends PlainComponent {
     // [ ] Falta implementar un método en el backend que devuelva el número máximo de páginas 
     // en base a los items por página definidos
     const currentPage = this.currentPage.getState()
-    if (currentPage === this.maxPages.getState()) this.parentComponent.disableRight()
     
     if (currentPage < this.maxPages.getState()) {
-      if (currentPage > 1) this.parentComponent.enableLeft()
-
       this.currentPage.setState(this.currentPage.getState() + 1, false)
+      if (this.currentPage.getState() > 1) this.parentComponent.enableLeft()
+      if (this.currentPage.getState() === this.maxPages.getState()) this.parentComponent.disableRight()
 
       /* await this.fetchData()
       this.centerSelectedCard() */
@@ -137,12 +136,12 @@ class PlanCarousel extends PlainComponent {
 
   async prevPage() {
     const currentPage = this.currentPage.getState()
-    if (currentPage === 1) this.parentComponent.disableLeft()
 
     if (currentPage > 1) {
-      if (currentPage < this.maxPages.getState()) this.parentComponent.enableRight()
       this.parentComponent.enableLeft()
       this.currentPage.setState(this.currentPage.getState() - 1, false)
+      if (this.currentPage.getState() < this.maxPages.getState()) this.parentComponent.enableRight()
+      if (this.currentPage.getState() === 1) this.parentComponent.disableLeft()
 
       /* await this.fetchData()
       this.centerSelectedCard() */

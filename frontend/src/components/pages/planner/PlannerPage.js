@@ -30,6 +30,8 @@ class PlannerPage extends PlainComponent {
     this.isLoading = new PlainState(true, this)
     this.error = new PlainState(null, this)
     this.data = new PlainState(null, this)
+
+    this.currentPage = new PlainState(1, this)
   }
 
   template() {
@@ -46,6 +48,8 @@ class PlannerPage extends PlainComponent {
                 <span class="icon material-symbols-outlined">chevron_left</span>
               </button>
 
+              <span class="page-number">${this.currentPage.getState()}</span>
+
               <button class="right-button">
                 <span class="icon material-symbols-outlined">chevron_right</span>
               </button>
@@ -53,6 +57,11 @@ class PlannerPage extends PlainComponent {
 
             <p-navbar></p-navbar>
         `
+  }
+
+  getPage() { // [ ] Esto va fuera, habrá que elevar el estado a este componente de página
+    const carousel = this.$('p-plan-carousel')
+    return carousel.currentPage.getState()
   }
 
   listeners() {
