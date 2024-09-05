@@ -10,7 +10,7 @@ class Env
     const STATUS = 'dev'; // Puede ser 'dev' o 'prod'
 
     /* HOST */
-    const APP_HOST = 'http://localhost/';
+    const APP_HOST = 'http://147.83.7.203/'; //http://147.83.7.203/
 
     /* DATABASE */
     const DB_TYPE = 'mysql';
