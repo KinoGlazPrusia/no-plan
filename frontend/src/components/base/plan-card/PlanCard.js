@@ -156,7 +156,7 @@ class PlanCard extends PlainComponent {
     const creatorData = this.planData.getState().created_by
     creatorData.birth_date = helper.getAge(new Date(creatorData.birth_date))
 
-    const planDate = new Date(this.planData.getState().datetime)
+    const planDate = new Date(this.planData.getState().datetime) // [ ] Hay un error en las fechas (el día es incorrecto)
     const participations = this.acceptedParticipations
       .getState()
       .map((participation, index) => {

@@ -30,6 +30,7 @@ tiempo para implementarlo*
 - [x] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
 - [x] Crear componente PlanTimeline
 - [x] Crear modal para añadir 'steps' a un plan.
+- [ ] !!! IMPORTANTE !!! Implementar un método para restaurar los datos de usuario en el contexto cuando se restaure la sesión a través del token. !!! BUG !!!
 - [ ] Crear endpoint para hacer un fetch de todos los planes de un usuario.
 - [ ] En el componente FormFeedback, añadir un modal cuando el mensaje supere las 2 líneas.
 - [ ] Completar validaciones para el SignUpForm.

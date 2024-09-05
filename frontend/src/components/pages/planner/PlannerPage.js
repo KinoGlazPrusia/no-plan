@@ -35,11 +35,56 @@ class PlannerPage extends PlainComponent {
   template() {
     return `
             <p-logout-button></p-logout-button>
+
             <p-plan-carousel></p-plan-carousel>
+
             <span class="fade-left"></span>
             <span class="fade-right"></span>
+
+            <div class="button-wrapper">
+              <button class="left-button">
+                <span class="icon material-symbols-outlined">chevron_left</span>
+              </button>
+
+              <button class="right-button">
+                <span class="icon material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+
             <p-navbar></p-navbar>
         `
+  }
+
+  listeners() {
+    this.$('.left-button').onclick = () => this.prevPage()
+    this.$('.right-button').onclick = () => this.nextPage()
+  }
+
+  enableRight() {
+    this.$('.right-button').classList.remove('disabled')
+  }
+
+  disableRight() {
+    // [ ] Estos métodos deshabilitaran los botones de paso de página
+    this.$('.right-button').classList.add('disabled')
+  }
+
+  enableLeft() {
+    this.$('.left-button').classList.remove('disabled')
+  }
+
+  disableLeft() {
+    this.$('.left-button').classList.add('disabled')
+  }
+
+  nextPage() {
+    const carousel = this.$('p-plan-carousel')
+    carousel.nextPage()
+  }
+
+  prevPage() {
+    const carousel = this.$('p-plan-carousel')
+    carousel.prevPage()
   }
 }
 

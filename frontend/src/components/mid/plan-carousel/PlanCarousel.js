@@ -18,12 +18,15 @@ class PlanCarousel extends PlainComponent {
     this.error = new PlainState(null, this)
     this.data = new PlainState(null, this)
     this.cards = new PlainState(null, this)
+
     this.currentPage = new PlainState(1, this)
     this.itemsPerPage = new PlainState(3, this)
+    this.maxPages = new PlainState(4, this)
   }
 
   async connectedCallback() {
     super.connectedCallback()
+    // [ ] implementar await this.getMaxPages() (cambiará el estado del max pages)
     await this.fetchData()
     this.centerSelectedCard()
   }
@@ -110,6 +113,46 @@ class PlanCarousel extends PlainComponent {
         this.wrapper.style.transform = `translateX(${-offset}px)`
       })
     })
+  }
+
+  async nextPage() {
+    // [ ] Falta implementar un método en el backend que devuelva el número máximo de páginas 
+    // en base a los items por página definidos
+    const currentPage = this.currentPage.getState()
+    
+    if (currentPage < this.maxPages.getState()) {
+      if (currentPage > 1) this.parentComponent.enableLeft()
+      if (currentPage === this.maxPages.getState()) this.parentComponent.disableRight()
+
+      this.currentPage.setState(this.currentPage.getState() + 1, false)
+
+      /* await this.fetchData()
+      this.centerSelectedCard() */
+    } else {
+      this.parentComponent.disableRight()
+    }
+
+    console.log(this.currentPage.getState())
+  }
+
+  async prevPage() {
+    const currentPage = this.currentPage.getState()
+
+    if (currentPage > 1) {
+      if (currentPage < this.maxPages.getState()) this.parentComponent.enableRight()
+      if (currentPage == 1) this.parentComponent.disableLeft()
+      this.parentComponent.enableLeft()
+      this.currentPage.setState(this.currentPage.getState() - 1, false)
+
+      /* await this.fetchData()
+      this.centerSelectedCard() */
+    } else {
+      this.parentComponent.disableLeft()
+    }
+
+    console.log(this.currentPage.getState())
+
+    
   }
 }
 
