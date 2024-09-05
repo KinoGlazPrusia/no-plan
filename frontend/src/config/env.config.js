@@ -2,7 +2,7 @@
 // En este caso desde el archivo App.js que es llamado desde index.html
 // Por lo tanto las rutas son relativas al archivo index.html
 
-const MODE = 'dev' // o 'prod'
+const MODE = 'prod' // 'dev' o 'prod'
 
 export const APP_URL = MODE === 'dev' 
   ? 'http://localhost/no-plan/app/public/' 
