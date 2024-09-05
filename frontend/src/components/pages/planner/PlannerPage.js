@@ -44,7 +44,7 @@ class PlannerPage extends PlainComponent {
             <span class="fade-right"></span>
 
             <div class="button-wrapper">
-              <button class="left-button">
+              <button class="left-button disabled">
                 <span class="icon material-symbols-outlined">chevron_left</span>
               </button>
 
@@ -89,11 +89,17 @@ class PlannerPage extends PlainComponent {
   nextPage() {
     const carousel = this.$('p-plan-carousel')
     carousel.nextPage()
+    this.currentPage.setState(this.currentPage.getState() + 1, false)
+    this.$('.page-number').textContent = Number(this.$('.page-number').textContent) + 1
+    // [ ] Esto se podría evitar creando un componente a parte o con VirtualDom para renderizar solo el
+    // elemento que estamos actualizando.
   }
 
   prevPage() {
     const carousel = this.$('p-plan-carousel')
     carousel.prevPage()
+    this.currentPage.setState(this.currentPage.getState() - 1, false)
+    this.$('.page-number').textContent = Number(this.$('.page-number').textContent) - 1
   }
 }
 
