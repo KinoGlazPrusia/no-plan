@@ -112,6 +112,7 @@ CREATE TABLE `notification` (
   `notification_type_id` int(11) NOT NULL,
   `content` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `read` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `fk_notification_user1_idx` (`user_id`),
   KEY `fk_notification_notification_type1_idx` (`notification_type_id`),
@@ -126,7 +127,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-INSERT INTO `notification` VALUES (1,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',2,'Juan Perez ha solicitado participar en tu plan: Tarde de skate','2024-09-03 08:42:18'),(2,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',2,'Has solicitado participar en el plan: Tarde de skate','2024-09-03 08:42:18'),(3,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',3,'Has aceptado la solicitud de Josep en el plan: Tarde de skate','2024-09-03 11:22:24'),(4,'481fbb71-94e3-44b0-b668-37467499b869',3,'Jon Doe ha aceptado tu solicitud para participar en el plan: Tarde de skate','2024-09-03 11:22:24');
+INSERT INTO `notification` VALUES (1,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',2,'Juan Perez ha solicitado participar en tu plan: Tarde de skate','2024-09-03 08:42:18',0),(2,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',9,'Has solicitado participar en el plan: Tarde de skate','2024-09-03 08:42:18',0),(3,'77ce78e7-69ae-4b3d-9b6f-fc88a11defd5',1,'Has aceptado la solicitud de Josep en el plan: Tarde de skate','2024-09-03 11:22:24',0),(4,'481fbb71-94e3-44b0-b668-37467499b869',3,'Jon Doe ha aceptado tu solicitud para participar en el plan: Tarde de skate','2024-09-03 11:22:24',0);
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +144,7 @@ CREATE TABLE `notification_type` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `read` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +153,7 @@ CREATE TABLE `notification_type` (
 
 LOCK TABLES `notification_type` WRITE;
 /*!40000 ALTER TABLE `notification_type` DISABLE KEYS */;
-INSERT INTO `notification_type` VALUES (1,'message','2024-09-02 07:59:37',0),(2,'participation_request','2024-09-02 07:59:37',0),(3,'participation_accepted','2024-09-02 07:59:37',0),(4,'participation_rejected','2024-09-02 07:59:37',0),(5,'participation_cancelled','2024-09-02 07:59:37',0),(6,'plan_rated','2024-09-02 07:59:37',0),(7,'rated','2024-09-02 07:59:37',0),(8,'followed','2024-09-02 07:59:37',0);
+INSERT INTO `notification_type` VALUES (1,'message','2024-09-02 07:59:37',0),(2,'participation_request','2024-09-02 07:59:37',0),(3,'participation_accepted','2024-09-02 07:59:37',0),(4,'participation_rejected','2024-09-02 07:59:37',0),(5,'participation_cancelled','2024-09-02 07:59:37',0),(6,'plan_rated','2024-09-02 07:59:37',0),(7,'rated','2024-09-02 07:59:37',0),(8,'followed','2024-09-02 07:59:37',0),(9,'info','2024-09-05 07:32:19',0);
 /*!40000 ALTER TABLE `notification_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -573,4 +574,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-03 13:59:32
+-- Dump completed on 2024-09-05 13:09:32
