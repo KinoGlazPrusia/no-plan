@@ -13,6 +13,7 @@ export const APP_URL = MODE === 'dev'
 export const BASE_PATH = MODE === 'dev'
   ? `${DEV_HOST}frontend/`
   : `${PROD_HOST}frontend/`
+  
 
 export const PUBLIC_PATH = BASE_PATH + 'public/'
 export const SRC_PATH = BASE_PATH + 'src/'
