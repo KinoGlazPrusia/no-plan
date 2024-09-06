@@ -7,8 +7,8 @@ const DEV_HOST = 'https://localhost/no-plan/'
 const PROD_HOST = 'https://1c56e0b9-2fb7-41ee-9de0-c9f19d529ab1-10-244-8-197-8080.spch.r.killercoda.com/'
 
 export const APP_URL = MODE === 'dev' 
-  ? DEV_HOST 
-  : PROD_HOST
+  ? `${DEV_HOST}app/public/`
+  : `${PROD_HOST}app/public/`
 
 export const BASE_PATH = MODE === 'dev'
   ? `${DEV_HOST}frontend/`
