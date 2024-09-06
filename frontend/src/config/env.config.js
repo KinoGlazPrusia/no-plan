@@ -2,18 +2,15 @@
 // En este caso desde el archivo App.js que es llamado desde index.html
 // Por lo tanto las rutas son relativas al archivo index.html
 
-const MODE = 'prod' // 'dev' o 'prod'
-const DEV_HOST = 'https://localhost/no-plan/'
+const MODE = 'dev' // 'dev' o 'prod'
+const DEV_HOST = 'http://localhost/no-plan/'
 const PROD_HOST = 'http://147.83.7.155/no-plan/'
 
-export const APP_URL = MODE === 'dev' 
-  ? `${DEV_HOST}app/public/`
-  : `${PROD_HOST}app/public/`
+export const APP_URL =
+  MODE === 'dev' ? `${DEV_HOST}app/public/` : `${PROD_HOST}app/public/`
 
-export const BASE_PATH = MODE === 'dev'
-  ? `${DEV_HOST}frontend/`
-  : `${PROD_HOST}frontend/`
-
+export const BASE_PATH =
+  MODE === 'dev' ? `${DEV_HOST}frontend/` : `${PROD_HOST}frontend/`
 
 export const PUBLIC_PATH = BASE_PATH + 'public/'
 export const SRC_PATH = BASE_PATH + 'src/'

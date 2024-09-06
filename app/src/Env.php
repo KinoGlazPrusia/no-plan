@@ -7,10 +7,10 @@ namespace App;
 class Env
 {
     /* STATUS */
-    const STATUS = 'prod'; // Puede ser 'dev' o 'prod'
+    const STATUS = 'dev'; // Puede ser 'dev' o 'prod'
 
     /* HOST */
-    const APP_HOST = 'http://147.83.7.155/'; //http://localhost/
+    const APP_HOST = 'http://localhost/';
 
     /* DATABASE */
     const DB_TYPE = 'mysql';

@@ -13,25 +13,29 @@ use Secret\Secret;
 
 class JWToken {
     public static function encodeToken(User $user, array $roles, $validityTime): string {
-        $key = Secret::JWT_SECRET_KEY;
-        $issuedAt = time();
-        $payload = [
-            'iss' => Env::APP_HOST,                 // issuer
-            'sub' => $user->id,                     // subject
-            'aud' => Env::APP_HOST,                 // audience
-            'iat' => $issuedAt,                     // issued at
-            'nbf' => $issuedAt,                     // not before
-            'exp' => $issuedAt + $validityTime,     // expiration (segundos)
-            'jti' => bin2hex(random_bytes(16)),     // JWT ID
-            'uid' => $user->id,                     // User ID
-            'roles' => array_map(function($role) {  // Roles
-                return $role->role;
-            }, $roles),  
-            'email' => $user->email                 // Email
-        ];
-        $jwt = JWT::encode($payload, $key, 'HS256');
+        try {
+            $key = Secret::JWT_SECRET_KEY;
+            $issuedAt = time();
+            $payload = [
+                'iss' => Env::APP_HOST,                 // issuer
+                'sub' => $user->id,                     // subject
+                'aud' => Env::APP_HOST,                 // audience
+                'iat' => $issuedAt,                     // issued at
+                'nbf' => $issuedAt,                     // not before
+                'exp' => $issuedAt + $validityTime,     // expiration (segundos)
+                'jti' => bin2hex(random_bytes(16)),     // JWT ID
+                'uid' => $user->id,                     // User ID
+                'roles' => array_map(function($role) {  // Roles
+                    return $role->role;
+                }, $roles),  
+                'email' => $user->email                 // Email
+            ];
+            $jwt = JWT::encode($payload, $key, 'HS256');
 
-        return $jwt;
+            return $jwt;
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     public static function decodeToken(string $jwt): Object {
