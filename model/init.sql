@@ -1,3 +1,6 @@
+CREATE USER 'noplanuser'@'%' IDENTIFIED BY 'noplanuser';
+GRANT ALL PRIVILEGES ON no_plan_db.* TO 'noplanuser'@'%';
+
 CREATE DATABASE  IF NOT EXISTS `no_plan_db` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
 USE `no_plan_db`;
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
