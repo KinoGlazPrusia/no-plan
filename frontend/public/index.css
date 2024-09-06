@@ -20,7 +20,7 @@
   padding: 0;
 }
 
-.body {
-  background: url('../public/assets/background/purple-gradient.avif');
+body {
+  background: url('../public/assets/background/summer-gradient.avif');
   background-size: cover;
 }
