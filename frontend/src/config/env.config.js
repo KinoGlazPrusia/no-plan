@@ -3,14 +3,16 @@
 // Por lo tanto las rutas son relativas al archivo index.html
 
 const MODE = 'dev' // 'dev' o 'prod'
+const DEV_HOST = DEV_HOST 
+const PROD_HOST = 'https://1c56e0b9-2fb7-41ee-9de0-c9f19d529ab1-10-244-8-197-8080.spch.r.killercoda.com/'
 
 export const APP_URL = MODE === 'dev' 
-  ? 'http://localhost/no-plan/app/public/' 
-  : 'http://147.83.7.203/no-plan/app/public/' 
+  ? DEV_HOST 
+  : PROD_HOST
 
 export const BASE_PATH = MODE === 'dev'
-  ? 'http://localhost/no-plan/frontend/'
-  : 'http://147.83.7.203/no-plan/frontend/'
+  ? `${DEV_HOST}frontend/`
+  : `${PROD_HOST}frontend/`
 
 export const PUBLIC_PATH = BASE_PATH + 'public/'
 export const SRC_PATH = BASE_PATH + 'src/'
