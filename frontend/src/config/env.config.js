@@ -2,9 +2,9 @@
 // En este caso desde el archivo App.js que es llamado desde index.html
 // Por lo tanto las rutas son relativas al archivo index.html
 
-const MODE = 'dev' // 'dev' o 'prod'
+const MODE = 'prod' // 'dev' o 'prod'
 const DEV_HOST = 'https://localhost/no-plan/'
-const PROD_HOST = 'https://1c56e0b9-2fb7-41ee-9de0-c9f19d529ab1-10-244-8-197-8080.spch.r.killercoda.com/'
+const PROD_HOST = 'https://811b0869-a965-49fe-bdc2-26d75fa18ca7-10-244-8-236-8080.spch.r.killercoda.com/'
 
 export const APP_URL = MODE === 'dev' 
   ? `${DEV_HOST}app/public/`
