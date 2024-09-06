@@ -21,5 +21,6 @@
 }
 
 .body {
-  background: url(https://img.freepik.com/free-vector/vibrant-summer-ombre-background-vector_53876-105765.jpg?t=st=1725617880~exp=1725621480~hmac=069ae0f38f39d9628228d850ce3745b2bdf74c2577bbfc7c991f73f8083ba5d4&w=740)
+  background: url('../public/assets/background/purple-gradient.avif');
+  background-size: cover;
 }
