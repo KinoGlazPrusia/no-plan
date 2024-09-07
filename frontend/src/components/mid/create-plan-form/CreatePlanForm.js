@@ -34,7 +34,7 @@ class CreatePlanForm extends PlainComponent {
 
     this.userContext = new PlainContext('user', this, false)
 
-    this.fillData(1) // [ ] Implementar correctamente esta función
+    // this.fillData(1) // [ ] Esta función será llamada para poner el formulario en modo edición
 
     // [ ] Quizás se podría sustituir el select multiple por un div lleno de check chips como en un filtro
   }
