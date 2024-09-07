@@ -39,13 +39,12 @@
 }
 
 .unfold-menu {
+  user-select: none;
   cursor: pointer;
 
   position: fixed;
   bottom: 200%;
-  left: 50%;
-
-  transform: translateX(-50%);
+  left: 0.5em;
 
   appearance: none;
 
@@ -54,13 +53,15 @@
 
   border: none;
   border-radius: 10pt;
-  background-color: var(--bg-color);
-
-  color: var(--text-color);
-  font-size: 32px;
-  font-weight: bold;
+  /* background-color: var(--bg-color); */
+  background-color: transparent;
 
   transition: 300ms;
+}
+
+.unfold-menu span {
+  color: var(--text-color);
+  font-size: 30px;
 }
 
 .unfold-menu.hidden {
