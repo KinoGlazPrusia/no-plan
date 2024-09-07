@@ -13,9 +13,9 @@ class MySqlDatabase implements ITransactionalDatabase {
 
     public function connect(): bool {
         try {
-            $dsn = Env::DB_TYPE . ':host=' . Env::DB_HOST . ';dbname=' . Env::DB_NAME;
+            $dsn = Env::$DB_TYPE . ':host=' . Env::$DB_HOST . ';dbname=' . Env::$DB_NAME;
 
-            $this->conn = new PDO($dsn, Env::DB_USER, Env::DB_PASS);
+            $this->conn = new PDO($dsn, Env::$DB_USER, Env::$DB_PASS);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } 
         catch (PDOException $e) {

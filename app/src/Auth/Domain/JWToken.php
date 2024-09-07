@@ -17,9 +17,9 @@ class JWToken {
             $key = Secret::JWT_SECRET_KEY;
             $issuedAt = time();
             $payload = [
-                'iss' => Env::APP_HOST,                 // issuer
+                'iss' => Env::$APP_HOST,                 // issuer
                 'sub' => $user->id,                     // subject
-                'aud' => Env::APP_HOST,                 // audience
+                'aud' => Env::$APP_HOST,                 // audience
                 'iat' => $issuedAt,                     // issued at
                 'nbf' => $issuedAt,                     // not before
                 'exp' => $issuedAt + $validityTime,     // expiration (segundos)

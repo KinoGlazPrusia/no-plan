@@ -43,7 +43,7 @@ class LoginUseCase implements IUseCase {
             $_SESSION['roles'] = $roles;
             
             // Generamos el token de sesión y su cookie
-            JWToken::generateCookie($user, $roles, Env::SESSION_TOKEN_EXPIRATION_TIME);
+            JWToken::generateCookie($user, $roles, Env::$SESSION_TOKEN_EXPIRATION_TIME);
 
             // Devolvemos el usuario
             return $user;

@@ -1,0 +1,31 @@
+{
+    "mode": "dev",
+    "dev": {
+        "app_host": "http://localhost/",
+        "db_type": "mysql",
+        "db_host": "localhost",
+        "db_user": "root",
+        "db_pass": "",
+        "db_name": "no_plan_db",
+        "base_dir": "no-plan/app/",
+        "src_dir": "no-plan/app/src/",
+        "public_dir": "no-plan/app/public/",
+        "avatar_images_dir": "no-plan/app/public/assets/images/avatar/",
+        "plan_images_dir": "no-plan/app/public/assets/images/plan/",
+        "session_token_expiration_time": 86400
+    },
+    "prod": {
+        "app_host": "http://147.83.7.155/",
+        "db_type": "mysql",
+        "db_host": "db",
+        "db_user": "noplanuser",
+        "db_pass": "noplanuser",
+        "db_name": "no_plan_db",
+        "base_dir": "no-plan/app/",
+        "public_dir": "no-plan/app/public/",
+        "avatar_images_dir": "no-plan/app/public/assets/images/avatar/",
+        "plan_images_dir": "no-plan/app/public/assets/images/plan/",
+        "src_dir": "no-plan/app/src/",
+        "session_token_expiration_time": 86400
+    }
+}

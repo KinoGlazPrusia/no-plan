@@ -31,7 +31,7 @@ class Router
         $query = parse_url($url, PHP_URL_QUERY);
 
         // Eliminamos la parte del directorio público del path
-        $path = substr($path, strlen(Env::PUBLIC_DIR) + 1);
+        $path = substr($path, strlen(Env::$PUBLIC_DIR) + 1);
         $path = rtrim($path, '/');
 
         // Para construir la query necesitamos métodos distintos dependiendo del request method
