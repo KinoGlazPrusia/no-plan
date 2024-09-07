@@ -51,7 +51,7 @@ class JWToken {
     public static function generateCookie(User $user, array $roles, $validityTime): void {
         try {
             $jwt = self::encodeToken($user, $roles, $validityTime);
-            setcookie('session_token', $jwt, time() + $validityTime, secure: true, httponly:true);
+            setcookie('session_token', $jwt, time() + $validityTime, httponly:true);
         }
         catch (\Exception $e) {
             throw $e;

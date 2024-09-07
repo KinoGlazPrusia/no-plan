@@ -44,12 +44,12 @@ class LoginUseCase implements IUseCase {
             
             // Generamos el token de sesión y su cookie
             JWToken::generateCookie($user, $roles, Env::SESSION_TOKEN_EXPIRATION_TIME);
+
+            // Devolvemos el usuario
+            return $user;
         }
         catch (\Exception $e) {
             throw $e;
         }
-
-        // Devolvemos el usuario
-        return $user;
     }
 }
