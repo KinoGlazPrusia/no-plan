@@ -25,21 +25,22 @@ class NotificationModal extends PlainComponent {
   }
 
   template() {
+    const notificationCategory = {
+      1: 'message',
+      2: 'participation_request',
+      3: 'participation_accepted',
+      4: 'participation_rejected',
+      5: 'participation_cancelled',
+      6: 'plan_rated',
+      7: 'rated',
+      8: 'followed',
+      9: 'info'
+    }
+
     const notifications = () => {
       if (!this.notifications.getState()) return null
       return this.notifications.getState().map((notification) => {
         const createdAt = helper.timeFromNow(notification.created_at)
-        const notificationCategory = {
-          1: 'message',
-          2: 'participation_request',
-          3: 'participation_accepted',
-          4: 'participation_rejected',
-          5: 'participation_cancelled',
-          6: 'plan_rated',
-          7: 'rated',
-          8: 'followed',
-          9: 'info'
-        }
 
         if (notification.notification_type_id === 2) {
           return `
@@ -79,6 +80,11 @@ class NotificationModal extends PlainComponent {
             <div class="content">
                 <ul class="notification-list">
                     ${notifications() && notifications().join('')}
+                    <li class="notification no-more read">
+                      <div class="notification-wrapper ${notificationCategory[1]} no-more">
+                          <span class="notification-message">No more notifications...</span>
+                      </div>
+                  </li>
                 </ul>
             </div>
             <div class="button-wrapper">
@@ -179,6 +185,10 @@ class NotificationModal extends PlainComponent {
         this.$(
           `.notification:has(button[id="${notificationId}"])`
         ).classList.add('read')
+      }
+
+      if (this.parentComponent.notifications.getState().length === 0) {
+        this.$('.no-more').classList.remove('read')
       }
     } catch (error) {
       throw error

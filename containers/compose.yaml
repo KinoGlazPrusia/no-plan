@@ -13,7 +13,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - /var/lib/mysql:/var/lib/mysql
+      - /var/lib/mysql:/var/lib/mysql # Seleccionar el volumen en el que se guardará la base de datos y después hacer un import con phpmyadmin
     environment:
       - MYSQL_ROOT_PASSWORD=kinoglaz
       - MYSQL_DATABASE=no_plan_db

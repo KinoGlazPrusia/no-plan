@@ -18,7 +18,6 @@ class SignUpPage extends PlainComponent {
   template() {
     return `
             <p-signup-form></p-signup-form>
-            <p-navbar></p-navbar>
             <span class="login-link">Already have an account? <a class="to-login">Log In</a></span>
         `
   }

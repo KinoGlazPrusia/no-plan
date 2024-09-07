@@ -29,7 +29,6 @@ class Navbar extends PlainComponent {
   async loadNotifications(reRender = true) {
     const unreadNotifications = await apiNotification.getUnreadNotifications()
     this.notifications.setState(unreadNotifications.data, reRender)
-    console.log(this.notifications.getState())
 
     // Mantenemos la actualización de las notificaciones en un bucle infinito
     /* setTimeout(async () => {
@@ -74,8 +73,6 @@ class Navbar extends PlainComponent {
 
   // [ ] Habría que revisar las responsabilidades de este componente y del notificationModal y rehacer la estructura (de momento no hay tiempo)
   notificationRead(notificationId) {
-    console.log(this.notifications.getState())
-
     let newNotifications = this.notifications
       .getState()
       .filter((notification) => {
@@ -84,7 +81,10 @@ class Navbar extends PlainComponent {
 
     this.notifications.setState(newNotifications, false)
 
-    console.log(this.notifications.getState())
+    // [ ] Esto es un parche para modificar los estilos. Debería trasladarse esto a un componente externo y re-renderizarlo cuando se cambie el estado.
+    if (this.notifications.getState().length === 0) {
+      this.$('.notification-chip').style.display = 'none'
+    }
 
     this.$('.notification-chip').textContent =
       this.notifications.getState().length
