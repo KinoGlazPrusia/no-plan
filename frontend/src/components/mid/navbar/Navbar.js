@@ -38,13 +38,23 @@ class Navbar extends PlainComponent {
 
   // [ ] Implementar deshabilitación de botones dependiendo del estado de autenticación del usuario
   template() {
+    this.wrapper.classList.add('hidden')
     const notificationChip = () => {
       return this.notifications.getState().length > 0
         ? `<span class="notification-chip pop">${this.notifications.getState().length}</span>`
         : ''
     }
 
+    const unfoldMenuButton = () => {
+      return `
+          <button class="unfold-menu ${!this.wrapper.classList.contains('hidden') ? 'hidden' : ''}" type="button">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        `
+    }
+
     return `
+            ${unfoldMenuButton()}
             <p-navbar-button icon="person" path="user/profile" ${this.navigationContext.getData('currentPage') === 'user/profile' ? 'selected="true' : ''}"></p-navbar-button>
             <p-navbar-button icon="event" path="user/plans" ${this.navigationContext.getData('currentPage') === 'user/plans' ? 'selected="true"' : ''}"></p-navbar-button>
             <p-navbar-button icon="add" path="plan/create" ${this.navigationContext.getData('currentPage') === 'plan/create' ? 'selected="true' : ''}"></p-navbar-button>
@@ -65,10 +75,24 @@ class Navbar extends PlainComponent {
         this.openNotificationModal()
       }
     }
+
+    this.$('.unfold-menu').onclick = () => {
+      this.toogleMenu()
+    }
   }
 
   openNotificationModal() {
     this.$('p-notification-modal').open()
+  }
+
+  toogleMenu() {
+    this.wrapper.classList.toggle('hidden')
+    this.$('.unfold-menu').classList.toggle('hidden')
+
+    setTimeout(() => {
+      this.wrapper.classList.toggle('hidden')
+      this.$('.unfold-menu').classList.toggle('hidden')
+    }, 3000)
   }
 
   // [ ] Habría que revisar las responsabilidades de este componente y del notificationModal y rehacer la estructura (de momento no hay tiempo)
