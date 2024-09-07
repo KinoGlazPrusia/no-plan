@@ -55,6 +55,7 @@
   border-radius: 10pt;
   /* background-color: var(--bg-color); */
   background-color: transparent;
+  backdrop-filter: blur(10px);
 
   transition: 300ms;
 }
