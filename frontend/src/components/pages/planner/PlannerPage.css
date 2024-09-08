@@ -85,7 +85,8 @@
 
 button.disabled {
   pointer-events: none;
-  color: var(--tertiary-color);
+  opacity: 0;
+  /* color: var(--tertiary-color); */
 }
 
 @media screen and (max-width: 750px) {
