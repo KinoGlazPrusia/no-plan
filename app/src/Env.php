@@ -66,7 +66,7 @@ class Env
         self::$SESSION_TOKEN_EXPIRATION_TIME = self::$config['session_token_expiration_time'];
     }
 
-    // Método estático para inicializar la configuración una vez.
+    // Método estático para inicializar la configuración una vez cuando la clase es cargada por el autoloader al ser requerida.
     public static function init()
     {
         self::loadConfig();
