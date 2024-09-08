@@ -26,7 +26,6 @@ class PlanCarousel extends PlainComponent {
 
   async connectedCallback() {
     super.connectedCallback()
-    // [ ] implementar await this.getMaxPages() (cambiará el estado del max pages)
     await this.fetchData()
     this.centerSelectedCard()
   }
