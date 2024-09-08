@@ -11,6 +11,7 @@ use App\Auth\Application\LoginUseCase;
 use App\Auth\Application\LogoutUseCase;
 use App\Auth\Application\EmailExistsUseCase;
 use App\Auth\Application\CheckAuthenticationUseCase;
+use App\Auth\Application\GetLoggedUserFilteredDataUseCase;
 
 /* USER */
 use App\User\Infrastructure\UserController;
@@ -144,6 +145,11 @@ class Routes
                 'plan' => [
                     'controller' => [PlanController::class, 'fetchPlanData'],
                     'logic' => new GetPlanByIdService(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'public'
+                ],
+                'user-data' => [
+                    'controller' => [AuthController::class, 'fetchUserData'],
+                    'logic' => new GetLoggedUserFilteredDataUseCase(new UserRepository(new MySqlDatabase)),
                     'access' => 'public'
                 ]
             ],

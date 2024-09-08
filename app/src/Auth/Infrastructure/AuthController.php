@@ -99,4 +99,23 @@ class AuthController {
             Response::jsonError(500, $e->getMessage());
         }
     }
+
+    public static function fetchUserData(Request $request, IUseCase | IService $fetchUserData): void {
+        // Validamos la request
+        if (!$request->validateQuery([])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        if (!isset($_SESSION['uid'])) {
+            Response::jsonError(403, 'You are not logged in');
+        }
+
+        try {
+            $user = $fetchUserData();
+            Response::json('success', 200, 'User data fetched', $user->serialize(false));
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
 }
