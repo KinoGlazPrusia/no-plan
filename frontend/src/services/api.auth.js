@@ -1,6 +1,6 @@
 import { API_ENDPOINTS } from '../config/env.config.js'
 
-export async function isAuthenticated () {
+export async function isAuthenticated() {
   const url = API_ENDPOINTS.IS_AUTHENTICATED
   const response = await fetch(url)
 
@@ -12,7 +12,7 @@ export async function isAuthenticated () {
   return data
 }
 
-export async function login (email, password) {
+export async function login(email, password) {
   const url = API_ENDPOINTS.LOGIN
   const body = new FormData()
 
@@ -32,7 +32,7 @@ export async function login (email, password) {
   return data
 }
 
-export async function emailExists (email) {
+export async function emailExists(email) {
   const url = `${API_ENDPOINTS.EMAIL_EXISTS}?email=${email}`
 
   const response = await fetch(url)
@@ -45,13 +45,25 @@ export async function emailExists (email) {
   return data
 }
 
-export async function logout () {
+export async function logout() {
   const url = API_ENDPOINTS.LOGOUT
 
   const response = await fetch(url)
 
   if (!response.ok) {
     throw new Error('Something went wrong while logging out')
+  }
+
+  const data = await response.json()
+  return data
+}
+
+export async function fetchLoggedUserData() {
+  const url = API_ENDPOINTS.USER_DATA
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error('Something went wrong while fetching user data')
   }
 
   const data = await response.json()

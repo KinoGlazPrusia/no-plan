@@ -26,6 +26,7 @@ use App\Plan\Application\CreatePlanService;
 use App\Plan\Application\GetAllPlansService;
 use App\Plan\Application\UpdatePlanService;
 use App\Plan\Application\GetPlanByIdService;
+use App\Plan\Application\CountAllNotCreatedPlansUseCase;
 
 /* PARTICIPACION */
 use App\Participation\Infrastructure\ParticipationController;
@@ -151,6 +152,11 @@ class Routes
                     'controller' => [AuthController::class, 'fetchUserData'],
                     'logic' => new GetLoggedUserFilteredDataUseCase(new UserRepository(new MySqlDatabase)),
                     'access' => 'public'
+                ],
+                'plans-count' => [
+                    'controller' => [PlanController::class, 'countAllNotCreatedPlans'],
+                    'logic' => new CountAllNotCreatedPlansUseCase(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'private'
                 ]
             ],
             'POST' => [

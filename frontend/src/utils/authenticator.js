@@ -22,3 +22,14 @@ export async function checkAuthentication(permittedRoles, callback, fallback) {
     fallback && fallback()
   }
 }
+
+export async function fetchLoggedUserDataInContext(context) {
+  if (!context.getData('user')) {
+    const response = await apiAuth.fetchLoggedUserData()
+    if (response.status === 'success') {
+      context.setData({ user: response.data }, false)
+    } else {
+      throw new Error('Something went wrong while fetching user data')
+    }
+  }
+}

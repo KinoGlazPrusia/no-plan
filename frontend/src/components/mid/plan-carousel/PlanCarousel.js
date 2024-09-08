@@ -57,6 +57,7 @@ class PlanCarousel extends PlainComponent {
 
   async fetchData() {
     await this.fetchPlans()
+    await this.setMaxPages()
     await this.loadCards()
   }
 
@@ -66,6 +67,12 @@ class PlanCarousel extends PlainComponent {
       this.itemsPerPage.getState()
     )
     this.data.setState(plans.data, false)
+  }
+
+  async setMaxPages() {
+    const planCount = await apiPlan.countAllNotCreatedPlans()
+    const maxPages = Math.ceil(planCount / this.itemsPerPage.getState())
+    this.maxPages.setState(maxPages, false)
   }
 
   async loadCards() {
@@ -116,22 +123,18 @@ class PlanCarousel extends PlainComponent {
   }
 
   async nextPage() {
-    // [ ] Falta implementar un método en el backend que devuelva el número máximo de páginas 
+    // [ ] Falta implementar un método en el backend que devuelva el número máximo de páginas
     // en base a los items por página definidos
     const currentPage = this.currentPage.getState()
-    
+
     if (currentPage < this.maxPages.getState()) {
       this.currentPage.setState(this.currentPage.getState() + 1, false)
       if (this.currentPage.getState() > 1) this.parentComponent.enableLeft()
-      if (this.currentPage.getState() === this.maxPages.getState()) this.parentComponent.disableRight()
-
-      /* await this.fetchData()
-      this.centerSelectedCard() */
+      if (this.currentPage.getState() === this.maxPages.getState())
+        this.parentComponent.disableRight()
     } else {
       this.parentComponent.disableRight()
     }
-
-    console.log(this.currentPage.getState())
   }
 
   async prevPage() {
@@ -140,18 +143,12 @@ class PlanCarousel extends PlainComponent {
     if (currentPage > 1) {
       this.parentComponent.enableLeft()
       this.currentPage.setState(this.currentPage.getState() - 1, false)
-      if (this.currentPage.getState() < this.maxPages.getState()) this.parentComponent.enableRight()
+      if (this.currentPage.getState() < this.maxPages.getState())
+        this.parentComponent.enableRight()
       if (this.currentPage.getState() === 1) this.parentComponent.disableLeft()
-
-      /* await this.fetchData()
-      this.centerSelectedCard() */
     } else {
       this.parentComponent.disableLeft()
     }
-
-    console.log(this.currentPage.getState())
-
-    
   }
 }
 

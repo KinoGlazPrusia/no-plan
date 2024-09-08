@@ -86,6 +86,27 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    public function countAllNotCreatedPlans(string $userId): int {
+        try {
+            $data = ['user_id' => $userId];
+
+            $sql = "
+                SELECT COUNT(*) AS count
+                FROM plan 
+                WHERE created_by_id != :user_id";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $result =$this->db->execute($stmt, $data)[0];
+            $this->db->disconnect();
+            return $result->count;
+        } 
+        catch (\Exception $e) {
+            $this->db->disconnect();
+            throw $e;
+        }
+    }
+
     public function getPlanStatusByName(string $status): PlanStatus {
         try {
             $res = $this->findBy('plan_status', 'status', $status);

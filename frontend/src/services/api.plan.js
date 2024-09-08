@@ -16,7 +16,10 @@ export async function fetchAllCategories() {
 }
 
 export async function fetchAllPlans(page = 1, itemsPerPage = 10) {
-  const url = API_ENDPOINTS.FETCH_ALL_PLANS.replace('{page}', page).replace('{items}', itemsPerPage)
+  const url = API_ENDPOINTS.FETCH_ALL_PLANS.replace('{page}', page).replace(
+    '{items}',
+    itemsPerPage
+  )
   try {
     const response = await fetch(url)
     if (!response.ok) {
@@ -122,6 +125,22 @@ export async function updatePlan(planId, planData) {
 
     const data = await response.json()
     return data
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function countAllNotCreatedPlans() {
+  const url = API_ENDPOINTS.PLANS_COUNT
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error(
+        'Something went wrong while counting all not created plans'
+      )
+    }
+    const data = await response.json()
+    return data.data[0]
   } catch (error) {
     throw error
   }

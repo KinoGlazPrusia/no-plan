@@ -161,6 +161,21 @@ class PlanController {
         }
     }
 
+    public static function countAllNotCreatedPlans(Request $request, IUseCase | IService $countAllNotCreatedPlans): void {
+        // Validamos la request
+        if (!$request->validateQuery([])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        try {
+            $count = $countAllNotCreatedPlans($_SESSION['uid']);
+            Response::json('success', 200, 'All plans count', [$count]);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
     public static function fetchPlanData(Request $request, IUseCase | IService $fetchPlanData): void {
         // Validamos la request
         if (!$request->validateQuery(['id'])) {

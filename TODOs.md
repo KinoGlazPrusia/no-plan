@@ -1,7 +1,7 @@
 # TODOs
 
 ## WORKING ON ...
-- [ ] Revisar el error con el session_token dentro del contenedor de docker
+- [x] Revisar el error con el session_token dentro del contenedor de docker
 - [x] Crear el formulario de registro de planes + Página de registro funcional
 - [x] Crear la página de visualización de planes (con acción de suscripción y cancelación)
 - [ ] Terminar de implementar la función de aceptar o rechazar un participante
