@@ -133,7 +133,7 @@ class PlanCarousel extends PlainComponent {
       this.parentComponent.disableRight()
     }
 
-    this.console.log(this.currentPage.getState())
+    console.log(this.currentPage.getState())
 
     await this.fetchData()
     this.centerSelectedCard()
@@ -152,7 +152,7 @@ class PlanCarousel extends PlainComponent {
       this.parentComponent.disableLeft()
     }
 
-    this.console.log(this.currentPage.getState())
+    console.log(this.currentPage.getState())
 
     await this.fetchData()
     this.centerSelectedCard()
