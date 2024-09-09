@@ -1,16 +1,14 @@
 # TODOs
 
 ## WORKING ON ...
-
-- [x] Terminar de implementar la función de aceptar a un participante
-- [x] Terminar de implementar la función de rechazar a un participante
-- [x] Implementar la llamada al endpoint para suscribirse a un plan (componente de PlanCard)
-- [ ] Implementar los iconos de categoría en las 'plan-cards' (con un tooltip al hacer hoover)
+- [ ] Implementar los iconos de categoría en las 'plan-cards' (con un tooltip al hacer hover)
 - [ ] Implementar un componente 'toast' para mostrar mensajes al usuario (de momento solo los de error)
 - [ ] Implementar validaciones pendientes en los formularios de:
         - Creación de plan
         - Edición de plan
         - Plan step 
+- [ ] Crear la página de calendario, en el que salgan chips de notificación con el número
+de planes para el día (en vista de calendario), y al apretar sobre la chip, se despliegue un carousel en el que se puedan visualizar todas las cards del plan e interactuar con ellas.
 - [ ] Crear la página de usuario con visualización de notificaciones.
 - [ ] Solucionar el bug en el formulario de registro de usuarios (activación del botón submit)
 - [ ] Crear un logo y añadirlo a las páginas (revisar el diseño en general) (añadir también un caption en la página de login/signup, estilo 'Plan, meet, enjoy')
@@ -40,6 +38,9 @@ tiempo para implementarlo*
 - [x] Crear el formulario de registro de planes + Página de registro funcional
 - [x] Crear la página de visualización de planes (con acción de suscripción y cancelación)
 - [x] !!! IMPORTANTE !!! Implementar un método para restaurar los datos de usuario en el contexto cuando se restaure la sesión a través del token. !!! BUG !!!
+- [x] Terminar de implementar la función de aceptar a un participante
+- [x] Terminar de implementar la función de rechazar a un participante
+- [x] Implementar la llamada al endpoint para suscribirse a un plan (componente de PlanCard)
 - [ ] Crear endpoint para hacer un fetch de todos los planes de un usuario.
 - [ ] En el componente FormFeedback, añadir un modal cuando el mensaje supere las 2 líneas.
 - [ ] Completar validaciones para el SignUpForm.
