@@ -41,9 +41,9 @@ export const API_ENDPOINTS = {
   GET_UNREAD_NOTIFICATIONS: APP_URL + 'notifications/unread',
   SET_NOTIFICATION_AS_READ: APP_URL + 'notifications/set-read/?id={id}',
   ACCEPT_PARTICIPATION:
-    APP_URL + 'participation/accept/?user_id={userId}&plan_id={planId}',
+    APP_URL + 'accept-participation/?user_id={userId}&plan_id={planId}',
   REJECT_PARTICIPATION:
-    APP_URL + 'participation/reject/?user_id={userId}&plan_id={planId}',
+    APP_URL + 'reject-participation/?user_id={userId}&plan_id={planId}',
   USER_DATA: APP_URL + 'user-data',
   PLANS_COUNT: APP_URL + 'plans-count'
 }

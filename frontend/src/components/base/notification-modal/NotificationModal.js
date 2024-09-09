@@ -39,22 +39,24 @@ class NotificationModal extends PlainComponent {
 
     const notifications = () => {
       if (!this.notifications.getState()) return null
-      console.log(this.notifications.getState())
       return this.notifications.getState().map((notification) => {
         const createdAt = helper.timeFromNow(notification.created_at)
 
         if (notification.notification_type_id === 2) {
-          const planId = notification.content.match(/{planId=\d*}/)[0]
-          console.log(planId.match(/^[0-9]*$/)[0]) // [ ] Recuperar el id del plan
+          const userId = notification.user_id
+          const planId = notification.content
+          .match(/{planId=\d*}/)[0]
+          .split('=')[1]
+          .replace('}', '')
           return `
                 <li class="notification ${notification.read ? 'read' : ''}">
                     <div class="notification-wrapper ${notificationCategory[notification.notification_type_id]}">
                         <span class="notification-message">${notification.content.replace(/{planId=\d*}/, '')}</span>
                         <div class="notification-actions">
-                            <button class="accept" id="${notification.id}" planId="${planId.match(/\d*/)[0]}">
+                            <button class="accept" id="${notification.id}" plan-id="${planId}" user-id="${userId}">
                                 <span class="material-symbols-outlined">thumb_up</span>
                             </button>
-                            <button class="reject" id="${notification.id}" planId="${planId.match(/\d*/)[0]}">
+                            <button class="reject" id="${notification.id}" plan-id="${planId}" user-id="${userId}">
                                 <span class="material-symbols-outlined">thumb_down</span>
                             </button>
                         </div>
@@ -101,16 +103,26 @@ class NotificationModal extends PlainComponent {
     this.$('.close').onclick = () => this.close()
 
     if (this.$('.accept')) {
-      this.$('.accept').onclick = (e) => {
-        this.animateClick(e.target)
-        this.acceptParticipation(e.target.id)
+      const button = this.$('.accept')
+      button.onclick = (e) => {
+        this.animateClick(button)
+        this.acceptParticipation(
+          button.id, 
+          button.getAttribute('plan-id'),
+          button.getAttribute('user-id')
+        )
       }
     }
 
     if (this.$('.reject')) {
-      this.$('.reject').onclick = (e) => {
-        this.animateClick(e.target)
-        this.rejectParticipation(e.target.id)
+      const button = this.$('.reject')
+      button.onclick = (e) => {
+        this.animateClick(button)
+        this.rejectParticipation(
+          button.id, 
+          button.getAttribute('plan-id'),
+          button.getAttribute('user-id')
+        )
       }
     }
 
@@ -141,15 +153,11 @@ class NotificationModal extends PlainComponent {
   }
 
   // [ ] Terminar de implementar la función de aceptar o rechazar un participante
-  async acceptParticipation(notificationId) {
-    const notification = this.notifications
-      .getState()
-      .find((notification) => notification.id === notificationId)
-
+  async acceptParticipation(notificationId, planId, userId) {
     try {
       const response = await apiParticipation.acceptParticipation(
-        notification.user_id,
-        notificationId
+        userId,
+        planId
       )
 
       if (response.status === 'success') {
@@ -160,15 +168,11 @@ class NotificationModal extends PlainComponent {
     }
   }
 
-  async rejectParticipation(notificationId) {
-    const notification = this.notifications
-      .getState()
-      .find((notification) => notification.id === notificationId)
-
+  async rejectParticipation(notificationId, planId, userId) {
     try {
       const response = await apiParticipation.rejectParticipation(
-        notification.user_id,
-        notificationId
+        userId,
+        planId
       )
 
       if (response.status === 'success') {

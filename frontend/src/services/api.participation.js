@@ -71,11 +71,11 @@ export async function getRejectedPlanParticipations(planId) {
   }
 }
 
-export async function acceptParticipation(userId, notificationId) {
+export async function acceptParticipation(userId, planId) {
   const url = API_ENDPOINTS.ACCEPT_PARTICIPATION.replace(
     '{userId}',
     userId
-  ).replace('{planId}', notificationId)
+  ).replace('{planId}', planId)
   try {
     const response = await fetch(url)
     if (!response.ok) {
@@ -88,11 +88,11 @@ export async function acceptParticipation(userId, notificationId) {
   }
 }
 
-export async function rejectParticipation(userId, notificationId) {
+export async function rejectParticipation(userId, planId) {
   const url = API_ENDPOINTS.REJECT_PARTICIPATION.replace(
     '{userId}',
     userId
-  ).replace('{planId}', notificationId)
+  ).replace('{planId}', planId)
   try {
     const response = await fetch(url)
     if (!response.ok) {

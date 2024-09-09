@@ -2,7 +2,8 @@
 
 ## WORKING ON ...
 
-- [ ] Terminar de implementar la función de aceptar o rechazar un participante
+- [x] Terminar de implementar la función de aceptar a un participante
+- [x] Terminar de implementar la función de rechazar a un participante
 - [ ] Implementar la llamada al endpoint para suscribirse a un plan (componente de PlanCard)
 - [ ] Implementar los iconos de categoría en las 'plan-cards' (con un tooltip al hacer hoover)
 - [ ] Implementar un componente 'toast' para mostrar mensajes al usuario (de momento solo los de error)
@@ -12,7 +13,7 @@
         - Plan step 
 - [ ] Crear la página de usuario con visualización de notificaciones.
 - [ ] Solucionar el bug en el formulario de registro de usuarios (activación del botón submit)
-- [ ] Crear un logo y añadirlo a las páginas (revisar el diseño en general)
+- [ ] Crear un logo y añadirlo a las páginas (revisar el diseño en general) (añadir también un caption en la página de login/signup, estilo 'Plan, meet, enjoy')
 - [ ] Incluir varios temas que se activen según la hora (mañana, día, tarde, noche)
 - [ ] Implementar un placeholder en la imagen del plan-card si esta no carga o no se encuentra (basado en la categoría del plan)
 
