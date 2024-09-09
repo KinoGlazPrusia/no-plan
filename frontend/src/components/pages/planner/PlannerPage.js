@@ -51,7 +51,7 @@ class PlannerPage extends PlainComponent {
             <span class="fade-right"></span>
 
             <!-- PAGE SELECTOR -->
-            <div class="button-wrapper">
+            <div class="button-wrapper paginator">
               <button class="left-button disabled">
                 <span class="icon material-symbols-outlined">chevron_left</span>
               </button>
@@ -94,6 +94,14 @@ class PlannerPage extends PlainComponent {
 
   disableLeft() {
     this.$('.left-button').classList.add('disabled')
+  }
+
+  enablePaginator() {
+    this.$('.paginator').style.display = 'flex';
+  }
+
+  disablePaginator() {
+    this.$('.paginator').style.display = 'none';
   }
 
   nextPage() {

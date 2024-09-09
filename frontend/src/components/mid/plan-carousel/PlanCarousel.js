@@ -21,7 +21,7 @@ class PlanCarousel extends PlainComponent {
 
     this.currentPage = new PlainState(1, this) // [ ] Elevar estos estados al componente de página
     this.itemsPerPage = new PlainState(3, this)
-    this.maxPages = new PlainState(1, this)
+    this.maxPages = new PlainState(0, this)
   }
 
   async connectedCallback() {
@@ -72,6 +72,12 @@ class PlanCarousel extends PlainComponent {
     const planCount = await apiPlan.countAllNotCreatedPlans()
     const maxPages = Math.ceil(planCount / this.itemsPerPage.getState())
     this.maxPages.setState(maxPages, false)
+
+    if (maxPages <= 1 ) {
+      this.parentComponent.disablePaginator()
+    } else {
+      this.parentComponent.enablePaginator()
+    }
   }
 
   async loadCards() {
@@ -129,14 +135,13 @@ class PlanCarousel extends PlainComponent {
       if (this.currentPage.getState() > 1) this.parentComponent.enableLeft()
       if (this.currentPage.getState() === this.maxPages.getState())
         this.parentComponent.disableRight()
-    } else {
+
+      await this.fetchData()
+      this.centerSelectedCard()
+    } 
+    else {
       this.parentComponent.disableRight()
     }
-
-    console.log(this.currentPage.getState())
-
-    await this.fetchData()
-    this.centerSelectedCard()
   }
 
   async prevPage() {
@@ -148,14 +153,12 @@ class PlanCarousel extends PlainComponent {
       if (this.currentPage.getState() < this.maxPages.getState())
         this.parentComponent.enableRight()
       if (this.currentPage.getState() === 1) this.parentComponent.disableLeft()
+
+      await this.fetchData()
+      this.centerSelectedCard()
     } else {
       this.parentComponent.disableLeft()
     }
-
-    console.log(this.currentPage.getState())
-
-    await this.fetchData()
-    this.centerSelectedCard()
   }
 }
 

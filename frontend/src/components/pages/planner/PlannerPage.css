@@ -55,7 +55,7 @@
 
   transform: translate(-50%, 100%);
 
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
