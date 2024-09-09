@@ -26,10 +26,10 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php \
     && composer self-update \
     && rm composer-setup.php
 
-# Activamos el m      dulo de reescritura en apache
+# Activamos el módulo de reescritura en apache
 RUN a2enmod rewrite
 
-# Reiniciamos el servicio Apache
+# Reiniciamos el servicio Apache (no se si es realmente necesario ya que al iniciar la máquina empieza de cero)
 RUN service apache2 restart
 
 # Configuramos el directorio de trabajo
