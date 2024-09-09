@@ -21,7 +21,7 @@ class PlanCarousel extends PlainComponent {
 
     this.currentPage = new PlainState(1, this) // [ ] Elevar estos estados al componente de página
     this.itemsPerPage = new PlainState(3, this)
-    this.maxPages = new PlainState(4, this)
+    this.maxPages = new PlainState(1, this)
   }
 
   async connectedCallback() {
