@@ -14,6 +14,20 @@ export async function applyToPlan(planId) {
   }
 }
 
+export async function unapplyToPlan(planId) {
+  const url = API_ENDPOINTS.UNPARTICIPATE_IN_PLAN.replace('{planId}', planId)
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while unapplying to the plan')
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
 export async function getPendingPlanParticipations(planId) {
   const url = API_ENDPOINTS.GET_PENDING_PARTICIPATIONS.replace(
     '{planId}',

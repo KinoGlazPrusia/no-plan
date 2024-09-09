@@ -4,7 +4,7 @@
 
 - [x] Terminar de implementar la función de aceptar a un participante
 - [x] Terminar de implementar la función de rechazar a un participante
-- [ ] Implementar la llamada al endpoint para suscribirse a un plan (componente de PlanCard)
+- [x] Implementar la llamada al endpoint para suscribirse a un plan (componente de PlanCard)
 - [ ] Implementar los iconos de categoría en las 'plan-cards' (con un tooltip al hacer hoover)
 - [ ] Implementar un componente 'toast' para mostrar mensajes al usuario (de momento solo los de error)
 - [ ] Implementar validaciones pendientes en los formularios de:

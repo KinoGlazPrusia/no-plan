@@ -33,7 +33,18 @@ class SuscribeToPlanService implements IService {
             $participationData['status_id'] = 1;
 
             // 2. Caso de uso para guardar la participación en el repositorio
-            $this->repository->save(new Participation((object)$participationData));
+            try {
+                $this->repository->save(new Participation((object)$participationData));
+            } 
+            catch (\Exception $e) {
+                if (str_contains($e->getMessage(), 'SQLSTATE[23000]')) { // Si la participación ya existe, solo la actualizamos
+                    $this->repository->updateParticipationStatus(
+                        $participationData['user_id'],
+                        $participationData['plan_id'],
+                        $participationData['status_id']
+                    );
+                }
+            }
 
             // 3. Caso de uso para recuperar los datos del autor de un plan
             $creator = GetPlanCreatorContactDataUseCase::fetch($this->repository, $planId);

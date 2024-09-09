@@ -85,15 +85,21 @@ class PlanCarousel extends PlainComponent {
       const card =
         index === 0
           ? `
-        <div class="card-wrapper selected-card">
-          <p-plan-card plan-data='${JSON.stringify(planData)}'></p-plan-card>
-        </div>
-      `
+          <div class="card-wrapper selected-card">
+            <p-plan-card 
+              plan-data='${JSON.stringify(planData)}' 
+              plan-id="${planData.id}">
+            </p-plan-card>
+          </div>
+        `
           : `
-        <div class="card-wrapper">
-          <p-plan-card plan-data='${JSON.stringify(planData)}'></p-plan-card>
-        </div>
-      `
+          <div class="card-wrapper">
+            <p-plan-card 
+              plan-data='${JSON.stringify(planData)}' 
+              plan-id="${planData.id}">
+            </p-plan-card>
+          </div>
+        `
       return card
     })
 
@@ -156,7 +162,8 @@ class PlanCarousel extends PlainComponent {
 
       await this.fetchData()
       this.centerSelectedCard()
-    } else {
+    } 
+    else {
       this.parentComponent.disableLeft()
     }
   }

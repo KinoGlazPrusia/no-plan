@@ -32,6 +32,7 @@ export const API_ENDPOINTS = {
   UPDATE_PLAN: APP_URL + 'update-plan',
   FETCH_PLAN_DATA: APP_URL + 'plan/?id={id}',
   PARTICIPATE_IN_PLAN: APP_URL + 'participate/?plan_id={planId}',
+  UNPARTICIPATE_IN_PLAN: APP_URL + 'cancel-participation/?plan_id={planId}',
   GET_PENDING_PARTICIPATIONS:
     APP_URL + 'pending-participations/?plan_id={planId}',
   GET_ACCEPTED_PARTICIPATIONS:

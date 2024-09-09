@@ -232,7 +232,12 @@ class PlanCard extends PlainComponent {
   }
 
   listeners() {
-    this.$('.apply-button').onclick = () => this.toggleApplication()
+    //this.$('.apply-button').onclick = () => this.toggleApplication()
+    this.$('.apply-button').onclick = async () => {
+      this.isApplied.getState() 
+        ? await this.unapplyToPlan()
+        : await this.applyToPlan()
+    }
   }
 
   toggleApplication() {
@@ -244,20 +249,28 @@ class PlanCard extends PlainComponent {
     this.$('p-plan-timeline').addStep(step)
   }
 
-  async applyToPlan(planId) {
-    // const response = await apiParticipation.applyToPlan(planId)
-    const response = {
-      status: 'success'
-    }
+  async applyToPlan() {
+    const response = await apiParticipation.applyToPlan(this.getAttribute('plan-id'))
 
     if (response.status === 'success') {
-      this.handleResponse(response)
+      this.handleSuccess()
     } else {
       this.handleError(response)
     }
   }
 
-  handleResponse(response) {
+  async unapplyToPlan() {
+    console.log('Unaplaying to plan', this.getAttribute('plan-id'))
+    const response = await apiParticipation.unapplyToPlan(this.getAttribute('plan-id'))
+
+    if (response.status === 'success') {
+      this.handleSuccess()
+    } else {
+      this.handleError(response)
+    }
+  }
+
+  handleSuccess() {
     this.toggleApplication()
   }
 
