@@ -1,15 +1,20 @@
 # TODOs
 
 ## WORKING ON ...
-- [x] Revisar el error con el session_token dentro del contenedor de docker
-- [x] Crear el formulario de registro de planes + Página de registro funcional
-- [x] Crear la página de visualización de planes (con acción de suscripción y cancelación)
+
 - [ ] Terminar de implementar la función de aceptar o rechazar un participante
 - [ ] Implementar la llamada al endpoint para suscribirse a un plan (componente de PlanCard)
---------
-- [ ] Crear la página de usuario con visualización de notificaciones
-- [ ] Crear la acción de aceptar o rechazar solicitudes dentro de la página de notificaciones.
-
+- [ ] Implementar los iconos de categoría en las 'plan-cards' (con un tooltip al hacer hoover)
+- [ ] Implementar un componente 'toast' para mostrar mensajes al usuario (de momento solo los de error)
+- [ ] Implementar validaciones pendientes en los formularios de:
+        - Creación de plan
+        - Edición de plan
+        - Plan step 
+- [ ] Crear la página de usuario con visualización de notificaciones.
+- [ ] Solucionar el bug en el formulario de registro de usuarios (activación del botón submit)
+- [ ] Crear un logo y añadirlo a las páginas (revisar el diseño en general)
+- [ ] Incluir varios temas que se activen según la hora (mañana, día, tarde, noche)
+- [ ] Implementar un placeholder en la imagen del plan-card si esta no carga o no se encuentra (basado en la categoría del plan)
 
 *El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay
 tiempo para implementarlo*
@@ -31,7 +36,9 @@ tiempo para implementarlo*
 - [x] Hacer el SelectInput dinámico (que acepte un array) y con estilos personalizados.
 - [x] Crear componente PlanTimeline
 - [x] Crear modal para añadir 'steps' a un plan.
-- [ ] !!! IMPORTANTE !!! Implementar un método para restaurar los datos de usuario en el contexto cuando se restaure la sesión a través del token. !!! BUG !!!
+- [x] Crear el formulario de registro de planes + Página de registro funcional
+- [x] Crear la página de visualización de planes (con acción de suscripción y cancelación)
+- [x] !!! IMPORTANTE !!! Implementar un método para restaurar los datos de usuario en el contexto cuando se restaure la sesión a través del token. !!! BUG !!!
 - [ ] Crear endpoint para hacer un fetch de todos los planes de un usuario.
 - [ ] En el componente FormFeedback, añadir un modal cuando el mensaje supere las 2 líneas.
 - [ ] Completar validaciones para el SignUpForm.
@@ -58,6 +65,7 @@ tiempo para implementarlo*
 - [x] Implementar el caso de uso: GetAllPendingParticipations
 - [x] Implementar el caso de uso: CheckForUnreadNotifications
 - [x] Implementar el caso de uso: SetNotificationAsRead
+- [x] Revisar el error con el session_token dentro del contenedor de docker
 - [ ] Limpiar las respuestas Json del servidor eliminando los campos redundantes y "columns" y "table".
 - [ ] Revisar todo el sistema de autenticación (parece que a veces la sesión caduca pero el token no repone los datos de sesión, revisar sobretodo el caso de uso de checkAuthentication).
 - [ ] Encapsular y automatizar la sanitización y la validación de datos en funciones únicas encerradas en un try catch !!! IMPORTANTE !!!
@@ -70,11 +78,12 @@ tiempo para implementarlo*
 - [ ] Implementar un método para devolver respuesta en caso de que el servidor no responda.
 - [ ] En la creación de usuario, habría que extraer el rollback al caso de uso para poder hacerlo en caso de que no se pueda guardar la imagen o enviar el email de confirmación. Buscar y revisar un vídeo de CodelyTV que hablaba de mover la lógica de bases de datos transaccionales a la capa de aplicación (creo que se llama BBDD transaccionales).
 - [ ] Rehacer el test de registro de usuarios.
+- [ ] Añadir el módulo de 'rating'
 
 ## DATABASE
 - [x] Revisar el manejo de excepciones en MySqlDatabase.php
 - [x] Añadir un campo rol para la tabla user.
-- [ ] Añadir el campo phone a la tabla users e implementarlo en el servidor.
+- [x] Añadir el campo phone a la tabla users e implementarlo en el servidor.
 - [ ] Revisar el modelo. Creo que debería añadirse un campo en la tabla de rating_criteria para definir si es criterio de usuario o criterio de plan ya que no todos podrán compartirse.
 - [ ] Incluir campo teléfono en la tabla 'user' (añadirlo la gestión en servidor al registrar usuario).
 

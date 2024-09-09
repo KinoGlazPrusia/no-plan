@@ -39,19 +39,22 @@ class NotificationModal extends PlainComponent {
 
     const notifications = () => {
       if (!this.notifications.getState()) return null
+      console.log(this.notifications.getState())
       return this.notifications.getState().map((notification) => {
         const createdAt = helper.timeFromNow(notification.created_at)
 
         if (notification.notification_type_id === 2) {
+          const planId = notification.content.match(/{planId=\d*}/)[0]
+          console.log(planId.match(/^[0-9]*$/)[0]) // [ ] Recuperar el id del plan
           return `
                 <li class="notification ${notification.read ? 'read' : ''}">
                     <div class="notification-wrapper ${notificationCategory[notification.notification_type_id]}">
-                        <span class="notification-message">${notification.content}</span>
+                        <span class="notification-message">${notification.content.replace(/{planId=\d*}/, '')}</span>
                         <div class="notification-actions">
-                            <button class="accept" id="${notification.id}">
+                            <button class="accept" id="${notification.id}" planId="${planId.match(/\d*/)[0]}">
                                 <span class="material-symbols-outlined">thumb_up</span>
                             </button>
-                            <button class="reject" id="${notification.id}">
+                            <button class="reject" id="${notification.id}" planId="${planId.match(/\d*/)[0]}">
                                 <span class="material-symbols-outlined">thumb_down</span>
                             </button>
                         </div>
