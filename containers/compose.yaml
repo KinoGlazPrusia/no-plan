@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: kinoglazprusia/no-plan:v1.0.0
+    image: kinoglazprusia/no-plan:v1.0.1
     ports:
       - 80:80
     depends_on:
