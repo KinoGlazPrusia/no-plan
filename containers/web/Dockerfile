@@ -46,6 +46,9 @@ RUN npm install && npm cache clean --force
 WORKDIR /var/www/html/no-plan/app
 RUN composer install --no-dev --optimize-autoloader
 
+# Damos permisos completos al servidor para la carpeta pública
+RUN chown www-data:www-data ./public/*
+
 # Volvemos al directorio de trabajo principal
 WORKDIR /var/www/html
 
