@@ -24,7 +24,7 @@ class LoginUseCase implements IUseCase {
             
             // Se puede retornar directamente $user pero es por legibilidad
             // Esta excepción podría retornarse directamente desde el repository
-            if (!$user) throw new \Exception('User don\'t exist'); 
+            if (!$user) throw new \Exception('Incorrect email or password'); 
 
             $roles = $this->repository->getUserRoles($user);
         } 
@@ -34,7 +34,10 @@ class LoginUseCase implements IUseCase {
 
         // Chequeamos las credenciales
         try {
-            password_verify($password, $user->password);
+            if (!password_verify($password, $user->password)) {
+                throw new \Exception('Incorrect email or password');
+            }
+            
             // Si las credenciales son válidas
             // Guardamos el id, el email y los roles del usuario en la sesión
             $_SESSION['uid'] = $user->id;
