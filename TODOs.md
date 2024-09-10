@@ -7,6 +7,7 @@ de planes para el día (en vista de calendario), y al apretar sobre la chip, se 
         - Creación de plan
         - Edición de plan
         - Plan step 
+- [ ] Implementar la función de sort del plan-timeline (por hora)
 - [ ] Crear un logo y añadirlo a las páginas (revisar el diseño en general) (añadir también un caption en la página de login/signup, estilo 'Plan, meet, enjoy')
 - [ ] Implementar los iconos de categoría en las 'plan-cards' (con un tooltip al hacer hover)
 - [ ] Incluir varios temas que se activen según la hora (mañana, día, tarde, noche)
