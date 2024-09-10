@@ -8,6 +8,12 @@
   --accent-color: #8ececa;
   --link-color: #0085ff;
 
+  /* TOAST COLORS */
+  --toast-success-color: #a3cea3;
+  --toast-error-color: rgb(201, 138, 138);
+  --toast-accent-color: #8ececa;
+  --toast-info-color: #86afd6;
+
   /* TEXT */
   --text-color: #5f6368;
 

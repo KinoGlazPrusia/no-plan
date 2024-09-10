@@ -17,6 +17,7 @@ import * as helper from '../../../utils/helper.js'
 
 /* COMPONENTS */
 import LoginForm from '../../mid/login-form/LoginForm.js'
+import Toast from '../../base/toast/Toast.js'
 
 class LoginPage extends PlainComponent {
   constructor() {
@@ -34,6 +35,7 @@ class LoginPage extends PlainComponent {
 
   template() {
     return `
+            <p-toast></p-toast>
             <p-login-form></p-login-form>
             <span class="sign-up-link">Don't you have an account? <a class="to-signup">Sign Up</a></span>
         `
@@ -41,6 +43,10 @@ class LoginPage extends PlainComponent {
 
   listeners() {
     this.$('.to-signup').onclick = () => helper.navigateTo(PAGE_ROUTES.SIGNUP)
+  }
+
+  getToast() {
+    return this.$('p-toast')
   }
 }
 

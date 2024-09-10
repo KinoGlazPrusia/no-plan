@@ -44,6 +44,7 @@ class NotificationModal extends PlainComponent {
 
         if (notification.notification_type_id === 2) {
           const userId = notification.user_id
+          console.log(notification.content.match(/{planId=\d*}/))
           const planId = notification.content
           .match(/{planId=\d*}/)[0]
           .split('=')[1]

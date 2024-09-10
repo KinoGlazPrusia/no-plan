@@ -1,19 +1,19 @@
 # TODOs
 
 ## WORKING ON ...
-- [ ] Implementar los iconos de categoría en las 'plan-cards' (con un tooltip al hacer hover)
+- [ ] Crear la página de calendario, en el que salgan chips de notificación con el número
+de planes para el día (en vista de calendario), y al apretar sobre la chip, se despliegue un carousel en el que se puedan visualizar todas las cards del plan e interactuar con ellas.
 - [ ] Implementar un componente 'toast' para mostrar mensajes al usuario (de momento solo los de error)
 - [ ] Implementar validaciones pendientes en los formularios de:
         - Creación de plan
         - Edición de plan
         - Plan step 
-- [ ] Crear la página de calendario, en el que salgan chips de notificación con el número
-de planes para el día (en vista de calendario), y al apretar sobre la chip, se despliegue un carousel en el que se puedan visualizar todas las cards del plan e interactuar con ellas.
-- [ ] Crear la página de usuario con visualización de notificaciones.
-- [ ] Solucionar el bug en el formulario de registro de usuarios (activación del botón submit)
 - [ ] Crear un logo y añadirlo a las páginas (revisar el diseño en general) (añadir también un caption en la página de login/signup, estilo 'Plan, meet, enjoy')
+- [ ] Implementar los iconos de categoría en las 'plan-cards' (con un tooltip al hacer hover)
 - [ ] Incluir varios temas que se activen según la hora (mañana, día, tarde, noche)
 - [ ] Implementar un placeholder en la imagen del plan-card si esta no carga o no se encuentra (basado en la categoría del plan)
+- [ ] Crear la página de usuario
+- [ ] Solucionar el bug en el formulario de registro de usuarios (activación del botón submit)
 
 *El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay
 tiempo para implementarlo*

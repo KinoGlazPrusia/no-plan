@@ -10,11 +10,9 @@ import { VALIDATORS } from '../../../utils/validators.js'
 import * as apiAuth from '../../../services/api.auth.js'
 
 /* COMPONENTS */
-/* eslint-disable */
 import Button from '../../base/button/Button.js'
 import TextInput from '../../base/text-input/TextInput.js'
 import LoadingSpinner from '../../base/loading-spinner/LoadingSpinner.js'
-/* eslint-enable */
 
 class LoginForm extends PlainComponent {
   constructor() {
@@ -31,14 +29,13 @@ class LoginForm extends PlainComponent {
     if (this.isLoading.getState()) {
       return `
         <form class="login-form" name="login-form">
-            <h1 class="greetings">Welcome!</h1>
+          <h1 class="greetings">Welcome!</h1>
 
-            <p-loading-spinner
-              class="spinner"
-              success-message="Welcome"
-              success-detail="You're logged in">
-            </p-loading-spinner>
-
+          <p-loading-spinner
+            class="spinner"
+            success-message="Welcome"
+            success-detail="You're logged in">
+          </p-loading-spinner>
         </form>
       `
     }
@@ -88,20 +85,32 @@ class LoginForm extends PlainComponent {
       const response = await apiAuth.login(email, password)
       this.handleResponse(response)
     } catch (error) {
-      // [ ] Implementar manejo de errores
-      // Aqui se activa el isError
+      this.handleError(error)
     }
   }
 
   handleResponse(response) {
     // [ ] Eliminar los console logs
-    console.log(response)
     if (response.status === 'success') {
       this.$('.spinner').success()
       this.userContext.setData({ user: response.data[0] })
       this.redirectAfterLogin()
+    } else if (response.error) {
+      const toast = this.parentComponent.getToast()
+      toast.showError(response.error.details)
+      this.isLoading.setState(false)
+      // this.restoreFieldValues()
     }
-    // [ ] Implementar manejo de errores cuando la response.status === 'error'
+  }
+
+  handleError(error) {
+    console.log(error)
+  }
+
+  restoreFieldValues() {
+    this.$('#email-input').inputValue.setState(
+       this.$('#email-input').inputValue.getState()
+    )
   }
 
   validateFields() {
