@@ -10,6 +10,7 @@ class Toast extends PlainComponent {
 
         this.message = new PlainState(null, this)
         this.type = new PlainState(null, this)
+        this.icon = new PlainState(null, this)
         this.ttl = new PlainState(3000, this) //ms
 
         this.disable()
@@ -17,24 +18,28 @@ class Toast extends PlainComponent {
 
     showError(error) {
         this.message.setState(error, false)
+        this.setIcon('error')
         this.setType(toastTypes.ERROR)
         this.enable()
     }
 
     showMessage(message) {
         this.message.setState(message, false)
+        this.setIcon('feedback')
         this.setType(toastTypes.MESSAGE)
         this.enable()
     }
 
-    showInfo() {
+    showInfo(info) {
         this.message.setState(info, false)
+        this.setIcon('info')
         this.setType(toastTypes.INFO)
         this.enable()
     }
 
-    showSuccess() {
+    showSuccess(success) {
         this.message.setState(success, false)
+        this.setIcon('check_circle')
         this.setType(toastTypes.SUCCESS)
         this.enable()
     }
@@ -44,6 +49,10 @@ class Toast extends PlainComponent {
         this.wrapper.classList.add(type)
         this.type.setState(type)
     } 
+
+    setIcon(iconName) {
+        this.icon.setState(iconName, false)
+    }
 
     enable() {
         this.wrapper.classList.remove('disabled')
@@ -64,7 +73,7 @@ class Toast extends PlainComponent {
         return `
             <div class='message-wrapper'>
                 ${this.message.getState()}
-                <span class="material-symbols-outlined">error</span>
+                <span class="material-symbols-outlined">${this.icon.getState()}</span>
             </div>
         `
     }

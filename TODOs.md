@@ -3,7 +3,6 @@
 ## WORKING ON ...
 - [ ] Crear la página de calendario, en el que salgan chips de notificación con el número
 de planes para el día (en vista de calendario), y al apretar sobre la chip, se despliegue un carousel en el que se puedan visualizar todas las cards del plan e interactuar con ellas.
-- [ ] Implementar un componente 'toast' para mostrar mensajes al usuario (de momento solo los de error)
 - [ ] Implementar validaciones pendientes en los formularios de:
         - Creación de plan
         - Edición de plan
@@ -38,6 +37,7 @@ tiempo para implementarlo*
 - [x] Crear el formulario de registro de planes + Página de registro funcional
 - [x] Crear la página de visualización de planes (con acción de suscripción y cancelación)
 - [x] !!! IMPORTANTE !!! Implementar un método para restaurar los datos de usuario en el contexto cuando se restaure la sesión a través del token. !!! BUG !!!
+- [x] Implementar un componente 'toast' para mostrar mensajes al usuario (de momento solo los de error)
 - [x] Terminar de implementar la función de aceptar a un participante
 - [x] Terminar de implementar la función de rechazar a un participante
 - [x] Implementar la llamada al endpoint para suscribirse a un plan (componente de PlanCard)

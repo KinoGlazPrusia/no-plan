@@ -83,6 +83,8 @@ class PlanStepModal extends PlainComponent {
     })
 
     this.close()
+    const toast = this.parentComponent.getToast()
+    toast.showSuccess('Added new step to the plan.')
   }
 
   validateFields() {

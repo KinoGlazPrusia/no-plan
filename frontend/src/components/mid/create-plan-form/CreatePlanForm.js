@@ -56,6 +56,7 @@ class CreatePlanForm extends PlainComponent {
     }
 
     return `
+        <p-toast></p-toast>
         <form class="create-plan-form" name="create-plan-form">
             <div class="overflow-wrapper">
                 <!-- PLAN TITLE -->
@@ -246,6 +247,10 @@ class CreatePlanForm extends PlainComponent {
       toast.showError(response.error.details)
       this.isLoading.setState(false)
     }
+  }
+
+  getToast() {
+    return this.$('p-toast')
   }
 }
 

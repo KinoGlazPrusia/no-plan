@@ -12,29 +12,7 @@ class PlanTimeline extends PlainComponent {
     )
 
     this.isLoading = new PlainState(false, this)
-    this.isError = new PlainState(false, this)
-    /*  this.timeline = new PlainState(
-      [
-        {
-          time: '14:52',
-          title: 'Encuentro',
-          description:
-            'nos reunimos delante de la puerta de atrás del edificio del ayuntamiento.'
-        },
-        {
-          time: '15:00',
-          title: 'Primer bar',
-          description: 'vamos a tomar un vermut a la bodega X.'
-        },
-        {
-          time: '16:25',
-          title: 'Segundo bar',
-          description:
-            'vamos a tomar un vermut al otro bar un poco más adelante.'
-        }
-      ],
-      this
-    ) */
+    this.error = new PlainState(null, this)
     this.timeline = new PlainState([], this)
   }
 
