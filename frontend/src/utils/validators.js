@@ -11,7 +11,8 @@ export const VALIDATORS = {
   PASSWORD_CONFIRMATION: 'validatePasswordConfirmation',
   NAME: 'validateName',
   PHONE_NUMBER: 'validatePhoneNumber',
-  AVATAR_IMAGE_FILE: 'validateAvatarImage'
+  AVATAR_IMAGE_FILE: 'validateAvatarImage',
+  NOT_EMPTY: 'validateNotEmpty'
 }
 
 export function validateEmail (email) {
@@ -59,6 +60,17 @@ export function validateDate (rawDate) {
     day,
     raw: rawDate
   }
+}
+
+export function validateNotEmpty (value) {
+  const validityMessage = validate([
+    {
+      condition: () => value.length > 0,
+      message: 'This field is required'
+    }
+  ])
+
+  return validityMessage
 }
 
 export function validatePassword (password) {

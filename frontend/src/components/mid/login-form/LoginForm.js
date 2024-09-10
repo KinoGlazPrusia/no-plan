@@ -58,7 +58,8 @@ class LoginForm extends PlainComponent {
                 id="password-input"
                 name="password" 
                 label="Password" 
-                type="password">
+                type="password"
+                validator="${VALIDATORS.NOT_EMPTY}">
               </p-text-input>
 
               <p-button class="submit" type="primary">Log In</p-button>
@@ -81,6 +82,7 @@ class LoginForm extends PlainComponent {
     const password = this.$('#password-input').inputValue.getState()
 
     this.isLoading.setState(true)
+
     try {
       const response = await apiAuth.login(email, password)
       this.handleResponse(response)
@@ -99,7 +101,6 @@ class LoginForm extends PlainComponent {
       const toast = this.parentComponent.getToast()
       toast.showError(response.error.details)
       this.isLoading.setState(false)
-      // this.restoreFieldValues()
     }
   }
 
@@ -107,16 +108,13 @@ class LoginForm extends PlainComponent {
     console.log(error)
   }
 
-  restoreFieldValues() {
-    this.$('#email-input').inputValue.setState(
-       this.$('#email-input').inputValue.getState()
-    )
-  }
-
   validateFields() {
     this.$('#email-input').validate()
+    this.$('#password-input').validate()
 
-    const validity = this.$('#email-input').validity.getState().isValid // && otroInput.validity && etc
+    const validity = 
+      this.$('#email-input').validity.getState().isValid &&
+      this.$('#password-input').validity.getState().isValid 
 
     return validity
   }

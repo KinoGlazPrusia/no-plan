@@ -35,10 +35,15 @@ class CreatePlanPage extends PlainComponent {
 
   template() {
     return `
+            <p-toast></p-toast>
             <p-logout-button></p-logout-button>
             <p-create-plan-form class="create-plan-form"></p-create-plan-form>
             <p-navbar></p-navbar>
         `
+  }
+
+  getToast() {
+    return this.$('p-toast')
   }
 }
 

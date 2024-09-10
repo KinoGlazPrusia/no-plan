@@ -44,7 +44,6 @@ class CreatePlanForm extends PlainComponent {
     if (this.isLoading.getState()) {
       return `
         <form class="create-plan-form" name="create-plan-form">
-            <h1 class="greetings">Planning</h1>
             <div class="overflow-wrapper is-loading">
               <p-loading-spinner
                 class="spinner"
@@ -241,8 +240,11 @@ class CreatePlanForm extends PlainComponent {
   handleResponse(response) {
     console.log(response)
     if (response.status === 'success') {
-      console.log(response.status)
       this.$('.spinner').success()
+    } else if (response.error) {
+      const toast = this.parentComponent.getToast()
+      toast.showError(response.error.details)
+      this.isLoading.setState(false)
     }
   }
 }
