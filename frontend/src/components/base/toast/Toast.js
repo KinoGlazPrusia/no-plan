@@ -64,7 +64,7 @@ class Toast extends PlainComponent {
         return `
             <div class='message-wrapper'>
                 ${this.message.getState()}
-                <span class="
+                <span class="material-symbols-outlined">error</span>
             </div>
         `
     }

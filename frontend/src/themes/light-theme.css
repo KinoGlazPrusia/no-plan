@@ -9,10 +9,10 @@
   --link-color: #0085ff;
 
   /* TOAST COLORS */
-  --toast-success-color: #a3cea3;
-  --toast-error-color: rgb(201, 138, 138);
-  --toast-accent-color: #8ececa;
-  --toast-info-color: #86afd6;
+  --toast-success-color: #7eda7e;
+  --toast-error-color: rgb(226, 105, 105);
+  --toast-accent-color: #69d8d1;
+  --toast-info-color: #68a8e4;
 
   /* TEXT */
   --text-color: #5f6368;
