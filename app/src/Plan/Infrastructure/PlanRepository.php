@@ -86,6 +86,155 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    public function fetchAllCreatedPlans(string $userId, int $page, int $itemsPerPage): array {
+        $offset = ($page - 1) * $itemsPerPage;
+        try {
+            $data = ['user_id' => $userId];
+
+            $sql = "
+                SELECT * 
+                FROM plan 
+                WHERE created_by_id = :user_id 
+                ORDER BY datetime ASC
+                LIMIT $itemsPerPage 
+                OFFSET $offset";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $res = $this->db->execute($stmt, $data);
+
+            $plans = array_map(function($planData) {
+                return new Plan($planData);
+            }, $res);
+
+            return $plans;
+        }
+        catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function fetchAllAcceptedPlans(string $userId, int $page, int $itemsPerPage): array {
+        $offset = ($page - 1) * $itemsPerPage;
+        try {
+            $data = ['user_id' => $userId];
+
+            // status_id = 2 corresponde a participation_status.status = 'accepted'
+            $sql = "
+                SELECT * 
+                FROM plan 
+                WHERE id IN 
+                    (SELECT DISTINCT plan_id 
+                    FROM participation
+                    WHERE user_id = :user_id
+                    AND status_id = 2)
+                ORDER BY datetime ASC
+                LIMIT $itemsPerPage
+                OFFSET $offset";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $res = $this->db->execute($stmt, $data);
+
+            $plans = array_map(function($planData) {
+                return new Plan($planData);
+            }, $res);
+
+            return $plans;
+        }
+        catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function fetchAllRejectedPlans(string $userId, int $page, int $itemsPerPage): array {
+        $offset = ($page - 1) * $itemsPerPage;
+        try {
+            $data = ['user_id' => $userId];
+
+            // status_id = 3 corresponde a participation_status.status = 'rejected'
+            $sql = "
+                SELECT * 
+                FROM plan 
+                WHERE id IN 
+                    (SELECT DISTINCT plan_id 
+                    FROM participation
+                    WHERE user_id = :user_id
+                    AND status_id = 3)
+                ORDER BY datetime ASC
+                LIMIT $itemsPerPage
+                OFFSET $offset";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $res = $this->db->execute($stmt, $data);
+
+            $plans = array_map(function($planData) {
+                return new Plan($planData);
+            }, $res);
+
+            return $plans;
+        }
+        catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function fetchAllPendingPlans(string $userId, int $page, int $itemsPerPage): array {
+        $offset = ($page - 1) * $itemsPerPage;
+        try {
+            $data = ['user_id' => $userId];
+
+            // status_id = 4 corresponde a participation_status.status = 'pending'
+            $sql = "
+                SELECT * 
+                FROM plan 
+                WHERE id IN 
+                    (SELECT DISTINCT plan_id 
+                    FROM participation
+                    WHERE user_id = :user_id
+                    AND status_id = 1)
+                ORDER BY datetime ASC
+                LIMIT $itemsPerPage
+                OFFSET $offset";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $res = $this->db->execute($stmt, $data);
+
+            $plans = array_map(function($planData) {
+                return new Plan($planData);
+            }, $res);
+
+            return $plans;
+        }
+        catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function countAllCreatedPlans(string $userId): int {
+        try {
+            $data = ['user_id' => $userId];
+
+            $sql = "
+                SELECT COUNT(*) AS count
+                FROM plan 
+                WHERE created_by_id = :user_id
+            ";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $result =$this->db->execute($stmt, $data)[0];
+            $this->db->disconnect();
+            return $result->count;
+        }
+        catch (\Exception $e) {
+            $this->db->disconnect();
+            throw $e;
+        }
+    }
+
     public function countAllNotCreatedPlans(string $userId): int {
         try {
             $data = ['user_id' => $userId];
@@ -101,6 +250,84 @@ class PlanRepository extends CoreRepository {
             $this->db->disconnect();
             return $result->count;
         } 
+        catch (\Exception $e) {
+            $this->db->disconnect();
+            throw $e;
+        }
+    }
+
+    public function countAllAcceptedPlans(string $userId): int {
+        try {
+            $data = ['user_id' => $userId];
+
+            $sql = "
+                SELECT COUNT(*) AS count
+                FROM plan 
+                WHERE id IN 
+                    (SELECT DISTINCT plan_id 
+                    FROM participation
+                    WHERE user_id = :user_id
+                    AND status_id = 2)
+            ";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $result =$this->db->execute($stmt, $data)[0];
+            $this->db->disconnect();
+            return $result->count;
+        }
+        catch (\Exception $e) {
+            $this->db->disconnect();
+            throw $e;
+        }
+    }
+
+    public function countAllRejectedPlans(string $userId): int {
+        try {
+            $data = ['user_id' => $userId];
+
+            $sql = "
+                SELECT COUNT(*) AS count
+                FROM plan 
+                WHERE id IN 
+                    (SELECT DISTINCT plan_id 
+                    FROM participation
+                    WHERE user_id = :user_id
+                    AND status_id = 3)
+            ";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $result =$this->db->execute($stmt, $data)[0];
+            $this->db->disconnect();
+            return $result->count;
+        }
+        catch (\Exception $e) {
+            $this->db->disconnect();
+            throw $e;
+        }
+    }
+
+    public function countAllPendingPlans(string $userId): int {
+        try {
+            $data = ['user_id' => $userId];
+
+            $sql = "
+                SELECT COUNT(*) AS count
+                FROM plan 
+                WHERE id IN 
+                    (SELECT DISTINCT plan_id 
+                    FROM participation
+                    WHERE user_id = :user_id
+                    AND status_id = 1)
+            ";
+
+            $this->db->connect();
+            $stmt = $this->db->prepare($sql);
+            $result =$this->db->execute($stmt, $data)[0];
+            $this->db->disconnect();
+            return $result->count;
+        }
         catch (\Exception $e) {
             $this->db->disconnect();
             throw $e;

@@ -28,6 +28,14 @@ export const API_ENDPOINTS = {
   IS_AUTHENTICATED: APP_URL + 'is-authenticated',
   FETCH_ALL_CATEGORIES: APP_URL + 'categories',
   FETCH_ALL_PLANS: APP_URL + 'plans/?page={page}&items_per_page={items}',
+  FETCH_ALL_CREATED_PLANS:
+    APP_URL + 'plans/created/?page={page}&items_per_page={items}',
+  FETCH_ALL_ACCEPTED_PLANS:
+    APP_URL + 'plans/accepted/?page={page}&items_per_page={items}',
+  FETCH_ALL_REJECTED_PLANS:
+    APP_URL + 'plans/rejected/?page={page}&items_per_page={items}',
+  FETCH_ALL_PENDING_PLANS:
+    APP_URL + 'plans/pending/?page={page}&items_per_page={items}',
   CREATE_PLAN: APP_URL + 'create-plan',
   UPDATE_PLAN: APP_URL + 'update-plan',
   FETCH_PLAN_DATA: APP_URL + 'plan/?id={id}',
@@ -46,7 +54,11 @@ export const API_ENDPOINTS = {
   REJECT_PARTICIPATION:
     APP_URL + 'reject-participation/?user_id={userId}&plan_id={planId}',
   USER_DATA: APP_URL + 'user-data',
-  PLANS_COUNT: APP_URL + 'plans-count'
+  PLANS_COUNT: APP_URL + 'plans-count',
+  PLANS_COUNT_CREATED: APP_URL + 'plans-count/created',
+  PLANS_COUNT_ACCEPTED: APP_URL + 'plans-count/accepted',
+  PLANS_COUNT_REJECTED: APP_URL + 'plans-count/rejected',
+  PLANS_COUNT_PENDING: APP_URL + 'plans-count/pending'
 }
 
 export const PAGE_ROUTES = {

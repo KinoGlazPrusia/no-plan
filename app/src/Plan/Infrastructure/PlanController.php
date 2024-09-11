@@ -161,6 +161,97 @@ class PlanController {
         }
     }
 
+    public static function fetchAllCreatedPlans(Request $request, IUseCase | IService $fetchAllCreatedPlans): void {
+        // Validamos la request
+        if (!$request->validateQuery(['page', 'items_per_page'])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        // Obtenemos y validamos los datos de la request
+        $page = Sanitizer::sanitizeInt($request->query['page']);
+        $itemsPerPage = Sanitizer::sanitizeInt($request->query['items_per_page']);
+
+        try {
+            $plans = $fetchAllCreatedPlans($page, $itemsPerPage);
+            Response::json('success', 200, 'All plans', $plans);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
+    public static function fetchAllAcceptedPlans(Request $request, IUseCase | IService $fetchAllAcceptedPlans): void {
+        // Validamos la request
+        if (!$request->validateQuery(['page', 'items_per_page'])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        // Obtenemos y validamos los datos de la request
+        $page = Sanitizer::sanitizeInt($request->query['page']);
+        $itemsPerPage = Sanitizer::sanitizeInt($request->query['items_per_page']);
+
+        try {
+            $plans = $fetchAllAcceptedPlans($page, $itemsPerPage);
+            Response::json('success', 200, 'All plans', $plans);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
+    public static function fetchAllRejectedPlans(Request $request, IUseCase | IService $fetchAllRejectedPlans): void {
+        // Validamos la request
+        if (!$request->validateQuery(['page', 'items_per_page'])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        // Obtenemos y validamos los datos de la request
+        $page = Sanitizer::sanitizeInt($request->query['page']);
+        $itemsPerPage = Sanitizer::sanitizeInt($request->query['items_per_page']);
+
+        try {
+            $plans = $fetchAllRejectedPlans($page, $itemsPerPage);
+            Response::json('success', 200, 'All plans', $plans);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
+    public static function fetchAllPendingPlans(Request $request, IUseCase | IService $fetchAllPendingPlans): void {
+        // Validamos la request
+        if (!$request->validateQuery(['page', 'items_per_page'])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        // Obtenemos y validamos los datos de la request
+        $page = Sanitizer::sanitizeInt($request->query['page']);
+        $itemsPerPage = Sanitizer::sanitizeInt($request->query['items_per_page']);
+
+        try {
+            $plans = $fetchAllPendingPlans($page, $itemsPerPage);
+            Response::json('success', 200, 'All plans', $plans);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
+    public static function countAllCreatedPlans(Request $request, IUseCase | IService $countAllCreatedPlans): void {
+        // Validamos la request
+        if (!$request->validateQuery([])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        try {
+            $count = $countAllCreatedPlans($_SESSION['uid']);
+            Response::json('success', 200, 'All plans count', [$count]);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
     public static function countAllNotCreatedPlans(Request $request, IUseCase | IService $countAllNotCreatedPlans): void {
         // Validamos la request
         if (!$request->validateQuery([])) {
@@ -169,6 +260,51 @@ class PlanController {
 
         try {
             $count = $countAllNotCreatedPlans($_SESSION['uid']);
+            Response::json('success', 200, 'All plans count', [$count]);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
+    public static function countAllAcceptedPlans(Request $request, IUseCase | IService $countAllAcceptedPlans): void {
+        // Validamos la request
+        if (!$request->validateQuery([])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        try {
+            $count = $countAllAcceptedPlans($_SESSION['uid']);
+            Response::json('success', 200, 'All plans count', [$count]);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
+    public static function countAllRejectedPlans(Request $request, IUseCase | IService $countAllRejectedPlans): void {
+        // Validamos la request
+        if (!$request->validateQuery([])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        try {
+            $count = $countAllRejectedPlans($_SESSION['uid']);
+            Response::json('success', 200, 'All plans count', [$count]);
+        } 
+        catch (\Exception $e) {
+            Response::jsonError(500, $e->getMessage());
+        }
+    }
+
+    public static function countAllPendingPlans(Request $request, IUseCase | IService $countAllPendingPlans): void {
+        // Validamos la request
+        if (!$request->validateQuery([])) {
+            Response::jsonError(400, 'Expected parameters doesn\'t match');
+        }
+
+        try {
+            $count = $countAllPendingPlans($_SESSION['uid']);
             Response::json('success', 200, 'All plans count', [$count]);
         } 
         catch (\Exception $e) {

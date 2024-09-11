@@ -15,6 +15,9 @@ import LogoutButton from '../../base/logout-button/LogoutButton.js'
 import PlanCarousel from '../../mid/plan-carousel/PlanCarousel.js'
 import PlanCard from '../../base/plan-card/PlanCard.js'
 
+/* CONSTANTS */
+import { planFilters } from '../../../constants/planFilters.js'
+
 class PlannerPage extends PlainComponent {
   constructor() {
     super('p-planner-page', `${PAGES_PATH}planner/PlannerPage.css`)
@@ -43,7 +46,7 @@ class PlannerPage extends PlainComponent {
             <p-logout-button></p-logout-button>
 
             <!-- PLAN CAROUSEL -->
-            <p-plan-carousel></p-plan-carousel>
+            <p-plan-carousel filter="${planFilters.ALL}"></p-plan-carousel>
       
             <!-- FADES -->
             <span class="fade-left"></span>

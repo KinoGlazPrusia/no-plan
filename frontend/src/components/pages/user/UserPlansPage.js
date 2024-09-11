@@ -9,6 +9,9 @@ import { PAGES_PATH } from '../../../config/env.config.js'
 import * as helper from '../../../utils/helper.js'
 import * as auth from '../../../utils/authenticator.js'
 
+/* CONSTANTS */
+import { planFilters } from '../../../constants/planFilters.js'
+
 class UserPlansPage extends PlainComponent {
   constructor() {
     super('p-user-plans-page', `${PAGES_PATH}user/UserPlansPage.css`)
@@ -27,7 +30,7 @@ class UserPlansPage extends PlainComponent {
     this.isLoading = new PlainState(true, this)
     this.error = new PlainState(null, this)
 
-    this.currentTab = new PlainState('created', this)
+    this.currentTab = new PlainState(planFilters.PENDING, this)
     this.currentPage = new PlainState(1, this)
   }
 
@@ -37,7 +40,7 @@ class UserPlansPage extends PlainComponent {
             <p-logout-button></p-logout-button>
 
             <!-- PLAN CAROUSEL -->
-            <p-plan-carousel></p-plan-carousel>
+            <p-plan-carousel filter="${this.currentTab.getState()}"></p-plan-carousel>
       
             <!-- FADES -->
             <span class="fade-left"></span>
@@ -47,10 +50,10 @@ class UserPlansPage extends PlainComponent {
             
               <!-- PLAN TABS -->
               <div class="plan-tabs">
-                <span class="tab selected"><span class="material-symbols-outlined">edit_note</span></span>
-                <span class="tab"><span class="material-symbols-outlined">check_circle</span></span>
-                <span class="tab"><span class="material-symbols-outlined">close</span></span>
-                <span class="tab"><span class="material-symbols-outlined">mail</span></span>
+                <span class="tab ${this.currentTab.getState() === planFilters.CREATED ? 'selected' : ''}" id="created"><span class="material-symbols-outlined">edit_note</span></span>
+                <span class="tab ${this.currentTab.getState() === planFilters.ACCEPTED ? 'selected' : ''}" id="accepted"><span class="material-symbols-outlined">check_circle</span></span>
+                <span class="tab ${this.currentTab.getState() === planFilters.REJECTED ? 'selected' : ''}" id="rejected"><span class="material-symbols-outlined">close</span></span>
+                <span class="tab ${this.currentTab.getState() === planFilters.PENDING ? 'selected' : ''}" id="pending"><span class="material-symbols-outlined">mail</span></span>
               </div>
 
               <!-- PAGE SELECTOR -->
@@ -73,17 +76,31 @@ class UserPlansPage extends PlainComponent {
         `
   }
 
-  changeTab(tab) {}
+  listeners() {
+    this.$('.left-button').onclick = () => this.prevPage()
+    this.$('.right-button').onclick = () => this.nextPage()
+
+    const tabs = this.$$('.tab')
+    tabs.forEach((tab) => {
+      tab.onclick = () => this.changeTab(tab)
+    })
+  }
+
+  changeTab(tab) {
+    const tabs = this.$$('.tab')
+    tabs.forEach((tab) => {
+      tab.classList.remove('selected')
+    })
+
+    tab.classList.add('selected')
+
+    this.currentTab.setState(tab.id)
+  }
 
   getPage() {
     // [ ] Esto va fuera, habrá que elevar el estado a este componente de página
     const carousel = this.$('p-plan-carousel')
     return carousel.currentPage.getState()
-  }
-
-  listeners() {
-    this.$('.left-button').onclick = () => this.prevPage()
-    this.$('.right-button').onclick = () => this.nextPage()
   }
 
   enableRight() {

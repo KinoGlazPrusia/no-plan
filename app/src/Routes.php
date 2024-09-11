@@ -24,9 +24,17 @@ use App\Plan\Infrastructure\PlanRepository;
 use App\Plan\Application\GetAllPlanCategoriesUseCase;
 use App\Plan\Application\CreatePlanService;
 use App\Plan\Application\GetAllPlansService;
+use App\Plan\Application\GetAllCreatedPlansService;
+use App\Plan\Application\GetAllAcceptedPlansService;
+use App\Plan\Application\GetAllRejectedPlansService;
+use App\Plan\Application\GetAllPendingPlansService;
 use App\Plan\Application\UpdatePlanService;
 use App\Plan\Application\GetPlanByIdService;
 use App\Plan\Application\CountAllNotCreatedPlansUseCase;
+use App\Plan\Application\CountAllCreatedPlansUseCase;
+use App\Plan\Application\CountAllAcceptedPlansUseCase;
+use App\Plan\Application\CountAllRejectedPlansUseCase;
+use App\Plan\Application\CountAllPendingPlansUseCase;
 
 /* PARTICIPACION */
 use App\Participation\Infrastructure\ParticipationController;
@@ -98,6 +106,26 @@ class Routes
                     'logic' => new GetAllPlansService(new PlanRepository(new MySqlDatabase)),
                     'access' => 'public' // [ ] Cambiar acceso a privado
                 ],
+                'plans/created' => [
+                    'controller' => [PlanController::class, 'fetchAllCreatedPlans'],
+                    'logic' => new GetAllCreatedPlansService(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'public' // [ ] Cambiar acceso a privado
+                ],
+                'plans/accepted' => [
+                    'controller' => [PlanController::class, 'fetchAllAcceptedPlans'],
+                    'logic' => new GetAllAcceptedPlansService(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'public' // [ ] Cambiar acceso a privado
+                ],
+                'plans/rejected' => [
+                    'controller' => [PlanController::class, 'fetchAllRejectedPlans'],
+                    'logic' => new GetAllRejectedPlansService(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'public' // [ ] Cambiar acceso a privado
+                ],
+                'plans/pending' => [
+                    'controller' => [PlanController::class, 'fetchAllPendingPlans'],
+                    'logic' => new GetAllPendingPlansService(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'public' // [ ] Cambiar acceso a privado
+                ],
                 'participate' => [
                     'controller' =>[ParticipationController::class, 'suscribeToPlan'],
                     'logic' => new SuscribeToPlanService(new ParticipationRepository(new MySqlDatabase)),
@@ -156,6 +184,26 @@ class Routes
                 'plans-count' => [
                     'controller' => [PlanController::class, 'countAllNotCreatedPlans'],
                     'logic' => new CountAllNotCreatedPlansUseCase(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'private'
+                ],
+                'plans-count/created' => [
+                    'controller' => [PlanController::class, 'countAllCreatedPlans'],
+                    'logic' => new CountAllCreatedPlansUseCase(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'private'
+                ],
+                'plans-count/accepted' => [
+                    'controller' => [PlanController::class, 'countAllAcceptedPlans'],
+                    'logic' => new CountAllAcceptedPlansUseCase(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'private'
+                ],
+                'plans-count/rejected' => [
+                    'controller' => [PlanController::class, 'countAllRejectedPlans'],
+                    'logic' => new CountAllRejectedPlansUseCase(new PlanRepository(new MySqlDatabase)),
+                    'access' => 'private'
+                ],
+                'plans-count/pending' => [
+                    'controller' => [PlanController::class, 'countAllPendingPlans'],
+                    'logic' => new CountAllPendingPlansUseCase(new PlanRepository(new MySqlDatabase)),
                     'access' => 'private'
                 ]
             ],

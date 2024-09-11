@@ -7,6 +7,9 @@ import { MID_COMPONENTS_PATH } from '../../../config/env.config.js'
 /* SERVICES */
 import * as apiPlan from '../../../services/api.plan.js'
 
+/* CONSTANTS */
+import { planFilters } from '../../../constants/planFilters.js'
+
 class PlanCarousel extends PlainComponent {
   constructor() {
     super(
@@ -32,7 +35,7 @@ class PlanCarousel extends PlainComponent {
 
   template() {
     return `
-      ${this.cards.getState() && this.cards.getState().join('')}
+      ${this.cards.getState() ? this.cards.getState().join('') : ''}
     `
   }
 
@@ -55,25 +58,74 @@ class PlanCarousel extends PlainComponent {
   }
 
   async fetchData() {
-    await this.fetchPlans()
-    await this.setMaxPages()
+    await this.fetchPlans(this.getAttribute('filter'))
+    await this.setMaxPages(this.getAttribute('filter'))
     await this.loadCards()
   }
 
-  async fetchPlans() {
-    const plans = await apiPlan.fetchAllPlans(
-      this.currentPage.getState(),
-      this.itemsPerPage.getState()
-    )
+  async fetchPlans(filter) {
+    let plans
+    switch (filter) {
+      case planFilters.CREATED:
+        plans = await apiPlan.fetchAllCreatedPlans(
+          this.currentPage.getState(),
+          this.itemsPerPage.getState()
+        )
+        break
+      case planFilters.ACCEPTED:
+        plans = await apiPlan.fetchAllAcceptedPlans(
+          this.currentPage.getState(),
+          this.itemsPerPage.getState()
+        )
+        break
+      case planFilters.REJECTED:
+        plans = await apiPlan.fetchAllRejectedPlans(
+          this.currentPage.getState(),
+          this.itemsPerPage.getState()
+        )
+        break
+      case planFilters.PENDING:
+        plans = await apiPlan.fetchAllPendingPlans(
+          this.currentPage.getState(),
+          this.itemsPerPage.getState()
+        )
+        break
+      default:
+        plans = await apiPlan.fetchAllPlans(
+          this.currentPage.getState(),
+          this.itemsPerPage.getState()
+        )
+        break
+    }
+
     this.data.setState(plans.data, false)
   }
 
-  async setMaxPages() {
-    const planCount = await apiPlan.countAllNotCreatedPlans()
+  async setMaxPages(filter) {
+    let planCount
+
+    switch (filter) {
+      case planFilters.CREATED:
+        planCount = await apiPlan.countAllCreatedPlans()
+        break
+      case planFilters.ACCEPTED:
+        planCount = await apiPlan.countAllAcceptedPlans()
+        break
+      case planFilters.REJECTED:
+        planCount = await apiPlan.countAllRejectedPlans()
+        break
+      case planFilters.PENDING:
+        planCount = await apiPlan.countAllPendingPlans()
+        break
+      default:
+        planCount = await apiPlan.countAllNotCreatedPlans()
+        break
+    }
+
     const maxPages = Math.ceil(planCount / this.itemsPerPage.getState())
     this.maxPages.setState(maxPages, false)
 
-    if (maxPages <= 1 ) {
+    if (maxPages <= 1) {
       this.parentComponent.disablePaginator()
     } else {
       this.parentComponent.enablePaginator()
@@ -144,8 +196,7 @@ class PlanCarousel extends PlainComponent {
 
       await this.fetchData()
       this.centerSelectedCard()
-    } 
-    else {
+    } else {
       this.parentComponent.disableRight()
     }
   }
@@ -162,8 +213,7 @@ class PlanCarousel extends PlainComponent {
 
       await this.fetchData()
       this.centerSelectedCard()
-    } 
-    else {
+    } else {
       this.parentComponent.disableLeft()
     }
   }

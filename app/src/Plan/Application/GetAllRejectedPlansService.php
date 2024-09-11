@@ -9,11 +9,9 @@ use App\Plan\Application\GetPlanCategoriesUseCase;
 
 use App\Plan\Domain\PlanStatus;
 
-/* En esta clase vamos a devolver todos los planes que no haya creado el usuario
-paginados y ordenados por fecha (más adelante por el criterio de orden que selccione
-el usuario en el frontend) */
+/* En esta clase vamos a devolver todos los planes en los que el usuario haya sido rechazado*/
 
-class GetAllPlansService implements IService {
+class GetAllRejectedPlansService implements IService {
     private IRepository $repository;    
 
     public function __construct(IRepository $repository) {
@@ -21,14 +19,13 @@ class GetAllPlansService implements IService {
     }
 
     public function __invoke(int $page, int $itemsPerPage): array {
-        // $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
         $userId = $_SESSION['uid'];
 
         $plans = array();
 
         try {
             // 1. Caso de uso para recoger los datos base del plan
-            $plans = $this->repository->fetchAllPlans($userId, $page, $itemsPerPage);
+            $plans = $this->repository->fetchAllRejectedPlans($userId, $page, $itemsPerPage);
 
             // 2. Caso de uso para recuperar los datos de las categorías del plan
             foreach($plans as $plan) {

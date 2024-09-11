@@ -32,6 +32,74 @@ export async function fetchAllPlans(page = 1, itemsPerPage = 10) {
   }
 }
 
+export async function fetchAllCreatedPlans(page = 1, itemsPerPage = 10) {
+  const url = API_ENDPOINTS.FETCH_ALL_CREATED_PLANS.replace(
+    '{page}',
+    page
+  ).replace('{items}', itemsPerPage)
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while fetching the plans.')
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function fetchAllAcceptedPlans(page = 1, itemsPerPage = 10) {
+  const url = API_ENDPOINTS.FETCH_ALL_ACCEPTED_PLANS.replace(
+    '{page}',
+    page
+  ).replace('{items}', itemsPerPage)
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while fetching the plans.')
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function fetchAllRejectedPlans(page = 1, itemsPerPage = 10) {
+  const url = API_ENDPOINTS.FETCH_ALL_REJECTED_PLANS.replace(
+    '{page}',
+    page
+  ).replace('{items}', itemsPerPage)
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while fetching the plans.')
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function fetchAllPendingPlans(page = 1, itemsPerPage = 10) {
+  const url = API_ENDPOINTS.FETCH_ALL_PENDING_PLANS.replace(
+    '{page}',
+    page
+  ).replace('{items}', itemsPerPage)
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while fetching the plans.')
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
 export async function fetchPlanData(id) {
   const url = API_ENDPOINTS.FETCH_PLAN_DATA.replace('{id}', id)
   console.log(url)
@@ -130,6 +198,20 @@ export async function updatePlan(planId, planData) {
   }
 }
 
+export async function countAllCreatedPlans() {
+  const url = API_ENDPOINTS.PLANS_COUNT_CREATED
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while counting all created plans')
+    }
+    const data = await response.json()
+    return data.data[0]
+  } catch (error) {
+    throw error
+  }
+}
+
 export async function countAllNotCreatedPlans() {
   const url = API_ENDPOINTS.PLANS_COUNT
   try {
@@ -138,6 +220,48 @@ export async function countAllNotCreatedPlans() {
       throw new Error(
         'Something went wrong while counting all not created plans'
       )
+    }
+    const data = await response.json()
+    return data.data[0]
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function countAllAcceptedPlans() {
+  const url = API_ENDPOINTS.PLANS_COUNT_ACCEPTED
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while counting all accepted plans')
+    }
+    const data = await response.json()
+    return data.data[0]
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function countAllRejectedPlans() {
+  const url = API_ENDPOINTS.PLANS_COUNT_REJECTED
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while counting all rejected plans')
+    }
+    const data = await response.json()
+    return data.data[0]
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function countAllPendingPlans() {
+  const url = API_ENDPOINTS.PLANS_COUNT_PENDING
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Something went wrong while counting all pending plans')
     }
     const data = await response.json()
     return data.data[0]
