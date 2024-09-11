@@ -20,7 +20,7 @@ class AcceptParticipationService implements IService {
         $this->repository = $repository;
     }
 
-    public function __invoke(string $userId, int $planId): void {
+    public function __invoke(string $userId, string $participantId,  int $planId): void {
         try {
             // 1. Caso de uso para actualizar el status de la participación
             $acceptStatus = $this->repository->findBy('participation_status', 'status', ParticipationStatus::ACCEPTED)[0];
@@ -29,7 +29,7 @@ class AcceptParticipationService implements IService {
             // 2. Caso de uso para recuperar los datos del plan, el creador y el participante
             $creator = GetPlanCreatorContactDataUseCase::fetch($this->repository, $planId);
             $participant = new User(
-                $this->repository->findBy('user', 'id', $userId)[0]
+                $this->repository->findBy('user', 'id', $participantId)[0]
             );
             $plan = $this->repository->findBy('plan', 'id', $planId)[0];
 

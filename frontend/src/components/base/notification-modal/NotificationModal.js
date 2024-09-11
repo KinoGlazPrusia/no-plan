@@ -61,7 +61,7 @@ class NotificationModal extends PlainComponent {
                               notification.notification_type_id
                             ].replace('_', ' ')}
                           </span>
-                        <span class="notification-message">${notification.content.replace(/{planId=\d*}/, '')}</span>
+                        <span class="notification-message">${notification.content.replace(/{planId=\d*}/, '').replace(/{participantId=([a-f0-9\-]+)}/, '')}</span>
                       </div>
                       <div class="notification-actions request">
                         <button class="accept" id="${notification.id}" plan-id="${planId}" user-id="${userId} participant-id="${participantId}">
@@ -126,8 +126,8 @@ class NotificationModal extends PlainComponent {
         this.animateClick(button)
         this.acceptParticipation(
           button.id,
-          button.getAttribute('plan-id'),
-          button.getAttribute('participant-id')
+          button.getAttribute('participant-id'),
+          button.getAttribute('plan-id')
         )
       }
     }
@@ -138,8 +138,8 @@ class NotificationModal extends PlainComponent {
         this.animateClick(button)
         this.rejectParticipation(
           button.id,
-          button.getAttribute('plan-id'),
-          button.getAttribute('participant-id')
+          button.getAttribute('participant-id'),
+          button.getAttribute('plan-id')
         )
       }
     }

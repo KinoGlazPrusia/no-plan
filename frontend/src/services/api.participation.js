@@ -85,11 +85,10 @@ export async function getRejectedPlanParticipations(planId) {
   }
 }
 
-export async function acceptParticipation(userId, planId) {
-  const url = API_ENDPOINTS.ACCEPT_PARTICIPATION.replace(
-    '{userId}',
-    userId
-  ).replace('{planId}', planId)
+export async function acceptParticipation(userId, participantId, planId) {
+  const url = API_ENDPOINTS.ACCEPT_PARTICIPATION.replace('{userId}', userId)
+    .replace('{participantId}', participantId)
+    .replace('{planId}', planId)
   try {
     const response = await fetch(url)
     if (!response.ok) {
