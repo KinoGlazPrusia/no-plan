@@ -19,7 +19,6 @@ class PlannerPage extends PlainComponent {
   constructor() {
     super('p-planner-page', `${PAGES_PATH}planner/PlannerPage.css`)
 
-    // [ ] Reactivar esto
     auth.checkAuthentication(['user', 'admin'], null, () =>
       helper.navigateTo(PAGE_ROUTES.LOGIN)
     )
@@ -97,11 +96,11 @@ class PlannerPage extends PlainComponent {
   }
 
   enablePaginator() {
-    this.$('.paginator').style.display = 'flex';
+    this.$('.paginator').style.display = 'flex'
   }
 
   disablePaginator() {
-    this.$('.paginator').style.display = 'none';
+    this.$('.paginator').style.display = 'none'
   }
 
   nextPage() {

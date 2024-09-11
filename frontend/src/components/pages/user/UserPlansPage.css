@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
+.p-user-plans-page-wrapper {
+  height: 100vh;
+  width: 100%;
+
+  display: grid;
+  place-content: center;
+
+  overflow: hidden;
+}
+
+.spinner {
+  height: 100px;
+  width: 300px;
+}
+
+/* FADES */
+.fade-left {
+  pointer-events: none;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 200px;
+  height: 100%;
+
+  background: linear-gradient(to left, rgba(0, 0, 0, 0), var(--bg-color));
+
+  z-index: 100;
+}
+
+.fade-right {
+  pointer-events: none;
+
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  width: 200px;
+
+  height: 100%;
+
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--bg-color));
+
+  z-index: 100;
+}
+
+/* CONTROLS */
+.controls {
+  position: fixed;
+  top: 2em;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.plan-tabs {
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--bg-color);
+
+  overflow: hidden;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 0.5em;
+
+  display: grid;
+  place-content: center;
+
+  color: var(--text-color);
+
+  transition: 300ms;
+}
+
+.tab:hover {
+  background-color: rgb(from var(--tertiary-color) r g b / 0.25);
+}
+
+.tab:has(+ .tab) {
+  border-right: 1px solid var(--tertiary-color);
+}
+
+.tab.selected {
+  background-color: var(--tertiary-color);
+}
+
+/* BUTTONS */
+.button-wrapper {
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.left-button,
+.right-button {
+  cursor: pointer;
+
+  width: 50px;
+  height: 50px;
+
+  display: grid;
+  place-content: center;
+
+  border: none;
+  border-radius: 100pt;
+
+  color: var(--text-color);
+  background-color: transparent;
+
+  transition: 300ms;
+
+  z-index: 1000;
+}
+
+button.disabled {
+  pointer-events: none;
+  opacity: 0;
+  /* color: var(--tertiary-color); */
+}
+
+@media screen and (max-width: 750px) {
+  .fade-left {
+    display: none;
+  }
+
+  .fade-right {
+    display: none;
+  }
+}

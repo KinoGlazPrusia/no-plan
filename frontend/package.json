@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/KinoGlazPrusia/no-plan#readme",
   "dependencies": {
-    "plain-reactive": "^1.1.7"
+    "plain-reactive": "^1.1.8"
   },
   "devDependencies": {
     "eslint": "^8.52.0",
