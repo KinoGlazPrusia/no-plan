@@ -44,7 +44,10 @@ class NotificationModal extends PlainComponent {
 
         if (notification.notification_type_id === 2) {
           const userId = notification.user_id
-          console.log(notification.content.match(/{planId=\d*}/))
+          const participantId = notification.content
+            .match(/{participantId=\d*}/)[0]
+            .split('=')[1]
+            .replace('}', '')
           const planId = notification.content
             .match(/{planId=\d*}/)[0]
             .split('=')[1]
@@ -61,10 +64,10 @@ class NotificationModal extends PlainComponent {
                         <span class="notification-message">${notification.content.replace(/{planId=\d*}/, '')}</span>
                       </div>
                       <div class="notification-actions request">
-                        <button class="accept" id="${notification.id}" plan-id="${planId}" user-id="${userId}">
+                        <button class="accept" id="${notification.id}" plan-id="${planId}" user-id="${userId} participant-id="${participantId}">
                             <span class="material-symbols-outlined">thumb_up</span>
                         </button>
-                        <button class="reject" id="${notification.id}" plan-id="${planId}" user-id="${userId}">
+                        <button class="reject" id="${notification.id}" plan-id="${planId}" user-id="${userId}" participant-id="${participantId}">
                             <span class="material-symbols-outlined">thumb_down</span>
                         </button>
                       </div>
@@ -124,7 +127,7 @@ class NotificationModal extends PlainComponent {
         this.acceptParticipation(
           button.id,
           button.getAttribute('plan-id'),
-          button.getAttribute('user-id')
+          button.getAttribute('participant-id')
         )
       }
     }
@@ -136,7 +139,7 @@ class NotificationModal extends PlainComponent {
         this.rejectParticipation(
           button.id,
           button.getAttribute('plan-id'),
-          button.getAttribute('user-id')
+          button.getAttribute('participant-id')
         )
       }
     }

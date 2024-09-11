@@ -57,7 +57,7 @@ class SuscribeToPlanService implements IService {
             
             // 5. Caso de uso para notificar al creador del plan de que se ha suscrito a él a través
             // de la app
-            $notificationMessage = $_SESSION['userName'] . ' ha solicitado participar en tu plan: ' . $plan->title . "{planId=$planId}";
+            $notificationMessage = $_SESSION['userName'] . ' ha solicitado participar en tu plan: ' . $plan->title . "{planId=$planId}{participantId=$participant->id}";
 
             CreateNotificationUseCase::create(
                 $this->repository, 
