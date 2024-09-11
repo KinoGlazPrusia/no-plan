@@ -10,12 +10,13 @@ export const VALIDATORS = {
   PASSWORD: 'validatePassword',
   PASSWORD_CONFIRMATION: 'validatePasswordConfirmation',
   NAME: 'validateName',
+  DESCRIPTION: 'validatePlanDescription',
   PHONE_NUMBER: 'validatePhoneNumber',
   AVATAR_IMAGE_FILE: 'validateAvatarImage',
   NOT_EMPTY: 'validateNotEmpty'
 }
 
-export function validateEmail (email) {
+export function validateEmail(email) {
   /* eslint-disable */
   const regexEmailFormat = new RegExp(/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi)
   /* eslint-enable */
@@ -34,7 +35,7 @@ export function validateEmail (email) {
   return validityMessage
 }
 
-export async function validateEmailDontExists (email) {
+export async function validateEmailDontExists(email) {
   if (!email || email.length === 0) return []
 
   /* eslint-disable */
@@ -51,8 +52,7 @@ export async function validateEmailDontExists (email) {
   return validityMessage
 }
 
-export function validateDate (rawDate) {
-  // [ ] Implementar validación de fecha
+export function validateDate(rawDate) {
   const [year, month, day] = rawDate.split('-')
   const date = {
     year,
@@ -60,9 +60,29 @@ export function validateDate (rawDate) {
     day,
     raw: rawDate
   }
+
+  const planDate = new Date(rawDate)
+  const today = new Date()
+  today.setDate(today.getDate() - 1) // Contamos desde ayer, ya que se complica comparar con hoy mismo y hoy si que pueden publicarse planes
+
+  const validityMessage = validate([
+    {
+      condition: () =>
+        date.year.length === 4 &&
+        date.month.length === 2 &&
+        date.day.length === 2,
+      message: 'Invalid date'
+    },
+    {
+      condition: () => planDate > today,
+      message: 'Date must be in the future'
+    }
+  ])
+
+  return validityMessage
 }
 
-export function validateNotEmpty (value) {
+export function validateNotEmpty(value) {
   const validityMessage = validate([
     {
       condition: () => value.length > 0,
@@ -73,7 +93,7 @@ export function validateNotEmpty (value) {
   return validityMessage
 }
 
-export function validatePassword (password) {
+export function validatePassword(password) {
   const regexHasUppercase = /[A-Z]{1,}/g
   const regexHasLowercase = /[a-z]{1,}/g
   const regexHasSpecialChar = /[^A-z\s\d][\\\^]?/g
@@ -105,18 +125,18 @@ export function validatePassword (password) {
   return validityMessage
 }
 
-export function validatePasswordConfirmation (password, confirmation) {
+export function validatePasswordConfirmation(password, confirmation) {
   const validityMessage = validate([
     {
       condition: () => password === confirmation,
-      message: 'Passwords don\'t match'
+      message: "Passwords don't match"
     }
   ])
 
   return validityMessage
 }
 
-export function validateName (name) {
+export function validateName(name) {
   const validityMessage = validate([
     {
       condition: () => name.length > 0 && name.length < 20,
@@ -127,7 +147,18 @@ export function validateName (name) {
   return validityMessage
 }
 
-export function validatePhoneNumber (phone) {
+export function validatePlanDescription(description) {
+  const validityMessage = validate([
+    {
+      condition: () => description.length > 0 && description.length <= 100,
+      message: 'Between 1 and 100 characters'
+    }
+  ])
+
+  return validityMessage
+}
+
+export function validatePhoneNumber(phone) {
   const validityMessage = validate([
     {
       condition: () => phone.length > 8 && phone.length < 20,
@@ -138,7 +169,7 @@ export function validatePhoneNumber (phone) {
   return validityMessage
 }
 
-export function validateAvatarImage (file) {
+export function validateAvatarImage(file) {
   let type = null
   let size = null
 
@@ -169,10 +200,10 @@ export function validateAvatarImage (file) {
 si la función no retorna true, un mensaje de error se añade al array de validityMessage.
 Si el validityMessage tiene un tamaño mayor a 0, significa que se ha retornado algún error
 de validación */
-function validate (conditions) {
+function validate(conditions) {
   const validityMessage = []
 
-  conditions.forEach(condition => {
+  conditions.forEach((condition) => {
     if (!condition.condition()) {
       validityMessage.push(condition.message)
     }

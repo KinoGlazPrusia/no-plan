@@ -55,7 +55,36 @@ class DateInput extends PlainComponent {
     this.inputValue.setState(this.$('.input').value, false)
   }
 
-  validate() {}
+  validate() {
+    const value = this.$('.input').value
+
+    let isValid = null
+    const validityMessage = this.validator(value)
+
+    validityMessage.length > 0 ? (isValid = false) : (isValid = true)
+
+    !isValid
+      ? !this.wrapper.classList.contains('is-invalid') &&
+        this.wrapper.classList.add('is-invalid')
+      : this.wrapper.classList.contains('is-invalid') &&
+        this.wrapper.classList.remove('is-invalid')
+
+    this.validity.setState(
+      {
+        isValid,
+        messages: validityMessage
+      },
+      false
+    )
+
+    // Re-renderizamos el componente de feedback para mostrar errores o mensajes
+    this.updateFeedback()
+  }
+
+  updateFeedback() {
+    // Re-renderizamos el componente de feedback para mostrar errores o mensajes
+    this.$('.feedback').errors.setState(this.validity.getState().messages)
+  }
 }
 
 export default window.customElements.define('p-date-input', DateInput)

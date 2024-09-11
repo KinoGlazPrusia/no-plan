@@ -76,7 +76,8 @@ class CreatePlanForm extends PlainComponent {
                   id="description"
                   name="description"
                   label="Description"
-                  maxlength="100">
+                  maxlength="100"
+                  validator="${VALIDATORS.DESCRIPTION}">
                 </p-text-area-input>
 
                 <!-- PLAN DATE -->
@@ -84,7 +85,8 @@ class CreatePlanForm extends PlainComponent {
                   class="input"
                   id="plan-date"
                   name="plan-date"
-                  label="Plan Date">
+                  label="Plan Date"
+                  validator="${VALIDATORS.DATE}">
                 </p-date-input>
 
                 <!-- MAX PARTICIPANTS -->
@@ -201,8 +203,16 @@ class CreatePlanForm extends PlainComponent {
 
   /* HANDLERS */
   validateFields() {
-    // [ ] Implementar las validaciones pertinentes para el formulario completo
-    return true
+    this.$('#title').validate()
+    this.$('#description').validate()
+    this.$('#plan-date').validate()
+
+    const validity =
+      this.$('#title').validity.getState().isValid &&
+      this.$('#description').validity.getState().isValid &&
+      this.$('#plan-date').validity.getState().isValid
+
+    return validity
   }
 
   async handleSubmit() {

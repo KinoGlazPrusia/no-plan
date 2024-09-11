@@ -29,7 +29,7 @@ class LoginForm extends PlainComponent {
     if (this.isLoading.getState()) {
       return `
         <form class="login-form" name="login-form">
-          <h1 class="greetings">Welcome!</h1>
+          <!-- <h1 class="greetings">Welcome!</h1> -->
 
           <p-loading-spinner
             class="spinner"
@@ -42,7 +42,7 @@ class LoginForm extends PlainComponent {
 
     return `
         <form class="login-form" name="login-form">
-            <h1 class="greetings">Welcome!</h1>
+            <!-- <h1 class="greetings">Welcome!</h1> -->
 
               <p-text-input 
                 class="input" 
@@ -112,9 +112,9 @@ class LoginForm extends PlainComponent {
     this.$('#email-input').validate()
     this.$('#password-input').validate()
 
-    const validity = 
+    const validity =
       this.$('#email-input').validity.getState().isValid &&
-      this.$('#password-input').validity.getState().isValid 
+      this.$('#password-input').validity.getState().isValid
 
     return validity
   }

@@ -26,22 +26,27 @@
 }
 
 .logo-wrapper {
-  position: fixed;
-  top: 1em;
-  left: 50%;
-  transform: translateX(-50%);
-
   width: 100%;
+  /* margin-bottom: 50px; */
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0.5em;
+  gap: 1em;
+}
+
+.app-name {
+  align-self: flex-end;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 .logo {
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
+  height: 50px;
+  width: 50px;
 
   animation-name: logo;
   animation-duration: 3s;
@@ -49,22 +54,18 @@
   animation-timing-function: linear;
 }
 
-.title {
-  padding: 0;
-  margin: 0;
-
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
 .caption {
   padding: 0;
   margin: 0;
 
+  margin-top: -10px;
+  /* margin-bottom: 50px; */
+
+  word-spacing: 0.25em;
+
   font-family: 'Poppins', sans-serif;
+  color: var(--text-color);
   font-size: 1em;
-  font-weight: bold;
 }
 
 .filler {

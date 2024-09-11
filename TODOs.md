@@ -8,12 +8,13 @@ de planes para el día (en vista de calendario), y al apretar sobre la chip, se 
         - Edición de plan
         - Plan step 
 - [ ] Implementar la función de sort del plan-timeline (por hora)
-- [ ] Crear un logo y añadirlo a las páginas (revisar el diseño en general) (añadir también un caption en la página de login/signup, estilo 'Plan, meet, enjoy')
+- [x] Crear un logo y añadirlo a las páginas (revisar el diseño en general) (añadir también un caption en la página de login/signup, estilo 'Plan, meet, enjoy')
 - [ ] Implementar los iconos de categoría en las 'plan-cards' (con un tooltip al hacer hover)
 - [ ] Incluir varios temas que se activen según la hora (mañana, día, tarde, noche)
 - [ ] Implementar un placeholder en la imagen del plan-card si esta no carga o no se encuentra (basado en la categoría del plan)
 - [ ] Crear la página de usuario
 - [ ] Solucionar el bug en el formulario de registro de usuarios (activación del botón submit)
+- [ ] Revisar bug en el cálculo de la edad del user avatar
 
 *El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay
 tiempo para implementarlo*
