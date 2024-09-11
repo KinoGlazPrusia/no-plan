@@ -40,6 +40,7 @@ class NotificationModal extends PlainComponent {
     const notifications = () => {
       if (!this.notifications.getState()) return null
       return this.notifications.getState().map((notification) => {
+        console.log(notification.created_at)
         const createdAt = helper.timeFromNow(notification.created_at)
 
         if (notification.notification_type_id === 2) {
