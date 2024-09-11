@@ -24,7 +24,7 @@ class AcceptParticipationService implements IService {
         try {
             // 1. Caso de uso para actualizar el status de la participación
             $acceptStatus = $this->repository->findBy('participation_status', 'status', ParticipationStatus::ACCEPTED)[0];
-            $this->repository->updateParticipationStatus($userId, $planId, $acceptStatus->id);
+            $this->repository->updateParticipationStatus($participantId, $planId, $acceptStatus->id);
 
             // 2. Caso de uso para recuperar los datos del plan, el creador y el participante
             $creator = GetPlanCreatorContactDataUseCase::fetch($this->repository, $planId);

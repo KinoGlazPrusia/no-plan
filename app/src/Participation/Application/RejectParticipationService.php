@@ -24,7 +24,7 @@ class RejectParticipationService implements IService {
         try {
             // 1. Caso de uso para actualizar el status de la participación
             $rejectStatus = $this->repository->findBy('participation_status', 'status', ParticipationStatus::REJECTED)[0];
-            $this->repository->updateParticipationStatus($userId, $planId, $rejectStatus->id);
+            $this->repository->updateParticipationStatus($participantId, $planId, $rejectStatus->id);
 
             // 2. Caso de uso para recuperar los datos del plan, el creador y el participante
             $creator = GetPlanCreatorContactDataUseCase::fetch($this->repository, $planId);
