@@ -3,6 +3,7 @@
 ## WORKING ON ...
 - [x] Crear la página de calendario, en el que salgan chips de notificación con el número
 de planes para el día (en vista de calendario), y al apretar sobre la chip, se despliegue un carousel en el que se puedan visualizar todas las cards del plan e interactuar con ellas.
+- [ ] Revisar bug en el cálculo de la edad del user avatar
 - [ ] Implementar validaciones pendientes en los formularios de:
         - Creación de plan
         - Edición de plan
@@ -14,7 +15,6 @@ de planes para el día (en vista de calendario), y al apretar sobre la chip, se 
 - [ ] Implementar un placeholder en la imagen del plan-card si esta no carga o no se encuentra (basado en la categoría del plan)
 - [ ] Crear la página de usuario
 - [ ] Solucionar el bug en el formulario de registro de usuarios (activación del botón submit)
-- [ ] Revisar bug en el cálculo de la edad del user avatar
 
 *El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay
 tiempo para implementarlo*
