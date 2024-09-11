@@ -47,7 +47,7 @@ WORKDIR /var/www/html/no-plan/app
 RUN composer install --no-dev --optimize-autoloader
 
 # Damos permisos completos al servidor para la carpeta pública
-RUN chown -R www-data:www-data /var/www/html/no-plan/assets/images
+RUN chown -R www-data:www-data /var/www/html/no-plan/app/public/assets/images
 RUN chmod -R 755 /var/www/html/no-plan/app/public/assets/images
 
 # Volvemos al directorio de trabajo principal

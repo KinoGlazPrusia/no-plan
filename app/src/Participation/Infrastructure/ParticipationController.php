@@ -29,12 +29,13 @@ class ParticipationController {
     }
 
     public static function acceptParticipation(Request $request, IUseCase | IService $acceptParticipation): void {
-        $request->validateQuery(['user_id, plan_id']);
+        $request->validateQuery(['user_id, participant_id, plan_id']);
 
         try {
             $userId = Sanitizer::sanitizeString($request->query['user_id']);
+            $participantId = Sanitizer::sanitizeString($request->query['participant_id']);
             $planId = Sanitizer::sanitizeInt($request->query['plan_id']);
-            $acceptParticipation($userId, $planId); 
+            $acceptParticipation($userId, $participantId, $planId); 
             Response::json('success', 200, 'Participación aceptada');
         }
         catch (\Exception $e) {
