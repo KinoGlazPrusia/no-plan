@@ -46,21 +46,28 @@ class NotificationModal extends PlainComponent {
           const userId = notification.user_id
           console.log(notification.content.match(/{planId=\d*}/))
           const planId = notification.content
-          .match(/{planId=\d*}/)[0]
-          .split('=')[1]
-          .replace('}', '')
+            .match(/{planId=\d*}/)[0]
+            .split('=')[1]
+            .replace('}', '')
           return `
                 <li class="notification ${notification.read ? 'read' : ''}">
                     <div class="notification-wrapper ${notificationCategory[notification.notification_type_id]}">
+                      <div class="content-wrapper">
+                          <span class="notification-title">
+                            ${notificationCategory[
+                              notification.notification_type_id
+                            ].replace('_', ' ')}
+                          </span>
                         <span class="notification-message">${notification.content.replace(/{planId=\d*}/, '')}</span>
-                        <div class="notification-actions">
-                            <button class="accept" id="${notification.id}" plan-id="${planId}" user-id="${userId}">
-                                <span class="material-symbols-outlined">thumb_up</span>
-                            </button>
-                            <button class="reject" id="${notification.id}" plan-id="${planId}" user-id="${userId}">
-                                <span class="material-symbols-outlined">thumb_down</span>
-                            </button>
-                        </div>
+                      </div>
+                      <div class="notification-actions request">
+                        <button class="accept" id="${notification.id}" plan-id="${planId}" user-id="${userId}">
+                            <span class="material-symbols-outlined">thumb_up</span>
+                        </button>
+                        <button class="reject" id="${notification.id}" plan-id="${planId}" user-id="${userId}">
+                            <span class="material-symbols-outlined">thumb_down</span>
+                        </button>
+                      </div>
                     </div>
                     <span class="notification-time">${createdAt}</span>
                 </li>
@@ -70,7 +77,14 @@ class NotificationModal extends PlainComponent {
         return `
             <li class="notification">
                 <div class="notification-wrapper ${notificationCategory[notification.notification_type_id]}">
-                    <span class="notification-message">${notification.content}</span>
+                    <div class="content-wrapper">
+                      <span class="notification-title">
+                        ${notificationCategory[
+                          notification.notification_type_id
+                        ].replace('_', ' ')}
+                      </span>
+                      <span class="notification-message">${notification.content}</span>
+                    </div>
                     <button class="read-button" id="${notification.id}">
                         <span class="material-symbols-outlined notification-actions">close</span>
                     </button>
@@ -108,7 +122,7 @@ class NotificationModal extends PlainComponent {
       button.onclick = (e) => {
         this.animateClick(button)
         this.acceptParticipation(
-          button.id, 
+          button.id,
           button.getAttribute('plan-id'),
           button.getAttribute('user-id')
         )
@@ -120,7 +134,7 @@ class NotificationModal extends PlainComponent {
       button.onclick = (e) => {
         this.animateClick(button)
         this.rejectParticipation(
-          button.id, 
+          button.id,
           button.getAttribute('plan-id'),
           button.getAttribute('user-id')
         )
