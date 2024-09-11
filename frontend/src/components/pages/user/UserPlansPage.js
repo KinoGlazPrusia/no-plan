@@ -30,7 +30,7 @@ class UserPlansPage extends PlainComponent {
     this.isLoading = new PlainState(true, this)
     this.error = new PlainState(null, this)
 
-    this.currentTab = new PlainState(planFilters.PENDING, this)
+    this.currentTab = new PlainState(planFilters.CREATED, this)
     this.currentPage = new PlainState(1, this)
   }
 
