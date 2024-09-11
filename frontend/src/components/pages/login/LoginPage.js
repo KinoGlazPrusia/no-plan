@@ -36,8 +36,14 @@ class LoginPage extends PlainComponent {
   template() {
     return `
             <p-toast></p-toast>
+            <div class="filler"></div>
+            <img class="logo" src="${PUBLIC_PATH}assets/icons/logo.svg" width="100px" height="100px" alt="Logo">
             <p-login-form></p-login-form>
             <span class="sign-up-link">Don't you have an account? <a class="to-signup">Sign Up</a></span>
+            <p class="caption">Share. Meet. Experience.</p>
+            <div class="filler"></div>
+
+
         `
   }
 
