@@ -155,6 +155,7 @@ class PlanCard extends PlainComponent {
   template() {
     const creatorData = this.planData.getState().created_by
     creatorData.birth_date = helper.getAge(new Date(creatorData.birth_date))
+    console.log(creatorData.birth_date, creatorData.name)
 
     const planDate = new Date(this.planData.getState().datetime) // [ ] Hay un error en las fechas (el día es incorrecto)
     const participations = this.acceptedParticipations
@@ -234,7 +235,7 @@ class PlanCard extends PlainComponent {
   listeners() {
     //this.$('.apply-button').onclick = () => this.toggleApplication()
     this.$('.apply-button').onclick = async () => {
-      this.isApplied.getState() 
+      this.isApplied.getState()
         ? await this.unapplyToPlan()
         : await this.applyToPlan()
     }
@@ -250,7 +251,9 @@ class PlanCard extends PlainComponent {
   }
 
   async applyToPlan() {
-    const response = await apiParticipation.applyToPlan(this.getAttribute('plan-id'))
+    const response = await apiParticipation.applyToPlan(
+      this.getAttribute('plan-id')
+    )
 
     if (response.status === 'success') {
       this.handleSuccess()
@@ -261,7 +264,9 @@ class PlanCard extends PlainComponent {
 
   async unapplyToPlan() {
     console.log('Unaplaying to plan', this.getAttribute('plan-id'))
-    const response = await apiParticipation.unapplyToPlan(this.getAttribute('plan-id'))
+    const response = await apiParticipation.unapplyToPlan(
+      this.getAttribute('plan-id')
+    )
 
     if (response.status === 'success') {
       this.handleSuccess()

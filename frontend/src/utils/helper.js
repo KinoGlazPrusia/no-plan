@@ -7,11 +7,26 @@ export function navigateTo(path) {
 export function getAge(birthdate) {
   const today = new Date()
 
-  let diff = (today.getTime() - birthdate.getTime()) / 1000
-  diff /= 60 * 60 * 24
-  return Math.abs(Math.round(diff / 365.25))
+  // Asegurarnos de que birthdate es un objeto Date
+  birthdate = new Date(birthdate)
 
-  // [ ] Revisar el cálculo de la edad porque no es perfecto
+  let age = today.getFullYear() - birthdate.getFullYear()
+  const monthDiff = today.getMonth() - birthdate.getMonth()
+
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && today.getDate() < birthdate.getDate())
+  ) {
+    age--
+  }
+
+  // Verificación adicional para evitar edades negativas o excesivamente altas
+  if (age < 0 || age > 150) {
+    console.error('Cálculo de edad inválido. Verifica la fecha de nacimiento.')
+    return null
+  }
+
+  return age
 }
 
 export function timeFromNow(time) {

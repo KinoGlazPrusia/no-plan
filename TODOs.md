@@ -15,6 +15,7 @@ de planes para el día (en vista de calendario), y al apretar sobre la chip, se 
 - [ ] Implementar un placeholder en la imagen del plan-card si esta no carga o no se encuentra (basado en la categoría del plan)
 - [ ] Crear la página de usuario
 - [ ] Solucionar el bug en el formulario de registro de usuarios (activación del botón submit)
+- [ ] Resolver bug con la zona horaria del conteneder del webserver
 
 *El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay
 tiempo para implementarlo*
