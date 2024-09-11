@@ -45,7 +45,7 @@ class NotificationModal extends PlainComponent {
         if (notification.notification_type_id === 2) {
           const userId = notification.user_id
           const participantId = notification.content
-            .match(/{participantId=\d*}/)[0]
+            .match(/{participantId=\w+}/)[0]
             .split('=')[1]
             .replace('}', '')
           const planId = notification.content
