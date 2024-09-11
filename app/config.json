@@ -15,7 +15,7 @@
         "session_token_expiration_time": 86400
     },
     "prod": {
-        "app_host": "http://147.83.7.155/",
+        "app_host": "http://147.83.7.155:85/",
         "db_type": "mysql",
         "db_host": "db",
         "db_user": "noplanuser",

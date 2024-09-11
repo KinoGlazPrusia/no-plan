@@ -4,7 +4,7 @@
 
 const MODE = 'dev' // 'dev' o 'prod'
 const DEV_HOST = 'http://localhost/no-plan/'
-const PROD_HOST = 'http://147.83.7.155/no-plan/'
+const PROD_HOST = 'http://147.83.7.155:85/no-plan/'
 
 export const APP_URL =
   MODE === 'dev' ? `${DEV_HOST}app/public/` : `${PROD_HOST}app/public/`
