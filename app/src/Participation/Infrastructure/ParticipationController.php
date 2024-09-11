@@ -44,12 +44,14 @@ class ParticipationController {
     }
 
     public static function rejectParticipation(Request $request, IUseCase | IService $rejectParticipation): void {
-        $request->validateQuery(['user_id, plan_id']);
+        $request->validateQuery(['user_id, participant_id, plan_id']);
+
 
         try {
             $userId = Sanitizer::sanitizeString($request->query['user_id']);
+            $participantId = Sanitizer::sanitizeString($request->query['participant_id']);
             $planId = Sanitizer::sanitizeInt($request->query['plan_id']);
-            $rejectParticipation($userId, $planId); 
+            $rejectParticipation($userId, $participantId, $planId); 
             Response::json('success', 200, 'Participación rechazada');
         }
         catch (\Exception $e) {

@@ -43,11 +43,13 @@ class NotificationModal extends PlainComponent {
         const createdAt = helper.timeFromNow(notification.created_at)
 
         if (notification.notification_type_id === 2) {
+          console.log(notification.content)
           const userId = notification.user_id
           const participantId = notification.content
             .match(/{participantId=([a-f0-9\-]+)}/)[0]
             .split('=')[1]
             .replace('}', '')
+          console.log(participantId)
           const planId = notification.content
             .match(/{planId=\d*}/)[0]
             .split('=')[1]
@@ -64,7 +66,7 @@ class NotificationModal extends PlainComponent {
                         <span class="notification-message">${notification.content.replace(/{planId=\d*}/, '').replace(/{participantId=([a-f0-9\-]+)}/, '')}</span>
                       </div>
                       <div class="notification-actions request">
-                        <button class="accept" id="${notification.id}" plan-id="${planId}" user-id="${userId} participant-id="${participantId}">
+                        <button class="accept" id="${notification.id}" plan-id="${planId}" user-id="${userId}" participant-id="${participantId}">
                             <span class="material-symbols-outlined">thumb_up</span>
                         </button>
                         <button class="reject" id="${notification.id}" plan-id="${planId}" user-id="${userId}" participant-id="${participantId}">
@@ -126,6 +128,7 @@ class NotificationModal extends PlainComponent {
         this.animateClick(button)
         this.acceptParticipation(
           button.id,
+          button.getAttribute('user-id'),
           button.getAttribute('participant-id'),
           button.getAttribute('plan-id')
         )
@@ -138,6 +141,7 @@ class NotificationModal extends PlainComponent {
         this.animateClick(button)
         this.rejectParticipation(
           button.id,
+          button.getAttribute('user-id'),
           button.getAttribute('participant-id'),
           button.getAttribute('plan-id')
         )
@@ -171,10 +175,11 @@ class NotificationModal extends PlainComponent {
   }
 
   // [ ] Terminar de implementar la función de aceptar o rechazar un participante
-  async acceptParticipation(notificationId, planId, userId) {
+  async acceptParticipation(notificationId, userId, participantId, planId) {
     try {
       const response = await apiParticipation.acceptParticipation(
         userId,
+        participantId,
         planId
       )
 
@@ -186,10 +191,11 @@ class NotificationModal extends PlainComponent {
     }
   }
 
-  async rejectParticipation(notificationId, planId, userId) {
+  async rejectParticipation(notificationId, userId, participantId, planId) {
     try {
       const response = await apiParticipation.rejectParticipation(
         userId,
+        participantId,
         planId
       )
 

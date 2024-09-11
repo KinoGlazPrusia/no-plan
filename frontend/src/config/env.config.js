@@ -53,7 +53,8 @@ export const API_ENDPOINTS = {
     APP_URL +
     'accept-participation/?user_id={userId}&participant_id={participantId}&plan_id={planId}',
   REJECT_PARTICIPATION:
-    APP_URL + 'reject-participation/?user_id={userId}&plan_id={planId}',
+    APP_URL +
+    'reject-participation/?user_id={userId}&participant_id={participantId}&plan_id={planId}',
   USER_DATA: APP_URL + 'user-data',
   PLANS_COUNT: APP_URL + 'plans-count',
   PLANS_COUNT_CREATED: APP_URL + 'plans-count/created',
