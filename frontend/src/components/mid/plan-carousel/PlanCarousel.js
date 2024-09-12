@@ -60,7 +60,7 @@ class PlanCarousel extends PlainComponent {
   async fetchData() {
     await this.fetchPlans(this.getAttribute('filter'))
     await this.setMaxPages(this.getAttribute('filter'))
-    await this.loadCards()
+    await this.loadCards(this.getAttribute('filter'))
   }
 
   async fetchPlans(filter) {
@@ -132,7 +132,7 @@ class PlanCarousel extends PlainComponent {
     }
   }
 
-  async loadCards() {
+  async loadCards(filter) {
     const cards = this.data.getState().map((planData, index) => {
       const card =
         index === 0
@@ -140,7 +140,8 @@ class PlanCarousel extends PlainComponent {
           <div class="card-wrapper selected-card">
             <p-plan-card 
               plan-data='${JSON.stringify(planData)}' 
-              plan-id="${planData.id}">
+              plan-id="${planData.id}"
+              ${filter === 'created' ? 'editable="true"' : ''}>
             </p-plan-card>
           </div>
         `
@@ -148,7 +149,8 @@ class PlanCarousel extends PlainComponent {
           <div class="card-wrapper">
             <p-plan-card 
               plan-data='${JSON.stringify(planData)}' 
-              plan-id="${planData.id}">
+              plan-id="${planData.id}"
+              ${filter === 'created' ? 'editable="true"' : ''}>
             </p-plan-card>
           </div>
         `

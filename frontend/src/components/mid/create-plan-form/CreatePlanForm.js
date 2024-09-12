@@ -33,10 +33,6 @@ class CreatePlanForm extends PlainComponent {
     this.editMode = new PlainState(null, this) // Si estamos en modo edición, guardamos el id del plan que vamos a editar
 
     this.userContext = new PlainContext('user', this, false)
-
-    // this.fillData(1) // [ ] Esta función será llamada para poner el formulario en modo edición
-
-    // [ ] Quizás se podría sustituir el select multiple por un div lleno de check chips como en un filtro
   }
 
   template() {
@@ -128,7 +124,7 @@ class CreatePlanForm extends PlainComponent {
 
             <div class="button-wrapper">
                 <p-button class="add-step" type="secondary" icon="add">Add Step</p-button>
-                <p-button class="submit" type="primary">Publish</p-button>
+                <p-button class="submit" type="primary">${this.editMode.getState() ? 'Update' : 'Publish'}</p-button>
             </div>
 
         </form>
@@ -143,13 +139,16 @@ class CreatePlanForm extends PlainComponent {
     }
   }
 
-  async fillData(planId) {
-    const plan = await apiPlan.fetchPlanData(planId)
-    const data = plan.data[0]
+  fillData(planId, data) {
+    this.editMode.setState(planId, false)
 
+    /* TITULO */
     this.$('#title').inputValue.setState(data.title)
+
+    /* DESCRIPCIÓN */
     this.$('#description').inputValue.setState(data.description)
 
+    /* FECHA */
     const date = new Date(data.datetime)
     const year = date.getFullYear()
     const month =
@@ -160,13 +159,17 @@ class CreatePlanForm extends PlainComponent {
       date.getDay().toString().length > 1 ? date.getDay() : '0' + date.getDay()
 
     this.$('#plan-date').inputValue.setState(`${year}-${month}-${day}`)
+
+    /* PARTICIPANTES */
     this.$('#max-participants').inputValue.setState(data.max_participation)
 
-    //this.$('#categories').inputValue.setState(data.categories) // [ ] Implementar la carga de categorias
+    /* CATEGORIAS */
     data.categories.forEach((category) => {
       this.$('#categories').selectOption(category.id)
     })
 
+    /* TIMELINE */
+    this.clearTimeline()
     data.timeline.forEach((step) => {
       const time = new Date(`01/01/2000 ${step.time}`)
       const hours =
@@ -180,8 +183,6 @@ class CreatePlanForm extends PlainComponent {
       step.time = `${hours}:${minutes}`
       this.addStep(step)
     })
-
-    this.editMode.setState(planId, false)
   }
 
   async fetchCategories() {
@@ -199,6 +200,10 @@ class CreatePlanForm extends PlainComponent {
 
   addStep(step) {
     this.$('p-plan-timeline').addStep(step) // Esto se llama desde el modal
+  }
+
+  clearTimeline() {
+    this.$('p-plan-timeline').clear()
   }
 
   /* HANDLERS */

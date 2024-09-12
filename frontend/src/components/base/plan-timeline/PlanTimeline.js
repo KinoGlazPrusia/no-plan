@@ -50,7 +50,13 @@ class PlanTimeline extends PlainComponent {
     // [ ] Se debería hacer un sortStep() para ordenar las tareas por hora
   }
 
-  removeStep() {}
+  removeStep(step) {
+    this.timeline.setState(this.timeline.getState().filter((s) => s !== step))
+  }
+
+  clear() {
+    this.timeline.setState([])
+  }
 
   editStep() {}
 

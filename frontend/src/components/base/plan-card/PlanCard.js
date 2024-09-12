@@ -40,6 +40,7 @@ class PlanCard extends PlainComponent {
     this.isAccepted = new PlainState(false, this) // El usuario ha sido aceptado en el plan
     this.isRejected = new PlainState(false, this) // El usuario ha sido rechazado en el plan
     this.isFocused = new PlainState(true, this)
+    this.isEditable = new PlainState(this.getAttribute('editable'), this)
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -155,7 +156,6 @@ class PlanCard extends PlainComponent {
   template() {
     const creatorData = this.planData.getState().created_by
     creatorData.birth_date = helper.getAge(new Date(creatorData.birth_date))
-    console.log(creatorData.birth_date, creatorData.name)
 
     const planDate = new Date(this.planData.getState().datetime) // [ ] Hay un error en las fechas (el día es incorrecto)
     const participations = this.acceptedParticipations
@@ -189,6 +189,14 @@ class PlanCard extends PlainComponent {
         return `
           <button class="apply-button applied pop-in">
             <span class="material-symbols-outlined">mail</span>
+          </button>
+        `
+      }
+
+      if (this.isEditable.getState()) {
+        return `
+          <button class="apply-button unapplied pop-in">
+            <span class="material-symbols-outlined">edit</span>
           </button>
         `
       }
@@ -235,6 +243,10 @@ class PlanCard extends PlainComponent {
   listeners() {
     //this.$('.apply-button').onclick = () => this.toggleApplication()
     this.$('.apply-button').onclick = async () => {
+      if (this.isEditable.getState()) {
+        return this.editCard()
+      }
+
       this.isApplied.getState()
         ? await this.unapplyToPlan()
         : await this.applyToPlan()
@@ -289,6 +301,19 @@ class PlanCard extends PlainComponent {
       'out-of-focus',
       !this.isFocused.getState()
     )
+  }
+
+  setEditable() {
+    this.isEditable.setState(true, false)
+  }
+
+  editCard() {
+    console.log(this.planData.getState())
+    try {
+      this.parentComponent.parentComponent.openEditor(this.planData.getState()) // PlanCard >> UserPlansPage >> EditPlanModal >> CreatePlanForm
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

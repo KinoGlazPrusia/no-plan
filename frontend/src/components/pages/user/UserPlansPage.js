@@ -12,6 +12,9 @@ import * as auth from '../../../utils/authenticator.js'
 /* CONSTANTS */
 import { planFilters } from '../../../constants/planFilters.js'
 
+/* COMPONENTS */
+import EditPlanModal from '../../mid/edit-plan-modal/EditPlanModal.js'
+
 class UserPlansPage extends PlainComponent {
   constructor() {
     super('p-user-plans-page', `${PAGES_PATH}user/UserPlansPage.css`)
@@ -69,7 +72,9 @@ class UserPlansPage extends PlainComponent {
                 </button>
               </div>
             </div>
-           
+
+            <!-- EDIT PLAN MODAL -->
+            <p-edit-plan-modal></p-edit-plan-modal>
 
             <!-- PAGE SELECTOR -->
             <p-navbar></p-navbar>
@@ -84,6 +89,15 @@ class UserPlansPage extends PlainComponent {
     tabs.forEach((tab) => {
       tab.onclick = () => this.changeTab(tab)
     })
+  }
+
+  openEditor(data) {
+    this.$('p-edit-plan-modal').open()
+    this.$('p-edit-plan-modal').setPlanData(data)
+  }
+
+  closeEditor() {
+    this.$('p-edit-plan-modal').close()
   }
 
   changeTab(tab) {

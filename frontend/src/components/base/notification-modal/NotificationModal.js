@@ -40,21 +40,21 @@ class NotificationModal extends PlainComponent {
     const notifications = () => {
       if (!this.notifications.getState()) return null
       return this.notifications.getState().map((notification) => {
-        console.log(notification.created_at)
         const createdAt = helper.timeFromNow(notification.created_at)
 
         if (notification.notification_type_id === 2) {
-          console.log(notification.content)
           const userId = notification.user_id
+
           const participantId = notification.content
             .match(/{participantId=([a-f0-9\-]+)}/)[0]
             .split('=')[1]
             .replace('}', '')
-          console.log(participantId)
+
           const planId = notification.content
             .match(/{planId=\d*}/)[0]
             .split('=')[1]
             .replace('}', '')
+
           return `
                 <li class="notification ${notification.read ? 'read' : ''}">
                     <div class="notification-wrapper ${notificationCategory[notification.notification_type_id]}">

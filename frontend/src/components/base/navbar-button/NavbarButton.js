@@ -1,34 +1,37 @@
-import { PlainComponent} from '../../../../node_modules/plain-reactive/src/index.js'
+import { PlainComponent } from '../../../../node_modules/plain-reactive/src/index.js'
 import { BASE_COMPONENTS_PATH } from '../../../config/env.config.js'
 
 /* UTILS */
 import * as helper from '../../../utils/helper.js'
 
 class NavbarButton extends PlainComponent {
-  constructor () {
-    super('p-navbar-button', `${BASE_COMPONENTS_PATH}navbar-button/NavbarButton.css`)
+  constructor() {
+    super(
+      'p-navbar-button',
+      `${BASE_COMPONENTS_PATH}navbar-button/NavbarButton.css`
+    )
   }
 
-  template () {
+  template() {
     return `
-            <button class="button ${this.getAttribute('selected') ? 'selected' : ''}">
+            <button class="button ${this.getAttribute('selected') ? 'selected' : ''} ${this.hasAttribute('disabled') ? 'disabled' : ''}">
                 <span class="material-symbols-outlined">${this.getAttribute('icon')}</span>
             </button>
         `
   }
 
-  listeners () {
+  listeners() {
     this.$('.button').onclick = () => {
       this.handleClick()
       helper.navigateTo(this.getAttribute('path'))
     }
   }
 
-  handleClick () {
+  handleClick() {
     this.animateClick()
   }
 
-  animateClick () {
+  animateClick() {
     this.wrapper.classList.add('clicked')
     this.wrapper.onanimationend = () => this.wrapper.classList.remove('clicked')
   }

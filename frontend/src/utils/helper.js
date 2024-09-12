@@ -38,10 +38,6 @@ export function timeFromNow(time) {
   const hours = Math.floor(minutes / 60)
   const days = Math.floor(hours / 24)
 
-  console.log('Notification time: ', time)
-  console.log('Notification date:', date)
-  console.log('Now date:', now)
-
   if (days > 0) {
     return `${days} ${days > 1 ? 'days' : 'day'} ago`
   } else if (hours > 0) {

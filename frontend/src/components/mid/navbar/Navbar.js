@@ -19,6 +19,7 @@ class Navbar extends PlainComponent {
     this.navigationContext = new PlainContext('navigation', this)
 
     this.notifications = new PlainState(null, this)
+    this.wrapper.classList.add('hidden')
   }
 
   async connectedCallback() {
@@ -38,7 +39,6 @@ class Navbar extends PlainComponent {
 
   // [ ] Implementar deshabilitación de botones dependiendo del estado de autenticación del usuario
   template() {
-    this.wrapper.classList.add('hidden')
     const notificationChip = () => {
       return this.notifications.getState().length > 0
         ? `<span class="notification-chip pop">${this.notifications.getState().length}</span>`
@@ -55,11 +55,11 @@ class Navbar extends PlainComponent {
 
     return `
             ${unfoldMenuButton()}
-            <p-navbar-button icon="person" path="user/profile" ${this.navigationContext.getData('currentPage') === 'user/profile' ? 'selected="true' : ''}"></p-navbar-button>
+            <p-navbar-button icon="person" path="user/profile" ${this.navigationContext.getData('currentPage') === 'user/profile' ? 'selected="true' : ''}" disabled></p-navbar-button>
             <p-navbar-button icon="event" path="user/plans" ${this.navigationContext.getData('currentPage') === 'user/plans' ? 'selected="true"' : ''}"></p-navbar-button>
             <p-navbar-button icon="add" path="plan/create" ${this.navigationContext.getData('currentPage') === 'plan/create' ? 'selected="true' : ''}"></p-navbar-button>
             <p-navbar-button icon="roofing" path="planner" ${this.navigationContext.getData('currentPage') === 'planner' ? 'selected="true' : ''}"></p-navbar-button>
-            <p-navbar-button icon="search" path="finder" ${this.navigationContext.getData('currentPage') === 'finder' ? 'selected="true' : ''}"></p-navbar-button>
+            <p-navbar-button icon="search" path="finder" ${this.navigationContext.getData('currentPage') === 'finder' ? 'selected="true' : ''}" disabled></p-navbar-button>
             ${notificationChip()}
             <p-notification-modal class="notification-modal" data='${JSON.stringify(this.notifications.getState())}'></p-notification-modal>
         `
