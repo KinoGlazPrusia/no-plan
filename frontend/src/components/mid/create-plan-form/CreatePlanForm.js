@@ -151,12 +151,15 @@ class CreatePlanForm extends PlainComponent {
     /* FECHA */
     const date = new Date(data.datetime)
     const year = date.getFullYear()
+    console.log('MES', (date.getMonth() + 1).toString().length)
     const month =
-      date.getMonth().toString().length > 1
-        ? date.getMonth()
-        : '0' + date.getMonth()
+      (date.getMonth() + 1).toString().length > 1
+        ? date.getMonth() + 1
+        : '0' + (date.getMonth() + 1).toString()
     const day =
-      date.getDay().toString().length > 1 ? date.getDay() : '0' + date.getDay()
+      date.getDate().toString().length > 1
+        ? date.getDate()
+        : '0' + date.getDate()
 
     this.$('#plan-date').inputValue.setState(`${year}-${month}-${day}`)
 

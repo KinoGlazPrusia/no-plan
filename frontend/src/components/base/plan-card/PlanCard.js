@@ -155,7 +155,7 @@ class PlanCard extends PlainComponent {
 
   template() {
     const creatorData = this.planData.getState().created_by
-    creatorData.birth_date = helper.getAge(new Date(creatorData.birth_date))
+    const creatorAge = helper.getAge(new Date(creatorData.birth_date))
 
     const planDate = new Date(this.planData.getState().datetime) // [ ] Hay un error en las fechas (el día es incorrecto)
     const participations = this.acceptedParticipations
@@ -214,7 +214,7 @@ class PlanCard extends PlainComponent {
           </div>
           <div class="user-info">
             <span class="user-name">${creatorData.name}</span>
-            <span class="user-age">${creatorData.birth_date} y/o</span>
+            <span class="user-age">${creatorAge} y/o</span>
           </div>
         </div>
         <div class="plan">
@@ -224,7 +224,12 @@ class PlanCard extends PlainComponent {
           <div class="plan-info">
             <div class="plan-title">${this.planData.getState().title}</div>
             <div class="plan-description">${this.planData.getState().description}</div>
-            <div class="plan-date">${planDate.getDay()} ${helper.getMonthName(planDate.getMonth())} ${planDate.getFullYear()}</div>
+            <span class="week-day">${helper.getWeekDayName(planDate.getDay() - 1)}</span>
+            <div class="plan-date">
+              ${planDate.getDate()} de
+              ${helper.getMonthName(planDate.getMonth())}
+              ${planDate.getFullYear()}
+            </div>
           </div>
         </div>
         <div class="plan-timeline-wrapper">

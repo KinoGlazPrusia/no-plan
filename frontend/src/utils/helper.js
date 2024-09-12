@@ -64,3 +64,17 @@ export function getMonthName(month) {
   ]
   return months[month]
 }
+
+export function getWeekDayName(day) {
+  const days = [
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+    'Domingo'
+  ]
+
+  return days[day]
+}

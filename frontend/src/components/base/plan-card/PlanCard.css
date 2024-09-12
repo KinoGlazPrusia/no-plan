@@ -131,14 +131,21 @@
   overflow-y: scroll;
 }
 
-.plan-date {
+.week-day {
   padding-top: 0.5em;
 
   align-self: flex-end;
 
   color: var(--text-color);
-  font-size: 0.75em;
+  font-size: 0.7em;
   font-weight: bold;
+}
+
+.plan-date {
+  align-self: flex-end;
+
+  color: var(--text-color);
+  font-size: 0.7em;
 }
 
 .plan-img {
