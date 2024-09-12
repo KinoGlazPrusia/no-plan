@@ -1,3 +1,4 @@
 vendor
+./.phpdoc/
 ./public/assets/images/avatar/
 ./public/assets/images/plan/
