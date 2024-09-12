@@ -92,7 +92,8 @@ class CreatePlanForm extends PlainComponent {
                   name="max-participants" 
                   label="Max. Participants" 
                   type="number"
-                  maxlength="3">
+                  maxlength="3"
+                  validator="${VALIDATORS.MAX_PARTICIPANTS}">
                 </p-text-input>
 
                 <!-- CATEGORIES -->
@@ -102,6 +103,7 @@ class CreatePlanForm extends PlainComponent {
                   name="categories" 
                   label="Categories"
                   options='${JSON.stringify(this.categories.getState())}'
+                  validator="${VALIDATORS.CATEGORY_SELECTION}"
                   multiple>
                 </p-select-input>
 
@@ -112,7 +114,7 @@ class CreatePlanForm extends PlainComponent {
                   name="plan-img"
                   label="Plan Image"
                   accept="image/*"
-                  validator="${VALIDATORS.AVATAR_IMAGE_FILE}">
+                  validator="${VALIDATORS.PLAN_IMAGE_FILE}">
                 </p-file-input>
 
                 <!-- PLAN TIMELINE -->
@@ -214,11 +216,13 @@ class CreatePlanForm extends PlainComponent {
     this.$('#title').validate()
     this.$('#description').validate()
     this.$('#plan-date').validate()
+    this.$('#max-participants').validate()
 
     const validity =
       this.$('#title').validity.getState().isValid &&
       this.$('#description').validity.getState().isValid &&
-      this.$('#plan-date').validity.getState().isValid
+      this.$('#plan-date').validity.getState().isValid &&
+      this.$('#max-participants').validity.getState().isValid
 
     return validity
   }

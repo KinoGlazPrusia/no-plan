@@ -53,8 +53,8 @@ class SelectInput extends PlainComponent {
                   )}
               </select>
 
-              <p-form-feedback class="feedback"></p-form-feedback>
           </div>
+          <p-form-feedback class="feedback"></p-form-feedback>
         `
   }
 
@@ -62,7 +62,9 @@ class SelectInput extends PlainComponent {
     this.$('.input').oninput = (e) => {
       // Actualización del input value
       this.updateValue()
+    }
 
+    this.$('.input').onblur = () => {
       // Validación
       this.validator && this.validate()
     }
@@ -94,7 +96,36 @@ class SelectInput extends PlainComponent {
     this.inputValue.setState(prevInput, false)
   }
 
-  validate() {}
+  validate() {
+    const value = this.$('.input').selectedOptions
+
+    let isValid = null
+    const validityMessage = this.validator(value)
+
+    validityMessage.length > 0 ? (isValid = false) : (isValid = true)
+
+    !isValid
+      ? !this.wrapper.classList.contains('is-invalid') &&
+        this.wrapper.classList.add('is-invalid')
+      : this.wrapper.classList.contains('is-invalid') &&
+        this.wrapper.classList.remove('is-invalid')
+
+    this.validity.setState(
+      {
+        isValid,
+        messages: validityMessage
+      },
+      false
+    )
+
+    // Re-renderizamos el componente de feedback para mostrar errores o mensajes
+    this.updateFeedback()
+  }
+
+  updateFeedback() {
+    // Re-renderizamos el componente de feedback para mostrar errores o mensajes
+    this.$('.feedback').errors.setState(this.validity.getState().messages)
+  }
 }
 
 export default window.customElements.define('p-select-input', SelectInput)

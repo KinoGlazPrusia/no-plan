@@ -183,7 +183,7 @@ class Validator
             $validityMessage[] = 'Invalid participation: The participation must be greater than 0.';
         }
 
-        if ($participation >= 10) {
+        if ($participation > 10) {
             $validityMessage[] = 'Invalid participation: The participation must be equal or less than 10.';
         }
 

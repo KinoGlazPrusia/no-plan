@@ -13,7 +13,10 @@ export const VALIDATORS = {
   DESCRIPTION: 'validatePlanDescription',
   PHONE_NUMBER: 'validatePhoneNumber',
   AVATAR_IMAGE_FILE: 'validateAvatarImage',
-  NOT_EMPTY: 'validateNotEmpty'
+  PLAN_IMAGE_FILE: 'validatePlanImage',
+  NOT_EMPTY: 'validateNotEmpty',
+  MAX_PARTICIPANTS: 'validateMaxParticipants',
+  CATEGORY_SELECTION: 'validateCategorySelection'
 }
 
 export function validateEmail(email) {
@@ -150,8 +153,34 @@ export function validateName(name) {
 export function validatePlanDescription(description) {
   const validityMessage = validate([
     {
-      condition: () => description.length > 0 && description.length <= 100,
+      condition: () => description.length > 9 && description.length <= 100,
       message: 'Between 1 and 100 characters'
+    }
+  ])
+
+  return validityMessage
+}
+
+export function validateMaxParticipants(participants) {
+  const validityMessage = validate([
+    {
+      condition: () => participants.toString().length > 0,
+      message: 'This field is required'
+    },
+    {
+      condition: () => participants > 0 && participants <= 10,
+      message: 'Between 1 and 10 participants'
+    }
+  ])
+
+  return validityMessage
+}
+
+export function validateCategorySelection(categories) {
+  const validityMessage = validate([
+    {
+      condition: () => categories.length > 0,
+      message: 'Select at least one category'
     }
   ])
 
@@ -194,6 +223,31 @@ export function validateAvatarImage(file) {
   ])
 
   return validityMessage
+}
+
+export function validatePlanImage(file) {
+  let type = null
+  let size = null
+
+  if (file) {
+    type = file.type
+    size = file.size
+  }
+
+  const validityMessage = validate([
+    {
+      condition: () => file,
+      message: 'This field is required'
+    },
+    {
+      condition: () => imageValidFormats.type.includes(type),
+      message: 'This image type is not accepted'
+    },
+    {
+      condition: () => size <= imageValidFormats.maxSize * 100,
+      message: `The image is too big (max. size is ${(imageValidFormats.maxSize * 100) / 1000000}Mb)`
+    }
+  ])
 }
 
 /* Esta función genérica permite pasar un input value y una función como condición,
