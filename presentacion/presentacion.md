@@ -37,7 +37,7 @@ Tienes un plan pero nadie con quien compartirlo? Te apetece salir de casa pero n
 - El usuario podrá definir el mínimo y el máximo número de participantes.
 - Aceptar o rechazar participaciones (otros usuarios que quieran unirse).
 - Invitar a otros usuarios a sus planes.
-- Comunicarse a través del chat del plan con los otros participantes (nodejs / socketio) (opcional).
+- Comunicarse a través del chat del plan con los otros participantes (nodejs / socketio).
 - Puntuar a los participantes del plan una vez finalizado.
 - Duplicar planes ya realizados para publicarlos con una nueva fecha.
 
@@ -118,7 +118,7 @@ Más adelante se ampliará con los módulos.
 #### DDD (Domain-Driven Design)
 La aplicación se basa en el patrón de arquitectura de **Diseño Dirigido por el Dominio (DDD)**. La clave es el desacoplamiento entre las diferentes capas para garantizar escalabilidad y mantenibilidad. La aplicación está estructurada en módulos independientes y autónomos. Cada módulo consta de tres capas.
 
-![[DDD Scheme.png]]
+![](./Diagramas/DDD%20Scheme.png)
 
 **Dominio**
 Esta capa contiene las entidades del dominio, que son el núcleo de la aplicación. Ejemplos de estas entidades incluyen: `Plan`, `Participación`, `Notificación`, `Usuario`, etc. Estas entidades representan el dominio de la aplicación y sirven como base.  Las entidades de dominio se construyen como objetos simples que transfieren datos entre capas (similar a los DTO o Data Transfer Objects).
@@ -352,10 +352,11 @@ Puedes revisar aquí la [documentación del backend](http://147.83.7.155:85/no-p
 ## Frontend
 ### Diagrama de flujo
 
-![[Diagram flujo Frontend.svg]]
+![](./Diagramas/Diagram%20flujo%20Frontend.svg)
 
 
 ### AJAX
-Explicación del uso de la tecnología ajax
+Elegí usar AJAX para actualizar partes de la página sin recargarla, lo que mejora la velocidad y la fluidez y permite a la aplicación ser reactiva. Separar el frontend del backend facilita mantener una estructura clara y escalable, sobretodo para el futuro port a móvil. Con esta separación, puedo adaptar el frontend para React Native y reutilizar la lógica del backend, asegurando una transición progresiva y simple.
+
 ### Componentes reactivos
-Esquema de funcionamiento. Jerarquía de componentes y comunicación. Compartir repo.
+Para contar con componentes reactivos que puedan mantener un estado y comunicarse entre ellos, a la vez que la apliación se renderiza por partes solo cuando estas cambian su estado, utilicé una librería que he ido desarrollando a lo largo del curso. La librería se llama [plain-reactive](https://github.com/KinoGlazPrusia/plain-reactive) y está disponible en el repositorio de este proyecto. Es una librería escrita en javascript vanilla que sirve para construir custom elements usando el shadow DOM. La librería también está disponible en CDN y npm. Las contribuciones son bienvenidas y os animo a usarla!
