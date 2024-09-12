@@ -1,4 +1,4 @@
 vendor
-./.phpdoc/
-./public/assets/images/avatar/
-./public/assets/images/plan/
+.phpdoc/cache
+public/assets/images/avatar/
+public/assets/images/plan/
