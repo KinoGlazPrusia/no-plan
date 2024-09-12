@@ -10,13 +10,31 @@ use App\Core\Infrastructure\Interface\IUseCase;
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Service\Helper;
 
+/**
+ * Caso de uso para obtener todas las participaciones pendientes de un plan.
+ */
 class GetAllPendingParticipationsByPlanUseCase implements IUseCase {
+    /**
+     * @var IRepository El repositorio para acceder a los datos.
+     */
     private IRepository $repository;
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos.
+     */
     public function __construct(IRepository $repository) {
         $this->repository = $repository;
     }
     
+    /**
+     * Obtiene todas las participaciones pendientes de un plan.
+     *
+     * @param int $planId El ID del plan.
+     * @return array Un array de objetos Participation que representan las participaciones pendientes.
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function __invoke(int $planId): array {
         try {
             $data = $this->repository->fetchParticipationsByPlan($planId, ParticipationStatus::PENDING);

@@ -9,13 +9,31 @@ use App\Notification\Domain\NotificationType;
 use App\User\Domain\User;
 use App\Participation\Domain\Participation;
 
+/**
+ * Servicio para suscribirse a un plan.
+ */
 class SuscribeToPlanService implements IService {
+    /**
+     * @var IRepository El repositorio para acceder a los datos.
+     */
     private IRepository $repository;
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos.
+     */
     public function __construct(IRepository $repository) {
         $this->repository = $repository;
     }
 
+    /**
+     * Suscribe al usuario autenticado a un plan.
+     *
+     * @param int $planId El ID del plan.
+     * @return void
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function __invoke(int $planId): void {
         // $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
         // $_SESSION['userName'] = 'Juan Perez';

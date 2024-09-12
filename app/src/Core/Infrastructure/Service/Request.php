@@ -27,7 +27,6 @@ class Request
      */
     public readonly array | null $query;
 
-
     /**
      * Constructor para inicializar la solicitud HTTP.
      *
@@ -48,7 +47,7 @@ class Request
      * @param array|null $expectedQuery Una lista de claves esperadas en la consulta.
      * @return bool Retorna true si la consulta es válida, false en caso contrario.
      */
-    public function validateQuery (array | null $expectedQuery = null): bool {
+    public function validateQuery(array | null $expectedQuery = null): bool {
         $validity = true;
 
         // Comprobamos si los tipos de consultas coinciden (por si es nulo)

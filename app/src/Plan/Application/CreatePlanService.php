@@ -14,13 +14,37 @@ use App\Plan\Application\StorePlanImageUseCase;
 use App\Core\Infrastructure\Interface\IService;
 use App\Core\Infrastructure\Interface\IRepository;
 
+/**
+ * Servicio para crear un nuevo plan.
+ */
 class CreatePlanService implements IService {
+    /**
+     * @var IRepository El repositorio para acceder a los datos.
+     */
     private IRepository $repository;
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos.
+     */
     public function __construct(IRepository $repository) {
         $this->repository = $repository;
     }
 
+    /**
+     * Crea un nuevo plan.
+     *
+     * @param string $title El título del plan.
+     * @param string $description La descripción del plan.
+     * @param string $datetime La fecha y hora del plan.
+     * @param int $max_participation El número máximo de participantes.
+     * @param array $categories Las categorías a asignar al plan.
+     * @param array $timeline La línea de tiempo del plan.
+     * @param array $image La imagen del plan a subir.
+     * @return Plan El plan creado.
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function __invoke(
         string $title,
         string $description,

@@ -15,13 +15,38 @@ use App\Plan\Application\UpdateTimelineStepsUseCase;
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IService;
 
+/**
+ * Servicio para actualizar un plan existente.
+ */
 class UpdatePlanService implements IService {
+    /**
+     * @var IRepository El repositorio para acceder a los datos.
+     */
     private IRepository $repository;
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos.
+     */
     public function __construct(IRepository $repository) {
         $this->repository = $repository;
     }
 
+    /**
+     * Actualiza los datos de un plan existente.
+     *
+     * @param int|null $id El ID del plan a actualizar.
+     * @param string|null $title El nuevo título del plan.
+     * @param string|null $description La nueva descripción del plan.
+     * @param string|null $datetime La nueva fecha y hora del plan.
+     * @param int|null $max_participation El nuevo número máximo de participantes.
+     * @param array|null $categories Las nuevas categorías del plan.
+     * @param array|null $timeline Los nuevos pasos de la línea de tiempo del plan.
+     * @param array|null $image La nueva imagen del plan.
+     * @return Plan El plan actualizado.
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function __invoke(
         int | null $id,
         string | null $title,
@@ -69,6 +94,4 @@ class UpdatePlanService implements IService {
         }
         
     }
-
-    
 }

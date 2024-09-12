@@ -7,7 +7,18 @@ use App\Core\Infrastructure\Interface\IUseCase;
 use App\Plan\Domain\Plan;
 use App\Plan\Domain\PlanStep;
 
+/**
+ * Caso de uso para obtener la línea de tiempo de un plan.
+ */
 class GetPlanTimelineUseCase implements IUseCase {
+    /**
+     * Obtiene los pasos de la línea de tiempo de un plan y los añade al plan.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos.
+     * @param Plan $plan El plan del cual se obtendrá la línea de tiempo.
+     * @return void
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public static function fetch(
         IRepository $repository,
         Plan $plan
@@ -23,6 +34,13 @@ class GetPlanTimelineUseCase implements IUseCase {
         }
     }
 
+    /**
+     * Añade un paso a la línea de tiempo de un plan.
+     *
+     * @param Plan $plan El plan al que se añadirá el paso.
+     * @param PlanStep $step El paso a añadir.
+     * @return Plan El plan actualizado con el nuevo paso en su línea de tiempo.
+     */
     private static function addStepToPlanTimeline(Plan $plan, PlanStep $step): Plan {
         // Obtiene el timeline del plan
         $timeline = $plan->getTimeline();

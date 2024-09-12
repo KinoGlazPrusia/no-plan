@@ -3,34 +3,88 @@ namespace App;
 
 /**
  * Clase de configuración de entorno que define constantes para la aplicación.
+ *
+ * Esta clase se asegura de cargar y almacenar configuraciones específicas 
+ * del entorno desde un archivo JSON de configuración.
  */
 class Env
 {
+    /**
+     * @var array Almacena la configuración cargada desde el archivo JSON.
+     */
     private static $config;
 
-    /* STATUS */
-    public static $STATUS; 
+    /**
+     * @var string Estado de la aplicación (entorno).
+     */
+    public static $STATUS;
 
-    /* HOST */
+    /**
+     * @var string Host de la aplicación.
+     */
     public static $APP_HOST;
 
-    /* DATABASE */
+    /**
+     * @var string Tipo de la base de datos (ej. mysql, postgres).
+     */
     public static $DB_TYPE;
+
+    /**
+     * @var string Dirección del host de la base de datos.
+     */
     public static $DB_HOST;
+
+    /**
+     * @var string Usuario para la conexión a la base de datos.
+     */
     public static $DB_USER;
+
+    /**
+     * @var string Contraseña para la conexión a la base de datos.
+     */
     public static $DB_PASS;
+
+    /**
+     * @var string Nombre de la base de datos.
+     */
     public static $DB_NAME;
 
-    /* PATHS */
+    /**
+     * @var string Ruta base del proyecto.
+     */
     public static $BASE_DIR;
+
+    /**
+     * @var string Ruta del directorio público.
+     */
     public static $PUBLIC_DIR;
+
+    /**
+     * @var string Ruta del directorio de imágenes de avatares.
+     */
     public static $AVATAR_IMAGES_DIR;
+
+    /**
+     * @var string Ruta del directorio de imágenes de planes.
+     */
     public static $PLAN_IMAGES_DIR;
+
+    /**
+     * @var string Ruta del directorio de código fuente.
+     */
     public static $SRC_DIR;
 
-    /* SESSION */
+    /**
+     * @var int Tiempo de expiración del token de sesión en segundos (por defecto 24 horas).
+     */
     public static $SESSION_TOKEN_EXPIRATION_TIME; // 24 Horas
 
+    /**
+     * Carga la configuración desde un archivo JSON y la asigna a la variable $config.
+     *
+     * @throws \Exception Si el entorno especificado en el archivo de configuración no está definido.
+     * @return void
+     */
     private static function loadConfig()
     {
         if (!self::$config) {
@@ -47,6 +101,11 @@ class Env
         }
     }
 
+    /**
+     * Inicializa todas las variables estáticas con los valores de la configuración cargada.
+     *
+     * @return void
+     */
     private static function initialize()
     {
         self::$APP_HOST = self::$config['app_host'];
@@ -66,7 +125,11 @@ class Env
         self::$SESSION_TOKEN_EXPIRATION_TIME = self::$config['session_token_expiration_time'];
     }
 
-    // Método estático para inicializar la configuración una vez cuando la clase es cargada por el autoloader al ser requerida.
+    /**
+     * Método estático para inicializar la configuración una vez cuando la clase es cargada.
+     *
+     * @return void
+     */
     public static function init()
     {
         self::loadConfig();
@@ -75,4 +138,3 @@ class Env
 }
 
 Env::init();
-

@@ -3,21 +3,36 @@ namespace App\Plan\Application;
 
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IService;
-
 use App\Plan\Application\GetPlanTimelineUseCase;
 use App\Plan\Application\GetPlanCategoriesUseCase;
-
 use App\Plan\Domain\PlanStatus;
 
-/* En esta clase vamos a devolver todos los planes en los que el usuario esté esperando a ser aceptado*/
-
+/**
+ * Servicio para obtener todos los planes en los que el usuario está esperando a ser aceptado.
+ */
 class GetAllPendingPlansService implements IService {
+    /**
+     * @var IRepository El repositorio para acceder a los datos.
+     */
     private IRepository $repository;    
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos.
+     */
     public function __construct(IRepository $repository) {
         $this->repository = $repository;
     }
 
+    /**
+     * Obtiene todos los planes pendientes en los que el usuario ha solicitado participar.
+     *
+     * @param int $page El número de la página a obtener.
+     * @param int $itemsPerPage La cantidad de elementos por página.
+     * @return array Un array de planes pendientes.
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function __invoke(int $page, int $itemsPerPage): array {
         $userId = $_SESSION['uid'];
 

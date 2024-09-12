@@ -5,7 +5,17 @@ use App\User\Domain\User;
 use App\User\Domain\UserRole;
 use App\Core\Infrastructure\Repository\CoreRepository;
 
+/**
+ * Repositorio para manejar operaciones relacionadas con la autenticación y usuarios.
+ */
 class AuthRepository extends CoreRepository {
+    
+    /**
+     * Obtiene un usuario por su correo electrónico.
+     *
+     * @param string $email El correo electrónico del usuario a buscar.
+     * @return User|null El objeto del usuario si se encuentra, o null si no se encuentra.
+     */
     public function getUserByEmail(string $email): User | null {
         $res = $this->findBy('user', 'email', $email);
 
@@ -14,6 +24,13 @@ class AuthRepository extends CoreRepository {
         return new User($res[0]);
     }
 
+    /**
+     * Obtiene los roles de un usuario.
+     *
+     * @param User $user El objeto del usuario del cual se desean obtener los roles.
+     * @return UserRole[]|null Un array de objetos UserRole si se encuentran roles, o null si no se encuentran roles.
+     * @throws \Exception Si ocurre un error durante la consulta a la base de datos.
+     */
     public function getUserRoles(User $user): array | null {
         $res = [];
 

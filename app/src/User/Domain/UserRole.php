@@ -1,17 +1,29 @@
 <?php
 namespace App\User\Domain;
 
-/* Value Object */
-/* Este value object se inicializa con el valor de una de las constantes de la clase UserRole
-Con lo que la propia clase ya contiene todos los valores posibles
-Por ejemplo: new UserRole(UserRole::ADMIN)  */
+/**
+ * Value Object que representa un rol de usuario.
+ * 
+ * Esta clase se inicializa con uno de los valores constantes definidos en la clase `UserRole`.
+ * Por ejemplo, se puede crear una instancia con `new UserRole(UserRole::ADMIN)`.
+ */
 class UserRole {
-    const ADMIN = 'admin';
-    const USER = 'user';
+    public const ADMIN = 'admin';
+    public const USER = 'user';
 
-    readonly public string  $role;
+    /**
+     * Rol del usuario.
+     * 
+     * @var string
+     */
+    readonly public string $role;
 
-    public function __construct($role) {
+    /**
+     * Constructor de la clase UserRole.
+     * 
+     * @param string $role Valor del rol del usuario. Debe ser uno de los valores constantes definidos en la clase `UserRole`.
+     */
+    public function __construct(string $role) {
         $this->role = $role;
     }
 }

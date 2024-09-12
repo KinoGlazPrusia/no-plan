@@ -36,23 +36,26 @@ interface IRepository
     /**
      * Elimina todas las entidades de la base de datos que cumplen con un campo y valor dados.
      *
+     * @param string $table La tabla de la base de datos.
      * @param string $field El campo por el cual filtrar.
      * @param string $value El valor del campo por el cual filtrar.
-     * @return bool Retorna true si se pudo eliminar el modelo de la base de datos con el id dado.
+     * @return bool Retorna true si se pudieron eliminar las entidades que cumplen con los criterios dados.
      */
     public function deleteWhere(string $table, string $field, string $value): bool;
     
     /**
      * Encuentra una entidad en la base de datos por su ID.
      *
+     * @param string $table La tabla de la base de datos.
      * @param int $id El ID de la entidad a encontrar.
-     * @return IEntity|null Retorna el modelo con el id dado o null si no se pudo encontrar.
+     * @return IEntity|null Retorna la entidad con el ID dado o null si no se pudo encontrar.
      */
     public function find(string $table, int $id): IEntity | null;
     
     /**
      * Retorna todas las entidades en la base de datos.
      *
+     * @param string $table La tabla de la base de datos.
      * @return array Arreglo de todas las entidades en la base de datos.
      */
     public function findAll(string $table): array;    
@@ -60,6 +63,7 @@ interface IRepository
     /**
      * Encuentra entidades en la base de datos por un campo y valor dados.
      *
+     * @param string $table La tabla de la base de datos.
      * @param string $field El campo por el cual filtrar.
      * @param string $value El valor del campo por el cual filtrar.
      * @return array Arreglo de todas las entidades que cumplen con el campo y valor dados.

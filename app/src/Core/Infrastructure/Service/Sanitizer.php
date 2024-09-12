@@ -1,27 +1,27 @@
 <?php
 namespace App\Core\Infrastructure\Service;
 
+/**
+ * Clase Sanitizer que proporciona métodos para sanitizar diferentes tipos de datos.
+ */
 class Sanitizer
 {
-    /* const EMAIL = 'email';
-    const STRING = 'string';
-    const INT = 'int';
-    const NAME = 'name';
-    const DATE = 'date';
-    const DATA_TYPES = 'data_types';
-
-    const SANITIZE_FUNC = [
-        self::EMAIL => [self::class, 'sanitizeEmail'],
-        self::STRING => [self::class, 'sanitizeString'],
-        self::INT => [self::class, 'sanitizeInt'],
-        self::NAME => [self::class, 'sanitizeName'],
-        self::DATE => [self::class, 'sanitizeDate'],
-    ]; */
-
+    /**
+     * Sanitiza una dirección de correo electrónico.
+     *
+     * @param string $email La dirección de correo electrónico a sanitizar.
+     * @return string La dirección de correo electrónico sanitizada o una cadena vacía si no es válida.
+     */
     public static function sanitizeEmail(string $email): string {
         return filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : '';
     }
 
+    /**
+     * Sanitiza una cadena de texto.
+     *
+     * @param string $string La cadena de texto a sanitizar.
+     * @return string La cadena de texto sanitizada.
+     */
     public static function sanitizeString(string $string): string {
         $sanitized = trim($string);
         $sanitized = stripslashes($sanitized);
@@ -30,10 +30,22 @@ class Sanitizer
         return $sanitized;
     }
 
+    /**
+     * Sanitiza un entero.
+     *
+     * @param int|string $int El entero a sanitizar.
+     * @return int El entero sanitizado.
+     */
     public static function sanitizeInt(int | string $int): int {
         return (int)filter_var($int, FILTER_SANITIZE_NUMBER_INT);
     }
 
+    /**
+     * Sanitiza un nombre.
+     *
+     * @param string $name El nombre a sanitizar.
+     * @return string El nombre sanitizado.
+     */
     public static function sanitizeName(string $name): string {
         $sanitized = self::sanitizeString($name);
         $sanitized = strtolower($sanitized);
@@ -41,26 +53,14 @@ class Sanitizer
         return $sanitized;
     }
 
+    /**
+     * Sanitiza una fecha.
+     *
+     * @param string $birth_date La fecha a sanitizar.
+     * @return string La fecha sanitizada.
+     */
     public static function sanitizeDate(string $birth_date): string {
         $sanitized = preg_replace('/[^0-9\-]/', '', $birth_date);
         return $sanitized;
     }
-
-    /* public static function sanitizeData(array $data): array { */
-        /* 
-        Los datos de entrada se reciben como un array asociativo del tipo de dato y el valor:
-            $data = [
-                'email' => 'email@email.com',
-                'name' => 'John Doe',
-                'date' => '2022-01-01',
-                'int' => 1,
-                'string' => 'string'
-            ];
-        */
-        /* $res = [];
-        foreach ($data as $type => $value) {
-            array_push($res, call_user_func(self::SANITIZE_FUNC[$type], $value));
-        }
-        return $res;
-    } */
 }

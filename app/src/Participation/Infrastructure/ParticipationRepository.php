@@ -3,7 +3,19 @@ namespace App\Participation\Infrastructure;
 
 use App\Core\Infrastructure\Repository\CoreRepository;
 
+/**
+ * Repositorio para manejar las operaciones relacionadas con las participaciones en la base de datos.
+ */
 class ParticipationRepository extends CoreRepository {
+    /**
+     * Actualiza el estado de una participación.
+     *
+     * @param string $userId El ID del usuario participante.
+     * @param int $planId El ID del plan.
+     * @param int $statusId El ID del nuevo estado de la participación.
+     * @return bool Retorna true si la operación fue exitosa, false en caso contrario.
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function updateParticipationStatus(string $userId, int $planId, int $statusId): bool {
         $data = [
             'user_id' => $userId,
@@ -32,6 +44,14 @@ class ParticipationRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Obtiene las participaciones de un plan con un estado específico.
+     *
+     * @param int $planId El ID del plan.
+     * @param string $status El estado de las participaciones a buscar.
+     * @return array Un array de participaciones que cumplen con los criterios dados.
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function fetchParticipationsByPlan(int $planId, string $status): array {
         $data = [
             'plan_id' => $planId,

@@ -10,7 +10,18 @@ use App\Core\Infrastructure\Service\Validator;
 
 use App\Auth\Domain\JWToken;
 
+/**
+ * Controlador para manejar las operaciones de autenticación.
+ */
 class AuthController {
+    
+    /**
+     * Maneja el inicio de sesión de un usuario.
+     *
+     * @param Request $request Objeto de solicitud que contiene los datos de entrada.
+     * @param IUseCase|IService $login Interfaz para el caso de uso o servicio de inicio de sesión.
+     * @return void
+     */
     public static function login(Request $request, IUseCase | IService $login): void {
         // Chequeamos si el usuario ya está logueado
         if (isset($_COOKIE['session_token'])) {
@@ -51,6 +62,13 @@ class AuthController {
         }
     }
 
+    /**
+     * Verifica si el correo electrónico ya existe.
+     *
+     * @param Request $request Objeto de solicitud que contiene el correo electrónico a verificar.
+     * @param IUseCase|IService $emailExists Interfaz para el caso de uso o servicio que verifica la existencia del correo.
+     * @return void
+     */
     public static function emailExists(Request $request, IUseCase | IService $emailExists): void {
         // Validamos la request
         if (!$request->validateQuery(['email'])) {
@@ -79,7 +97,14 @@ class AuthController {
             Response::jsonError(403, $e->getMessage());
         }
     }
-    
+
+    /**
+     * Verifica si el usuario está autenticado.
+     *
+     * @param Request $request Objeto de solicitud (no utilizado en esta función).
+     * @param IUseCase|IService $isAuthenticated Interfaz para el caso de uso o servicio que verifica la autenticación del usuario.
+     * @return void
+     */
     public static function isAuthenticated(Request $request, IUseCase | IService $isAuthenticated): void {
         try {
             $sessionToken = $isAuthenticated();
@@ -90,6 +115,13 @@ class AuthController {
         }
     }
 
+    /**
+     * Maneja el cierre de sesión del usuario.
+     *
+     * @param Request $request Objeto de solicitud (no utilizado en esta función).
+     * @param IUseCase|IService $logout Interfaz para el caso de uso o servicio de cierre de sesión.
+     * @return void
+     */
     public static function logout(Request $request, IUseCase | IService $logout): void {
         try {
             $logout();
@@ -100,6 +132,13 @@ class AuthController {
         }
     }
 
+    /**
+     * Recupera los datos del usuario.
+     *
+     * @param Request $request Objeto de solicitud (no utilizado en esta función).
+     * @param IUseCase|IService $fetchUserData Interfaz para el caso de uso o servicio que obtiene los datos del usuario.
+     * @return void
+     */
     public static function fetchUserData(Request $request, IUseCase | IService $fetchUserData): void {
         // Validamos la request
         if (!$request->validateQuery([])) {

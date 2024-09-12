@@ -13,13 +13,33 @@ use App\User\Domain\User;
 /* APPLICATION */
 use App\Notification\Application\CreateNotificationUseCase;
 
+/**
+ * Servicio para aceptar la participación en un plan.
+ */
 class AcceptParticipationService implements IService {
+    /**
+     * @var IRepository El repositorio para acceder a los datos.
+     */
     private IRepository $repository;
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos.
+     */
     public function __construct(IRepository $repository) {
         $this->repository = $repository;
     }
 
+    /**
+     * Acepta la participación en un plan.
+     *
+     * @param string $userId El ID del creador del plan.
+     * @param string $participantId El ID del participante.
+     * @param int $planId El ID del plan.
+     * @return void
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function __invoke(string $userId, string $participantId,  int $planId): void {
         try {
             // 1. Caso de uso para actualizar el status de la participación

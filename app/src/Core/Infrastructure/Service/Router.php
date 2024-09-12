@@ -17,7 +17,7 @@ class Router
      *
      * @return Request Instancia de la solicitud HTTP analizada.
      */
-   public static function parse(): Request {
+    public static function parse(): Request {
         // Construimos la URL completa de la solicitud
         $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
@@ -49,7 +49,7 @@ class Router
 
         // Devolvemos una nueva instancia de Request con el método, path y query
         return new Request($method, $path, $query);
-   }
+    }
 
     /**
      * Maneja la solicitud HTTP usando la información de la instancia Request.
@@ -57,12 +57,12 @@ class Router
      * @param Request $request Instancia de la solicitud HTTP.
      * @return void
      */
-   public static function handle(Request $request): void {
+    public static function handle(Request $request): void {
         // Verificamos si la ruta existe para el método y el path dado
         if (!Routes::routeExists($request->method, $request->url)) {
             // Si la ruta no existe, devolvemos un error 404
             Response::jsonError(404, "This page does not exist");
-        };
+        }
 
         // Si la ruta es privada, verificamos la cookie con JWT de acceso (autorización)
         $access = Routes::getAll()[$request->method][$request->url]['access'];
@@ -77,5 +77,5 @@ class Router
         $controller = Routes::getAll()[$request->method][$request->url]['controller'];
         $logic = Routes::getAll()[$request->method][$request->url]['logic'];
         $controller($request, $logic);
-   }
+    }
 }

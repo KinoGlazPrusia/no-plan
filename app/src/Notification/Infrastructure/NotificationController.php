@@ -9,7 +9,17 @@ use App\Core\Infrastructure\Service\Response;
 use App\Core\Infrastructure\Service\Sanitizer;
 use App\Core\Infrastructure\Service\Validator;
 
+/**
+ * Controlador para manejar las operaciones relacionadas con las notificaciones.
+ */
 class NotificationController {
+    /**
+     * Obtiene las notificaciones no leídas.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $getUnreadNotifications Caso de uso o servicio para obtener notificaciones no leídas.
+     * @return void
+     */
     public static function getUnreadNotifications(Request $request, IUseCase | IService $getUnreadNotifications): void {
         $request->validateQuery([]);
 
@@ -24,6 +34,13 @@ class NotificationController {
         }
     }
 
+    /**
+     * Marca una notificación como leída.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $setNotificationAsRead Caso de uso o servicio para marcar una notificación como leída.
+     * @return void
+     */
     public static function setNotificationAsRead(Request $request, IUseCase | IService $setNotificationAsRead): void {
         $request->validateQuery(['id']);
 

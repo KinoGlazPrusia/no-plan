@@ -9,10 +9,19 @@ use App\Core\Infrastructure\Service\Response;
 use App\Core\Infrastructure\Service\Sanitizer;
 use App\Core\Infrastructure\Service\Validator;
 
-
+/**
+ * Controlador para gestionar las solicitudes relacionadas con el registro de usuarios.
+ */
 class UserController {
+    /**
+     * Registra un nuevo usuario.
+     *
+     * @param Request $request Objeto de solicitud que contiene los datos del usuario.
+     * @param IUseCase|IService $registerUser Caso de uso o servicio que gestiona el registro del usuario.
+     * @return void
+     */
     public static function register(Request $request, IUseCase | IService $registerUser): void {
-        // Validamos la request
+        // Validamos la solicitud
         if (!$request->validateQuery([
             'email', 
             'name',
@@ -24,7 +33,7 @@ class UserController {
             Response::jsonError(400, 'Expected parameters doesn\'t match');
         }
 
-        // Obtenemos los datos de la request y los sanitizamos
+        // Obtenemos los datos de la solicitud y los sanitizamos
         $email = Sanitizer::sanitizeEmail($request->query['email']);
         $name = Sanitizer::sanitizeName($request->query['name']);
         $lastname = Sanitizer::sanitizeName($request->query['lastname']);
@@ -32,7 +41,7 @@ class UserController {
         $birth_date = Sanitizer::sanitizeDate($request->query['birth_date']);
         $genre = Sanitizer::sanitizeString($request->query['genre']);
         
-        // Creamos una url para guardar la imagen
+        // Creamos una URL para guardar la imagen
         $image = $_FILES['image'];
         if (!is_uploaded_file($image['tmp_name'])) {
             Response::jsonError(400, 'Invalid image');
@@ -72,7 +81,7 @@ class UserController {
             $error = $e->getMessage();
         }
 
-        // Si recibimos un usuario
+        // Respondemos según el resultado del registro
         $isUserRegistered ? 
             Response::json('success', 200, 'Registered user') 
             :

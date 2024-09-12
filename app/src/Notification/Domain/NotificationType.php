@@ -3,7 +3,13 @@ namespace App\Notification\Domain;
 
 use App\Core\Domain\CoreEntity;
 
+/**
+ * Clase NotificationType que representa el tipo de notificación en el dominio.
+ */
 class NotificationType extends CoreEntity {
+    /**
+     * Constantes para cada tipo de notificación.
+     */
     const MESSAGE = 'message';
     const PARTICIPATION_REQUEST = 'participation_request';
     const PARTICIPATION_ACCEPTED = 'participation_accepted';
@@ -14,9 +20,21 @@ class NotificationType extends CoreEntity {
     const FOLLOWED = 'followed';
     const INFO = 'info';
 
+    /**
+     * @var int|null ID del tipo de notificación.
+     */
     public readonly int | null $id;
+
+    /**
+     * @var string|null Nombre del tipo de notificación.
+     */
     public readonly string | null $name;
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param object|null $data Datos para inicializar el tipo de notificación.
+     */
     public function __construct(Object | null $data = null) {
         parent::__construct([
             'notification_type',
@@ -30,6 +48,11 @@ class NotificationType extends CoreEntity {
         $this->name = isset($data->name) ? $data->name : null;
     }
 
+    /**
+     * Obtiene una lista de valores válidos para los tipos de notificación.
+     *
+     * @return array Un array de valores válidos para los tipos de notificación.
+     */
     public static function getValidValues() {
         return [
             self::MESSAGE,
@@ -44,10 +67,23 @@ class NotificationType extends CoreEntity {
     }
 
     /* SETTERS */
+
+    /**
+     * Establece el ID del tipo de notificación.
+     *
+     * @param int $id El ID del tipo de notificación.
+     * @return void
+     */
     public function setId(int $id): void {
         $this->id = $id;
     }
 
+    /**
+     * Establece el nombre del tipo de notificación.
+     *
+     * @param string $name El nombre del tipo de notificación.
+     * @return void
+     */
     public function setName(string $name): void {
         $this->name = $name;
     }

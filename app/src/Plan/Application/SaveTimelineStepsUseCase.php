@@ -9,6 +9,9 @@ use App\Plan\Domain\PlanStep;
 use App\Core\Infrastructure\Interface\IUseCase;
 use App\Core\Infrastructure\Interface\IRepository;
 
+/**
+ * Caso de uso para guardar los pasos de la línea de tiempo de un plan.
+ */
 class SaveTimelineStepsUseCase implements IUseCase {
     
     /**

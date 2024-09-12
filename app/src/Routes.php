@@ -69,7 +69,7 @@ class Routes
     public static function routeExists(string $method, string $path): bool {
         return isset(self::getAll()[$method][$path]) ? true : false;
     } 
-    // [ ] Revisar acceso a los endpoints (privado / publico)
+
     /**
      * Obtiene todas las rutas definidas en la aplicación.
      *

@@ -3,17 +3,34 @@ namespace App\Plan\Application;
 
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IService;
-
 use App\Plan\Domain\Plan;
 use App\Plan\Domain\PlanStatus;
 
+/**
+ * Servicio para obtener un plan por su ID.
+ */
 class GetPlanByIdService implements IService {
+    /**
+     * @var IRepository El repositorio para acceder a los datos.
+     */
     private IRepository $repository;
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos.
+     */
     public function __construct(IRepository $repository) {
         $this->repository = $repository;
     }
 
+    /**
+     * Obtiene un plan por su ID.
+     *
+     * @param int $id El ID del plan.
+     * @return Plan El plan encontrado.
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function __invoke(int $id): Plan {
         try {
             // 1. Caso de uso para recuperar los datos base del plan

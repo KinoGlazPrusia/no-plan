@@ -1,10 +1,10 @@
 <?php
 namespace App\Plan\Infrastructure;
 
+
 /* DOMINIO */
 use App\Plan\Domain\PlanStep;
 use App\Plan\Domain\PlanCategory;
-
 /* APLICACION */
 
 /* INFRAESTRUCTURA */
@@ -15,8 +15,17 @@ use App\Core\Infrastructure\Service\Response;
 use App\Core\Infrastructure\Service\Sanitizer;
 use App\Core\Infrastructure\Service\Validator;
 
-
+/**
+ * Controlador para manejar las operaciones relacionadas con los planes.
+ */
 class PlanController {
+    /**
+     * Crea un nuevo plan basado en la solicitud y lo guarda en el repositorio.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $createPlan Caso de uso o servicio para crear un nuevo plan.
+     * @return void
+     */
     public static function create(Request $request, IUseCase | IService $createPlan): void {
         // Validamos la request
         if (!$request->validateQuery([
@@ -85,6 +94,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Actualiza los datos de un plan existente.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $updatePlan Caso de uso o servicio para actualizar un plan existente.
+     * @return void
+     */
     public static function update(Request $request, IUseCase | IService $updatePlan): void {
         // Validamos la request
         if (!$request->validateQuery(['id'])) {
@@ -108,7 +124,6 @@ class PlanController {
             $timeline = $rawTimeline ? array_map(function($step) {
                 $jsonStep = json_decode($step, true);
                 $newStep = new PlanStep((object)$jsonStep);
-
                 return $newStep;
             }, $rawTimeline) : null;
 
@@ -118,7 +133,6 @@ class PlanController {
             }
 
             // Validamos todos los datos recogidos
-            // [ ] Finalizar la implementación de validaciones
             $validityMessage = Validator::validatePlanDate($datetime);
 
             if (count($validityMessage) > 0) {
@@ -142,6 +156,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Obtiene todas las participaciones de un plan.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $fetchAllPlans Caso de uso o servicio para obtener todas las participaciones.
+     * @return void
+     */
     public static function fetchAllPlans(Request $request, IUseCase | IService $fetchAllPlans): void {
         // Validamos la request
         if (!$request->validateQuery(['page', 'items_per_page'])) {
@@ -161,6 +182,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Obtiene todos los planes creados por un usuario.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $fetchAllCreatedPlans Caso de uso o servicio para obtener los planes creados.
+     * @return void
+     */
     public static function fetchAllCreatedPlans(Request $request, IUseCase | IService $fetchAllCreatedPlans): void {
         // Validamos la request
         if (!$request->validateQuery(['page', 'items_per_page'])) {
@@ -180,6 +208,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Obtiene todas las participaciones aceptadas en un plan.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $fetchAllAcceptedPlans Caso de uso o servicio para obtener todas las participaciones aceptadas.
+     * @return void
+     */
     public static function fetchAllAcceptedPlans(Request $request, IUseCase | IService $fetchAllAcceptedPlans): void {
         // Validamos la request
         if (!$request->validateQuery(['page', 'items_per_page'])) {
@@ -199,6 +234,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Obtiene todas las participaciones rechazadas en un plan.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $fetchAllRejectedPlans Caso de uso o servicio para obtener todas las participaciones rechazadas.
+     * @return void
+     */
     public static function fetchAllRejectedPlans(Request $request, IUseCase | IService $fetchAllRejectedPlans): void {
         // Validamos la request
         if (!$request->validateQuery(['page', 'items_per_page'])) {
@@ -218,6 +260,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Obtiene todas las participaciones pendientes en un plan.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $fetchAllPendingPlans Caso de uso o servicio para obtener todas las participaciones pendientes.
+     * @return void
+     */
     public static function fetchAllPendingPlans(Request $request, IUseCase | IService $fetchAllPendingPlans): void {
         // Validamos la request
         if (!$request->validateQuery(['page', 'items_per_page'])) {
@@ -237,6 +286,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Cuenta todas las participaciones creadas por el usuario.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $countAllCreatedPlans Caso de uso o servicio para contar las participaciones creadas.
+     * @return void
+     */
     public static function countAllCreatedPlans(Request $request, IUseCase | IService $countAllCreatedPlans): void {
         // Validamos la request
         if (!$request->validateQuery([])) {
@@ -252,6 +308,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Cuenta todas las participaciones que no fueron creadas por el usuario.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $countAllNotCreatedPlans Caso de uso o servicio para contar las participaciones no creadas.
+     * @return void
+     */
     public static function countAllNotCreatedPlans(Request $request, IUseCase | IService $countAllNotCreatedPlans): void {
         // Validamos la request
         if (!$request->validateQuery([])) {
@@ -267,6 +330,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Cuenta todas las participaciones aceptadas.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $countAllAcceptedPlans Caso de uso o servicio para contar las participaciones aceptadas.
+     * @return void
+     */
     public static function countAllAcceptedPlans(Request $request, IUseCase | IService $countAllAcceptedPlans): void {
         // Validamos la request
         if (!$request->validateQuery([])) {
@@ -282,6 +352,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Cuenta todas las participaciones rechazadas.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $countAllRejectedPlans Caso de uso o servicio para contar las participaciones rechazadas.
+     * @return void
+     */
     public static function countAllRejectedPlans(Request $request, IUseCase | IService $countAllRejectedPlans): void {
         // Validamos la request
         if (!$request->validateQuery([])) {
@@ -297,6 +374,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Cuenta todas las participaciones pendientes.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $countAllPendingPlans Caso de uso o servicio para contar las participaciones pendientes.
+     * @return void
+     */
     public static function countAllPendingPlans(Request $request, IUseCase | IService $countAllPendingPlans): void {
         // Validamos la request
         if (!$request->validateQuery([])) {
@@ -312,6 +396,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Obtiene los datos de un plan por su ID.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $fetchPlanData Caso de uso o servicio para obtener los datos del plan.
+     * @return void
+     */
     public static function fetchPlanData(Request $request, IUseCase | IService $fetchPlanData): void {
         // Validamos la request
         if (!$request->validateQuery(['id'])) {
@@ -330,6 +421,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Obtiene los planes de un usuario específico.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $fetchUserPlans Caso de uso o servicio para obtener los planes del usuario.
+     * @return void
+     */
     public static function fetchUserPlans(Request $request, IUseCase | IService $fetchUserPlans): void {
         // Validamos la request
         if (!$request->validateQuery(['user_id'])) {
@@ -337,6 +435,13 @@ class PlanController {
         }
     }
 
+    /**
+     * Obtiene todas las categorías de planes.
+     *
+     * @param Request $request La solicitud HTTP.
+     * @param IUseCase|IService $fetchAllCategories Caso de uso o servicio para obtener todas las categorías de planes.
+     * @return void
+     */
     public static function fetchAllCategories(Request $request, IUseCase | IService $fetchAllCategories): void {
         // Validamos la request
         if (!$request->validateQuery([])) {
@@ -350,6 +455,5 @@ class PlanController {
         catch (\Exception $e) {
             Response::jsonError(500, $e->getMessage());
         }
-
     }
 }

@@ -7,7 +7,18 @@ use App\Plan\Domain\PlanCategory;
 use App\Plan\Domain\PlanStatus;
 use App\User\Domain\User;
 
+/**
+ * Repositorio para manejar las operaciones relacionadas con los planes en la base de datos.
+ */
 class PlanRepository extends CoreRepository {
+    /**
+     * Asigna una categoría a un plan.
+     *
+     * @param Plan $plan El plan al que se asignará la categoría.
+     * @param PlanCategory $category La categoría a asociar.
+     * @return bool Retorna true si la operación fue exitosa, false en caso contrario.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function assignCategoryToPlan(Plan $plan, PlanCategory $category): bool {
         $data = [
             'plan_id' => $plan->id,
@@ -36,6 +47,12 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Obtiene todas las categorías desde la base de datos.
+     *
+     * @return array Un array de objetos PlanCategory que representan las categorías.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function fetchAllCategories(): array {
         try {
             $res = $this->findAll('category');
@@ -56,6 +73,15 @@ class PlanRepository extends CoreRepository {
         return $res;
     }
 
+    /**
+     * Obtiene todos los planes según el ID del usuario, paginados.
+     *
+     * @param string $userId El ID del usuario.
+     * @param int $page El número de página para la paginación.
+     * @param int $itemsPerPage La cantidad de elementos por página.
+     * @return array Un array de objetos Plan que representan los planes disponibles.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function fetchAllPlans(string $userId, int $page, int $itemsPerPage): array {
         $offset = ($page - 1) * $itemsPerPage;
         try {
@@ -86,6 +112,15 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Obtiene todos los planes creados por un usuario, paginados.
+     *
+     * @param string $userId El ID del usuario.
+     * @param int $page El número de página para la paginación.
+     * @param int $itemsPerPage La cantidad de elementos por página.
+     * @return array Un array de objetos Plan que representan los planes creados.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function fetchAllCreatedPlans(string $userId, int $page, int $itemsPerPage): array {
         $offset = ($page - 1) * $itemsPerPage;
         try {
@@ -114,6 +149,15 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Obtiene todos los planes aceptados por un usuario, paginados.
+     *
+     * @param string $userId El ID del usuario.
+     * @param int $page El número de página para la paginación.
+     * @param int $itemsPerPage La cantidad de elementos por página.
+     * @return array Un array de objetos Plan que representan los planes aceptados.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function fetchAllAcceptedPlans(string $userId, int $page, int $itemsPerPage): array {
         $offset = ($page - 1) * $itemsPerPage;
         try {
@@ -147,6 +191,15 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Obtiene todos los planes rechazados por un usuario, paginados.
+     *
+     * @param string $userId El ID del usuario.
+     * @param int $page El número de página para la paginación.
+     * @param int $itemsPerPage La cantidad de elementos por página.
+     * @return array Un array de objetos Plan que representan los planes rechazados.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function fetchAllRejectedPlans(string $userId, int $page, int $itemsPerPage): array {
         $offset = ($page - 1) * $itemsPerPage;
         try {
@@ -180,6 +233,15 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Obtiene todos los planes pendientes para un usuario, paginados.
+     *
+     * @param string $userId El ID del usuario.
+     * @param int $page El número de página para la paginación.
+     * @param int $itemsPerPage La cantidad de elementos por página.
+     * @return array Un array de objetos Plan que representan los planes pendientes.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function fetchAllPendingPlans(string $userId, int $page, int $itemsPerPage): array {
         $offset = ($page - 1) * $itemsPerPage;
         try {
@@ -213,6 +275,13 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Cuenta todos los planes creados por un usuario.
+     *
+     * @param string $userId El ID del usuario.
+     * @return int La cantidad de planes creados por el usuario.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function countAllCreatedPlans(string $userId): int {
         try {
             $data = ['user_id' => $userId];
@@ -225,7 +294,7 @@ class PlanRepository extends CoreRepository {
 
             $this->db->connect();
             $stmt = $this->db->prepare($sql);
-            $result =$this->db->execute($stmt, $data)[0];
+            $result = $this->db->execute($stmt, $data)[0];
             $this->db->disconnect();
             return $result->count;
         }
@@ -235,6 +304,13 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Cuenta todos los planes que no fueron creados por un usuario.
+     *
+     * @param string $userId El ID del usuario.
+     * @return int La cantidad de planes que no fueron creados por el usuario.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function countAllNotCreatedPlans(string $userId): int {
         try {
             $data = ['user_id' => $userId];
@@ -246,7 +322,7 @@ class PlanRepository extends CoreRepository {
 
             $this->db->connect();
             $stmt = $this->db->prepare($sql);
-            $result =$this->db->execute($stmt, $data)[0];
+            $result = $this->db->execute($stmt, $data)[0];
             $this->db->disconnect();
             return $result->count;
         } 
@@ -256,6 +332,13 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Cuenta todos los planes aceptados por un usuario.
+     *
+     * @param string $userId El ID del usuario.
+     * @return int La cantidad de planes aceptados.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function countAllAcceptedPlans(string $userId): int {
         try {
             $data = ['user_id' => $userId];
@@ -272,7 +355,7 @@ class PlanRepository extends CoreRepository {
 
             $this->db->connect();
             $stmt = $this->db->prepare($sql);
-            $result =$this->db->execute($stmt, $data)[0];
+            $result = $this->db->execute($stmt, $data)[0];
             $this->db->disconnect();
             return $result->count;
         }
@@ -282,6 +365,13 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Cuenta todos los planes rechazados por un usuario.
+     *
+     * @param string $userId El ID del usuario.
+     * @return int La cantidad de planes rechazados.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function countAllRejectedPlans(string $userId): int {
         try {
             $data = ['user_id' => $userId];
@@ -298,7 +388,7 @@ class PlanRepository extends CoreRepository {
 
             $this->db->connect();
             $stmt = $this->db->prepare($sql);
-            $result =$this->db->execute($stmt, $data)[0];
+            $result = $this->db->execute($stmt, $data)[0];
             $this->db->disconnect();
             return $result->count;
         }
@@ -308,6 +398,13 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Cuenta todos los planes pendientes para un usuario.
+     *
+     * @param string $userId El ID del usuario.
+     * @return int La cantidad de planes pendientes.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function countAllPendingPlans(string $userId): int {
         try {
             $data = ['user_id' => $userId];
@@ -324,7 +421,7 @@ class PlanRepository extends CoreRepository {
 
             $this->db->connect();
             $stmt = $this->db->prepare($sql);
-            $result =$this->db->execute($stmt, $data)[0];
+            $result = $this->db->execute($stmt, $data)[0];
             $this->db->disconnect();
             return $result->count;
         }
@@ -334,6 +431,13 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Obtiene un estado de plan por su nombre.
+     *
+     * @param string $status El nombre del estado del plan.
+     * @return PlanStatus El objeto PlanStatus correspondiente al nombre proporcionado.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function getPlanStatusByName(string $status): PlanStatus {
         try {
             $res = $this->findBy('plan_status', 'status', $status);
@@ -344,6 +448,13 @@ class PlanRepository extends CoreRepository {
         }
     }
 
+    /**
+     * Obtiene los datos del creador de un plan por su ID.
+     *
+     * @param string $id El ID del creador.
+     * @return User El objeto User correspondiente al ID proporcionado.
+     * @throws \Exception Si ocurre un error durante la operación.
+     */
     public function getPlanCreatorById(string $id): User {
         try {
             $res = $this->findBy('user', 'id', $id);

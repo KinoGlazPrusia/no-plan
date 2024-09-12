@@ -3,23 +3,39 @@ namespace App\Plan\Application;
 
 use App\Core\Infrastructure\Interface\IRepository;
 use App\Core\Infrastructure\Interface\IService;
-
 use App\Plan\Application\GetPlanTimelineUseCase;
 use App\Plan\Application\GetPlanCategoriesUseCase;
-
 use App\Plan\Domain\PlanStatus;
 
-/* En esta clase vamos a devolver todos los planes que no haya creado el usuario
-paginados y ordenados por fecha (más adelante por el criterio de orden que selccione
-el usuario en el frontend) */
-
+/**
+ * Servicio para obtener todos los planes que no haya creado el usuario.
+ * Estos planes están paginados y ordenados por fecha.
+ * Más adelante se podrá ordenar por el criterio de orden seleccionado
+ * por el usuario en el frontend.
+ */
 class GetAllPlansService implements IService {
+    /**
+     * @var IRepository El repositorio para acceder a los datos.
+     */
     private IRepository $repository;    
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos.
+     */
     public function __construct(IRepository $repository) {
         $this->repository = $repository;
     }
 
+    /**
+     * Obtiene todos los planes que no fueron creados por el usuario.
+     *
+     * @param int $page El número de la página a obtener.
+     * @param int $itemsPerPage La cantidad de elementos por página.
+     * @return array Un array de planes que no fueron creados por el usuario.
+     * @throws \Exception Si ocurre algún error durante la operación.
+     */
     public function __invoke(int $page, int $itemsPerPage): array {
         // $_SESSION['uid'] = '77ce78e7-69ae-4b3d-9b6f-fc88a11defd5'; // [ ] Eliminar este mock
         $userId = $_SESSION['uid'];

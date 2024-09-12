@@ -8,7 +8,7 @@ class Response
 {
 
     /**
-     * Envia una respuesta JSON al cliente.
+     * Envía una respuesta JSON al cliente.
      *
      * @param string $status El estado de la respuesta (por ejemplo, 'success', 'error').
      * @param int $code Código de estado HTTP.
@@ -29,7 +29,7 @@ class Response
     }
 
     /**
-     * Envia una respuesta JSON de error al cliente.
+     * Envía una respuesta JSON de error al cliente.
      *
      * @param int $code Código de estado HTTP.
      * @param string|null $details Detalles adicionales sobre el error (opcional).

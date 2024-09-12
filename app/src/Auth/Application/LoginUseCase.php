@@ -7,13 +7,32 @@ use App\User\Domain\User;
 use App\Core\Infrastructure\Interface\IUseCase;
 use App\Core\Infrastructure\Interface\IRepository;
 
+/**
+ * Caso de uso para manejar el proceso de inicio de sesión.
+ */
 class LoginUseCase implements IUseCase {
+    /**
+     * @var IRepository El repositorio para acceder a los datos de usuario.
+     */
     private IRepository $repository;
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param IRepository $repository El repositorio para acceder a los datos de usuario.
+     */
     public function __construct(IRepository $repository) {
         $this->repository = $repository;
     }
 
+    /**
+     * Maneja el proceso de inicio de sesión.
+     *
+     * @param string $email El correo electrónico del usuario.
+     * @param string $password La contraseña del usuario.
+     * @return User|null Retorna un objeto User si el inicio de sesión es exitoso, null en caso contrario.
+     * @throws \Exception Si ocurre algún error durante el proceso de inicio de sesión.
+     */
     public function __invoke($email, $password): User | null {
         // Recuperamos el usuario
         $user = null;
