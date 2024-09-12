@@ -39,8 +39,8 @@ class Button extends PlainComponent {
   }
 
   listeners() {
-    this.$('.button').onclick = () => {
-      this.handleClick()
+    this.$('.button').onclick = (e) => {
+      this.handleClick(e)
     }
   }
 

@@ -40,7 +40,6 @@ class SignUpForm extends PlainComponent {
     if (this.isLoading.getState()) {
       return `
         <form class="signup-form" name="signup-form">
-            <h1 class="greetings">Register!</h1>
             <div class="overflow-wrapper">
               <p-loading-spinner
                 class="spinner"
@@ -53,8 +52,6 @@ class SignUpForm extends PlainComponent {
     }
     return `
         <form class="signup-form" name="signup-form">
-            <h1 class="greetings">Register!</h1>
-
             <div class="overflow-wrapper">
                 <div class="input-wrapper current-tab-1">
 
@@ -240,18 +237,19 @@ class SignUpForm extends PlainComponent {
   }
 
   toogleSubmitButton(currentTab) {
+    console.log(currentTab)
     // Si estamos en el último tab activamos el botón de submit
     const submitButton = this.$('.submit')
-    if (currentTab === '3' && submitButton.getAttribute('disabled')) {
+    if (currentTab == '3' && submitButton.hasAttribute('disabled')) {
       submitButton.enable() // Llamamos a funciones propias del componente
-    } else if (!submitButton.classList.contains('disabled')) {
+    } else if (!submitButton.hasAttribute('disabled')) {
       submitButton.disable()
     }
   }
 
   async handleSubmit() {
     // Si el submit está deshabilitado salimos
-    if (this.$('.submit').getAttribute('disabled') === true) return
+    if (this.$('.submit').hasAttribute('disabled') === true) return
 
     // Validamos el formulario
     const isValid = await this.validateFields()
