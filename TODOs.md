@@ -3,6 +3,7 @@
 ## WORKING ON ...
 - [x] Crear la página de calendario, en el que salgan chips de notificación con el número
 de planes para el día (en vista de calendario), y al apretar sobre la chip, se despliegue un carousel en el que se puedan visualizar todas las cards del plan e interactuar con ellas.
+- [ ] Añadir toast acciones carousel
 - [ ] Revisar bug en el cálculo de la edad del user avatar
 - [ ] Implementar validaciones pendientes en los formularios de:
         - Creación de plan
