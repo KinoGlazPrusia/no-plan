@@ -217,12 +217,19 @@ class CreatePlanForm extends PlainComponent {
     this.$('#description').validate()
     this.$('#plan-date').validate()
     this.$('#max-participants').validate()
+    this.$('#categories').validate()
 
     const validity =
       this.$('#title').validity.getState().isValid &&
       this.$('#description').validity.getState().isValid &&
       this.$('#plan-date').validity.getState().isValid &&
-      this.$('#max-participants').validity.getState().isValid
+      this.$('#max-participants').validity.getState().isValid &&
+      this.$('#categories').validity.getState().isValid
+
+    if (!this.editMode.getState()) {
+      this.$('#plan-img').validate()
+      validity = validity && this.$('#plan-img').validity.getState().isValid
+    }
 
     return validity
   }

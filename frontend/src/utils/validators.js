@@ -226,6 +226,7 @@ export function validateAvatarImage(file) {
 }
 
 export function validatePlanImage(file) {
+  console.log(file)
   let type = null
   let size = null
 
@@ -248,6 +249,8 @@ export function validatePlanImage(file) {
       message: `The image is too big (max. size is ${(imageValidFormats.maxSize * 100) / 1000000}Mb)`
     }
   ])
+
+  return validityMessage
 }
 
 /* Esta función genérica permite pasar un input value y una función como condición,
