@@ -3,6 +3,8 @@
 ## WORKING ON ...
 - [x] Crear la página de calendario, en el que salgan chips de notificación con el número
 de planes para el día (en vista de calendario), y al apretar sobre la chip, se despliegue un carousel en el que se puedan visualizar todas las cards del plan e interactuar con ellas.
+- [ ] Implementar borrado y edición de pasos en el timeline del plan.
+- [ ] Implementar borrado de plan ('cancelación') y notificación a los participantes del mismo.
 - [ ] Añadir toast acciones carousel
 - [ ] Implementar validaciones pendientes en los formularios de:
         - Creación de plan
@@ -17,6 +19,10 @@ de planes para el día (en vista de calendario), y al apretar sobre la chip, se 
 
 *El sistema de notificaciones debería de hacerse a través de eventos de dominio pero no hay
 tiempo para implementarlo*
+
+## KNOWN BUGS
+- [ ] Revisar el caso en el que un usuario solicita y cancela varias veces la suscripción a un plan. La notificación que se le envía al creador debería de enviarse solamente una vez y ahora se envía tantas veces como se vuelva a solicitar la suscripción.
+- [ ] Falta implementar la validación de al menos un paso en el timeline antes de crear el plan.
 
 ## FRONTEND
 - [x] Implementar el método en la api del frontend para hacer login a través de POST
