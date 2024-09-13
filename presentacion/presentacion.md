@@ -108,6 +108,7 @@ Más adelante se ampliará con los módulos.
 - `Rating`
 - `Geolocation`
 - `Admin`
+- `InfoGather`
 
 ## Backend
 ### Diagrama de flujo
