@@ -73,7 +73,7 @@ Pulsa [aquí](./Diagramas/ERM.svg) para ver el diagrama completo.
 - Un **usuario** puede crear 0 o muchos **planes**.
 - Un **plan** solo puede tener un **usuario** creador.
 - Un **usuario** puede participar en 0 o muchos **planes**.
-- Un **plan** puede tener uno o muchos **participantes**.
+- Un **plan** puede tener 0 o muchos **participantes**.
 - Un **usuario** puede tener 0 o muchas **notificaciones**.
 - Una **notificación** solo puede ser de un **usuario**.
 - Un **plan** puede tener una o muchas **categorías**.
