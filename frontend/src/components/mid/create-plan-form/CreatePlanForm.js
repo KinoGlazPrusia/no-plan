@@ -219,7 +219,7 @@ class CreatePlanForm extends PlainComponent {
     this.$('#max-participants').validate()
     this.$('#categories').validate()
 
-    const validity =
+    let validity =
       this.$('#title').validity.getState().isValid &&
       this.$('#description').validity.getState().isValid &&
       this.$('#plan-date').validity.getState().isValid &&
